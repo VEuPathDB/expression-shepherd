@@ -4,6 +4,7 @@ export const individualResponseSchema = z.object({
   one_sentence_summary: z.string(),
   biological_relevance: z.enum(["low", "medium", "high"]),
   confidence: z.enum(["low", "medium", "high"]),
+  experiment_keywords: z.string().array(),
   notes: z.string().optional(),  
 })
 

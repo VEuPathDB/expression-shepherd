@@ -62,13 +62,15 @@ async function summariseExpression(
 
     // TEMPORARILY JUST DO ONE!
     const individualResults : FullIndividualResponseType[] = await Promise.all(
-      expressionGraphs.slice(10,13).map(
+      expressionGraphs
+	.filter(({ dataset_id } : { dataset_id : string }) => dataset_id == 'DS_b1ac1e329c')
+	.map(
 	async (expressionGraph : Record<string, string>) => {
 	  const { dataset_id : datasetId } = expressionGraph;
 	  const experimentInfo =
 	    pick(expressionGraph, [
 	      'y_axis', 'description', 'genus_species', 'project_id', 'summary',
-	      'assay_type', 'x_axis', 'module', 'dataset_name', 'display_name', 'short_attribution'
+	      'assay_type', 'x_axis', 'module', 'dataset_name', 'display_name', 'short_attribution', 'paralog_number'
 	    ]);
 
 	  const experimentInfoWithData = {
@@ -76,7 +78,14 @@ async function summariseExpression(
 	    data: expressionGraphsDataTable.filter(
 	      ({ dataset_id } : { dataset_id : string }) => dataset_id == datasetId
 	    ).map(
-	      (entry : Record<string, string>) => pick(entry, [ 'sample_name', 'value', 'standard_error', 'percentile_channel1', 'percentile_channel2' ])
+	      (entry : Record<string, string>) =>
+		pick(entry, [
+		  'sample_name',
+		  'value',
+		  'standard_error',
+		  'percentile_channel1',
+		  'percentile_channel2'
+		])
 	    )
 	  };
 
@@ -97,7 +106,8 @@ async function summariseExpression(
 		    "```json",
 		    jsonSummary,
 		    "```",
-		    "Provide a one-sentence summary of this gene's expression profile based on the provided data. Additionally, estimate the biological relevance of this profile relative to other experiments, even though specific comparative data has not been included. Note that standard error statistics may be unavailable, but percentile-normalized values can guide your analysis. Also estimate of your confidence in making the estimate and add optional notes if there are peculiarities or caveats.",
+		    "Provide a one-sentence summary of this gene's expression profile based on the provided data. Additionally, estimate the biological relevance of this profile relative to other experiments, even though specific comparative data has not been included. Note that standard error statistics may be unavailable, but percentile-normalized values can guide your analysis. Also estimate of your confidence in making the estimate and add optional notes if there are peculiarities or caveats. Provide up to five keywords to describe the overall experiment.",
+		    "Further guidance: Genes with many paralogs (paralog_number) tend to have low unique counts and high non-unique counts, making interpretation harder. Apologies that the sample names are not always super-informative. Please do your best!"
 		  ].join("\n")
 		},
 	      ],
@@ -157,6 +167,7 @@ export function emptyIndividualResponse(datasetId : string, error: any) : FullIn
     one_sentence_summary: "__AN_ERROR_OCCURRED__",
     biological_relevance: "low",
     confidence: "low",
+    experiment_keywords: [],
     notes: `Error message: ${errorMessage}`,
   };
 }
