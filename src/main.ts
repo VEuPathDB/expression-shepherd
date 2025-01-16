@@ -63,10 +63,10 @@ async function summariseExpression(
     // TEMPORARILY JUST DO ONE!
     const individualResults : FullIndividualResponseType[] = await Promise.all(
       expressionGraphs
-	.filter(({ dataset_id } : { dataset_id : string }) => dataset_id == 'DS_b1ac1e329c')
+	.filter(({ dataset_id } : { dataset_id : string }) => dataset_id == 'DS_4582562a4b')
 	.map(
 	async (expressionGraph : Record<string, string>) => {
-	  const { dataset_id : datasetId } = expressionGraph;
+	  const { dataset_id : datasetId, assay_type : assayType } = expressionGraph;
 	  const experimentInfo =
 	    pick(expressionGraph, [
 	      'y_axis', 'description', 'genus_species', 'project_id', 'summary',
@@ -88,7 +88,14 @@ async function summariseExpression(
 		])
 	    )
 	  };
+	  
 
+	  // just a bit of debugging
+	  if (1>0) {
+	    console.log(experimentInfoWithData);
+	    process.exit();
+	  }
+	  
 	  try {
 	    // Note that the LLM will not get the `geneId`. This is intentional.
 	    const jsonSummary = JSON.stringify(experimentInfoWithData); // not pretty on purpose to save tokens
@@ -106,8 +113,8 @@ async function summariseExpression(
 		    "```json",
 		    jsonSummary,
 		    "```",
-		    "Provide a one-sentence summary of this gene's expression profile based on the provided data. Additionally, estimate the biological relevance of this profile relative to other experiments, even though specific comparative data has not been included. Note that standard error statistics may be unavailable, but percentile-normalized values can guide your analysis. Also estimate of your confidence in making the estimate and add optional notes if there are peculiarities or caveats. Provide up to five keywords to describe the overall experiment.",
-		    "Further guidance: Genes with many paralogs (paralog_number) tend to have low unique counts and high non-unique counts, making interpretation harder. Apologies that the sample names are not always super-informative. Please do your best!"
+		    "Provide a one-sentence summary of this gene's expression profile based on the provided data. Additionally, estimate the biological relevance of this profile relative to other experiments, even though specific comparative data has not been included. Also estimate of your confidence in making the estimate and add optional notes if there are peculiarities or caveats. Provide up to five keywords to describe the overall experiment.",
+		    "Further guidance: Note that standard error statistics may be unavailable, but percentile-normalized values can guide your analysis. Genes with many paralogs (paralog_number) tend to have low unique counts and high non-unique counts (in RNA-Seq experiments), making interpretation harder. Apologies that the sample names are not always very informative. Please do your best deciphering them!"
 		  ].join("\n")
 		},
 	      ],
@@ -122,22 +129,23 @@ async function summariseExpression(
 		const individualResponse = individualResponseSchema.parse(parsedResponse);
 		const fullIndividualResponse : FullIndividualResponseType = {
 		  ...individualResponse,
-		  datasetId
+		  datasetId,
+		  assayType
 		};
 
 		return(fullIndividualResponse); // SUCCESS! Add to `individualResults` array
 
 	      } catch (error) {
 		console.error("Response validation failed:", error);
-		return(emptyIndividualResponse(datasetId, error));
+		return(emptyIndividualResponse(datasetId, assayType, error));
 	      }
 	    } else {
 	      console.error(`Empty response from model for ${datasetId}`);
-	      return(emptyIndividualResponse(datasetId, "empty response from model"));
+	      return(emptyIndividualResponse(datasetId, assayType, "empty response from model"));
 	    }
 	  } catch (error) {
 	    console.error("Error generating completion: for ${datasetId}", error);
-	    return(emptyIndividualResponse(datasetId, error));
+	    return(emptyIndividualResponse(datasetId, assayType, error));
 	  }
 	}
       )
@@ -154,7 +162,11 @@ async function summariseExpression(
 summariseExpression({ geneId, projectId, serviceBaseUrl });
 
 
-export function emptyIndividualResponse(datasetId : string, error: any) : FullIndividualResponseType {
+export function emptyIndividualResponse(
+  datasetId : string,
+  assayType: string,
+  error: any
+) : FullIndividualResponseType {
   const errorMessage =
     error instanceof Error // Check if it's an instance of Error
       ? error.message // Use the message property if available
@@ -164,6 +176,7 @@ export function emptyIndividualResponse(datasetId : string, error: any) : FullIn
 
   return {
     datasetId,
+    assayType,
     one_sentence_summary: "__AN_ERROR_OCCURRED__",
     biological_relevance: "low",
     confidence: "low",

@@ -12,4 +12,7 @@ export const individualResponseSchema = z.object({
 export type IndividualResponseType = z.infer<typeof individualResponseSchema>;
 
 export type FullIndividualResponseType =
-  IndividualResponseType & { datasetId: string };
+  IndividualResponseType & {
+    datasetId: string;
+    assayType: string;
+  };
