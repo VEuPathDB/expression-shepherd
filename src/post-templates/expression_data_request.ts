@@ -2,6 +2,9 @@
 // request URL: https://plasmodb.org/plasmo/service/record-types/gene/records
 // content-type: application/json
 
+// source_id is a gene ID
+// project_id is 'PlasmoDB' for example
+
 type ExpressionDataRequestPostData = {
   attributes: string[],
   primaryKey: {
@@ -32,7 +35,7 @@ export const expressionDataRequestPostData : ExpressionDataRequestPostData = {
     },
     {
       "name": "project_id",
-      "value": "PlasmoDB"
+      "value": "####"
     }
   ],
   "tables": [
