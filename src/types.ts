@@ -13,6 +13,6 @@ export type IndividualResponseType = z.infer<typeof individualResponseSchema>;
 
 export type FullIndividualResponseType =
   IndividualResponseType & {
-    datasetId: string;
-    assayType: string;
+    dataset_id: string;
+    assay_type: string;
   };

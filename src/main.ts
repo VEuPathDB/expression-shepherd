@@ -66,7 +66,7 @@ async function summariseExpression(
 	.filter(({ dataset_id } : { dataset_id : string }) => dataset_id == 'DS_4582562a4b')
 	.map(
 	async (expressionGraph : Record<string, string>) => {
-	  const { dataset_id : datasetId, assay_type : assayType } = expressionGraph;
+	  const { dataset_id, assay_type } = expressionGraph;
 	  const experimentInfo =
 	    pick(expressionGraph, [
 	      'y_axis', 'description', 'genus_species', 'project_id', 'summary',
@@ -76,7 +76,7 @@ async function summariseExpression(
 	  const experimentInfoWithData = {
 	    ...experimentInfo,
 	    data: expressionGraphsDataTable.filter(
-	      ({ dataset_id } : { dataset_id : string }) => dataset_id == datasetId
+	      (entry : { dataset_id : string }) => dataset_id == entry.dataset_id
 	    ).map(
 	      (entry : Record<string, string>) =>
 		pick(entry, [
@@ -129,23 +129,23 @@ async function summariseExpression(
 		const individualResponse = individualResponseSchema.parse(parsedResponse);
 		const fullIndividualResponse : FullIndividualResponseType = {
 		  ...individualResponse,
-		  datasetId,
-		  assayType
+		  dataset_id,
+		  assay_type
 		};
 
 		return(fullIndividualResponse); // SUCCESS! Add to `individualResults` array
 
 	      } catch (error) {
 		console.error("Response validation failed:", error);
-		return(emptyIndividualResponse(datasetId, assayType, error));
+		return(emptyIndividualResponse(dataset_id, assay_type, error));
 	      }
 	    } else {
-	      console.error(`Empty response from model for ${datasetId}`);
-	      return(emptyIndividualResponse(datasetId, assayType, "empty response from model"));
+	      console.error(`Empty response from model for ${dataset_id}`);
+	      return(emptyIndividualResponse(dataset_id, assay_type, "empty response from model"));
 	    }
 	  } catch (error) {
-	    console.error("Error generating completion: for ${datasetId}", error);
-	    return(emptyIndividualResponse(datasetId, assayType, error));
+	    console.error("Error generating completion: for ${dataset_id}", error);
+	    return(emptyIndividualResponse(dataset_id, assay_type, error));
 	  }
 	}
       )
@@ -154,7 +154,7 @@ async function summariseExpression(
     // TEMPORARILY JUST LOG TO TERMINAL
     console.log(JSON.stringify(individualResults, null, 2));
   } catch (error) {
-    console.error("Error fetching or processing data for ${datasetId}:", error);
+    console.error("Error fetching or processing data for ${dataset_id}:", error);
   }
 }
 
@@ -163,8 +163,8 @@ summariseExpression({ geneId, projectId, serviceBaseUrl });
 
 
 export function emptyIndividualResponse(
-  datasetId : string,
-  assayType: string,
+  dataset_id : string,
+  assay_type: string,
   error: any
 ) : FullIndividualResponseType {
   const errorMessage =
@@ -175,8 +175,8 @@ export function emptyIndividualResponse(
       : "An unknown error occurred"; // Fallback for non-standard errors
 
   return {
-    datasetId,
-    assayType,
+    dataset_id,
+    assay_type,
     one_sentence_summary: "__AN_ERROR_OCCURRED__",
     biological_relevance: "low",
     confidence: "low",
