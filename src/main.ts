@@ -91,14 +91,13 @@ async function summariseExpression(
 	  
 
 	  // just a bit of debugging
-	  if (1>0) {
+	  if (1<0) {
 	    console.log(experimentInfoWithData);
 	    process.exit();
 	  }
 	  
 	  try {
 	    // Note that the LLM will not get the `geneId`. This is intentional.
-	    const jsonSummary = JSON.stringify(experimentInfoWithData); // not pretty on purpose to save tokens
 	    const completion = await openai.chat.completions.create({
 	      model: "gpt-4o",
 	      messages: [
@@ -111,10 +110,10 @@ async function summariseExpression(
 		  content: [
 		    "Below is information about the expression of one gene in one experiment, provided in JSON format.",
 		    "```json",
-		    jsonSummary,
+		    JSON.stringify(experimentInfoWithData), // not pretty on purpose to save tokens
 		    "```",
-		    "Provide a one-sentence summary of this gene's expression profile based on the provided data. Additionally, estimate the biological relevance of this profile relative to other experiments, even though specific comparative data has not been included. Also estimate of your confidence in making the estimate and add optional notes if there are peculiarities or caveats. Provide up to five keywords to describe the overall experiment.",
-		    "Further guidance: Note that standard error statistics may be unavailable, but percentile-normalized values can guide your analysis. Genes with many paralogs (paralog_number) tend to have low unique counts and high non-unique counts (in RNA-Seq experiments), making interpretation harder. Apologies that the sample names are not always very informative. Please do your best deciphering them!"
+		    "Provide a one-sentence summary of this gene's expression profile based on the provided data. Additionally, estimate the biological relevance of this profile relative to other experiments, even though specific comparative data has not been included. Also estimate of your confidence in making the estimate and add optional notes if there are peculiarities or caveats. Provide up to five keywords to describe the experimental aims and design.",
+		    "Further guidance: Note that standard error statistics may not always be available. However, percentile-normalized values can guide your analysis. Genes with high `paralog_number` tend to have low unique counts and high non-unique counts in RNA-Seq experiments, making interpretation harder. Sample names are not always very informative. Please do your best deciphering them!"
 		  ].join("\n")
 		},
 	      ],
