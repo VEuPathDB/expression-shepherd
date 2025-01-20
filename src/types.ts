@@ -15,4 +15,20 @@ export type FullIndividualResponseType =
   IndividualResponseType & {
     dataset_id: string;
     assay_type: string;
+    display_name: string;
   };
+
+
+export const summaryResponseSchema = z.object({
+  headline: z.string(),
+  one_paragraph_summary: z.string(),
+  sections: z.array(
+    z.object({
+      headline: z.string(),
+      one_sentence_summary: z.string(),
+      dataset_ids: z.string().array()
+    })
+  )
+});
+
+export type SummaryResponseType = z.infer<typeof summaryResponseSchema>;

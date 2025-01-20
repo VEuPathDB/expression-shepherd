@@ -1,4 +1,4 @@
-# Expression Wrangler
+# Expression Shepherd
 
 This is a lightweight proof-of-concept tool for wrangling JSON from a REST API and performing analysis using OpenAI's GPT-4 model.
 
@@ -14,7 +14,7 @@ This is a lightweight proof-of-concept tool for wrangling JSON from a REST API a
 To build the Docker image, use the following command:
 
 ```bash
-docker build -t expression-wrangler .
+docker build -t expression-shepherd .
 ```
 
 ### 2. Run the Container
@@ -22,7 +22,7 @@ docker build -t expression-wrangler .
 To start a container from the image without running any specific command:
 
 ```bash
-docker run -it --rm --name expression-wrangler expression-wrangler
+docker run -it --rm --name expression-shepherd expression-shepherd
 ```
 
 This will start the container and drop you into an interactive shell.
@@ -32,7 +32,7 @@ This will start the container and drop you into an interactive shell.
 If the container is already running but you need a new shell:
 
 ```bash
-docker exec -it expression-wrangler sh
+docker exec -it expression-shepherd sh
 ```
 
 ### 4. Setting Environment Variables
@@ -40,7 +40,7 @@ docker exec -it expression-wrangler sh
 The application uses an OpenAI API key, which can be provided as an environment variable (or in a `.env` file) when starting the container:
 
 ```bash
-docker run -it --rm --name expression-wrangler -e OPENAI_API_KEY=your_openai_api_key expression-wrangler
+docker run -it --rm --name expression-shepherd -e OPENAI_API_KEY=your_openai_api_key expression-shepherd
 ```
 
 ### 5. Debugging or Interactive Use
@@ -48,7 +48,7 @@ docker run -it --rm --name expression-wrangler -e OPENAI_API_KEY=your_openai_api
 To explore or debug, start the container interactively without running the main script:
 
 ```bash
-docker run -it --rm expression-wrangler sh
+docker run -it --rm expression-shepherd sh
 ```
 
 You can then manually run the script or explore the container's environment.
