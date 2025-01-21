@@ -6,6 +6,7 @@ This is a lightweight proof-of-concept tool for summarising the expression data 
 
 ### Requirements
 
+- OpenAI API key
 - volta if possible: https://docs.volta.sh/guide/getting-started
   - it takes care of your node and yarn versions
 - node - 18.20.5 tested (higher versions will likely work) 
@@ -48,8 +49,8 @@ You can commit any generated files to the repo if you like (within reason)!
 ## Docker usage
 ### Requirements
 
-- [Docker](https://www.docker.com/) installed on your system
 - OpenAI API key
+- [Docker](https://www.docker.com/) installed on your system
 
 ### 1. Build the Docker Image
 
