@@ -1,144 +1,144 @@
 [
   {
-    "one_sentence_summary": "In <i>Plasmodium berghei</i>, the expression of the gene significantly increases upon induction with rapamycin, particularly at 0 hours and 12 hours post-induction, suggesting a role in gametocyte formation.",
+    "one_sentence_summary": "In the RNA-Seq study on <i>Plasmodium berghei</i>, the expression of the examined gene was markedly higher in rapamycin-induced gametocytes compared to control asexual forms, particularly at 0 and 12 hours post-induction, suggesting a role in gametocytogenesis.",
     "biological_relevance": "high",
     "confidence": "medium",
     "experiment_keywords": [
+      "Plasmodium berghei",
       "gametocytogenesis",
-      "<i>Plasmodium berghei</i>",
-      "rapamycin induction",
       "RNA-Seq",
-      "asexual and sexual stages"
+      "rapamycin induction",
+      "ap2-g overexpression"
     ],
-    "notes": "The induction with rapamycin causes a marked increase in transcript abundance at certain time points, indicating a potential regulatory role of the gene in gametocytogenesis. However, the high standard error in some samples suggests variability that could affect the confidence level in interpreting the exact expression dynamics.",
+    "notes": "Expression levels are notably higher in induced gametocytes at specific time points, indicating the gene could be involved in gametocyte formation. However, high standard errors in several samples suggest potential experimental variability, warranting cautious interpretation.",
     "dataset_id": "DS_7b1bac6cd1",
     "assay_type": "RNA-Seq",
     "display_name": "P. berghei transcriptome during inducible gametocytogenesis"
   },
   {
-    "one_sentence_summary": "The mRNA expression of the DOZI mutant in <i>Plasmodium berghei</i> shows negligible change compared to the wild type, with very slight upregulation (log ratio ~0.04), indicating a marginal impact on this gene's expression profile in blood-stage unactivated gametocytes.",
+    "one_sentence_summary": "In a study analyzing the gene expression profile in <i>Plasmodium berghei</i>, the effect of DOZI depletion in gametocytes showed only a slight change in mRNA abundance (log ratio M = 0.04) compared to the wild type, indicating minimal differential expression.",
     "biological_relevance": "medium",
-    "confidence": "medium",
+    "confidence": "high",
     "experiment_keywords": [
       "DOZI depletion",
       "microarray",
-      "blood-stage gametocytes",
-      "mRNA expression",
-      "<i>Plasmodium berghei</i>"
+      "gametocytes",
+      "<i>Plasmodium berghei</i>",
+      "mutant vs wild type"
     ],
-    "notes": "The experiment focuses on DOZI depletion which is crucial for understanding transcript regulation in gametocytes, and while the change in expression is minimal, this does not negate potential downstream biological effects. Standard error is relatively high in relation to the expression change suggesting variability, while percentile rankings indicate consistently high expression levels in both mutant and wild type strains.",
+    "notes": "The low log ratio (M = 0.04) suggests minor differences in expression levels between DOZI mutant and wild type, but high percentile values indicate relatively high expression of these transcripts, possibly affecting post-transcriptional regulation in gametocytes.",
     "dataset_id": "DS_5ae28eebe3",
     "assay_type": "array",
     "display_name": "DOZI Mutant Transcript Profile"
   },
   {
-    "one_sentence_summary": "In the microarray experiment studying <i>Plasmodium berghei</i>, the expression of the gene in wild type parasites is higher than in AP2-G2 knockout parasites, both untreated and treated with sulfadiazine, as indicated by the RMA normalized values and percentile changes.",
+    "one_sentence_summary": "In the expression profile for a gene in <i>Plasmodium berghei</i>, the AP2-G2 knockout showed significantly lower expression values compared to the wild type both in untreated (0.01 vs. 0.08) and sulfadiazine-treated conditions (0.43 vs. 0.9), as evidenced by the lower percentile rankings.",
     "biological_relevance": "medium",
-    "confidence": "medium",
+    "confidence": "high",
     "experiment_keywords": [
       "AP2-G2 knockout",
-      "wild type comparison",
+      "wild type",
+      "expression profiling",
       "sulfadiazine treatment",
-      "gene expression",
-      "microarray"
+      "Plasmodium berghei"
     ],
-    "notes": "The gene shows differences in expression between wild type and AP2-G2 knockout conditions, suggesting potential regulatory impacts of the AP2-G2 protein or sulfadiazine treatment. Percentile values indicate a consistent expression difference, although lacking standard error information limits confidence.",
+    "notes": "The distinct expression changes between knockout and wild type conditions combined with treatment effects suggest potential insights into AP2-G2's role, though lack of standard errors imposes some constraints on statistical confidence.",
     "dataset_id": "DS_d4f8765d13",
     "assay_type": "array",
     "display_name": "AP2-G2 knock out and WT expression profiles"
   },
   {
-    "one_sentence_summary": "This gene exhibits significantly elevated expression in the ookinete stage compared to all other <i>Plasmodium berghei</i> ANKA developmental stages assessed, with remarkably high TPM and percentile values at this stage.",
-    "biological_relevance": "high",
-    "confidence": "medium",
+    "one_sentence_summary": "The gene exhibits low expression in early stages of <i>P. berghei</i> development, with a dramatic increase reaching a peak in the Ookinete stage.",
+    "biological_relevance": "medium",
+    "confidence": "high",
     "experiment_keywords": [
-      "transcriptomics",
-      "life cycle",
-      "gene expression",
       "RNA-Seq",
-      "developmental stages"
+      "<i>P. berghei</i>",
+      "life cycle stages",
+      "gene expression",
+      "transcriptomics"
     ],
-    "notes": "The extreme increase in expression during the ookinete stage suggests stage-specific functionality, potentially critical for parasite transmission or development.",
+    "notes": "The expression peak in the Ookinete stage suggests stage-specific relevance, while lack of standard errors limits precision in expression variability estimation.",
     "dataset_id": "DS_49781e8c33",
     "assay_type": "RNA-Seq",
     "display_name": "5 asexual and sexual stage transcriptomes"
   },
   {
-    "one_sentence_summary": "The gene exhibits higher expression in female gametocytes of <i>Plasmodium berghei</i> compared to male gametocytes and asexual erythrocytic stages.",
-    "biological_relevance": "medium",
-    "confidence": "high",
+    "one_sentence_summary": "In <i>Plasmodium berghei</i>, the gene shows significantly higher transcript abundance in female gametocytes compared to male gametocytes and asexual erythrocytic stages, with female gametocytes having an expression level of 33.68 TPM and ranking in the 59th percentile.",
+    "biological_relevance": "high",
+    "confidence": "medium",
     "experiment_keywords": [
       "RNA-Seq",
-      "gametocytes",
-      "asexual stages",
+      "gametocyte",
+      "Plasmodium berghei",
       "transcript abundance",
-      "Plasmodium berghei"
+      "FACS sorting"
     ],
-    "notes": "The expression levels are significantly higher in female gametocytes, with a percentile ranking of 59 for sense transcripts, suggesting potential gender-specific roles. The gene has no reported paralogs, which increases confidence in the unique expression profile observed.",
+    "notes": "The clear disparity in expression between female gametocytes and other stages suggests a potential role in female gametocyte function. Confidence is reduced slightly due to lack of percentile data for the sense-strand analysis and absence of replicates.",
     "dataset_id": "DS_5dacfed867",
     "assay_type": "RNA-Seq",
     "display_name": "Female and male gametocyte"
   },
   {
-    "one_sentence_summary": "The gene shows variable expression across different time points in the liver stage infection of <i>Plasmodium berghei</i>, with highest expression observed at 48 hours post-infection in HuH7 cells.",
+    "one_sentence_summary": "This gene in <i>Plasmodium berghei</i> shows fluctuating expression during early to mid liver stage infection, with higher transcript abundance generally observed at earlier time points and in HuH7 cells compared to HepG2 cells.",
     "biological_relevance": "medium",
     "confidence": "medium",
     "experiment_keywords": [
+      "liver stage infection",
       "<i>Plasmodium berghei</i>",
-      "transcriptomics",
-      "liver stage",
-      "infection",
-      "RNA-Seq"
+      "RNA-Seq",
+      "HuH7 cells",
+      "HepG2 cells"
     ],
-    "notes": "The low expression levels and standard error variability across samples suggest caution in interpreting transient expression changes; additional context from complementary studies may be necessary for conclusive insights.",
+    "notes": "The expression profile indicates a potential cell type-specific response, with higher transcript levels in HuH7 cells and notable fluctuations across time points. Despite variability in standard error reporting, the consistent lower percentile ranking across samples suggests moderate biological relevance. Potentially interesting for studying host-pathogen interaction during liver infection phases.",
     "dataset_id": "DS_7dae78ae0b",
     "assay_type": "RNA-Seq",
     "display_name": "Transcriptome during early and mid-stage P. berghei liver infection"
   },
   {
-    "one_sentence_summary": "This gene in <i>Plasmodium berghei</i> shows high expression in sporozoites (TPM≈8.57) and gradual increase in later liver stages (up to TPM≈4.35 at 60 hours), suggesting its potential involvement in both early sporozoite development and late liver stage maturation.",
-    "biological_relevance": "high",
-    "confidence": "medium",
+    "one_sentence_summary": "The transcript abundance of this gene in <i>Plasmodium berghei</i> is highest in sporozoite stages (8.57 TPM) and shows a gradual increase during liver stages, peaking at 4.35 TPM at 60 hours.",
+    "biological_relevance": "medium",
+    "confidence": "high",
     "experiment_keywords": [
-      "exo-erythrocytic",
-      "development",
-      "temporal",
-      "transcriptome",
-      "Plasmodium berghei"
+      "temporal analysis",
+      "exo-erythrocytic stages",
+      "liver stage development",
+      "sporozoites",
+      "detached cells"
     ],
-    "notes": "The high initial expression in sporozoites and increasing trend in liver stages imply a role across crucial development stages, although the exact function requires further validation. The biological importance of the study is high due to the detailed temporal coverage and relevance to pathogenesis.",
+    "notes": "The increase in transcript abundance from early to later liver stages may suggest a role in liver stage development, but the moderate overall expression levels and low percentile rankings indicate the gene may not be among the most highly expressed during these stages.",
     "dataset_id": "DS_67483bf778",
     "assay_type": "RNA-Seq",
     "display_name": "Ex-erythrocytic stage transcriptomes (sporozoite, liver time course and detached cells)"
   },
   {
-    "one_sentence_summary": "In the transcriptomic analysis of <i>Plasmodium berghei</i>, the gene shows high expression in the ookinete stage, particularly in the WT and ap2-o2 KO mutants, with lower expression observed in schizont stages across different mutants.",
-    "biological_relevance": "medium",
-    "confidence": "medium",
+    "one_sentence_summary": "In <i>Plasmodium berghei</i>, the gene displays variable expression across different life stages and experimental conditions, with particularly high expression in the ookinete stage, especially in wild-type samples.",
+    "biological_relevance": "high",
+    "confidence": "high",
     "experiment_keywords": [
       "ApiAP2 mutants",
+      "Plasmodium berghei",
       "directional RNA-seq",
-      "schizonts",
-      "gametocytes",
-      "ookinetes"
+      "transcript abundance",
+      "life stages"
     ],
-    "notes": "The gene's expression is particularly elevated in the wild type and ap2-o2 KO ookinetes, suggesting a possible role in ookinete development or function. The experiment's focus on different developmental stages and mutants contributes to the moderate biological relevance score, though detailed functional data would enhance confidence.",
+    "notes": "This experiment specifically examined the impact of ApiAP2 transcription factor knockouts on gene expression, with the wild-type samples providing a crucial comparison point that highlights the regulatory role of these transcription factors in different life stages. The experiment's design across multiple life stages (schizont, gametocyte, ookinete) emphasizes its comprehensive nature, giving us confidence in assigning a high biological relevance due to the significant expression differences observed.",
     "dataset_id": "DS_9b450524d1",
     "assay_type": "RNA-Seq",
     "display_name": "Transcriptomes of viable ApiAP2 mutants by directional RNA-seq"
   },
   {
-    "one_sentence_summary": "The gene in this study shows a substantial reduction in expression under dietary restriction in both wild-type and Δkin mutant <i>P. berghei</i> parasites, with very low expression on the antisense strand.",
+    "one_sentence_summary": "In the study of <i>P. berghei</i>, the gene shows decreased transcript abundance under dietary restriction in both the wild-type and Δkin mutant parasites, with low expression levels in antisense samples across conditions.",
     "biological_relevance": "medium",
     "confidence": "medium",
     "experiment_keywords": [
+      "Plasmodium berghei",
       "dietary restriction",
-      "kin mutant",
+      "RNA-Seq",
       "wild-type",
-      "synchronized",
-      "RNA-Seq"
+      "Δkin mutant"
     ],
-    "notes": "The variation between control and dietary restriction conditions indicates potential nutritional regulation of this gene, but the overall low TPM and percentile values suggest it may not be a highly expressed gene in these conditions.",
+    "notes": "The expression changes due to dietary restriction are noticeable but not substantial, and antisense expression is uniformly low. Percentile values suggest that this gene has relatively low expression across samples compared to other genes in the experiment, and the low paralog number indicates unique expression data without redundancy issues.",
     "dataset_id": "DS_2f87d793d9",
     "assay_type": "RNA-Seq",
     "display_name": "Dietary restriction of P berghei WT and Δkin parasites"
