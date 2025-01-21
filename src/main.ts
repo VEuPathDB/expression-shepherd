@@ -5,7 +5,7 @@ import axios from "axios";
 import { pick } from "lodash";
 import { FullIndividualResponseType, individualResponseSchema, summaryResponseSchema } from "./types";
 import { zodResponseFormat } from "openai/helpers/zod";
-import { summaryJSONtoHTML, writeToFile } from "./utils";
+import { consolidateSummary, summaryJSONtoHTML, writeToFile } from "./utils";
 
 //
 // yarn build && yarn start PF3D7_0616000
@@ -17,6 +17,7 @@ const geneId = args[0];
 // these could be ENV vars or commandline args in future
 const projectId = 'PlasmoDB';
 const serverUrl = 'https://plasmodb.org';
+const geneBaseUrl = 'https://plasmodb.org/plasmo/app/record/gene';
 const serviceBaseUrl = 'https://plasmodb.org/plasmo/service';
 
 
@@ -115,7 +116,7 @@ async function summariseExpression(
 		JSON.stringify(experimentInfoWithData), // not pretty on purpose to save tokens
 		"```",
 		"Provide a one-sentence summary of this gene's expression profile based on the provided data. Additionally, estimate the biological relevance of this profile relative to other experiments, even though specific comparative data has not been included. Also estimate your confidence in making the estimate and add optional notes if there are peculiarities or caveats that may aid interpretation and further analysis. Provide up to five keywords to describe the experimental aims and design.",
-		"Purpose: The one-sentence summary will be displayed to users in tabular form on our gene-page. Please wrap any species names in HTML italics tags in this summary. The notes and other information you provide will not be shown to users, but will be passed along with the summary to a second AI summarisation step that synthesizes insights from multiple experiments.",
+		"Purpose: The one-sentence summary will be displayed to users in tabular form on our gene-page. Please wrap user-facing species names in `<i>` tags and use clear, scientific language accessible to non-native English speakers. The notes and other information you provide will not be shown to users, but will be passed along with the summary to a second AI summarisation step that synthesizes insights from multiple experiments.",
 		"Further guidance: Note that standard error statistics may not always be available. However, percentile-normalized values can guide your analysis. Genes with high `paralog_number` tend to have low unique counts and high non-unique counts in RNA-Seq experiments, making interpretation harder. Sample names are not always very informative. Please do your best deciphering them!"
 	      ].join("\n")
 	    },
@@ -184,7 +185,7 @@ async function summariseExpression(
 	      "```json",
 	      individualResultsJSON,
 	      "```",
-	      "Provide a snappy headline and a one-paragraph summary of this gene's expression. Both are for human-consumption on the gene page of our website. Please also group the experimental results (identified by `dataset_id`) into sections using any criteria you deem appropriate. Order the sections with the most salient first, and provide a headline and one-sentence summary for each (also user-facing). Please wrap any user-facing species names in HTML italics tags."
+	      "Provide a snappy headline and a one-paragraph summary of this gene's expression. Both are for human-consumption on the gene page of our website. Please also group the experimental results (identified by `dataset_id`) into sections using any criteria you deem appropriate. Order the sections with the most salient first, and provide a headline and one-sentence summary for each (also user-facing). Please wrap user-facing species names in `<i>` tags and use clear, scientific language accessible to non-native English speakers."
 	    ].join("\n")
 	  },
 	],
@@ -198,7 +199,13 @@ async function summariseExpression(
 	  const parsedResponse = JSON.parse(rawResponse); // make an object
 	  const summaryResponse = summaryResponseSchema.parse(parsedResponse);
 
-	  const html = summaryJSONtoHTML(summaryResponse, geneId, individualResults, expressionGraphs, serverUrl);
+	  // write a pretty version to file, just for reference
+	  await writeToFile(`example-output/${geneId}.summary.json`, JSON.stringify(summaryResponse, null, 2));
+
+	  // remove any duplicates and add an "Others" section if any were missed
+	  const summary = consolidateSummary(summaryResponse, individualResults);
+	  
+	  const html = summaryJSONtoHTML(summary, geneId, individualResults, expressionGraphs, serverUrl, geneBaseUrl);
 	  await writeToFile(`example-output/${geneId}.summary.html`, html);
 	  console.log(`total_tokens: ${completion.usage?.total_tokens}`);
 	} catch (error) {
