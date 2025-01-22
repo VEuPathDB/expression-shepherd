@@ -7,6 +7,7 @@ This is a lightweight proof-of-concept tool for summarising the expression data 
 ### Requirements
 
 - OpenAI API key
+  - add `OPENAI_API_KEY=xxxxxxxxxxxxx` to a file called `.env` in this directory
 - volta if possible: https://docs.volta.sh/guide/getting-started
   - it takes care of your node and yarn versions
 - node - 18.20.5 tested (higher versions will likely work) 
@@ -50,6 +51,7 @@ You can commit any generated files to the repo if you like (within reason)!
 ### Requirements
 
 - OpenAI API key
+  - add `OPENAI_API_KEY=xxxxxxxxxxxxx` to a file called `.env` in this directory
 - [Docker](https://www.docker.com/) installed on your system
 
 ### 1. Build the Docker Image
@@ -62,8 +64,7 @@ docker build -t expression-shepherd .
 
 ### 2. Run the Container
 
-To start a container from the image and get a shell.  Edit the `.env` file with your own
-OpenAI API key secret (`OPENAI_API_KEY=abc123def456xyz`).
+To start a container from the image and get a shell.
 
 The command below "mounts" ./example-output inside the container so any outputs will be seen
 in the host filesystem too.
