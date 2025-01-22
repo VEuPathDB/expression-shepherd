@@ -4,7 +4,7 @@ This is a lightweight proof-of-concept tool for summarising the expression data 
 
 ## Non-Docker usage
 
-### Requirements
+### 0. Requirements
 
 - OpenAI API key
   - add `OPENAI_API_KEY=xxxxxxxxxxxxx` to a file called `.env` in this directory
@@ -48,7 +48,7 @@ To view the HTML open it as a local file in your web browser (Ctrl-O usually).
 You can commit any generated files to the repo if you like (within reason)!
 
 ## Docker usage
-### Requirements
+### 0. Requirements
 
 - OpenAI API key
   - add `OPENAI_API_KEY=xxxxxxxxxxxxx` to a file called `.env` in this directory
@@ -66,15 +66,14 @@ docker build -t expression-shepherd .
 
 To start a container from the image and get a shell.
 
-The command below "mounts" ./example-output inside the container so any outputs will be seen
-in the host filesystem too.
+The command below "mounts" ./example-output inside the container so any outputs will be seen in the host filesystem too.
 
 ```bash
 docker run -d --rm --env-file .env -v $(pwd)/example-output:/app/example-output expression-shepherd sh
 ```
 The container will be removed when you exit the shell. (But not the image.)
 
-### 3. Access the Container (optional)
+### 3. Run the script
 
 If the container is already running but you need a new shell:
 
@@ -84,7 +83,7 @@ docker ps
 docker exec -it --env-file .env <CONTAINER_ID> sh
 ```
 
-You can then manually run the script (see step 3. in the non-Docker section above) or explore the container's environment.
+You can then manually run the script (see step 3. in the non-Docker section above):
 
 ```bash
 yarn start PF3D7_0818900
