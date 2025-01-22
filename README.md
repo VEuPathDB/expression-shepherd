@@ -13,13 +13,15 @@ This is a lightweight proof-of-concept tool for summarising the expression data 
 - node - 18.20.5 tested (higher versions will likely work) 
 - yarn - 1.22.19 tested
 
-### 1. initialise the Node.js environment
+### 1. Initialise the Node.js environment
 
 ```bash
 yarn
 ```
 
-### 2. compile
+If you have `volta` installed, this will also make sure you have the right versions of `node` and `yarn`, otherwise you'll need to install those manually if you run into any issues.
+
+### 2. Compile the TypeScript
 
 ```bash
 yarn build
@@ -27,7 +29,7 @@ yarn build
 
 This compiles `src/main.ts` into `dist/main.js`
 
-### 3. run
+### 3. Run the code
 
 You can run the script with any PlasmoDB gene ID:
 
@@ -54,7 +56,7 @@ You can commit any generated files to the repo if you like (within reason)!
   - add `OPENAI_API_KEY=xxxxxxxxxxxxx` to a file called `.env` in this directory
 - [Docker](https://www.docker.com/) installed on your system
 
-### 1. Build the Docker Image
+### 1. Build the Docker image
 
 To build the Docker image, use the following command:
 
@@ -62,7 +64,7 @@ To build the Docker image, use the following command:
 docker build -t expression-shepherd .
 ```
 
-### 2. Run the Container
+### 2. Run the container
 
 To start a container from the image and get a shell.
 
@@ -73,7 +75,7 @@ docker run -d --rm --env-file .env -v $(pwd)/example-output:/app/example-output 
 ```
 The container will be removed when you exit the shell. (But not the image.)
 
-### 3. Run the script
+### 3. Run the code
 
 If the container is already running but you need a new shell:
 
