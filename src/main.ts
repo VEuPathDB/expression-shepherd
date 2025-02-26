@@ -40,6 +40,35 @@ interface SummariseExpressionArgs {
 
 type SummariseExpressionReturnType = Promise<void>; // returns nothing at the moment
 
+
+export function getExperimentMessage(experiment: any, prettyPrint = false): string {
+  const json = prettyPrint ? JSON.stringify(experiment, null, 2) : JSON.stringify(experiment);
+
+  return (
+    "The JSON below contains expression data for a single gene within a specific experiment, along with relevant experimental and bioinformatics metadata:\n\n" +
+    "```json\n" + json + "\n```\n\n" +
+    "**Task**: In one sentence, summarize how this gene is expressed in the given experiment. Do not describe the experiment itself—focus on whether the gene is, or is not, substantially and/or significantly upregulated or downregulated with respect to the experimental conditions tested. Take extreme care to assert the correct directionality of the response, especially in experiments with only one or two samples. Additionally, estimate the biological importance of this profile relative to other experiments on an integer scale of 0 (lowest, no differential expression) to 5 (highest, marked differential expression), even though specific comparative data has not been included. Also estimate your confidence (also 0 to 5) in making the estimate and add optional notes if there are peculiarities or caveats that may aid interpretation and further analysis. Finally, provide some general experiment-based keywords that provide a bit more context to the gene-based expression summary.\n" +
+    "**Purpose**: The one-sentence summary will be displayed to users in tabular form on our gene-page. Please wrap user-facing species names in `<i>` tags and use clear, scientific language accessible to non-native English speakers. The notes, scores, and keywords will not be shown to users, but will be passed along with the summary to a second AI summarization step that synthesizes insights from multiple experiments.\n" +
+    "**Further guidance**: The `y_axis` field describes the `value` field in the `data` array, which is the primary expression level datum. Note that standard error statistics are only available when biological replicates were performed. However, percentile-normalized values can also guide your assessment of importance. If this is a time-series experiment, consider if it is cyclical and assess periodicity as appropriate. Ignore all discussion of individual or groups of genes in the experiment `description`, as this is irrelevant to the gene you are summarizing. For RNA-Seq experiments, be aware that if `paralog_number` is high, interpretation may be tricky (consider both unique and non-unique counts if available). Ensure that each key appears exactly once in the JSON response. Do not include any duplicate fields."
+  );
+}
+
+
+export function getFinalSummaryMessage(experiments: any[], prettyPrint = false): string {
+  const json = prettyPrint ? JSON.stringify(experiments, null, 2) : JSON.stringify(experiments);
+  
+  return (
+    "Below are AI-generated summaries of one gene's behavior in all the transcriptomics experiments available in VEuPathDB, provided in JSON format:\n\n" +
+    "```json\n" + json + "\n```\n\n" +
+    "Generate a one-paragraph summary (~100 words) describing the gene's expression. Structure it using <strong>, <ul>, and <li> tags with no attributes. If relevant, briefly speculate on the gene's potential function, but only if justified by the data. Also, generate a short, specific headline for the summary. The headline must reflect this gene's expression and **must not** include generic phrases like \"comprehensive insights into\" or the word \"gene\".\n\n" +
+    "Additionally, organize the experimental results (identified by `dataset_id`) into sections, ordered by descending biological importance. For each section, provide:\n" +
+    "- A headline summarizing the section's key findings\n" +
+    "- A concise one-sentence summary of the experimental results\n\n" +
+    "These sections will be displayed to users. In all generated text, wrap species names in `<i>` tags and use clear, precise scientific language accessible to non-native English speakers."
+  );
+}
+
+
 async function summariseExpression(
   { geneId, projectId, serviceBaseUrl } : SummariseExpressionArgs
 ) : SummariseExpressionReturnType { 
@@ -110,15 +139,7 @@ async function summariseExpression(
 	    },
 	    {
 	      role: "user",
-	      content: [
-		"Below is information about the expression of one gene in one experiment, provided in JSON format.",
-		"```json",
-		JSON.stringify(experimentInfoWithData), // not pretty on purpose to save tokens
-		"```",
-		"Provide a one-sentence summary of this gene's expression profile based on the provided data. Additionally, estimate the biological relevance of this profile relative to other experiments, even though specific comparative data has not been included. Also estimate your confidence in making the estimate and add optional notes if there are peculiarities or caveats that may aid interpretation and further analysis. Provide up to five keywords to describe the experimental aims and design.",
-		"Purpose: The one-sentence summary will be displayed to users in tabular form on our gene-page. Please wrap user-facing species names in `<i>` tags and use clear, scientific language accessible to non-native English speakers. The notes and other information you provide will not be shown to users, but will be passed along with the summary to a second AI summarisation step that synthesizes insights from multiple experiments.",
-		"Further guidance: Note that standard error statistics may not always be available. However, percentile-normalized values can guide your analysis. Genes with high `paralog_number` tend to have low unique counts and high non-unique counts in RNA-Seq experiments, making interpretation harder. Sample names are not always very informative. Please do your best deciphering them!"
-	      ].join("\n")
+	      content: getExperimentMessage(experimentInfoWithData),
 	    },
 	  ],
 	  response_format: zodResponseFormat(individualResponseSchema, 'individual_response')
@@ -167,8 +188,6 @@ async function summariseExpression(
     
     console.log("Summarising the summaries...");
 
-    const individualResultsJSON = JSON.stringify(individualResults);
-    
     try {
       // Note that the LLM will not get the `geneId`. This is intentional.
       const completion = await openai.chat.completions.create({
@@ -180,13 +199,7 @@ async function summariseExpression(
 	  },
 	  {
 	    role: "user",
-	    content: [
-	      "Below are AI-generated summaries of a gene's behaviour in multiple transcriptomics experiment, provided in JSON format.",
-	      "```json",
-	      individualResultsJSON,
-	      "```",
-	      "Provide a snappy headline and a one-paragraph summary of this gene's expression. Both are for human-consumption on the gene page of our website. Please also group the experimental results (identified by `dataset_id`) into sections using any criteria you deem appropriate. Order the sections with the most salient first, and provide a headline and one-sentence summary for each (also user-facing). Please wrap user-facing species names in `<i>` tags and use clear, scientific language accessible to non-native English speakers."
-	    ].join("\n")
+	    content: getFinalSummaryMessage(individualResults),
 	  },
 	],
 	response_format: zodResponseFormat(summaryResponseSchema, 'summary_response')
