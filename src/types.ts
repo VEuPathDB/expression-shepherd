@@ -2,8 +2,8 @@ import { z } from "zod";
 
 export const individualResponseSchema = z.object({
   one_sentence_summary: z.string(),
-  biological_importance: z.number().int().min(0).max(5),
-  confidence: z.number().int().min(0).max(5),
+  biological_importance: z.number().int(), // min and max not allowed by openai api?
+  confidence: z.number().int(),
   experiment_keywords: z.string().array(),
   notes: z.string().optional(),  
 })
