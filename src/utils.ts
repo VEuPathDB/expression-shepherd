@@ -12,7 +12,7 @@ export async function writeToFile(filename: string, content: string): Promise<vo
 }
 
 
-// remove any duplicates and add an "Others" section if any were missed
+// remove any duplicates and add an "Others" topic if any were missed
 export function consolidateSummary(
   summaryResponse: SummaryResponseType,
   individualResults: FullIndividualResponseType[],
@@ -26,14 +26,14 @@ export function consolidateSummary(
   const seenDatasetIds = new Set();
   const deduplicated = {
     ...summaryResponse,
-    sections: summaryResponse.sections.map(
-      (section) => ({
-	...section,
-	dataset_ids: section.dataset_ids.filter(
+    topics: summaryResponse.topics.map(
+      (topic) => ({
+	...topic,
+	dataset_ids: topic.dataset_ids.filter(
 	  (id) => {
 	    // warn and skip if the id doesn't exist
 	    if (!allDatasetIds.has(id)) {
-	      console.log(`WARNING: summary section id '${id}' does not exist. Excluding from HTML output.`);
+	      console.log(`WARNING: summary topic id '${id}' does not exist. Excluding from HTML output.`);
 	      return false;
 	    }
 	    // skip if we've seen it
@@ -51,11 +51,11 @@ export function consolidateSummary(
     (id) => !seenDatasetIds.has(id)
   );
 
-  // If there are missing IDs, add an "Others" section
+  // If there are missing IDs, add an "Others" topic
   if (missingDatasetIds.length > 0) {
-    deduplicated.sections.push({
+    deduplicated.topics.push({
       headline: "Other",
-      one_sentence_summary: "These experiments were not grouped into sub-sections by the AI.",
+      one_sentence_summary: "These experiments were not grouped by the AI.",
       dataset_ids: missingDatasetIds,
     });
   }
@@ -72,7 +72,7 @@ export function summaryJSONtoHTML(
   geneBaseUrl: string,
 ): string {
   // Destructure the summary response
-  const { headline, one_paragraph_summary, sections } = summaryResponse;
+  const { headline, one_paragraph_summary, topics } = summaryResponse;
 
   // Build the HTML structure
   const html = `
@@ -89,16 +89,16 @@ export function summaryJSONtoHTML(
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
     th { background-color: #f4f4f4; }
     img { max-width: 100px; }
-    .human-readable { max-width: 35em; }
+    .human-readable { max-width: 50em; }
   </style>
 </head>
 <body>
   <h1><a href="${geneBaseUrl}/${geneId}">${geneId}</a> - ${headline}</h1>
-  <p class="human-readable">${one_paragraph_summary}</p>
-  ${sections.map(section => `
+  <div class="human-readable">${one_paragraph_summary}</div>
+  ${topics.map(topic => `
     <section>
-      <h2>${section.headline}</h2>
-      <p class="human-readable">${section.one_sentence_summary}</p>
+      <h2>${topic.headline}</h2>
+      <p class="human-readable">${topic.one_sentence_summary}</p>
       <table>
         <thead>
           <tr>
@@ -110,7 +110,7 @@ export function summaryJSONtoHTML(
           </tr>
         </thead>
         <tbody>
-    ${section.dataset_ids.map(datasetId => {
+    ${topic.dataset_ids.map(datasetId => {
       const expressionGraph = expressionGraphs.find(({dataset_id} : {dataset_id: string }) => datasetId == dataset_id);
       const individualResult = individualResults.find(({dataset_id} : {dataset_id: string}) => datasetId == dataset_id);
       const thumbnailRaw = (expressionGraph?.['thumbnail'] ?? 'N/A') as string;
@@ -118,7 +118,7 @@ export function summaryJSONtoHTML(
       return `
 <tr>
 <td>${thumbnailFinal}</td>
-<td>${individualResult?.display_name}</td>
+<td>${individualResult?.experiment_name}</td>
 <td class="human-readable">${individualResult?.one_sentence_summary}</td>
 <td>${expressionGraph?.short_attribution}</td>
 <td>${individualResult?.assay_type}</td>

@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import "dotenv/config";
 import { expressionDataRequestPostData } from "./post-templates/expression_data_request";
 import axios from "axios";
-import { omit, pick } from "lodash";
+import { omit, pick, orderBy } from "lodash";
 import { FullIndividualResponseType, individualResponseSchema, summaryResponseSchema } from "./types";
 import { zodResponseFormat } from "openai/helpers/zod";
 import { consolidateSummary, summaryJSONtoHTML, writeToFile } from "./utils";
@@ -23,7 +23,7 @@ const args = process.argv.slice(2); // Skip the first two entries
 const geneId = args[0];
 const datasetId = args[1];
 const numReps = args[2] ? Number(args[2]) : 1;
-const prettyPrint = args[3] ? Boolean(args[3]) : false;
+const prettyPrint = args[3] ? Boolean(args[3]) : true;
 
 const modelId = "gpt-4o-2024-11-20";
 // "gpt-4o-2024-11-20";
@@ -72,19 +72,19 @@ export function getExperimentMessage(experiment: any, prettyPrint = false): stri
 export function getFinalSummaryMessage(experiments: any[], prettyPrint = false): string {
 
   // remove things we're not passing to second level in the Java port at the moment.
-  const stripped = experiments.map((experiment) => omit(experiment, [ 'assay_type', 'display_name' ]));
-  const json = JSON.stringify(stripped, null, prettyPrint ? 2 : 0);
+  //const stripped = experiments.map((experiment) => omit(experiment, [ 'assay_type', 'display_name' ]));
+  //const json = JSON.stringify(stripped, null, prettyPrint ? 2 : 0);
 
-  // const json = JSON.stringify(experiments, null, prettyPrint ? 2 : 0);
+  const json = JSON.stringify(experiments, null, prettyPrint ? 2 : 0);
   
   return (
     "Below are AI-generated summaries of one gene's behavior in all the transcriptomics experiments available in VEuPathDB, provided in JSON format:\n\n" +
     "```json\n" + json + "\n```\n\n" +
     "Generate a one-paragraph summary (~100 words) describing the gene's expression. Structure it using <strong>, <ul>, and <li> tags with no attributes. If relevant, briefly speculate on the gene's potential function, but only if justified by the data. Also, generate a short, specific headline for the summary. The headline must reflect this gene's expression and **must not** include generic phrases like \"comprehensive insights into\" or the word \"gene\".\n\n" +
-    "Additionally, organize the experimental results (identified by `dataset_id`) into sections, ordered by descending biological importance. For each section, provide:\n" +
-    "- A headline summarizing the section's key findings\n" +
-    "- A concise one-sentence summary of the experimental results\n\n" +
-    "These sections will be displayed to users. In all generated text, wrap species names in `<i>` tags and use clear, precise scientific language accessible to non-native English speakers."
+    "Additionally, group the per-experiment summaries (identified by `dataset_id`) with `biological_importance > 3` and `confidence > 3` into sections by topic. For each topic, provide:\n" +
+    "- A headline summarizing the key experimental results within the topic\n" +
+    "- A concise one-sentence summary of the topic's experimental results\n\n" +
+    "These topics will be displayed to users. In all generated text, wrap species names in `<i>` tags and use clear, precise scientific language accessible to non-native English speakers."
   );
 }
 
@@ -123,7 +123,7 @@ async function summariseExpression(
     }[] = [];
     
     for (const expressionGraph of expressionGraphs) {
-      const { dataset_id, assay_type, display_name } = expressionGraph;
+      const { dataset_id, assay_type, display_name : experiment_name } = expressionGraph;
 
       // single dataset mode:
       if (datasetId && dataset_id !== datasetId) continue;
@@ -151,7 +151,7 @@ async function summariseExpression(
 	)
       };
 	  
-      console.log(`Summarising '${experimentInfo['display_name']}' (${dataset_id})`)
+      console.log(`Summarising '${experiment_name}' (${dataset_id})`)
       
       try {
 	// Note that the LLM will not get the `geneId`. This is intentional.
@@ -180,11 +180,12 @@ async function summariseExpression(
 	      ...individualResponse,
 	      dataset_id,
 	      assay_type,
-	      display_name,
+	      experiment_name,
 	    };
 
 	    individualResults.push(fullIndividualResponse); // SUCCESS!
 	    console.log(`total_tokens: ${completion.usage?.total_tokens}`);
+	    console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
 	  } catch (error) {
 	    console.error("Response validation failed. Full report at end.");
 	    individualErrors.push({ dataset_id, error });
@@ -199,12 +200,6 @@ async function summariseExpression(
       }
     }
 
-    // write a pretty version to file, just for reference
-    await writeToFile(
-      `example-output/${geneId}.${rep.toString().padStart(2, "0")}.summaries.json`,
-      JSON.stringify(individualResults, null, 2)
-    );
-
     if (individualErrors.length > 0) {
       console.error(
 	"Some experiments failed to summarise. Not continuing to summary-of-summaries. Here is what happened:\n\n",
@@ -213,11 +208,18 @@ async function summariseExpression(
       process.exit(42);
     }
 
+    const sortedIndividualResults = orderBy(individualResults, ['biological_importance', 'confidence'], ['desc', 'desc']);
+
+    // write a pretty version to file, just for reference
+    await writeToFile(
+      `example-output/${geneId}.${rep.toString().padStart(2, "0")}.summaries.json`,
+      JSON.stringify(sortedIndividualResults, null, 2)
+    );
 
     if (datasetId) return;
     
     console.log("Summarising the summaries...");
-
+    
     try {
       // Note that the LLM will not get the `geneId`. This is intentional.
       const completion = await openai.chat.completions.create({
@@ -229,7 +231,7 @@ async function summariseExpression(
 	  },
 	  {
 	    role: "user",
-	    content: getFinalSummaryMessage(individualResults, prettyPrint),
+	    content: getFinalSummaryMessage(sortedIndividualResults, prettyPrint),
 	  },
 	],
 	response_format: zodResponseFormat(summaryResponseSchema, 'summary_response')
@@ -243,14 +245,15 @@ async function summariseExpression(
 	  const summaryResponse = summaryResponseSchema.parse(parsedResponse);
 
 	  // write a pretty version to file, just for reference
-	  await writeToFile(`example-output/${geneId}.summary.json`, JSON.stringify(summaryResponse, null, 2));
+	  await writeToFile(`example-output/${geneId}.${rep.toString().padStart(2, "0")}.summary.json`, JSON.stringify(summaryResponse, null, 2));
 
-	  // remove any duplicates and add an "Others" section if any were missed
-	  const summary = consolidateSummary(summaryResponse, individualResults);
+	  // remove any duplicates and add an "Others" topic if any were missed
+	  const summary = consolidateSummary(summaryResponse, sortedIndividualResults);
 	  
-	  const html = summaryJSONtoHTML(summary, geneId, individualResults, expressionGraphs, serverUrl, geneBaseUrl);
+	  const html = summaryJSONtoHTML(summary, geneId, sortedIndividualResults, expressionGraphs, serverUrl, geneBaseUrl);
 	  await writeToFile(`example-output/${geneId}.${rep.toString().padStart(2, "0")}.summary.html`, html);
 	  console.log(`total_tokens: ${completion.usage?.total_tokens}`);
+	  console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
 	} catch (error) {
 	  console.error("Error in parsing response: ", error);
 	}
