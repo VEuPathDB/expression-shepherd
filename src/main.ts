@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import "dotenv/config";
 import { expressionDataRequestPostData } from "./post-templates/expression_data_request";
 import axios from "axios";
-import { pick } from "lodash";
+import { omit, pick } from "lodash";
 import { FullIndividualResponseType, individualResponseSchema, summaryResponseSchema } from "./types";
 import { zodResponseFormat } from "openai/helpers/zod";
 import { consolidateSummary, summaryJSONtoHTML, writeToFile } from "./utils";
@@ -10,9 +10,21 @@ import { consolidateSummary, summaryJSONtoHTML, writeToFile } from "./utils";
 //
 // yarn build && yarn start PF3D7_0616000
 //
+// or
+//
+// yarn start PF3D7_0716300 DS_87e4fcafff 10
+//
+// which will run 10 replicates of a single experiment and make numbered output files
+// * it will NOT run the summary-of-summaries
+// * these run in parallel asynchronously - not sure if client retries if hitting the rate-limit
+//
 
 const args = process.argv.slice(2); // Skip the first two entries
 const geneId = args[0];
+const datasetId = args[1];
+const numReps = args[2] ? Number(args[2]) : 1;
+
+const modelId = "gpt-4o-2024-11-20"; //  "gpt-4o-2024-08-06"
 
 // these could be ENV vars or commandline args in future
 const projectId = 'PlasmoDB';
@@ -20,29 +32,29 @@ const serverUrl = 'https://plasmodb.org';
 const geneBaseUrl = 'https://plasmodb.org/plasmo/app/record/gene';
 const serviceBaseUrl = 'https://plasmodb.org/plasmo/service';
 
-
-console.log(`Going to work on ${projectId} gene ${geneId}...`);
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Ensure this is set in your environment
 });
 
 // use sleep to throttle requests
 // max 5,000 requests per minute, and 800,000 tokens per minute
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-const sleepTime = 500; // a complete guess
+// const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// const sleepTime = 500; // a complete guess
 
 interface SummariseExpressionArgs {
   geneId: string;
   projectId: string;
   serviceBaseUrl: string;
+  datasetId?: string;
+  rep?: number;
+  prettyPrint?: boolean;
 }
 
 type SummariseExpressionReturnType = Promise<void>; // returns nothing at the moment
 
 
 export function getExperimentMessage(experiment: any, prettyPrint = false): string {
-  const json = prettyPrint ? JSON.stringify(experiment, null, 2) : JSON.stringify(experiment);
+  const json = JSON.stringify(experiment, null, prettyPrint ? 2 : 0);
 
   return (
     "The JSON below contains expression data for a single gene within a specific experiment, along with relevant experimental and bioinformatics metadata:\n\n" +
@@ -55,7 +67,12 @@ export function getExperimentMessage(experiment: any, prettyPrint = false): stri
 
 
 export function getFinalSummaryMessage(experiments: any[], prettyPrint = false): string {
-  const json = prettyPrint ? JSON.stringify(experiments, null, 2) : JSON.stringify(experiments);
+
+  // remove things we're not passing to second level in the Java port at the moment.
+  const stripped = experiments.map((experiment) => omit(experiment, [ 'assay_type', 'display_name' ]));
+  const json = JSON.stringify(stripped, null, prettyPrint ? 2 : 0);
+
+  // const json = JSON.stringify(experiments, null, prettyPrint ? 2 : 0);
   
   return (
     "Below are AI-generated summaries of one gene's behavior in all the transcriptomics experiments available in VEuPathDB, provided in JSON format:\n\n" +
@@ -70,7 +87,7 @@ export function getFinalSummaryMessage(experiments: any[], prettyPrint = false):
 
 
 async function summariseExpression(
-  { geneId, projectId, serviceBaseUrl } : SummariseExpressionArgs
+  { geneId, projectId, serviceBaseUrl, datasetId, rep = 1, prettyPrint = false } : SummariseExpressionArgs
 ) : SummariseExpressionReturnType { 
   
   const postData = {
@@ -104,6 +121,10 @@ async function summariseExpression(
     
     for (const expressionGraph of expressionGraphs) {
       const { dataset_id, assay_type, display_name } = expressionGraph;
+
+      // single dataset mode:
+      if (datasetId && dataset_id !== datasetId) continue;
+      
       const experimentInfo =
 	pick(expressionGraph, [
 	  'y_axis', 'description', 'genus_species', 'project_id', 'summary',
@@ -113,7 +134,8 @@ async function summariseExpression(
       const experimentInfoWithData = {
 	...experimentInfo,
 	data: expressionGraphsDataTable.filter(
-	  (entry : { dataset_id : string }) => dataset_id == entry.dataset_id
+	  (entry : { sample_name: string, dataset_id : string }) =>
+	    dataset_id == entry.dataset_id // && !entry.sample_name.match("antisense")
 	).map(
 	  (entry : Record<string, string>) =>
 	    pick(entry, [
@@ -131,7 +153,7 @@ async function summariseExpression(
       try {
 	// Note that the LLM will not get the `geneId`. This is intentional.
 	const completion = await openai.chat.completions.create({
-	  model: "gpt-4o",
+	  model: modelId,
 	  messages: [
 	    {
 	      role: "system",
@@ -139,7 +161,7 @@ async function summariseExpression(
 	    },
 	    {
 	      role: "user",
-	      content: getExperimentMessage(experimentInfoWithData),
+	      content: getExperimentMessage(experimentInfoWithData, prettyPrint),
 	    },
 	  ],
 	  response_format: zodResponseFormat(individualResponseSchema, 'individual_response')
@@ -172,11 +194,13 @@ async function summariseExpression(
 	console.error("Error generating completion. Full report at end.");
 	individualErrors.push({ dataset_id, error });
       }
-      await sleep(sleepTime); // throttling
     }
 
     // write a pretty version to file, just for reference
-    await writeToFile(`example-output/${geneId}.summaries.json`, JSON.stringify(individualResults, null, 2));
+    await writeToFile(
+      `example-output/${geneId}.${rep.toString().padStart(2, "0")}.summaries.json`,
+      JSON.stringify(individualResults, null, 2)
+    );
 
     if (individualErrors.length > 0) {
       console.error(
@@ -185,13 +209,16 @@ async function summariseExpression(
       );
       process.exit(42);
     }
+
+
+    if (datasetId) return;
     
     console.log("Summarising the summaries...");
 
     try {
       // Note that the LLM will not get the `geneId`. This is intentional.
       const completion = await openai.chat.completions.create({
-	model: "gpt-4o",
+	model: modelId,
 	messages: [
 	  {
 	    role: "system",
@@ -199,7 +226,7 @@ async function summariseExpression(
 	  },
 	  {
 	    role: "user",
-	    content: getFinalSummaryMessage(individualResults),
+	    content: getFinalSummaryMessage(individualResults, prettyPrint),
 	  },
 	],
 	response_format: zodResponseFormat(summaryResponseSchema, 'summary_response')
@@ -219,7 +246,7 @@ async function summariseExpression(
 	  const summary = consolidateSummary(summaryResponse, individualResults);
 	  
 	  const html = summaryJSONtoHTML(summary, geneId, individualResults, expressionGraphs, serverUrl, geneBaseUrl);
-	  await writeToFile(`example-output/${geneId}.summary.html`, html);
+	  await writeToFile(`example-output/${geneId}.${rep.toString().padStart(2, "0")}.summary.html`, html);
 	  console.log(`total_tokens: ${completion.usage?.total_tokens}`);
 	} catch (error) {
 	  console.error("Error in parsing response: ", error);
@@ -236,4 +263,7 @@ async function summariseExpression(
 }
 
 
-summariseExpression({ geneId, projectId, serviceBaseUrl });
+const prettyPrint = true;
+for (let rep = 1; rep <= numReps; rep++) {
+  summariseExpression({ geneId, projectId, serviceBaseUrl, datasetId, rep, prettyPrint });
+}
