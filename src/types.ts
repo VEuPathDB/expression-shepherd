@@ -2,8 +2,8 @@ import { z } from "zod";
 
 export const individualResponseSchema = z.object({
   one_sentence_summary: z.string(),
-  biological_relevance: z.enum(["low", "medium", "high"]),
-  confidence: z.enum(["low", "medium", "high"]),
+  biological_importance: z.number().int().min(0).max(5),
+  confidence: z.number().int().min(0).max(5),
   experiment_keywords: z.string().array(),
   notes: z.string().optional(),  
 })
