@@ -12,10 +12,10 @@ import { consolidateSummary, summaryJSONtoHTML, writeToFile } from "./utils";
 //
 // or
 //
-// yarn start PF3D7_0716300 DS_87e4fcafff 10
+// yarn start PF3D7_0716300 DS_e973eadd57 10 0
 //
-// which will run 10 replicates of a single experiment and make numbered output files
-// * it will NOT run the summary-of-summaries
+// which will run 10 replicates of a single experiment with no pretty print and make numbered output files
+// * it will NOT run the summary-of-summaries, because there's only one
 // * these run in parallel asynchronously - not sure if client retries if hitting the rate-limit
 //
 
@@ -23,8 +23,11 @@ const args = process.argv.slice(2); // Skip the first two entries
 const geneId = args[0];
 const datasetId = args[1];
 const numReps = args[2] ? Number(args[2]) : 1;
+const prettyPrint = args[3] ? Boolean(args[3]) : false;
 
-const modelId = "gpt-4o-2024-11-20"; //  "gpt-4o-2024-08-06"
+const modelId = "gpt-4o-2024-11-20";
+// "gpt-4o-2024-11-20";
+// "gpt-4o-2024-08-06"
 
 // these could be ENV vars or commandline args in future
 const projectId = 'PlasmoDB';
@@ -262,8 +265,6 @@ async function summariseExpression(
   }
 }
 
-
-const prettyPrint = true;
 for (let rep = 1; rep <= numReps; rep++) {
   summariseExpression({ geneId, projectId, serviceBaseUrl, datasetId, rep, prettyPrint });
 }
