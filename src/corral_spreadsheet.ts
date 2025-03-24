@@ -2,6 +2,14 @@ import path from "path";
 import fs from "fs";
 import ExcelJS from "exceljs";
 
+/*****
+ * reads in a JSON file and outputs a .xslx file for QC
+ *
+ * usage: yarn ts-node src/corral_spreadsheet.ts data/local-analysisConfig-paths.json [excel output file]
+ *
+ * if no excel file given, writes to input file with new .xlsx extension
+ */
+
 type Annotation = { attribute: string; value: string };
 type Sample = {
   id: string;
@@ -23,6 +31,17 @@ function toDotXlsx(filePath : string) {
 }
 
 const [,, jsonInputFile, excelOutputFile = toDotXlsx(jsonInputFile)] = process.argv;
+
+
+if (!jsonInputFile) {
+  console.error("Usage: yarn ts-node src/corral_spreadsheet.ts data/local-analysisConfig-paths.json [excel output file]");
+  process.exit(1);
+}
+
+if (!fs.existsSync(jsonInputFile)) {
+  console.error("Input file '${jsonInputFile}' does not exist. Exiting.");
+  process.exit(1);
+}
 
 // Load JSON
 const experiments: Experiment[] = JSON.parse(fs.readFileSync(jsonInputFile, "utf8"));
