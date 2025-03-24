@@ -30,5 +30,47 @@ export const summaryResponseSchema = z.object({
     })
   )
 });
-
 export type SummaryResponseType = z.infer<typeof summaryResponseSchema>;
+
+
+export type UncorralledSample = {
+    fileName: string;
+    experiment: string;
+    componentDatabase: any;
+    speciesAndStrain: any;
+    samples: {
+        id: string;
+        label: string;
+    }[];
+};
+
+export const corralledSample = z.object({
+  id: z.string(),
+  annotations: z.array(
+    z.object({
+      attribute: z.string(),
+      value: z.string(),
+    })
+  )
+});
+export type CorralledSample = z.infer<typeof corralledSample>;
+
+// expected AI response to summarising 
+export const corralledExperimentResponseType = z.object({
+  inputQuality: z.number(),
+  samples: z.array(corralledSample),
+})
+export type CorralledExperimentResponseType = z.infer<typeof corralledExperimentResponseType>;
+
+
+export type RehydratedCorralledSample = CorralledSample & {
+  label: string;
+};
+
+export type RehydratedCorralExperimentResponseType =
+  Omit<CorralledExperimentResponseType, 'samples'> &
+  Omit<UncorralledSample, 'samples'> & {
+    samples: RehydratedCorralledSample[];
+  };
+
+
