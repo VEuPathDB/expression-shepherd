@@ -1,8 +1,8 @@
 {
   "name": "expression-wrangler",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
@@ -10,12 +10,14 @@
     "git-rev-sync": "^3.0.2",
     "lodash": "^4.17.21",
     "openai": "^4.78.1",
+    "p-queue": "^8.1.0",
+    "p-retry": "^6.2.1",
     "xml2js": "^0.6.2",
     "yaml": "^2.7.0",
     "zod": "^3.24.1"
   },
   "volta": {
-    "node": "18.20.5",
+    "node": "20.9.0",
     "yarn": "1.22.19"
   },
   "devDependencies": {
