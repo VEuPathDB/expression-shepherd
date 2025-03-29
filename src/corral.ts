@@ -7,6 +7,8 @@ import { corralledExperimentResponseType, CorralledExperimentResponseType, Rehyd
 import { zodResponseFormat } from "openai/helpers/zod";
 import { isEqual } from "lodash";
 import { writeToFile } from "./utils";
+import PQueue from 'p-queue';
+import pRetry from 'p-retry';
 // import { stringify } from 'yaml';
 
 const modelId = "gpt-4o-2024-11-20";
@@ -26,7 +28,7 @@ function asArray<T>(value: T | T[] | undefined): T[] {
 const [,, fileOfFilenames] = process.argv;
 
 if (!fileOfFilenames) {
-  console.error("Usage: yarn ts-node src/corral.ts data/local-analysisConfig-paths.txt");
+  console.error("Usage: yarn ts-node src/corral.ts data/local-analysisConfig-paths.txt\n\nWrites data to data/local-analysisConfig-paths.json");
   process.exit(1);
 }
 
@@ -116,87 +118,37 @@ async function processFiles(filenames: string[], outputFile: string) {
     maxRetries: 10,
   });
 
+  const queue = new PQueue({ concurrency: 1 }); // FIFO, single-threaded
+  
   const aiResponses : CorralledExperimentResponseType[] = [];
   const aiErrors : {
     fileName : string,
     error : any
   }[] = [];
 
+
   for (const input of processedData) {
-
-    const {
-      fileName,
-      experiment,
-      speciesAndStrain,
-      componentDatabase,
-      samples
-    } = input;
-    
-    console.log(`Gonna send input for ${fileName}:`);
-    try {
-      const completion = await openai.chat.completions.create({
-	model: modelId,
-	messages: [
-	  {
-	    role: "system",
-	    content: "You are a bioinformatician working for VEuPathDB.org. You are an expert at wrangling 'omics metadata."
-	  },
-	  {
-	    role: "user",
-	    content: getPrompt(input),
-	  },
-	],
-	response_format: zodResponseFormat(corralledExperimentResponseType, 'corral_experiment')
-      });
-      
-      const rawResponse = completion.choices[0].message.content; // Raw text response
-
-      if (rawResponse) {
-	try {
-	  const parsedResponse = corralledExperimentResponseType.parse(JSON.parse(rawResponse));
-
-	  // check that the response contains the same sample IDs
-	  if (!isEqual(
-	    input.samples.map(({ id } : { id: string }) => id),
-	    parsedResponse.samples.map(({ id } : { id: string }) => id)
-	  )) {
-	    throw new Error("Sample IDs in AI response do not match input");
-	  }
-	  
-	  // merge the input data back into the response
-	  // (more reliable than asking the AI to regurgitate it)
-	  const rehydratedResponse : RehydratedCorralExperimentResponseType = {
-	    ...parsedResponse,
-	    fileName,
-	    experiment,
-	    speciesAndStrain,
-	    componentDatabase,
-	    samples: parsedResponse.samples.map(
-	      (sample, index) => ({
-		...sample,
-		label: samples[index].label,
-	      })
-	    ),
-	  };
-	  
-	  aiResponses.push(rehydratedResponse);
-	  console.log(`total_tokens: ${completion.usage?.total_tokens}`);
-	  console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
-	  } catch (error) {
-	    console.error("Response validation failed. Full report at end.");
-	    aiErrors.push({ fileName, error });
-	  }
-      } else {
-	console.error(`Empty response. Full report at end.`);
-	aiErrors.push({ fileName, error: "empty response from model"});
-      }
-    } catch (error) {
-      console.error("Error generating completion. Full report at end.");
-      aiErrors.push({ fileName, error });
-    }
-    
+    queue.add(() =>
+      pRetry(() => processCorralInput(input, openai), {
+	retries: 5,
+	minTimeout: 60000,
+	onFailedAttempt: (error) => {
+          console.warn(
+            `Retry failed for ${input.fileName}. Attempt ${error.attemptNumber} of ${error.attemptNumber + error.retriesLeft}`
+          );
+	},
+      }).then((output) => {
+	aiResponses.push(output);
+      }).catch((error) => {
+	console.error(`Final failure for ${input.fileName}`);
+	aiErrors.push({ fileName: input.fileName, error });
+      })
+    );
   }
 
+  // wait for the queue to be processed
+  await queue.onIdle();
+  
   await writeToFile(
     outputFile,
     JSON.stringify(aiResponses, null, 2)
@@ -229,3 +181,62 @@ processFiles(filenames, outputFile).catch(err => {
   console.error("Error:", err);
   process.exit(1);
 });
+
+
+
+async function processCorralInput(input: UncorralledSample, openai: OpenAI): Promise<RehydratedCorralExperimentResponseType> {
+  const {
+    fileName,
+    experiment,
+    speciesAndStrain,
+    componentDatabase,
+    samples
+  } = input;
+
+  console.log(`Gonna send input for ${fileName}:`);
+
+  const completion = await openai.chat.completions.create({
+    model: modelId,
+    messages: [
+      {
+        role: "system",
+        content: "You are a bioinformatician working for VEuPathDB.org. You are an expert at wrangling 'omics metadata."
+      },
+      {
+        role: "user",
+        content: getPrompt(input),
+      },
+    ],
+    response_format: zodResponseFormat(corralledExperimentResponseType, 'corral_experiment')
+  });
+
+  const rawResponse = completion.choices[0].message.content;
+  if (!rawResponse) {
+    throw new Error("Empty response from model");
+  }
+
+  const parsedResponse = corralledExperimentResponseType.parse(JSON.parse(rawResponse));
+
+  // Validate sample IDs match
+  if (!isEqual(
+    input.samples.map(({ id }: { id: string }) => id),
+    parsedResponse.samples.map(({ id }: { id: string }) => id)
+  )) {
+    throw new Error("Sample IDs in AI response do not match input");
+  }
+
+  console.log(`total_tokens: ${completion.usage?.total_tokens}`);
+  console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
+
+  return {
+    ...parsedResponse,
+    fileName,
+    experiment,
+    speciesAndStrain,
+    componentDatabase,
+    samples: parsedResponse.samples.map((sample, index) => ({
+      ...sample,
+      label: samples[index].label,
+    })),
+  };
+}
