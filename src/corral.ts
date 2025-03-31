@@ -167,7 +167,7 @@ function getPrompt(input: UncorralledSample) : string {
     "```json",
     JSON.stringify(input, null, 2),
     "```\n",
-    "For each `sample`, extract `annotations` from the `label`, where possible, as `attribute,value` pairs with an optional `unit` field for numeric values. If the `label` does not contain usable information, return an empty `annotations` array for that sample. Avoid using identifiers as annotation values. When a unit is provided, this should be an unabbreviated singular noun.\n",
+    "For each `sample`, extract `annotations` from the `label`, where possible, as `attribute,value` pairs. If the `label` does not contain usable information, return an empty `annotations` array for that sample. Avoid using identifiers as annotation values. When a unit is provided, this should be an unabbreviated singular noun. For continuous variables, provide a top-level `units` lookup from attribute name to a unit name (singular noun). Convert values to this unit if the provided values are mixed-unit.\n",
     "Also provide an inputQuality score (integer from 0 to 5):",
     "• 0 = no usable information in the sample label",
     "• 5 = comprehensive, unambiguous annotation possible",

@@ -50,9 +50,8 @@ export const corralledSample = z.object({
     z.object({
       attribute: z.string(),
       value: z.string(),
-      unit: z.optional(z.string()),
-    })
-  )
+    }),
+  ),
 });
 export type CorralledSample = z.infer<typeof corralledSample>;
 
@@ -60,6 +59,7 @@ export type CorralledSample = z.infer<typeof corralledSample>;
 export const corralledExperimentResponseType = z.object({
   inputQuality: z.number(),
   samples: z.array(corralledSample),
+  units: z.object({}).catchall(z.string())
 })
 export type CorralledExperimentResponseType = z.infer<typeof corralledExperimentResponseType>;
 

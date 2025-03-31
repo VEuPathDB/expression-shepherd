@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import ExcelJS from "exceljs";
+import ExcelJS, { Fill, Font } from "exceljs";
 
 /*****
  * reads in a JSON file and outputs a .xslx file for QC
@@ -23,7 +23,11 @@ type Experiment = {
   speciesAndStrain: string;
   inputQuality: number;
   samples: Sample[];
+  units: Record<string, string>;
 };
+
+
+const AI_FONT : Partial<Font> = { color: {argb: '#FF8B0000' }};
 
 function toDotXlsx(filePath : string) {
   const { root, dir, name } = path.parse(filePath);
@@ -48,21 +52,28 @@ const experiments: Experiment[] = JSON.parse(fs.readFileSync(jsonInputFile, "utf
 
 // Create workbook and worksheet
 const workbook = new ExcelJS.Workbook();
-const sheet = workbook.addWorksheet("Sample QC");
-sheet.properties.defaultColWidth = 20; // applies to all columns
+const sheets : Record<string, ExcelJS.Worksheet> = {};
 
 const qcOptions = '"not done,in progress,complete"';
 
 for (const exp of experiments) {
+  // choose or create the correct sheet
+  const sheet = sheets[exp.componentDatabase] ??= workbook.addWorksheet(exp.componentDatabase);
+  // not ideal to repeat this but it works!
+  sheet.properties.defaultColWidth = 20;
+
+  const fixedFileName = exp.fileName.replace('./data', '');
   // Add metadata lines
   const metaLines = [
-    `# fileName: ${exp.fileName}`,
+    `# fileName: ${fixedFileName}`,
     `# experiment: ${exp.experiment}`,
     `# componentDatabase: ${exp.componentDatabase}`,
     `# speciesAndStrain: ${exp.speciesAndStrain}`,
-    `# inputQuality: ${exp.inputQuality}`,
   ];
   metaLines.forEach(line => sheet.addRow([line]));
+
+  const inputQualityRow = sheet.addRow([`# inputQuality: ${exp.inputQuality}`]);
+  inputQualityRow.getCell(1).font = AI_FONT;
   
   // Get unique attribute names for this experiment
   const attributes = Array.from(
@@ -72,6 +83,9 @@ for (const exp of experiments) {
   const headers = ["sample ID", "label", ...attributes, "QC status", "QC notes"];
   const addedHeaderRow = sheet.addRow(headers);
   addedHeaderRow.font = { bold: true };
+  for (let i = 0; i < attributes.length; i++) {
+    addedHeaderRow.getCell(3 + i).font = AI_FONT;
+  }
 
   for (const sample of exp.samples) {
     const annMap: Record<string, string> = {};
@@ -96,8 +110,26 @@ for (const exp of experiments) {
       formulae: [qcOptions],
       showErrorMessage: true,
     };
-  }
 
+    for (let i = 0; i < attributes.length; i++) {
+      addedRow.getCell(3 + i).font = AI_FONT;
+    }
+  }
+  
+  const units = ["units 🠪", '', ...attributes.map((attribute) => exp.units[attribute] ?? ''), '', ''];
+  const addedUnitsRow = sheet.addRow(units);
+  addedUnitsRow.getCell(1).font = { bold: true };
+  for (let i = 0; i < attributes.length; i++) {
+    addedUnitsRow.getCell(3 + i).font = AI_FONT;
+  }
+  const unitsQcCell = addedUnitsRow.getCell(units.length - 1);
+  unitsQcCell.dataValidation = {
+      type: "list",
+      allowBlank: true,
+      formulae: [qcOptions],
+      showErrorMessage: true,
+    };
+  
   sheet.addRow([]);
 }
 
