@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
-import ExcelJS, { Fill, Font } from "exceljs";
+import ExcelJS, { Font } from "exceljs";
+import { sortBy } from "lodash";
 
 /*****
  * reads in a JSON file and outputs a .xslx file for QC
@@ -26,8 +27,7 @@ type Experiment = {
   units: Record<string, string>;
 };
 
-
-const AI_FONT : Partial<Font> = { color: {argb: '#FF8B0000' }};
+const AI_FONT : Partial<Font> = { color: {argb: '#FF8B0000' } };
 
 function toDotXlsx(filePath : string) {
   const { root, dir, name } = path.parse(filePath);
@@ -48,7 +48,10 @@ if (!fs.existsSync(jsonInputFile)) {
 }
 
 // Load JSON
-const experiments: Experiment[] = JSON.parse(fs.readFileSync(jsonInputFile, "utf8"));
+const experiments: Experiment[] = sortBy(
+  JSON.parse(fs.readFileSync(jsonInputFile, "utf8")),
+  [ 'speciesAndStrain', 'inputQuality' ]
+);
 
 // Create workbook and worksheet
 const workbook = new ExcelJS.Workbook();
@@ -65,15 +68,14 @@ for (const exp of experiments) {
   const fixedFileName = exp.fileName.replace('./data', '');
   // Add metadata lines
   const metaLines = [
-    `# fileName: ${fixedFileName}`,
-    `# experiment: ${exp.experiment}`,
-    `# componentDatabase: ${exp.componentDatabase}`,
-    `# speciesAndStrain: ${exp.speciesAndStrain}`,
+    ['# fileName:', fixedFileName ],
+    ['# profileSetName:', exp.experiment],
+    ['# speciesAndStrain:', exp.speciesAndStrain],
   ];
-  metaLines.forEach(line => sheet.addRow([line]));
+  metaLines.forEach(line => sheet.addRow(line));
 
-  const inputQualityRow = sheet.addRow([`# inputQuality: ${exp.inputQuality}`]);
-  inputQualityRow.getCell(1).font = AI_FONT;
+  const inputQualityRow = sheet.addRow(['# inputQuality:', exp.inputQuality.toString()]);
+  inputQualityRow.getCell(2).font = AI_FONT;
   
   // Get unique attribute names for this experiment
   const attributes = Array.from(
@@ -84,7 +86,7 @@ for (const exp of experiments) {
   const addedHeaderRow = sheet.addRow(headers);
   addedHeaderRow.font = { bold: true };
   for (let i = 0; i < attributes.length; i++) {
-    addedHeaderRow.getCell(3 + i).font = AI_FONT;
+    addedHeaderRow.getCell(3 + i).font = { ...AI_FONT, bold:true };
   }
 
   for (const sample of exp.samples) {

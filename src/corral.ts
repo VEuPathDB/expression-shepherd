@@ -62,7 +62,7 @@ async function processFiles(filenames: string[], outputFile: string) {
 
     const xml = fs.readFileSync(filename, "utf-8");
     try {
-      const parsed = await parseStringPromise(xml, { explicitArray: false });
+      const parsed = await parseStringPromise(xml, { explicitArray: true });
       parsed.fileName = filename;
       xmlData.push(parsed);
     } catch (err) {
@@ -72,44 +72,49 @@ async function processFiles(filenames: string[], outputFile: string) {
 
   // now process this into something structured that we'll pass to the AI
 
-  const processedData : UncorralledSample[] = xmlData.map((datum: any) => {
+  const processedData : UncorralledSample[] = xmlData.flatMap((datum: any) => {
     const [, componentDatabase, speciesAndStrain] = datum.fileName.match(/\/manualDelivery\/(\w+)\/(.+?)\//) || [];
 
     const fileName = datum.fileName as string;
-   
-    const properties: XMLProperty[] = asArray(datum.xml?.globalReferencable?.property ?? datum.xml?.step?.property);
 
-    const experiment = properties.find(
-      prop => prop.$.name === "profileSetName" // example filter condition
-    )?.$.value;
+    const steps = asArray(datum.globalReferencable?.[0]?.property ?? datum.xml.step);
 
-    if (experiment == null) throw new Error("Unexpected item in the bagging area.");
-    
-    const rawSamples = asArray(
-      properties.find(
-	prop => prop.$.name === "samples" // example filter condition
-      )?.value
-    );
+    return steps.map(
+      (step) => {
+	const properties : XMLProperty[] = asArray(step.property);
+	const experiment = properties.find(
+	  prop => prop.$.name === "profileSetName" // example filter condition
+	)?.$.value;
 
-    const samples = rawSamples.map(
-      (str) => {
-	const [ label, id ] = str.split("|");
-	return { id, label };
-      }
-    );
-    
-    return {
-      fileName,
-      experiment,
-      componentDatabase,
-      speciesAndStrain,
-      samples,
-    };
+	if (experiment == null) throw new Error(`Unexpected item in the bagging area for ${fileName}`);
+	
+	const rawSamples = asArray(
+	  properties.find(
+	    prop => prop.$.name === "samples" // example filter condition
+	  )?.value
+	);
+
+	const samples = rawSamples.map(
+	  (str) => {
+	    const [ label, id ] = str.split("|");
+	    return { id, label };
+	  }
+	);
+	
+	return {
+	  fileName,
+	  experiment,
+	  componentDatabase,
+	  speciesAndStrain,
+	  samples,
+	};
+      });
   });
 
 //  console.log(JSON.stringify(xmlData, null, 2));
 //  console.log(JSON.stringify(processedData, null, 2));
-//  if (1>0) process.exit(0);
+  console.log(`Got ${processedData.length} profileSets/experiments`);
+  if (1>0) process.exit(0);
 
   
   // Placeholder for OpenAI initialization
@@ -139,6 +144,11 @@ async function processFiles(filenames: string[], outputFile: string) {
 	},
       }).then((output) => {
 	aiResponses.push(output);
+	const perExperimentOutputFile = input.fileName.replace('.xml', ".ai.json");
+	return writeToFile(
+	  perExperimentOutputFile,
+	  JSON.stringify(output, null, 2)
+	);
       }).catch((error) => {
 	console.error(`Final failure for ${input.fileName}`);
 	aiErrors.push({ fileName: input.fileName, error });
