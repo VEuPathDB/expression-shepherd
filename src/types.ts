@@ -50,6 +50,7 @@ export const corralledSample = z.object({
     z.object({
       attribute: z.string(),
       value: z.string(),
+      unit: z.optional(z.string()),
     })
   )
 });
