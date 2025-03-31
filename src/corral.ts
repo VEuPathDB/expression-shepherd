@@ -135,11 +135,11 @@ async function processFiles(filenames: string[], outputFile: string) {
   for (const input of processedData) {
     queue.add(() =>
       pRetry(() => processCorralInput(input, openai), {
-	retries: 5,
-	minTimeout: 60000,
+	retries: 1, // try again just once after 2 minutes
+	minTimeout: 120000,
 	onFailedAttempt: (error) => {
           console.warn(
-            `Retry failed for ${input.fileName}. Attempt ${error.attemptNumber} of ${error.attemptNumber + error.retriesLeft}`
+            `Retry failed for ${input.fileName}. Attempt ${error.attemptNumber} of ${error.attemptNumber + error.retriesLeft}. Reason: ${error.message}`
           );
 	},
       }).then((output) => {
@@ -177,7 +177,7 @@ function getPrompt(input: UncorralledSample) : string {
     "```json",
     JSON.stringify(input, null, 2),
     "```\n",
-    "For each `sample`, extract `annotations` from the `label`, where possible, as `attribute,value` pairs. If the `label` does not contain usable information, return an empty `annotations` array for that sample. Avoid using identifiers as annotation values. When a unit is provided, this should be an unabbreviated singular noun. For continuous variables, provide a top-level `units` lookup from attribute name to a unit name (singular noun). Convert values to this unit if the provided values are mixed-unit.\n",
+    "For each sample, extract `annotations` from the `label`, where possible, as (`attribute`,`value`) pairs. If the `label` does not contain usable information, return an empty `annotations` array for that sample. For continuous variables, provide a top-level `units` lookup from attribute name to a unit name (singular noun) and strip any units from the value(s). Convert values to this unit if the provided values are mixed-unit.\n",
     "Also provide an inputQuality score (integer from 0 to 5):",
     "• 0 = no usable information in the sample label",
     "• 5 = comprehensive, unambiguous annotation possible",
@@ -217,6 +217,7 @@ async function processCorralInput(input: UncorralledSample, openai: OpenAI): Pro
         content: getPrompt(input),
       },
     ],
+    max_tokens: 4096,
     response_format: zodResponseFormat(corralledExperimentResponseType, 'corral_experiment')
   });
 
@@ -232,7 +233,8 @@ async function processCorralInput(input: UncorralledSample, openai: OpenAI): Pro
     input.samples.map(({ id }: { id: string }) => id),
     parsedResponse.samples.map(({ id }: { id: string }) => id)
   )) {
-    throw new Error("Sample IDs in AI response do not match input");
+    console.log(parsedResponse); // .samples.map(({ id }: { id: string }) => id));
+    throw new Error("Sample IDs in AI response do not match input: " + JSON.stringify(parsedResponse, null, 2));
   }
 
   console.log(`total_tokens: ${completion.usage?.total_tokens}`);
