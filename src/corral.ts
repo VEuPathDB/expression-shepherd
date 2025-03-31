@@ -113,8 +113,8 @@ async function processFiles(filenames: string[], outputFile: string) {
 
 //  console.log(JSON.stringify(xmlData, null, 2));
 //  console.log(JSON.stringify(processedData, null, 2));
-  console.log(`Got ${processedData.length} profileSets/experiments`);
-  if (1>0) process.exit(0);
+  console.log(`Going to do ${processedData.length} profileSets/experiments`);
+//  if (1>0) process.exit(0);
 
   
   // Placeholder for OpenAI initialization
