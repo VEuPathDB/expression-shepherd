@@ -118,7 +118,7 @@ for (const exp of experiments) {
     }
   }
   
-  const units = ["units", "🠪", ...attributes.map((attribute) => exp.units[attribute] ?? ''), '', ''];
+  const units = ["units", "-->", ...attributes.map((attribute) => exp.units[attribute] ?? ''), '', ''];
   const addedUnitsRow = sheet.addRow(units);
   addedUnitsRow.getCell(1).font = { bold: true };
   for (let i = 0; i < attributes.length; i++) {
