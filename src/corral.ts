@@ -77,7 +77,7 @@ async function processFiles(filenames: string[], outputFile: string) {
 
     const fileName = datum.fileName as string;
 
-    const steps = asArray(datum.globalReferencable?.[0]?.property ?? datum.xml.step);
+    const steps = asArray(datum.xml.globalReferencable ?? datum.xml.step);
 
     return steps.map(
       (step) => {
@@ -112,9 +112,9 @@ async function processFiles(filenames: string[], outputFile: string) {
   });
 
 //  console.log(JSON.stringify(xmlData, null, 2));
-//  console.log(JSON.stringify(processedData, null, 2));
+  console.log(JSON.stringify(processedData, null, 2));
   console.log(`Going to do ${processedData.length} profileSets/experiments`);
-//  if (1>0) process.exit(0);
+  if (1>0) process.exit(0);
 
   
   // Placeholder for OpenAI initialization
