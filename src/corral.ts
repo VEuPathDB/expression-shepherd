@@ -5,7 +5,7 @@ import OpenAI from "openai";
 import { parseStringPromise } from "xml2js";
 import { corralledExperimentResponseType, CorralledExperimentResponseType, RehydratedCorralExperimentResponseType, UncorralledSample } from "./types";
 import { zodResponseFormat } from "openai/helpers/zod";
-import { isEqual, omit } from "lodash";
+import { isEqual, omit, uniqBy } from "lodash";
 import { writeToFile } from "./utils";
 import PQueue from 'p-queue';
 import pRetry from 'p-retry';
@@ -94,12 +94,15 @@ async function processFiles(filenames: string[], outputFile: string, errorFile: 
 	);
 
 	const idsToLabel = new Map<string, string>();
-	const samples = rawSamples.map(
-	  (str) => {
-	    const [ label, id ] = str.split("|");
-	    idsToLabel.set(id, label);
-	    return { label };
-	  }
+	const samples =  uniqBy(
+	  rawSamples.map(
+	    (str) => {
+	      const [ label, id ] = str.split("|");
+	      idsToLabel.set(id, label);
+	      return { label };
+	    }
+	  ),
+	  'label'
 	);
 	
 	return {
