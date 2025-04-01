@@ -9,7 +9,6 @@ import { isEqual } from "lodash";
 import { writeToFile } from "./utils";
 import PQueue from 'p-queue';
 import pRetry from 'p-retry';
-// import { stringify } from 'yaml';
 
 const modelId = "gpt-4o-2024-11-20";
 
@@ -131,6 +130,7 @@ async function processFiles(filenames: string[], outputFile: string) {
     error : any
   }[] = [];
 
+  const fileCounter = new Map<string, number>();
 
   for (const input of processedData) {
     queue.add(() =>
@@ -144,7 +144,10 @@ async function processFiles(filenames: string[], outputFile: string) {
 	},
       }).then((output) => {
 	aiResponses.push(output);
-	const perExperimentOutputFile = input.fileName.replace('.xml', ".ai.json");
+	const counter = (fileCounter.get(input.fileName) ?? 0) + 1;
+	fileCounter.set(input.fileName, counter);
+	// counter doesn't need zero padding, max per fileName is 5
+	const perExperimentOutputFile = input.fileName.replace('.xml', ".ai." + counter + ".json");
 	return writeToFile(
 	  perExperimentOutputFile,
 	  JSON.stringify(output, null, 2)
