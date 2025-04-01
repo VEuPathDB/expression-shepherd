@@ -34,18 +34,18 @@ export type SummaryResponseType = z.infer<typeof summaryResponseSchema>;
 
 
 export type UncorralledSample = {
-    fileName: string;
-    experiment: string;
-    componentDatabase: any;
-    speciesAndStrain: any;
-    samples: {
-        id: string;
-        label: string;
-    }[];
+  fileName: string;
+  experiment: string;
+  componentDatabase: any;
+  speciesAndStrain: any;
+  samples: {
+    label: string;
+  }[];
+  idsToLabel: Map<string, string>;
 };
 
 export const corralledSample = z.object({
-  id: z.string(),
+  label: z.string(),
   annotations: z.array(
     z.object({
       attribute: z.string(),
@@ -65,12 +65,13 @@ export type CorralledExperimentResponseType = z.infer<typeof corralledExperiment
 
 
 export type RehydratedCorralledSample = CorralledSample & {
+  id: string;
   label: string;
 };
 
 export type RehydratedCorralExperimentResponseType =
   Omit<CorralledExperimentResponseType, 'samples'> &
-  Omit<UncorralledSample, 'samples'> & {
+  Omit<UncorralledSample, 'samples' | 'idsToLabel'> & {
     samples: RehydratedCorralledSample[];
   };
 

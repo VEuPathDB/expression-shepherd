@@ -5,7 +5,7 @@ import OpenAI from "openai";
 import { parseStringPromise } from "xml2js";
 import { corralledExperimentResponseType, CorralledExperimentResponseType, RehydratedCorralExperimentResponseType, UncorralledSample } from "./types";
 import { zodResponseFormat } from "openai/helpers/zod";
-import { isEqual } from "lodash";
+import { isEqual, omit } from "lodash";
 import { writeToFile } from "./utils";
 import PQueue from 'p-queue';
 import pRetry from 'p-retry';
@@ -93,10 +93,12 @@ async function processFiles(filenames: string[], outputFile: string) {
 	  )?.value
 	);
 
+	const idsToLabel = new Map<string, string>();
 	const samples = rawSamples.map(
 	  (str) => {
 	    const [ label, id ] = str.split("|");
-	    return { id, label };
+	    idsToLabel.set(id, label);
+	    return { label };
 	  }
 	);
 	
@@ -106,14 +108,15 @@ async function processFiles(filenames: string[], outputFile: string) {
 	  componentDatabase,
 	  speciesAndStrain,
 	  samples,
+	  idsToLabel,
 	};
       });
   });
 
 //  console.log(JSON.stringify(xmlData, null, 2));
-  console.log(JSON.stringify(processedData, null, 2));
+//  console.log(JSON.stringify(processedData, null, 2));
   console.log(`Going to do ${processedData.length} profileSets/experiments`);
-  if (1>0) process.exit(0);
+//  if (1>0) process.exit(0);
 
   
   // Placeholder for OpenAI initialization
@@ -127,6 +130,7 @@ async function processFiles(filenames: string[], outputFile: string) {
   const aiResponses : CorralledExperimentResponseType[] = [];
   const aiErrors : {
     fileName : string,
+    profileSetName: string,
     error : any
   }[] = [];
 
@@ -135,8 +139,8 @@ async function processFiles(filenames: string[], outputFile: string) {
   for (const input of processedData) {
     queue.add(() =>
       pRetry(() => processCorralInput(input, openai), {
-	retries: 1, // try again just once after 2 minutes
-	minTimeout: 120000,
+	retries: 3,
+	minTimeout: 10000,
 	onFailedAttempt: (error) => {
           console.warn(
             `Retry failed for ${input.fileName}. Attempt ${error.attemptNumber} of ${error.attemptNumber + error.retriesLeft}. Reason: ${error.message}`
@@ -154,7 +158,7 @@ async function processFiles(filenames: string[], outputFile: string) {
 	);
       }).catch((error) => {
 	console.error(`Final failure for ${input.fileName}`);
-	aiErrors.push({ fileName: input.fileName, error });
+	aiErrors.push({ fileName: input.fileName, profileSetName: input.experiment, error });
       })
     );
   }
@@ -175,10 +179,14 @@ async function processFiles(filenames: string[], outputFile: string) {
 }
 
 function getPrompt(input: UncorralledSample) : string {
+
+  // AI doesn't need the id->label lookup
+  const aiInput = omit(input, ['idsToLabel']);
+  
   return [
     "Below in JSON format is information about a transcriptomics experiment and its samples.\n",
     "```json",
-    JSON.stringify(input, null, 2),
+    JSON.stringify(aiInput, null, 2),
     "```\n",
     "For each sample, extract `annotations` from the `label`, where possible, as (`attribute`,`value`) pairs. If the `label` does not contain usable information, return an empty `annotations` array for that sample. For continuous variables, provide a top-level `units` lookup from attribute name to a unit name (singular noun) and strip any units from the value(s). Convert values to this unit if the provided values are mixed-unit.\n",
     "Also provide an inputQuality score (integer from 0 to 5):",
@@ -203,9 +211,11 @@ async function processCorralInput(input: UncorralledSample, openai: OpenAI): Pro
     experiment,
     speciesAndStrain,
     componentDatabase,
-    samples
+    samples,
+    idsToLabel,
   } = input;
 
+  
   console.log(`Gonna send input for ${fileName}:`);
 
   const completion = await openai.chat.completions.create({
@@ -231,12 +241,11 @@ async function processCorralInput(input: UncorralledSample, openai: OpenAI): Pro
 
   const parsedResponse = corralledExperimentResponseType.parse(JSON.parse(rawResponse));
 
-  // Validate sample IDs match
+  // Validate sample labels match
   if (!isEqual(
-    input.samples.map(({ id }: { id: string }) => id),
-    parsedResponse.samples.map(({ id }: { id: string }) => id)
+    input.samples.map(({ label }: { label: string }) => label),
+    parsedResponse.samples.map(({ label }: { label: string }) => label)
   )) {
-    console.log(parsedResponse); // .samples.map(({ id }: { id: string }) => id));
     throw new Error("Sample IDs in AI response do not match input: " + JSON.stringify(parsedResponse, null, 2));
   }
 
@@ -249,9 +258,19 @@ async function processCorralInput(input: UncorralledSample, openai: OpenAI): Pro
     experiment,
     speciesAndStrain,
     componentDatabase,
-    samples: parsedResponse.samples.map((sample, index) => ({
-      ...sample,
-      label: samples[index].label,
-    })),
+    // map samples from label-based to id-based array
+    samples: Array.from(idsToLabel.keys()).map(
+      (id) => {
+	const label = idsToLabel.get(id) as string; // can't be missing, right?
+	const sample = parsedResponse.samples.find((sample) => sample.label === label);
+	if (sample == null) {
+	  throw new Error(`Sample with label '${label}' missing from AI response for ${fileName}.`);
+	}
+	return ({
+	  id,
+	  ...sample,
+	});
+      }
+    ),
   };
 }
