@@ -48,7 +48,7 @@ console.log(`Loaded ${filenames.length} filenames!`);
 
 
 
-async function processFiles(filenames: string[], outputFile: string) {
+async function processFiles(filenames: string[], outputFile: string, errorFile: string) {
 
   // read in the XMLs into an array of objects
   const xmlData : any[] = [];
@@ -174,6 +174,10 @@ async function processFiles(filenames: string[], outputFile: string) {
   if (aiErrors.length > 0) {
     console.error("There were errors!");
     console.error(JSON.stringify(aiErrors, null, 2));
+    await writeToFile(
+      errorFile,
+      JSON.stringify(aiErrors, null, 2)
+    );
   }
 
 }
@@ -198,7 +202,8 @@ function getPrompt(input: UncorralledSample) : string {
 
 const { root, dir, name } = path.parse(filePath);
 const outputFile = path.join(root, dir, name) + ".json";
-processFiles(filenames, outputFile).catch(err => {
+const errorFile = path.join(root, dir, name) + ".errors";
+processFiles(filenames, outputFile, errorFile).catch(err => {
   console.error("Error:", err);
   process.exit(1);
 });
@@ -211,7 +216,6 @@ async function processCorralInput(input: UncorralledSample, openai: OpenAI): Pro
     experiment,
     speciesAndStrain,
     componentDatabase,
-    samples,
     idsToLabel,
   } = input;
 
@@ -242,11 +246,11 @@ async function processCorralInput(input: UncorralledSample, openai: OpenAI): Pro
   const parsedResponse = corralledExperimentResponseType.parse(JSON.parse(rawResponse));
 
   // Validate sample labels match
-  if (!isEqual(
-    input.samples.map(({ label }: { label: string }) => label),
-    parsedResponse.samples.map(({ label }: { label: string }) => label)
-  )) {
-    throw new Error("Sample IDs in AI response do not match input: " + JSON.stringify(parsedResponse, null, 2));
+  const inputLabels = input.samples.map(({ label }: { label: string }) => label);
+  const outputLabels = parsedResponse.samples.map(({ label }: { label: string }) => label);
+  
+  if (!isEqual(inputLabels, outputLabels)) {
+    throw new Error(`Sample labels in AI response (${outputLabels}) do not match input (${inputLabels})`);
   }
 
   console.log(`total_tokens: ${completion.usage?.total_tokens}`);
