@@ -107,6 +107,9 @@ async function summariseExpression(
     ]
   };
 
+  let sum_costs = 0;
+  let num_costs = 0;
+  
   try {
     const response = await axios.post(`${serviceBaseUrl}/record-types/gene/records`, postData);
     const {
@@ -185,6 +188,10 @@ async function summariseExpression(
 
 	    individualResults.push(fullIndividualResponse); // SUCCESS!
 	    console.log(`total_tokens: ${completion.usage?.total_tokens}`);
+	    const cost = ((completion.usage?.prompt_tokens ?? 0)*250 + (completion.usage?.completion_tokens ?? 0)*1000)/1000000;
+	    console.log(`cost: ${cost}`);
+	    sum_costs += cost;
+	    num_costs++;
 	    console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
 	  } catch (error) {
 	    console.error("Response validation failed. Full report at end.");
@@ -253,6 +260,8 @@ async function summariseExpression(
 	  const html = summaryJSONtoHTML(summary, geneId, sortedIndividualResults, expressionGraphs, serverUrl, geneBaseUrl);
 	  await writeToFile(`example-output/${geneId}.${rep.toString().padStart(2, "0")}.summary.html`, html);
 	  console.log(`total_tokens: ${completion.usage?.total_tokens}`);
+	  const cost = ((completion.usage?.prompt_tokens ?? 0)*250 + (completion.usage?.completion_tokens ?? 0)*1000)/1000000;
+	  console.log(`cost: ${cost}`);
 	  console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
 	} catch (error) {
 	  console.error("Error in parsing response: ", error);
@@ -266,6 +275,10 @@ async function summariseExpression(
   } catch (error) {
     console.error("Error fetching or processing data for ${dataset_id}:", error);
   }
+
+  const mean_expt_cost = sum_costs / num_costs;
+  console.log(`mean_cost: ${mean_expt_cost}`);
+
 }
 
 for (let rep = 1; rep <= numReps; rep++) {
