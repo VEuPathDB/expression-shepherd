@@ -66,9 +66,13 @@ for (const exp of experiments) {
   sheet.properties.defaultColWidth = 20;
 
   const fixedFileName = exp.fileName.replace('./data', '');
+
+  const parts = fixedFileName.split('/');
+  const datasetName = parts[8];
   // Add metadata lines
   const metaLines = [
     ['# fileName:', fixedFileName ],
+    ['# datasetName:', datasetName ],
     ['# profileSetName:', exp.experiment],
     ['# speciesAndStrain:', exp.speciesAndStrain],
   ];
