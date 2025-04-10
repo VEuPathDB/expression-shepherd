@@ -33,18 +33,25 @@ export const summaryResponseSchema = z.object({
 export type SummaryResponseType = z.infer<typeof summaryResponseSchema>;
 
 
-export type UncorralledSample = {
+// CORRALLING TYPES //
+
+export type ExperimentInfo = {
+  name: string;
+  summary: string;
+  description: string;
+};
+
+export type UncorralledExperiment = {
   fileName: string;
-  experiment: string;
-  componentDatabase: any;
-  speciesAndStrain: any;
-  samples: {
-    label: string;
-  }[];
+  datasetName: string;
+  experiment: ExperimentInfo;
+  profileSetName: string;
+  componentDatabase: string;
+  speciesAndStrain: string;
   idsToLabel: Map<string, string>;
 };
 
-export const corralledSample = z.object({
+export const corralledExperiment = z.object({
   label: z.string(),
   annotations: z.array(
     z.object({
@@ -53,25 +60,25 @@ export const corralledSample = z.object({
     }),
   ),
 });
-export type CorralledSample = z.infer<typeof corralledSample>;
+export type CorralledExperiment = z.infer<typeof corralledExperiment>;
 
 // expected AI response to summarising 
 export const corralledExperimentResponseType = z.object({
   inputQuality: z.number(),
-  samples: z.array(corralledSample),
+  samples: z.array(corralledExperiment),
   units: z.object({}).catchall(z.string())
 })
 export type CorralledExperimentResponseType = z.infer<typeof corralledExperimentResponseType>;
 
 
-export type RehydratedCorralledSample = CorralledSample & {
+export type RehydratedCorralledSample = CorralledExperiment & {
   id: string;
   label: string;
 };
 
 export type RehydratedCorralExperimentResponseType =
   Omit<CorralledExperimentResponseType, 'samples'> &
-  Omit<UncorralledSample, 'samples' | 'idsToLabel'> & {
+  Omit<UncorralledExperiment, 'idsToLabel'> & {
     samples: RehydratedCorralledSample[];
   };
 

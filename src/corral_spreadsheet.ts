@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs";
 import ExcelJS, { Font } from "exceljs";
 import { sortBy } from "lodash";
+import { ExperimentInfo } from "./types";
 
 /*****
  * reads in a JSON file and outputs a .xslx file for QC
@@ -19,7 +20,8 @@ type Sample = {
 };
 type Experiment = {
   fileName: string;
-  experiment: string;
+  profileSetName: string;
+  experiment: ExperimentInfo;
   componentDatabase: string;
   speciesAndStrain: string;
   inputQuality: number;
@@ -73,8 +75,11 @@ for (const exp of experiments) {
   const metaLines = [
     ['# fileName:', fixedFileName ],
     ['# datasetName:', datasetName ],
-    ['# profileSetName:', exp.experiment],
+    ['# profileSetName:', exp.profileSetName],
     ['# speciesAndStrain:', exp.speciesAndStrain],
+    ['# experimentName:', exp.experiment.name.replace(/[\n\t]+/g, ' ')],
+    ['# experimentSummary:', exp.experiment.summary.replace(/[\n\t]+/g, ' ')],
+    ['# experimentDescription:', exp.experiment.description.replace(/[\n\t]+/g, ' ')],
   ];
   metaLines.forEach(line => sheet.addRow(line));
 
