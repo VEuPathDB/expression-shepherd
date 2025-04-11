@@ -12,9 +12,11 @@ import { ExperimentInfo } from "./types";
  * if no excel file given, writes to input file with new .xlsx extension
  */
 
+// can't we get these from types.ts?
 type Annotation = { attribute: string; value: string };
 type Sample = {
   id: string;
+  sra_ids: string;
   label: string;
   annotations: Annotation[];
 };
@@ -91,7 +93,7 @@ for (const exp of experiments) {
     new Set(exp.samples.flatMap(s => s.annotations.map(a => a.attribute)))
   ).sort();
 
-  const headers = ["sample ID", "label", ...attributes, "QC status", "QC notes"];
+  const headers = ["sample ID", "SRA ID(s)", "label", ...attributes, "QC status", "QC notes"];
   const addedHeaderRow = sheet.addRow(headers);
   addedHeaderRow.font = { bold: true };
   for (let i = 0; i < attributes.length; i++) {
@@ -106,6 +108,7 @@ for (const exp of experiments) {
 
     const rowData = [
       sample.id,
+      sample.sra_ids,
       sample.label,
       ...attributes.map(attr => annMap[attr] || ""),
       "",
@@ -123,15 +126,15 @@ for (const exp of experiments) {
     };
 
     for (let i = 0; i < attributes.length; i++) {
-      addedRow.getCell(3 + i).font = AI_FONT;
+      addedRow.getCell(4 + i).font = AI_FONT;
     }
   }
   
-  const units = ["units", "-->", ...attributes.map((attribute) => exp.units[attribute] ?? 'no unit'), '', ''];
+  const units = ["units", "-->", "-->", ...attributes.map((attribute) => exp.units[attribute] ?? 'no unit'), '', ''];
   const addedUnitsRow = sheet.addRow(units);
   addedUnitsRow.getCell(1).font = { bold: true };
   for (let i = 0; i < attributes.length; i++) {
-    addedUnitsRow.getCell(3 + i).font = AI_FONT;
+    addedUnitsRow.getCell(4 + i).font = AI_FONT;
   }
   const unitsQcCell = addedUnitsRow.getCell(units.length - 1);
   unitsQcCell.dataValidation = {

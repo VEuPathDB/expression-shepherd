@@ -73,6 +73,7 @@ export type CorralledExperimentResponseType = z.infer<typeof corralledExperiment
 
 export type RehydratedCorralledSample = CorralledExperiment & {
   id: string;
+  sra_ids: string;
   label: string;
 };
 

@@ -1,11 +1,12 @@
 import request from 'sync-request';
+import Response = require('http-response-object');
 
 export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): string[] {
   const accessions = lookup.get(id);
   if (!accessions) return [];
 
   const biosampleTexts: string[] = [];
-
+  
   for (const accession of accessions) {
     let biosampleId: string | null = null;
 
@@ -13,7 +14,9 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
       const sraRes = request('GET', `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`, {
         qs: { db: 'sra', id: accession },
         timeout: 10000,
-        retry: true,  // automatic retry on failure
+	maxRetries: 3,
+	retryDelay: 1000,
+	retry: true
       });
       const xml = sraRes.getBody('utf-8');
       const match = xml.match(/<EXTERNAL_ID\s+namespace="BioSample">(SAMN\d+)<\/EXTERNAL_ID>/);
@@ -32,6 +35,8 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
       const bioRes = request('GET', `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`, {
         qs: { db: 'biosample', id: biosampleId, retmode: 'text' },
         timeout: 10000,
+	maxRetries: 3,
+	retryDelay: 1000,
         retry: true,
       });
       const text = bioRes.getBody('utf-8');
