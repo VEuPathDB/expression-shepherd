@@ -194,7 +194,7 @@ async function processFiles(
   // Placeholder for OpenAI initialization
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
-    maxRetries: 10,
+    maxRetries: 5,
   });
 
   const queue = new PQueue({ concurrency: 1 }); // FIFO, single-threaded
@@ -208,7 +208,8 @@ async function processFiles(
 
   const fileCounter = new Map<string, number>();
 
-  for (const input of processedData.slice(400, 405)) {
+//  for (const input of processedData.filter(({ fileName }) => fileName.match(/Lind_SecondaryMetabolism_Anid/))) {
+  for (const input of processedData) {
     queue.add(() =>
       pRetry(() => processCorralInput(input, accessionsLookup, openai), {
 	retries: 3,
@@ -336,6 +337,8 @@ async function processCorralInput(
     max_tokens: 4096,
     response_format: zodResponseFormat(corralledExperimentResponseType, 'corral_experiment')
   });
+
+  console.log(`Got a response for ${fileName}:`);
 
   const rawResponse = completion.choices[0].message.content;
   if (!rawResponse) {

@@ -9,7 +9,7 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
   
   for (const accession of accessions) {
     let biosampleId: string | null = null;
-
+    console.log(`NCBI efetch for ${accession}...`);
     try {
       const sraRes = request('GET', `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`, {
         qs: { db: 'sra', id: accession },
