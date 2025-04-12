@@ -79,9 +79,9 @@ for (const exp of experiments) {
     ['# datasetName:', datasetName ],
     ['# profileSetName:', exp.profileSetName],
     ['# speciesAndStrain:', exp.speciesAndStrain],
-    ['# experimentName:', exp.experiment.name.replace(/[\n\t]+/g, ' ')],
-    ['# experimentSummary:', exp.experiment.summary.replace(/[\n\t]+/g, ' ')],
-    ['# experimentDescription:', exp.experiment.description.replace(/[\n\t]+/g, ' ')],
+    ['# experimentName:', exp.experiment.name?.replace(/[\n\t]+/g, ' ') ?? ''],
+    ['# experimentSummary:', exp.experiment.summary?.replace(/[\n\t]+/g, ' ') ?? ''],
+    ['# experimentDescription:', exp.experiment.description?.replace(/[\n\t]+/g, ' ') ?? ''],
   ];
   metaLines.forEach(line => sheet.addRow(line));
 
@@ -97,7 +97,7 @@ for (const exp of experiments) {
   const addedHeaderRow = sheet.addRow(headers);
   addedHeaderRow.font = { bold: true };
   for (let i = 0; i < attributes.length; i++) {
-    addedHeaderRow.getCell(3 + i).font = { ...AI_FONT, bold:true };
+    addedHeaderRow.getCell(4 + i).font = { ...AI_FONT, bold:true };
   }
 
   for (const sample of exp.samples) {
