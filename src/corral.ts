@@ -83,11 +83,26 @@ function getOrCreate<K, V>(map: Map<K, V>, key: K, create: () => V): V {
 }
 
 // species -> experimentName -> sampleName = [ accessions ]
-type SraLookup = Map<string, Map<string, Map<string,string[]>>>;
+type SraLookup = Map<string, Map<string, Map<string, string[]>>>;
+
 const accessionsLookup = sraLookup.reduce<SraLookup>(
   (result, entry) => {
     const speciesToExperiment = getOrCreate(result, entry.species, () => new Map());
-    const experimentToLookup = getOrCreate(speciesToExperiment, entry.name, () => new Map());
+
+    // Primary experiment key
+    const experimentKey = entry.name;
+    // Alternate key: remove the _RNASeq_RSRC suffix if present
+    const alternateKey = experimentKey.replace(/_RNASeq_RSRC$/, '');
+
+    // Get (or create) the map for the primary key.
+    const experimentToLookup = getOrCreate(speciesToExperiment, experimentKey, () => new Map());
+
+    // Alias the alternate key to point to the same map.
+    if (experimentKey !== alternateKey) {
+      speciesToExperiment.set(alternateKey, experimentToLookup);
+    }
+
+    // Then fill in sample-level data.
     entry.runs.forEach(({ name, accessions }) => {
       experimentToLookup.set(name, accessions);
     });
@@ -95,6 +110,7 @@ const accessionsLookup = sraLookup.reduce<SraLookup>(
   },
   new Map()
 );
+
 
 async function processFiles(
   filenames: string[],
