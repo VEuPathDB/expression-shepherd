@@ -35,7 +35,7 @@ function asArray<T>(value: T | T[] | undefined): T[] {
   return [];
 }
 
-const [,, steveJsonFilename, outputJsonFilename] = process.argv;
+const [,, steveJsonFilename, outputJsonFilename, skipNcbi = ''] = process.argv;
 
 if (!steveJsonFilename && !outputJsonFilename) {
   console.error("Usage: yarn ts-node src/corral.ts data/inputs-from-steve.json data/output-filename.json");
@@ -268,7 +268,7 @@ function getPrompt(input: UncorralledExperiment, accessionsLookup: SraLookup) : 
 	seen.add(label);
 	result.push({
           label,
-          ncbi_attributes: lookup != null ? get_ncbi_attributes(id, lookup) : [],
+          ncbi_attributes: lookup != null && skipNcbi === '' ? get_ncbi_attributes(id, lookup) : [],
 	});
       }
       return result;
