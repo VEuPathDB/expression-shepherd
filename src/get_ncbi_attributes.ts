@@ -40,7 +40,8 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
         retry: true,
       });
       const text = bioRes.getBody('utf-8');
-      biosampleTexts.push(text.replace(/\s+/g, ' ').replace(/"/g, "'").replace(/.+(?=Organism:)/, '').replace(/(?:Accession|Description):.+/, ''));
+      // (. does not match newlines by default)
+      biosampleTexts.push(text.replace(/\/replicate=.+/, '').replace(/\s+/g, ' ').replace(/"/g, "'").replace(/.+(?=Organism:)/, '').replace(/(?:Accession|Description):.+/, ''));
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : String(e);
       console.warn(`Failed to fetch BioSample ${biosampleId}:`, message);

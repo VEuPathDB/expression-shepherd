@@ -288,7 +288,7 @@ function getPrompt(input: UncorralledExperiment, accessionsLookup: SraLookup) : 
     "```json",
     JSON.stringify(aiInput, null, 2),
     "```\n",
-    "For each sample, extract `annotations` from the `label` as (`attribute`,`value`) pairs. Be sure to represent all attributes that vary across samples, including timepoints if present. If there is no usable information, return an empty `annotations` array for that sample. For continuous variables, provide a top-level `units` lookup from attribute name to a unit name (singular noun) and strip any units from the value(s). Convert values to this unit if the provided values are mixed-unit. Sample and replicate identifiers should not be used as annotation values.\n",
+    "For each sample, extract `annotations` from the `label` as (`attribute`,`value`) pairs. Be sure to represent all attributes that vary across samples, including timepoints if present. If there is no usable information, return an empty `annotations` array for that sample. For continuous variables, provide a top-level `units` lookup from attribute name to a unit name (singular noun) and strip any units from the value(s). Convert values to this unit if the provided values are mixed-unit. Sample identifiers should not be used as annotation values.\n",
     "Also provide an inputQuality score (integer from 0 to 5):",
     "• 0 = no usable information in the sample label",
     "• 5 = comprehensive, unambiguous annotation possible",
