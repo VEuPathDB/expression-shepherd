@@ -81,6 +81,8 @@ export type RehydratedCorralExperimentResponseType =
   Omit<CorralledExperimentResponseType, 'samples'> &
   Omit<UncorralledExperiment, 'idsToLabel'> & {
     samples: RehydratedCorralledSample[];
+  } & {
+    usedNcbi: boolean;
   };
 
 

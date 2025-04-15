@@ -35,7 +35,7 @@ function asArray<T>(value: T | T[] | undefined): T[] {
   return [];
 }
 
-const [,, steveJsonFilename, outputJsonFilename, skipNcbi = ''] = process.argv;
+const [,, steveJsonFilename, outputJsonFilename, skipNcbiArg = ''] = process.argv;
 
 if (!steveJsonFilename && !outputJsonFilename) {
   console.error("Usage: yarn ts-node src/corral.ts data/inputs-from-steve.json data/output-filename.json");
@@ -227,8 +227,8 @@ async function processFiles(
 //  for (const input of processedData.filter(({ fileName }) => fileName.match(/Lind_SecondaryMetabolism_Anid/))) {
   for (const input of processedData) {
     queue.add(() =>
-      pRetry(() => processCorralInput(input, accessionsLookup, openai), {
-	retries: 3,
+      pRetry((attemptNumber) => processCorralInput(input, accessionsLookup, openai, skipNcbiArg !== '' || attemptNumber > 2), {
+	retries: 4,
 	minTimeout: 10000,
 	onFailedAttempt: (error) => {
           console.warn(
@@ -272,7 +272,7 @@ async function processFiles(
 
 }
 
-function getPrompt(input: UncorralledExperiment, accessionsLookup: SraLookup) : string {
+function getPrompt(input: UncorralledExperiment, accessionsLookup: SraLookup, skipNcbi: boolean) : string {
 
   // find the sample name to SRA accession lookup
   const lookup = accessionsLookup.get(input.speciesAndStrain)?.get(input.datasetName);
@@ -284,7 +284,7 @@ function getPrompt(input: UncorralledExperiment, accessionsLookup: SraLookup) : 
 	seen.add(label);
 	result.push({
           label,
-          ncbi_attributes: lookup != null && skipNcbi === '' ? get_ncbi_attributes(id, lookup) : [],
+          ncbi_attributes: lookup != null && !skipNcbi ? get_ncbi_attributes(id, lookup) : [],
 	});
       }
       return result;
@@ -324,7 +324,8 @@ processFiles(filenames, metadataByFilename, accessionsLookup, outputJsonFilename
 async function processCorralInput(
   input: UncorralledExperiment,
   accessionsLookup: SraLookup,
-  openai: OpenAI
+  openai: OpenAI,
+  skipNcbi: boolean,
 ): Promise<RehydratedCorralExperimentResponseType> {
   const {
     fileName,
@@ -347,7 +348,7 @@ async function processCorralInput(
       },
       {
         role: "user",
-        content: getPrompt(input, accessionsLookup),
+        content: getPrompt(input, accessionsLookup, skipNcbi),
       },
     ],
     max_tokens: 4096,
@@ -382,6 +383,7 @@ async function processCorralInput(
     profileSetName,
     speciesAndStrain,
     componentDatabase,
+    usedNcbi: !skipNcbi,
     // map samples from label-based to id-based array
     samples: Array.from(idsToLabel.keys()).map(
       (id) => {

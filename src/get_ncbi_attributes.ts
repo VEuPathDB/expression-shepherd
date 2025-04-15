@@ -1,5 +1,4 @@
 import request from 'sync-request';
-import Response = require('http-response-object');
 
 export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): string[] {
   const accessions = lookup.get(id);

@@ -29,6 +29,7 @@ type Experiment = {
   inputQuality: number;
   samples: Sample[];
   units: Record<string, string>;
+  usedNcbi: boolean;
 };
 
 const AI_FONT : Partial<Font> = { color: {argb: '#FF8B0000' } };
@@ -82,6 +83,7 @@ for (const exp of experiments) {
     ['# experimentName:', exp.experiment.name?.replace(/[\n\t]+/g, ' ') ?? ''],
     ['# experimentSummary:', exp.experiment.summary?.replace(/[\n\t]+/g, ' ') ?? ''],
     ['# experimentDescription:', exp.experiment.description?.replace(/[\n\t]+/g, ' ') ?? ''],
+    ['# AiWasGivenNcbiAnnotations:', exp.usedNcbi ? 'Yes' : 'No'],
   ];
   metaLines.forEach(line => sheet.addRow(line));
 
