@@ -1,27 +1,24 @@
-import request from 'sync-request';
+import axios from 'axios';
 
-export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): string[] {
+export async function get_ncbi_attributes_async(id: string, lookup: Map<string, string[]>): Promise<string[]> {
   const accessions = lookup.get(id);
   if (!accessions) return [];
 
   const biosampleTexts: string[] = [];
-  
+
   for (const accession of accessions) {
     let biosampleId: string | null = null;
-    console.log(`NCBI efetch for SRA ${accession}...`);
+
     try {
-      const sraRes = request('GET', `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`, {
-        qs: { db: 'sra', id: accession },
+      console.log(`NCBI efetch for SRA ${accession}...`);
+      const sraRes = await axios.get('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi', {
+        params: { db: 'sra', id: accession },
         timeout: 10000,
-	maxRetries: 3,
-	retryDelay: 1000,
-	retry: true
       });
       console.log(`NCBI responded for SRA ${accession}...`);
-      const xml = sraRes.getBody('utf-8');
+      const xml = sraRes.data;
       const match = xml.match(/<EXTERNAL_ID\s+namespace="BioSample">(SAMN\d+)<\/EXTERNAL_ID>/);
       if (!match) continue;
-
       biosampleId = match[1];
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : String(e);
@@ -31,19 +28,21 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
 
     if (!biosampleId) continue;
 
-    console.log(`NCBI efetch for BioSample ${biosampleId}...`);
     try {
-      const bioRes = request('GET', `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`, {
-        qs: { db: 'biosample', id: biosampleId, retmode: 'text' },
+      console.log(`NCBI efetch for BioSample ${biosampleId}...`);
+      const bioRes = await axios.get('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi', {
+        params: { db: 'biosample', id: biosampleId, retmode: 'text' },
         timeout: 10000,
-	maxRetries: 3,
-	retryDelay: 1000,
-        retry: true,
       });
       console.log(`NCBI responded for BioSample ${biosampleId}...`);
-      const text = bioRes.getBody('utf-8');
-      // (. does not match newlines by default)
-      biosampleTexts.push(text.replace(/\/replicate=.+/, '').replace(/\s+/g, ' ').replace(/"/g, "'").replace(/.+(?=Organism:)/, '').replace(/(?:Accession|Description):.+/, ''));
+      const text = bioRes.data;
+      biosampleTexts.push(
+        text.replace(/\/replicate=.+/, '')
+            .replace(/\s+/g, ' ')
+            .replace(/"/g, "'")
+            .replace(/.+(?=Organism:)/, '')
+            .replace(/(?:Accession|Description):.+/, '')
+      );
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : String(e);
       console.warn(`Failed to fetch BioSample ${biosampleId}:`, message);
@@ -52,4 +51,3 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
 
   return biosampleTexts;
 }
-

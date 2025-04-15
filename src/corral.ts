@@ -9,9 +9,14 @@ import { isEqual, omit, uniq } from "lodash";
 import { writeToFile } from "./utils";
 import PQueue from 'p-queue';
 import pRetry from 'p-retry';
-import { get_ncbi_attributes } from "./get_ncbi_attributes";
+import { get_ncbi_attributes_async } from "./get_ncbi_attributes";
 
-const modelId = "gpt-4.1-nano"; //  "gpt-4o-2024-11-20";
+const modelId = "gpt-4.1-nano";
+
+// "gpt-4.1"
+// "gpt-4.1-mini";
+// "gpt-4.1-nano";
+// "gpt-4o-2024-11-20";
 
 const sraLookupJsonFilename = 'data/build70.json';
 
@@ -273,21 +278,20 @@ async function processFiles(
 
 }
 
-function getPrompt(input: UncorralledExperiment, lookup: SampleNametoSraAccessions, skipNcbi: boolean) : string {
+async function getPrompt(input: UncorralledExperiment, lookup: SampleNametoSraAccessions, skipNcbi: boolean) : Promise<string> {
 
   const seen = new Set<string>();
-  const samples = Array.from(input.idsToLabel.entries()).reduce(
-    (result, [id, label]) => {
+  const samples = await Array.from(input.idsToLabel.entries()).reduce(
+    async (promiseAcc, [id, label]) => {
+      const acc = await promiseAcc;
       if (!seen.has(label)) {
 	seen.add(label);
-	result.push({
-          label,
-          ncbi_attributes: skipNcbi ? [] : get_ncbi_attributes(id, lookup),
-	});
+	const ncbi_attributes = skipNcbi ? [] : await get_ncbi_attributes_async(id, lookup);
+	acc.push({ label, ncbi_attributes });
       }
-      return result;
+      return acc;
     },
-    [] as { label: string; ncbi_attributes: string[] }[]
+    Promise.resolve([] as { label: string; ncbi_attributes: string[] }[])
   );
   
   // AI doesn't need the id->label lookup
@@ -360,7 +364,7 @@ async function processCorralInput(
       },
       {
         role: "user",
-        content: getPrompt(input, lookup, skipNcbi),
+        content: await getPrompt(input, lookup, skipNcbi),
       },
     ],
     max_tokens: 4096,
