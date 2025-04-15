@@ -11,7 +11,7 @@ import PQueue from 'p-queue';
 import pRetry from 'p-retry';
 import { get_ncbi_attributes } from "./get_ncbi_attributes";
 
-const modelId = "gpt-4o-2024-11-20";
+const modelId = "gpt-4.1-nano"; //  "gpt-4o-2024-11-20";
 
 const sraLookupJsonFilename = 'data/build70.json';
 

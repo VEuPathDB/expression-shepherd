@@ -8,7 +8,7 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
   
   for (const accession of accessions) {
     let biosampleId: string | null = null;
-    console.log(`NCBI efetch for ${accession}...`);
+    console.log(`NCBI efetch for SRA ${accession}...`);
     try {
       const sraRes = request('GET', `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`, {
         qs: { db: 'sra', id: accession },
@@ -17,6 +17,7 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
 	retryDelay: 1000,
 	retry: true
       });
+      console.log(`NCBI responded for SRA ${accession}...`);
       const xml = sraRes.getBody('utf-8');
       const match = xml.match(/<EXTERNAL_ID\s+namespace="BioSample">(SAMN\d+)<\/EXTERNAL_ID>/);
       if (!match) continue;
@@ -30,6 +31,7 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
 
     if (!biosampleId) continue;
 
+    console.log(`NCBI efetch for BioSample ${biosampleId}...`);
     try {
       const bioRes = request('GET', `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`, {
         qs: { db: 'biosample', id: biosampleId, retmode: 'text' },
@@ -38,6 +40,7 @@ export function get_ncbi_attributes(id: string, lookup: Map<string, string[]>): 
 	retryDelay: 1000,
         retry: true,
       });
+      console.log(`NCBI responded for BioSample ${biosampleId}...`);
       const text = bioRes.getBody('utf-8');
       // (. does not match newlines by default)
       biosampleTexts.push(text.replace(/\/replicate=.+/, '').replace(/\s+/g, ' ').replace(/"/g, "'").replace(/.+(?=Organism:)/, '').replace(/(?:Accession|Description):.+/, ''));
