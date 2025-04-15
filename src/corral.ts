@@ -83,7 +83,8 @@ function getOrCreate<K, V>(map: Map<K, V>, key: K, create: () => V): V {
 }
 
 // species -> experimentName -> sampleName = [ accessions ]
-type SraLookup = Map<string, Map<string, Map<string, string[]>>>;
+type SampleNametoSraAccessions = Map<string, string[]>;
+type SraLookup = Map<string, Map<string, SampleNametoSraAccessions>>;
 
 const accessionsLookup = sraLookup.reduce<SraLookup>(
   (result, entry) => {
@@ -272,10 +273,7 @@ async function processFiles(
 
 }
 
-function getPrompt(input: UncorralledExperiment, accessionsLookup: SraLookup, skipNcbi: boolean) : string {
-
-  // find the sample name to SRA accession lookup
-  const lookup = accessionsLookup.get(input.speciesAndStrain)?.get(input.datasetName);
+function getPrompt(input: UncorralledExperiment, lookup: SampleNametoSraAccessions, skipNcbi: boolean) : string {
 
   const seen = new Set<string>();
   const samples = Array.from(input.idsToLabel.entries()).reduce(
@@ -284,7 +282,7 @@ function getPrompt(input: UncorralledExperiment, accessionsLookup: SraLookup, sk
 	seen.add(label);
 	result.push({
           label,
-          ncbi_attributes: lookup != null && !skipNcbi ? get_ncbi_attributes(id, lookup) : [],
+          ncbi_attributes: skipNcbi ? [] : get_ncbi_attributes(id, lookup),
 	});
       }
       return result;
@@ -339,6 +337,20 @@ async function processCorralInput(
   
   console.log(`Gonna send input for ${fileName}:`);
 
+  // find the sample name to SRA accession lookup
+  const lookup = accessionsLookup.get(speciesAndStrain)?.get(datasetName) ?? new Map();
+
+  // supplement `lookup` where the keys of `idsToLabel` match /^[SED]R[RXS]\d+$/
+  // with trivial "identity" lookups: id => [ id ]
+  // but only if `lookup.get(id)` is nullish
+  for (const id of idsToLabel.keys()) {
+    if (/^[SED]R[RXS]\d+$/.test(id) && lookup?.get(id) == null) {
+      lookup.set(id, [id]);
+    }
+  }
+
+  const lookupHitCount = Array.from(idsToLabel.keys()).filter((id) => lookup.has(id)).length;
+  
   const completion = await openai.chat.completions.create({
     model: modelId,
     messages: [
@@ -348,7 +360,7 @@ async function processCorralInput(
       },
       {
         role: "user",
-        content: getPrompt(input, accessionsLookup, skipNcbi),
+        content: getPrompt(input, lookup, skipNcbi),
       },
     ],
     max_tokens: 4096,
@@ -383,7 +395,7 @@ async function processCorralInput(
     profileSetName,
     speciesAndStrain,
     componentDatabase,
-    usedNcbi: !skipNcbi,
+    usedNcbi: !skipNcbi && lookupHitCount > 0,
     // map samples from label-based to id-based array
     samples: Array.from(idsToLabel.keys()).map(
       (id) => {

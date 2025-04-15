@@ -83,7 +83,7 @@ for (const exp of experiments) {
     ['# experimentName:', exp.experiment.name?.replace(/[\n\t]+/g, ' ') ?? ''],
     ['# experimentSummary:', exp.experiment.summary?.replace(/[\n\t]+/g, ' ') ?? ''],
     ['# experimentDescription:', exp.experiment.description?.replace(/[\n\t]+/g, ' ') ?? ''],
-    ['# AiWasGivenNcbiAnnotations:', exp.usedNcbi ? 'Yes' : 'No'],
+    ['# ncbiAnnotationsProvidedToAi:', exp.usedNcbi ? 'Yes' : 'No'],
   ];
   metaLines.forEach(line => sheet.addRow(line));
 
