@@ -110,7 +110,7 @@ for (const exp of experiments) {
 
     const rowData = [
       sample.id,
-      sample.sra_ids,
+      sample.sra_ids || exp.usedNcbi && sample.id.match(/^[SED]R[RXS]\d+$/) ? sample.id : '',
       sample.label,
       ...attributes.map(attr => annMap[attr] || ""),
       "",
