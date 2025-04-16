@@ -407,7 +407,7 @@ async function processCorralInput(
 	}
 	return ({
 	  id,
-	  sra_ids: accessionsLookup.get(input.speciesAndStrain)?.get(input.datasetName)?.get(id)?.join(',') ?? '',
+	  sra_ids: lookup.get(id)?.join(',') ?? '',
 	  ...sample,
 	});
       }
