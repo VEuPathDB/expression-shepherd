@@ -314,14 +314,11 @@ async function getPrompt(input: UncorralledExperiment, lookup: SampleNametoSraAc
   ].join("\n");
 }
 
-const { root, dir, name } = path.parse(filePath);
-const errorFile = path.join(root, dir, name) + ".errors";
+const errorFile = outputJsonFilename.replace(/(?:\.json)?$/, '.err.json');
 processFiles(filenames, metadataByFilename, accessionsLookup, outputJsonFilename, errorFile).catch(err => {
   console.error("Error:", err);
   process.exit(1);
 });
-
-
 
 async function processCorralInput(
   input: UncorralledExperiment,
