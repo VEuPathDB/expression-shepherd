@@ -55,7 +55,7 @@ if (!fs.existsSync(jsonInputFile)) {
 // Load JSON
 const experiments: Experiment[] = sortBy(
   JSON.parse(fs.readFileSync(jsonInputFile, "utf8")),
-  [ 'speciesAndStrain', 'inputQuality' ]
+  [ 'speciesAndStrain', 'fileName' ]
 );
 
 // Create workbook and worksheet
