@@ -11,7 +11,7 @@ import PQueue from 'p-queue';
 import pRetry from 'p-retry';
 import { get_ncbi_attributes_async } from "./get_ncbi_attributes";
 
-const modelId = "gpt-4.1-mini";
+const modelId = "gpt-4.1";
 
 // "gpt-4.1"
 // "gpt-4.1-mini";

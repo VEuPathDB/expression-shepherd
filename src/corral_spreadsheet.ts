@@ -62,7 +62,7 @@ const experiments: Experiment[] = sortBy(
 const workbook = new ExcelJS.Workbook();
 const sheets : Record<string, ExcelJS.Worksheet> = {};
 
-const qcOptions = '"not done,in progress,complete"';
+const qcOptions = '"fail: major edits needed,fail: minor edits needed,pass: major edits made,pass: minor edits made,pass: no edits required"';
 
 for (const exp of experiments) {
   // choose or create the correct sheet
@@ -110,7 +110,7 @@ for (const exp of experiments) {
 
     const rowData = [
       sample.id,
-      sample.sra_ids || exp.usedNcbi && sample.id.match(/^[SED]R[RXS]\d+$/) ? sample.id : '',
+      sample.sra_ids || (exp.usedNcbi && sample.id.match(/^[SED]R[RXS]\d+$/) ? sample.id : ''),
       sample.label,
       ...attributes.map(attr => annMap[attr] || ""),
       "",
