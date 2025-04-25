@@ -230,10 +230,10 @@ async function processFiles(
 
   const fileCounter = new Map<string, number>();
 
-//  for (const input of processedData.filter(({ fileName }) => fileName.match(/Lind_SecondaryMetabolism_Anid/))) {
-  for (const input of processedData) {
+  for (const input of processedData.filter(({ fileName }) => fileName.match("FungiDB/cneoH99/rnaSeq/YU_Cneo_CNS_2021"))) {
+//  for (const input of processedData) {
     queue.add(() =>
-      pRetry((attemptNumber) => processCorralInput(input, accessionsLookup, openai, skipNcbiArg !== '' || attemptNumber > 2), {
+      pRetry(() => dummyProcessCorralInput(input), {
 	retries: 4,
 	minTimeout: 10000,
 	onFailedAttempt: (error) => {
@@ -319,6 +319,45 @@ processFiles(filenames, metadataByFilename, accessionsLookup, outputJsonFilename
   console.error("Error:", err);
   process.exit(1);
 });
+
+async function dummyProcessCorralInput(
+  input: UncorralledExperiment
+): Promise<RehydratedCorralExperimentResponseType> {
+  const {
+    fileName,
+    datasetName,
+    experiment,
+    profileSetName,
+    speciesAndStrain,
+    componentDatabase,
+    idsToLabel,
+  } = input;
+
+
+  return {
+    inputQuality: 0,
+    units: {},
+    fileName,
+    datasetName,
+    experiment,
+    profileSetName,
+    speciesAndStrain,
+    componentDatabase,
+    usedNcbi: false,
+    // map samples from label-based to id-based array
+    samples: Array.from(idsToLabel.keys()).map(
+      (id) => {
+	const label = idsToLabel.get(id) as string; // can't be missing, right?
+	const sample = { label, annotations: [] };
+	return ({
+	  id,
+	  sra_ids: '',
+	  ...sample,
+	});
+      }
+    ),
+  };
+}
 
 async function processCorralInput(
   input: UncorralledExperiment,
