@@ -8,18 +8,22 @@ library(knitr)
 
 #' Parse a spreadsheet of mini-tables, extract each as metadata, data, and units
 #' @param filePath Path to .xlsx file
+#' @param allData a list to accumulate all the data (see `processExperiment` for info on its structure)
 #' @param process_fn A function to call on each parsed block:
-#'                   function(meta_tbl, data_tbl, units_map)
-#' @return Invisible NULL
-parseSpreadsheet <- function(filePath, process_fn) {
+#'                   function(allData, meta_tbl, data_tbl, units_map)
+#' @return allData accumulated data from passing through `process_fn`
+parseSpreadsheet <- function(filePath, allData, process_fn) {
   if (!file.exists(filePath)) {
     stop(glue::glue("File '{filePath}' does not exist. Exiting."))
+  }
+  if (missing(allData) || !is.list(allData)) {
+    stop("You must supply a `data` arg that is a list")
   }
   if (missing(process_fn) || !is.function(process_fn)) {
     stop("You must supply a process_fn(meta_tbl, data_tbl, units_map) function.")
   }
   
-  sheets <- excel_sheets(filePath)
+  sheets <- c('TriTrypDB')   # excel_sheets(filePath)
   for (sheetName in sheets) {
     message("Processing sheet: ", sheetName)
     raw <- read_excel(filePath,
@@ -86,29 +90,41 @@ parseSpreadsheet <- function(filePath, process_fn) {
       }
       
       # hand off to user-provided function to user-provided function
-      process_fn(meta_tbl, data_tbl, units_map)
-      
-      break # just for now
+      allData <- process_fn(allData, meta_tbl, data_tbl, units_map)
     }
   }
   
-  invisible(NULL)
+  return(invisible(allData))
 }
 
-# this does not display nicely
-processExperiment <- function(meta_tbl, data_tbl, units_map) {
-    cat(
-    "Metadata",
-    kable(meta_tbl),
-    "\n\n",
-    "Data",
-    kable(data_tbl),
-    "\n\n",
-    "Units",
-    units_map
-  )
+processExperiment <- function(allData, meta_tbl, data_tbl, units_map) {
+  key <- paste(meta_tbl$speciesAndStrain, meta_tbl$datasetName, sep="/")
+  message(glue::glue("Processing {key} ..."))
+  if (allData %>% hasName(key)) {
+    message(glue::glue("Appending to {key} ..."))
+    # now we need to merge the data and check that the units are the same
+    # we should also append `meta$profileSetName` with the extra profileSetName
+    prev <- allData[[key]]
+    # units check is the simplest
+    if (!identical(prev$units, units_map)) {
+      cat(
+        "Units from", meta_tbl$profileSetName, ":\n"
+      )
+      print(units_map)
+      cat("are not identical to previous profileSets", prev$meta_tbl$profileSetName, ":\n")
+      print(prev$units)
+      stop(glue::glue("Aborting due to unit mismatch for {key}"), call. = FALSE)
+    }
+  } else {
+    allData[[key]] <- list(
+      meta = meta_tbl,
+      data = data_tbl,
+      units = units_map
+    )
+  }
+  return(allData)
 }
 
-
-parseSpreadsheet('../data/third-reannotation-gpt-4.1-nomissing.xlsx', processExperiment)
+allData <- list()
+parseSpreadsheet('../data/third-reannotation-gpt-4.1-nomissing.xlsx', allData, processExperiment)
 
