@@ -23,7 +23,7 @@ parseSpreadsheet <- function(filePath, allData, process_fn) {
     stop("You must supply a process_fn(meta_map, data_tbl, units_map) function.")
   }
   
-  sheets <- c('PlasmoDB')   # excel_sheets(filePath)
+  sheets <- excel_sheets(filePath)
   for (sheetName in sheets) {
     message("Processing sheet: ", sheetName)
     raw <- read_excel(filePath,
