@@ -26,11 +26,12 @@ parseSpreadsheet <- function(filePath, allData, process_fn) {
   sheets <- excel_sheets(filePath)
   for (sheetName in sheets) {
     message("Processing sheet: ", sheetName)
-    raw <- read_excel(filePath,
-                      sheet     = sheetName,
-                      col_names = FALSE,
-                      col_types = "text")
-    
+    raw <- suppressMessages( # added later to suppress annoying "New names:" messages
+      read_excel(filePath,
+                 sheet     = sheetName,
+                 col_names = FALSE,
+                 col_types = "text")
+    )  
     # find blocks by sentinel row in column A
     starts <- which(str_starts(raw[[1]], "# fileName:"))
     ends   <- c(starts[-1] - 1, nrow(raw))
