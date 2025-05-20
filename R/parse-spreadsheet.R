@@ -125,7 +125,8 @@ processExperiment <- function(allData, meta_map, data_tbl, units_map) {
       print("Columns extra: ", setdiff(names(data_tbl), names(prev$data)))
       stop(glue::glue("Aborting due to data columns mismatch for {key}"), call. = FALSE)
     }
-    # now bind_rows but watch out for duplicate rows
+    # now union the data tibbles but if rows with the same sample IDs didn't have identical row content
+    # we should throw an error (sample ID should remain unique after the union)
     unioned <- union(prev$data, data_tbl)
     if (unioned %>% pull('sample ID') %>% anyDuplicated() > 0) {
       stop(glue::glue("Aborting due duplicate 'sample ID' after data union for {key}"), call. = FALSE)
@@ -141,6 +142,12 @@ processExperiment <- function(allData, meta_map, data_tbl, units_map) {
     )
   }
   return(allData)
+}
+
+determineOverlaps <- function(allData) {
+  
+  
+  
 }
 
 allData <- parseSpreadsheet('../data/RNA-Seq sample re-annotation for QC.xlsx', list(), processExperiment)
