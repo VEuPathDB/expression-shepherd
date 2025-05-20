@@ -110,6 +110,17 @@ parseSpreadsheet <- function(filePath, allData, process_fn) {
   return(invisible(allData))
 }
 
+#'
+#' append-or-add to `allData` the experiment data passed in
+#'
+#' uses a key made from species/datasetName
+#' 
+#' `allData` is a list and the key is used for named lookup
+#'
+#' various consistency checks are made if appending (variables must be the same)
+#' 
+#' actually it's a union rather than append but you get the idea...
+#'
 processExperiment <- function(allData, meta_map, data_tbl, units_map) {
   key <- paste(meta_map$speciesAndStrain, meta_map$datasetName, sep="/")
   message(glue::glue("Processing {key} ..."))
