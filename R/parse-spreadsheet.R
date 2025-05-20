@@ -1,4 +1,5 @@
 library(readxl)
+library(writexl)
 library(dplyr)
 library(stringr)
 library(tidyr)
@@ -57,6 +58,7 @@ parseSpreadsheet <- function(filePath, allData, process_fn) {
         str_trim()
       vals <- block[meta_rows, 2] %>% pull() %>% str_trim()
       meta_map <- as.list(setNames(vals, keys))
+      meta_map$projectId <- sheetName
 
       # extract data between header and units
       data_start <- header_row + 1
@@ -65,12 +67,10 @@ parseSpreadsheet <- function(filePath, allData, process_fn) {
       colnames(data_tbl) <- as.character(block[header_row, ])
       # keep only columns with actual headers (not all the blanks on the right)
       data_tbl <- data_tbl %>% select(matches("."))
-      
+
       # create a named vector of unit strings
       all_units <- as.character(block[unit_row, ])
       names(all_units) <- as.character(block[header_row, ])
-      # remove the NAs
-      all_units <- all_units %>% discard(is.na)
 
       # find positions of label and QC status
       headers <- colnames(data_tbl)
@@ -82,7 +82,7 @@ parseSpreadsheet <- function(filePath, allData, process_fn) {
       }
       
       # slice units for columns strictly between label and QC status
-      if (qc_pos - label_pos >= 1) {
+      if (qc_pos - label_pos > 1) {
         sel <- seq(label_pos + 1, qc_pos - 1)
         units_map <- all_units[sel]
       } else {
@@ -90,6 +90,18 @@ parseSpreadsheet <- function(filePath, allData, process_fn) {
       }
       units_map <- as.list(units_map)
       
+      if (any(units_map %>% is.na())) {
+        stop(glue::glue("Fatal error: missing units in {meta_map$fileName}"))
+      }
+      
+      # join the two ID columns into a single underscore-delimited 'combined ID' column
+      # and make the `fallback ID` column
+      data_tbl <- data_tbl %>%
+        unite('combined ID', 'sample ID', 'SRA ID(s)', remove = FALSE) %>%
+        mutate(
+          `fallback ID` = coalesce(`SRA ID(s)`, `sample ID`)
+        )
+
       # hand off to user-provided function to user-provided function
       allData <- process_fn(allData, meta_map, data_tbl, units_map)
     }
@@ -144,11 +156,110 @@ processExperiment <- function(allData, meta_map, data_tbl, units_map) {
   return(allData)
 }
 
-determineOverlaps <- function(allData) {
+#'
+#' filter `allData` keeping only experiments with data where
+#' at least one of the label and annotation variable columns contains
+#' at least two different values that are replicated at least two times each
+#' (so DESeq2 can compare at least 2 vs. 2 samples)
+#'
+#'
+#'
+
+# helper: given a vector x, count how many unique values occur ≥2 times
+count_replicated_levels <- function(x) {
+  tbl <- table(x, useNA = "no")     # drop NAs automatically
+  sum(tbl >= 2)
+}
+
+keepContrastingOnly <- function(allData) {
+  allData %>%
+    keep(function(expt) {
+      column_names <- c('label', names(expt$units)) # columns 'label' plus any annotation columns like 'sex', 'age' etc
+
+      # For each column, count how many levels have ≥2 replicates
+      replicated_level_counts <- expt$data %>%
+        summarise(across(all_of(column_names), count_replicated_levels)) %>%
+        unlist()
+      
+      # keep if any variable has at least two such levels
+      any(replicated_level_counts >= 2)
+    })
+}
+
+
+#'
+#' Takes the `allData` list of experimentKey -> {meta, data, units}
+#'
+#' For each experimentKey, count the percent overlap of sample IDs in `data`
+#'
+#' Returns a list keyed again by experimentKey
+#' with entries only when that experiment overlaps with another experiment.
+#' 
+#' `column_name` is an optional argument
+#' default value is 'combined ID' which is a concatenation of the 'sample ID' and 'SRA ID(s)' columns
+#' you could use 'sample ID' or the other special column 'fallback ID' which is
+#' SRA falling-back to sample ID if not present.
+#' 
+#' The returned tibble has the following columns and has rows only where there
+#' is a non-zero overlap
+#'
+#' project1: e.g. HostDB
+#' project2: e.g. PlasmoDB
+#' experiment1: organism/experiment1
+#' experiment2: organism/experiment2
+#' percent_overlap_2_with_1: how much of 2 overlaps with 1
+#' percent_overlap_1_with_2: and in the other direction
+#'
+determineOverlaps <- function(allData, column_name = 'combined ID') {
+  overlap_tbl <- tibble()
+  experiment_keys <- names(allData)
   
+  for (i in seq_along(experiment_keys)) {
+    key1 <- experiment_keys[i]
+    samples1 <- allData[[key1]]$data[[column_name]]
+    
+    result <- list()
+    
+    for (j in seq_along(experiment_keys)) {
+      key2 <- experiment_keys[j]
+      if (key1 == key2) break # only do A vs B (not B vs A too)
+      
+      samples2 <- allData[[key2]]$data[[column_name]]
+      shared <- intersect(samples1, samples2)
+      if (length(samples1) == 0) next  # avoid div by zero
+      
+      percent_overlap_2_with_1 <- length(shared) / length(samples1) * 100
+      percent_overlap_1_with_2 <- length(shared) / length(samples2) * 100
+      
+      if (percent_overlap_1_with_2 + percent_overlap_1_with_2 > 0) {
+        overlap_tbl <- bind_rows(
+          overlap_tbl,
+          tibble(
+            project1 = allData[[key1]]$meta$projectId,
+            project2 = allData[[key2]]$meta$projectId,
+            experiment1 = key1,
+            experiment2 = key2,
+            percent_overlap_2_with_1 = percent_overlap_2_with_1,
+            percent_overlap_1_with_2 = percent_overlap_1_with_2
+          )
+        )
+      }
+    }
+  }
   
-  
+  return(overlap_tbl)
 }
 
 allData <- parseSpreadsheet('../data/RNA-Seq sample re-annotation for QC.xlsx', list(), processExperiment)
-
+message("Filtering to keep only contrasting experiments.")
+contrasting <- keepContrastingOnly(allData)
+message("Determining overlaps... (takes a minute)")
+overlaps_both_tbl <- determineOverlaps(contrasting, 'combined ID')
+overlaps_sra_tbl <- determineOverlaps(contrasting, 'fallback ID')
+write_xlsx(
+  x = list(
+    CombinedID_Overlaps = overlaps_both_tbl,
+    FallbackID_Overlaps = overlaps_sra_tbl
+  ),
+  path = "../data/overlaps.xlsx"
+)
