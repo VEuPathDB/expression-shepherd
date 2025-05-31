@@ -4,15 +4,14 @@ import * as XLSX from 'xlsx';
 import { OpenAI } from 'openai';
 import dotenv from 'dotenv';
 import { z } from 'zod';
-import { isEqual } from 'lodash';
+import { isEqual, sum } from 'lodash';
 import { zodResponseFormat } from 'openai/helpers/zod';
 
 dotenv.config();
 
 // Zod schema for LLM response
 const responseSchema = z.object({
-  institution: z.string(),
-  sub_entity: z.string().nullable(),
+  org_clean: z.string(),
   country_clean: z.string(),
   type_clean: z.enum([
     'academic',
@@ -37,24 +36,25 @@ type FinalEntry = InputEntry & CleanedEntry;
 // Static system prompt (instructions + examples)
 const STATIC_PROMPT = `You are a data-cleaning assistant helping standardize institution names in the domain of public health, biomedical research, and human disease. The data comes from users of VEuPathDB, ClinEpiDB, MicrobiomeDB, and OrthoMCL.org.
 
-Institution names may refer to universities, research institutes, hospitals, government public health bodies, or major pharmaceutical/biotech companies. They may contain typos, inconsistent casing, translations, internal divisions, or IDs from exported spreadsheets.
+The institution name, provided as the 'org' field below, may refer to a university, research institute, hospital, government public health body, major pharmaceutical/biotech company or start-up. It may be in a local script or language, and may contain typos, inconsistent casing, abbreviations, acronyms and unnecessary details. In some cases it is even randomly typed junk.
 
-Your task is to return a cleaned, canonical representation of the institution provided as the 'org' field of the input. If applicable, include a major named or semi-autonomous school, faculty, division, or branded research institute as a 'sub_entity', otherwise return 'null'. Ordinary departments, research labs, or internal units without public-facing identity should be discarded and 'sub_entity' should be 'null'.
+Your task is to return a cleaned, canonical representation ('org_clean') of the institution name as it would appear in English-language publications. If applicable, include in parentheses the major named or semi-autonomous school, faculty, division, or branded research institute. Ordinary departments, research labs, or internal units without public-facing identity should be discarded. For example, the cleaned version of "Penn Vet" would be "University of Pennsylvania (School of Veterinary Medicine)", while "Dept. of Mathematics, Oxford University" would be cleaned to "University of Oxford".
 
-You will also be given an institution type ('org type') and country code ('country'). If either of these appear to be incorrect for the institution, you may correct them in your response. If in doubt, leave as-is but set flag_for_review: true.
+If an institution's name is not unique internationally, append a comma and the country name, as follows: "China Medical University, China" or "China Medical University, Taiwan".
+
+You will also be given an institution type ('org type') and country code ('country'). If either of these appear to be incorrect for the institution, you may correct them in your response ('type_clean' and 'country_clean'). If in doubt, leave as-is but set flag_for_review: true.
 
 Return structured JSON in the following format:
 
 {
-  institution: "Canonical name of the parent institution",
-  sub_entity: "Major named sub-entity or null",
-  country_clean: "Two-letter country code, corrected if appropriate",
-  type_clean: "academic | government | industry | other (correct if appropriate)",
-  flag_for_review: true or false,
-  reason_for_concern: "Short explanation why this is flagged for review"
+  org_clean: "Canonical institution name",
+  country_clean: "Two-letter country code",
+  type_clean: "academic | government | industry | other",
+  flag_for_review: boolean,
+  reason_for_concern: "Short explanation of why this is flagged for review"
 }
 
-Set \`flag_for_review: true\` and provide a 'reason_for_concern' if:
+Set 'flag_for_review' to 'true' and provide a 'reason_for_concern' if:
 - The input is ambiguous or generic (e.g., "CDC", "Columbia")
 - The user appears to have declared multiple affiliations
 - Multiple plausible matches exist
@@ -70,7 +70,9 @@ function generateKey(row: InputEntry): string {
 async function main() {
   const [,, inputXlsxFilename, outputXlsxFilename] = process.argv;
   if (!inputXlsxFilename || !outputXlsxFilename) {
-    console.error('Usage: ts-node org_names.ts <input.xlsx> <output.xlsx>');
+    console.error('Usage: ts-node src/org_name_cleaner.ts <input.xlsx> <output.xlsx>');
+    // you can also compile with `yarn tsc` and run with
+    // node dist/org_name_cleaner.js ...
     process.exit(1);
   }
 
@@ -98,13 +100,14 @@ async function main() {
 
   // In-memory mapping of raw input key -> cleaned entry
   const mapping = new Map<string, CleanedEntry>();
-  const canonicalList: CleanedEntry[] = [];
+  const canonicals: string[] = [];
   const outputEntries: FinalEntry[] = [];
   const threeBackTicks = "```";
 
   // wipe the temporary file
+  const tempJsonlPath = path.resolve('data', 'responses.json');
   try {
-    fs.unlinkSync('/tmp/canonical.jsonl');
+    fs.unlinkSync(tempJsonlPath);
   } catch (error) { }
   
   for (const row of rows) {
@@ -115,10 +118,9 @@ async function main() {
       cleaned = mapping.get(key)!;
     } else {
       // Build dynamic prompt
-      const jsonlList = canonicalList.map(e => JSON.stringify(e)).join("\n");
-      let userContent = '';
-      if (canonicalList.length > 0) {
-        userContent += `Here is a growing list of previously cleaned entries in JSONL format. Re-use them where appropriate, giving preference to entries not flagged for review:\n${threeBackTicks}jsonl\n${jsonlList}\n${threeBackTicks}\n\n`;
+         let userContent = '';
+      if (canonicals.length > 0) {
+        userContent += `Here is a growing list of previously cleaned entries, which you should re-use where appropriate:\n${threeBackTicks}\n${canonicals.join("\n")}\n${threeBackTicks}\n\n`;
       }      
       userContent += `Here is the data for cleaning...\n${threeBackTicks}json\n${JSON.stringify(row, null, 2)}\n${threeBackTicks}`;
 
@@ -128,7 +130,7 @@ async function main() {
       while (attempts < 5) {
         try {
           const resp = await openai.chat.completions.create({
-            model: 'gpt-4o',
+            model: 'gpt-4.1',
             user: 'org_name_script',
             messages: [
               { role: 'system', content: STATIC_PROMPT },
@@ -142,33 +144,19 @@ async function main() {
 	  }
           cleaned = responseSchema.parse(JSON.parse(rawResponse));
 
-	  // LLM seems to put a lot of crap in the sub_entity output, so normalise/clean
-          if (cleaned.sub_entity != null) {
-	    // strip any leading and trailing non-alphanumerics (the model seems to like prefixing this with ., : or ;)
-	    cleaned.sub_entity = cleaned.sub_entity.replace(/^\W+/, '');
-	    cleaned.sub_entity = cleaned.sub_entity.replace(/\W+$/, '');
-	    // strip any all-numeric values
-	    cleaned.sub_entity = cleaned.sub_entity.replace(/^\d+$/, '');
-	    // wipe anything starting with 'formerly '
-	    cleaned.sub_entity = cleaned.sub_entity.replace(/^formerly .+$/, '');
-	    // if no meaningful content (a capitalised English letter), or the word 'null' is found, return null
-	    if (!cleaned.sub_entity.match(/[A-Z]/) ||
-	      cleaned.sub_entity.match(/\bnull\b/i)) {
-              cleaned.sub_entity = null;
-	    }
-          }
-
           // Store mapping and update canonical list
           mapping.set(key, cleaned);
-          const exists = canonicalList.some(e => isEqual(e, cleaned));
-          if (!exists) {
-            canonicalList.push(cleaned);
-            // Append to tmp JSONL
-            fs.appendFileSync(
-              path.resolve('/tmp', 'canonical.jsonl'),
-              JSON.stringify(cleaned) + "\n"
-            );
-          }
+          if (
+	    !cleaned.flag_for_review &&
+	    !canonicals.includes(cleaned.org_clean)
+	  ) {
+            canonicals.push(cleaned.org_clean);
+	  }
+          // log all the responses
+          fs.appendFileSync(
+            tempJsonlPath,
+            JSON.stringify({ ...row, ...cleaned }) + "\n"
+          );
 
           break;
         } catch (err : unknown) {
@@ -182,8 +170,7 @@ async function main() {
         console.error(`Failed to clean '${JSON.stringify(row)}' after 5 attempts.`, lastError);
         // Fallback: mark for review with raw org as institution
         cleaned = {
-          institution: row.org,
-          sub_entity: null,
+          org_clean: row.org,
           country_clean: row.country,
           type_clean: row['org type'],
           flag_for_review: true,
@@ -194,17 +181,16 @@ async function main() {
     }
 
     outputEntries.push({ ...row, ...cleaned });
-    if (outputEntries.length % 10 == 0) {
-      console.log(`Processed ${outputEntries.length} of ${rows.length} entries...`);
+    if (outputEntries.length % 10 === 0) {
+      console.log(`Processed ${outputEntries.length} of ${rows.length} entries. Canonical list: ${canonicals.length} lines, ${sum(canonicals.map(e => e.length)) + 1} chars.`);
+    }
+    // write the spreadsheet so far, every now and then
+    if (outputEntries.length % 100 === 0) {
+      writeXlsx(outputEntries, path.resolve('data', 'wip.xlsx'));
     }
   }
 
-  // Write output workbook
-  const outSheet = XLSX.utils.json_to_sheet(outputEntries);
-  const outWb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(outWb, outSheet, 'Cleaned');
-  XLSX.writeFile(outWb, outputXlsxFilename);
-
+  writeXlsx(outputEntries, outputXlsxFilename);
   console.log(`Cleaning complete. Wrote ${outputEntries.length} records to ${outputXlsxFilename}`);
 }
 
@@ -212,3 +198,12 @@ main().catch(err => {
   console.error('Fatal error:', err);
   process.exit(1);
 });
+
+
+function writeXlsx(outputEntries: FinalEntry[], outputXlsxFilename: string): void {
+  // Write output workbook
+  const outSheet = XLSX.utils.json_to_sheet(outputEntries);
+  const outWb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(outWb, outSheet, 'Cleaned');
+  XLSX.writeFile(outWb, outputXlsxFilename);
+}
