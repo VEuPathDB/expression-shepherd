@@ -30,17 +30,19 @@ const responseSchema = z.object({
 });
 type ResponseRecord = z.infer<typeof responseSchema>;
 
+type FullOutput = ResponseRecord & { org_clean: string; };
+
 // Static system prompt (instructions + examples)
 const STATIC_PROMPT = `You are an expert in global academic and research institutions in the domain of public health, biomedical research, and human disease.
 
-For the given institution name, return a list of commonly used short forms, including:
+For the given institution name, return a JSON object containing a list of commonly used short forms, including:
 
 * acronyms (e.g. LSHTM)
 * initialisms (e.g. MIT)
 * abbreviations or truncations (e.g. Unimelb, Caltech)
 * any widely used local-language forms
 
-Include both international and local-language variants if applicable. Only include names that are actually used in practice. Do not invent abbreviations based solely on initials. Return an empty 'short_forms' array if necessary.`;
+Include both international and local-language variants if applicable. Only include names that are actually used in practice. Do not invent abbreviations based solely on initials—return an empty 'short_forms' array if necessary. Return the long form name in 'institution'. Optionally use 'notes' to explain any oddities.`;
 
 async function main() {
   const [,, inputJsonlFilename, outputXlsxFilename] = process.argv;
@@ -72,7 +74,7 @@ async function main() {
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
   // Gather outputs in this array
-  const outputEntries: ResponseRecord[] = [];
+  const outputEntries: FullOutput[] = [];
   
   for (const institution of institutions) {
 
@@ -113,7 +115,7 @@ async function main() {
       // merge in the original just to be sure
       outputEntries.push({
 	...shortForms,
-	institution,
+	org_clean: institution,
       });
 
       if (outputEntries.length % 10 === 0) {
@@ -138,26 +140,15 @@ main().catch(err => {
 
 
 // Write output workbook
-function writeXlsx(outputEntries: ResponseRecord[], outputXlsxFilename: string): void {
+function writeXlsx(outputEntries: FullOutput[], outputXlsxFilename: string): void {
 
-  function escapeForRegExp(str: string) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  const rows = outputEntries.map(e => {
-
-    // remove any short forms that are already in the long form
-    const filtered = e.short_forms.filter(sf => {
-      const re = new RegExp(`\\b${escapeForRegExp(sf)}\\b`);
-      return !re.test(e.institution);
-    });
-    
-    return {
-      institution: e.institution,
-      short_forms: filtered.join(';'),
-      notes: e.notes ?? ''
-    };
-  });
+  // clean up the field order and join multi-values
+  const rows = outputEntries.map(e => ({
+    org_clean: e.org_clean,
+    institution: e.institution,
+    short_forms: e.short_forms.join(';'),
+    notes: e.notes ?? ''
+  }));
 
   const outSheet = XLSX.utils.json_to_sheet(rows);
   const outWb = XLSX.utils.book_new();
