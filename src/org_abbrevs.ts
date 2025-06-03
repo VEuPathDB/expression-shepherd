@@ -36,13 +36,22 @@ type FullOutput = ResponseRecord & { org_clean: string; };
 const STATIC_PROMPT = `You are an expert in global academic and research institutions in the domain of public health, biomedical research, and human disease.
 
 For the given institution name, return a JSON object containing a list of commonly used short forms, including:
-
 * acronyms (e.g. LSHTM)
 * initialisms (e.g. MIT)
-* abbreviations or truncations (e.g. Unimelb, Caltech)
-* any widely used local-language forms
+* one-word abbreviated truncations (e.g. Unimelb, Caltech)
+* any widely used local-language short forms
 
-Include both international and local-language variants if applicable. Only include names that are actually used in practice. Do not invent abbreviations based solely on initials—return an empty 'short_forms' array if necessary. Return the long form name in 'institution'. Optionally use 'notes' to explain any oddities.`;
+Only include names that are actually used in practice. The short forms will be used to drive auto-complete in a web form.
+
+Do not:
+* invent abbreviations based solely on initials
+* shorten "University of X" to "U of X", "Univ. X" etc
+* return the full local-language name
+
+Do:
+* return an empty 'short_forms' array if necessary
+* return the long form name in 'institution'
+* optionally use 'notes' to explain any oddities.`;
 
 async function main() {
   const [,, inputJsonlFilename, outputXlsxFilename] = process.argv;
@@ -108,14 +117,10 @@ async function main() {
     }
 
     if (shortForms != null) {
-      if (shortForms.institution !== institution) {
-	console.warn(`Warning: Response institution '${shortForms.institution}' did not match input '${institution}'`);
-      }
-
-      // merge in the original just to be sure
+      // merge in the original as org_clean
       outputEntries.push({
-	...shortForms,
 	org_clean: institution,
+	...shortForms,
       });
 
       if (outputEntries.length % 10 === 0) {
@@ -141,12 +146,22 @@ main().catch(err => {
 
 // Write output workbook
 function writeXlsx(outputEntries: FullOutput[], outputXlsxFilename: string): void {
-
+  function escapeForRegExp(str: string) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+  
   // clean up the field order and join multi-values
+  // prune any whole words already in the institution name
   const rows = outputEntries.map(e => ({
     org_clean: e.org_clean,
     institution: e.institution,
     short_forms: e.short_forms.join(';'),
+    pruned_short_forms: e.short_forms
+      .filter(sf => {
+	const re = new RegExp(`\\b${escapeForRegExp(sf)}\\b`);
+	return !re.test(e.institution);
+      })
+      .join(';'),
     notes: e.notes ?? ''
   }));
 
