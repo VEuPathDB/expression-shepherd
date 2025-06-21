@@ -261,6 +261,59 @@ determineOverlaps <- function(allData, column_name = 'combined ID') {
   return(overlap_tbl)
 }
 
+writeSampleSTF <- function(data, output_directory) {
+  data %>% walk(
+    function(d) {
+      organism <- d$meta$speciesAndStrain
+      dataset <- d$meta$datasetName
+      path <- file.path(output_directory, organism, dataset)
+      if (!dir.exists(path)) {
+        dir.create(path, recursive = TRUE)
+      }
+      # remove unwanted columns before we make the EDA entity
+      sdata <- d$data %>% select(-c(`combined ID`, `QC status`, `QC notes`, `fallback ID`))
+
+      samples <- entity_from_tibble(sdata, name = 'sample')
+
+      samples <- samples %>%
+        redetect_columns_as_variables(columns = c('SRA.ID.s.', 'label')) %>%
+        set_variable_display_names_from_provider_labels() %>%
+        set_variable_metadata('SRA.ID.s.', display_name = 'SRA ID(s)')
+      
+      # remove SRA ID(s) column if it's empty
+      if (samples %>% get_data() %>% pull(SRA.ID.s.) %>% is.na() %>% all()) {
+        samples <- samples %>%
+          modify_data(
+            select(-SRA.ID.s.)
+          )  %>%
+          sync_variable_metadata()
+      } else {
+        samples <- samples %>% set_variables_multivalued('SRA.ID.s.' = ',')
+      }
+      
+      # annotate the units
+      samples <- reduce2(
+        .x    = d$units,          # the values
+        .y    = make.names(names(d$units)),   # the "R-friendly" column names
+        .init = samples,          # start here
+        .f    = function(acc, unit, col) {
+          # only set on numeric columns
+          if (unit != "no unit" && acc %>% get_data() %>% pull(col) %>% is.numeric()) {
+            acc <- set_variable_metadata(acc, col, unit = unit)
+          }
+          acc
+        }
+      )
+      
+      if (samples %>% validate() == FALSE) {
+        break;
+      }
+      
+      samples %>% export_entity_to_stf(path)
+    }
+  )
+}
+
 allData <- parseSpreadsheet('../data/RNA-Seq sample re-annotation for QC.xlsx', list(), processExperiment)
 message("Filtering to keep only contrasting experiments.")
 contrasting <- keepContrastingOnly(allData)
@@ -274,3 +327,4 @@ write_xlsx(
   ),
   path = "../data/overlaps.xlsx"
 )
+writeSampleSTF(contrasting, '../data/sample_stf/')
