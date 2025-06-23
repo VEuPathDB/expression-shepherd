@@ -2,19 +2,30 @@ projectId <- 'PlasmoDB'
 speciesAndStrain <- 'pfal3D7'
 datasetName <- 'Bartfai_IDC_2018'
 
-
+#
+# reads in the tall counts file (one row per gene)
+# and flips it round to wide
+#
 read_counts_data <- function(filename) {
-  data <- read_tsv(filename, col_names = FALSE, col_types = cols(.default = "c")) %>%
+
+  # read in as all-character  
+  data <- read_tsv(
+    filename,
+    col_names = FALSE,
+    col_types = cols(.default = "c")
+  ) %>%
     t() %>%
     as_tibble()
   
   # Extract the header row
   headers <- data %>% slice_head(n = 1) %>% unlist(use.names = FALSE)
-  data <- data %>% slice_tail(n = nrow(data) - 1)  # Drop header row
-  
   headers[1] <- 'sample.ID'
+  # Drop header row
+  data <- data %>% slice_tail(n = nrow(data) - 1)
+  # Name the columns and we're back to a proper tibble
   colnames(data) <- headers
 
+  # convert the counts columns to integer
   data <- data %>%
     mutate(
       across(
