@@ -1,7 +1,3 @@
-projectId <- 'PlasmoDB'
-speciesAndStrain <- 'pfal3D7'
-datasetName <- 'Bartfai_IDC_2018'
-
 #
 # reads in the tall counts file (one row per gene)
 # and flips it round to wide
@@ -14,6 +10,7 @@ read_counts_data <- function(filename) {
     col_names = FALSE,
     col_types = cols(.default = "c")
   ) %>%
+    # and transpose
     t() %>%
     as_tibble()
   
@@ -26,20 +23,98 @@ read_counts_data <- function(filename) {
   colnames(data) <- headers
 
   # convert the counts columns to integer
+  # and make a trivial assay ID column
   data <- data %>%
     mutate(
       across(
         -sample.ID,
         as.integer
-      )
-    )
+      ),
+      assay.ID = sample.ID
+    ) %>%
+    relocate(assay.ID, .after = sample.ID)
   
   return(data)
 }
 
-
-wrangle <- function(speciesAndStrain, datasetName) {
+#
+# figures out which countsForEda file is sense/antisense
+#
+# returns a named ("sense", "antisense" or "unstranded") list of tibbles
+#
+rename_counts_by_strandedness <- function(counts_list) {
+  if (length(counts_list) == 1) {
+    # Only one file → label it unstranded
+    names(counts_list) <- "unstranded"
+    return(counts_list)
+  }
   
+  stopifnot(length(counts_list) == 2)
+  
+  # Extract tibbles
+  x <- counts_list[[1]]
+  y <- counts_list[[2]]
+  
+  # Remove metadata columns (assumes first 2 cols are not genes)
+  x_counts <- x %>% select(-1, -2)
+  y_counts <- y %>% select(-1, -2)
+  
+  # Compute per-sample medians (across each row)
+  x_medians <- x_counts %>%
+    rowwise() %>%
+    mutate(median = median(c_across(everything()), na.rm = TRUE)) %>%
+    pull(median)
+  
+  y_medians <- y_counts %>%
+    rowwise() %>%
+    mutate(median = median(c_across(everything()), na.rm = TRUE)) %>%
+    pull(median)
+  
+  if (all(x_medians > y_medians)) {
+    names(counts_list) <- c("sense", "antisense")
+  } else if (all(x_medians < y_medians)) {
+    names(counts_list) <- c("antisense", "sense")
+  } else {
+    stop("Strandedness could not be consistently determined for ", names(counts_list))
+  }
+  
+  counts_list
+}
+
+counts_to_entity <- function(tbl, name) {
+  assays <- entity_from_tibble(
+    tbl,
+    name = paste0(name, "_assay"),
+    display_name = paste(str_to_title(name), 'assay'),
+    display_name_plural = paste(str_to_title(name), 'assays'),
+    skip_type_convert = TRUE
+    #TO DO, description = ???
+  ) %>%
+    set_parents('sample', 'sample.ID')
+  
+  assays <- assays %>%
+    create_variable_category(
+      category_name = 'gene_counts',
+      children = assays %>% get_variable_metadata() %>% pull(variable),
+      display_name = 'Gene counts',
+      definition = 'Counts per gene from RNA-Seq'  
+    ) %>%
+    create_variable_collection(
+      'gene_counts',
+      member = 'gene',
+      member_plural = 'genes'
+      # TO DO: normalization_method? is_compositional?
+    )
+  
+  assays
+}
+
+#
+# the main event... wrangle()
+#
+wrangle <- function(projectId, speciesAndStrain, datasetName) {
+  
+  # find the sample STF file
   sample_filename <- file.path(
     '../data/sample_stf',
     speciesAndStrain,
@@ -47,6 +122,7 @@ wrangle <- function(speciesAndStrain, datasetName) {
     'entity-sample.tsv'
   )
   
+  # find the countsForEda_*.txt files
   counts_file_glob <- file.path(
     '../data/ReflowPlus-data',
     projectId,
@@ -57,7 +133,30 @@ wrangle <- function(speciesAndStrain, datasetName) {
   )
   counts_filenames <- Sys.glob(counts_file_glob)
   
+  counts_data <- counts_filenames %>%
+    set_names() %>%
+    map(read_counts_data) %>%
+    rename_counts_by_strandedness() %>%
+    imap(counts_to_entity)
+  
+  # the entity will have the name 'sample'
   samples <- entity_from_stf(sample_filename)
   
+  study <- study_from_entities(c(samples, counts_data), name = "RNA-Seq study")
   
+  study
 }
+
+
+# for testing
+
+projectId <- 'PlasmoDB'
+speciesAndStrain <- 'pfal3D7'
+datasetName <- 'Bartfai_IDC_2018'
+# study <- wrangle(projectId, speciesAndStrain, datasetName)
+# validate(study)
+# inspect(study)
+# (do not inspect entities - it is unusably slow - bug issue #41 filed)
+
+# example VDI export
+# study %>% export_to_vdi(some_directory)

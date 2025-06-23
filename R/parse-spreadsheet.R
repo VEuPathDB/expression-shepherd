@@ -278,7 +278,12 @@ writeSampleSTF <- function(data, output_directory) {
       # remove unwanted columns before we make the EDA entity
       sdata <- d$data %>% select(-c(`combined ID`, `QC status`, `QC notes`, `fallback ID`))
 
-      samples <- entity_from_tibble(sdata, name = 'sample')
+      samples <- entity_from_tibble(
+        sdata,
+        name = 'sample',
+        display_name = 'Sample',
+        display_name_plural = 'Samples'
+      )
 
       non_id_variables <- samples %>%
         get_id_column_metadata() %>%

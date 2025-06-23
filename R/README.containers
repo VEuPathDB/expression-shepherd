@@ -12,7 +12,7 @@ screen -S RStudio docker run --rm -ti -v $PWD:/study.wrangler -v ~/work/expressi
 #
 
 library(devtools)
-load_all('study.wrangler')
+load_all('~/study.wrangler')
 
 #
 # Then set this directory as the working dir
