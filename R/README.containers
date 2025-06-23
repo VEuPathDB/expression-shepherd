@@ -1,0 +1,45 @@
+#
+# To work on the wrangling scripts, start RStudio with this repo also mounted
+#
+# 
+
+cd /path/to/study-wrangler
+screen -S RStudio docker run --rm -ti -v $PWD:/study.wrangler -v ~/work/expression-shepherd:/home/rstudio/expression-shepherd -e PASSWORD=password -p 8888:8787 veupathdb/study-wrangler
+
+
+#
+# Then use devtools to install the wrangler (in RStudio)
+#
+
+library(devtools)
+load_all('study.wrangler')
+
+#
+# Then set this directory as the working dir
+#
+
+setwd("~/expression-shepherd/R")
+
+#
+# Then you can run the code.
+#
+# parse-spreadsheet.R
+#
+# Requires the xlsx export of
+# https://docs.google.com/spreadsheets/d/1C-rPODs4_RryM8KdDx0rYcasNDClYdQN2b-gyeQWbqc/edit?gid=431453410#gid=431453410
+# as input. See the last few lines of the script.
+#
+# This creates
+# 1. a spreadsheet for reviewing overlaps between datasets
+# 2. sample_stf - directories containing sample annots in STF entity files
+#
+# wrangle-rnaseq.R is a prototype for the workflow
+# 
+#
+# To get some Pf data for testing:
+#
+
+mkdir /home/maccallr/work/expression-shepherd/data/ReflowPlus-data/PlasmoDB/pfal3D7/rnaseq
+cd /home/maccallr/work/expression-shepherd/data/ReflowPlus-data/PlasmoDB/pfal3D7/rnaseq
+rsync -av --prune-empty-dirs --include='*/' --include='countsForEda*' --exclude='*' yew:/veupath/data/workflows/GenomicsDB/ReflowPlus/data/PlasmoDB/pfal3D7/rnaseq/
+

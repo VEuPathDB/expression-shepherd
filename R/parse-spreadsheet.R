@@ -192,8 +192,13 @@ keepContrastingOnly <- function(allData) {
         summarise(across(all_of(column_names), count_replicated_levels)) %>%
         unlist()
       
+      unreplicated_level_counts <- expt$data %>%
+        summarise(across(all_of(column_names), n_distinct)) %>% unlist()
+
       # keep if any variable has at least two such levels
-      any(replicated_level_counts >= 2)
+      # or at least 4 unreplicated levels
+      # (the user may want to combine neighbouring timepoints or life stages, for example)
+      any(replicated_level_counts >= 2, unreplicated_level_counts >= 4)
     })
 }
 
@@ -275,10 +280,14 @@ writeSampleSTF <- function(data, output_directory) {
 
       samples <- entity_from_tibble(sdata, name = 'sample')
 
+      non_id_variables <- samples %>%
+        get_id_column_metadata() %>%
+        filter(variable != 'sample.ID') %>%
+        pull(variable)
+
       samples <- samples %>%
-        redetect_columns_as_variables(columns = c('SRA.ID.s.', 'label')) %>%
-        set_variable_display_names_from_provider_labels() %>%
-        set_variable_metadata('SRA.ID.s.', display_name = 'SRA ID(s)')
+        redetect_columns_as_variables(non_id_variables) %>%
+        set_variable_display_names_from_provider_labels()
       
       # remove SRA ID(s) column if it's empty
       if (samples %>% get_data() %>% pull(SRA.ID.s.) %>% is.na() %>% all()) {
