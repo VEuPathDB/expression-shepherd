@@ -4,15 +4,18 @@
 #
 read_counts_data <- function(filename) {
 
-  # read in as all-character  
-  data <- read_tsv(
-    filename,
-    col_names = FALSE,
-    col_types = cols(.default = "c")
-  ) %>%
-    # and transpose
-    t() %>%
-    as_tibble()
+  message(glue("reading {filename}..."))
+  # read in as all-character
+  suppressMessages(
+    data <- read_tsv(
+      filename,
+      col_names = FALSE,
+      col_types = cols(.default = "c")
+    ) %>%
+      # and transpose
+      t() %>% as_tibble(.name_repair = 'unique')
+  )
+  message(glue("read {filename}, doing headers..."))
   
   # Extract the header row
   headers <- data %>% slice_head(n = 1) %>% unlist(use.names = FALSE)
@@ -22,6 +25,7 @@ read_counts_data <- function(filename) {
   # Name the columns and we're back to a proper tibble
   colnames(data) <- headers
 
+  message(glue("read {filename}, doing headers and integer conversion..."))
   # convert the counts columns to integer
   # and make a trivial assay ID column
   data <- data %>%
@@ -32,7 +36,9 @@ read_counts_data <- function(filename) {
       ),
       assay.ID = sample.ID
     ) %>%
-    relocate(assay.ID, .after = sample.ID)
+    relocate(assay.ID, .after = sample.ID) %>%
+    select(-starts_with('__'))
+  
   
   return(data)
 }
@@ -59,25 +65,18 @@ rename_counts_by_strandedness <- function(counts_list) {
   x_counts <- x %>% select(-1, -2)
   y_counts <- y %>% select(-1, -2)
   
-  # Compute per-sample medians (across each row)
-  x_medians <- x_counts %>%
-    rowwise() %>%
-    mutate(median = median(c_across(everything()), na.rm = TRUE)) %>%
-    pull(median)
+  # Compute per-sample sums (across each row)
+  x_sums <- rowSums(x_counts)
+  y_sums <- rowSums(y_counts)
   
-  y_medians <- y_counts %>%
-    rowwise() %>%
-    mutate(median = median(c_across(everything()), na.rm = TRUE)) %>%
-    pull(median)
-  
-  if (all(x_medians > y_medians)) {
+  if (all(x_sums > y_sums)) {
     names(counts_list) <- c("sense", "antisense")
-  } else if (all(x_medians < y_medians)) {
+  } else if (all(x_sums < y_sums)) {
     names(counts_list) <- c("antisense", "sense")
   } else {
     stop("Strandedness could not be consistently determined for ", names(counts_list))
   }
-  
+
   counts_list
 }
 
@@ -153,6 +152,7 @@ wrangle <- function(projectId, speciesAndStrain, datasetName) {
 projectId <- 'PlasmoDB'
 speciesAndStrain <- 'pfal3D7'
 datasetName <- 'Bartfai_IDC_2018'
+
 # study <- wrangle(projectId, speciesAndStrain, datasetName)
 # validate(study)
 # inspect(study)
