@@ -6,15 +6,24 @@ read_counts_data <- function(filename) {
 
   message(glue("reading {filename}..."))
   # read in as all-character
-  suppressMessages(
-    data <- read_tsv(
-      filename,
-      col_names = FALSE,
-      col_types = cols(.default = "c")
-    ) %>%
-      # and transpose
-      t() %>% as_tibble(.name_repair = 'unique')
-  )
+  data <- read_tsv(
+    filename,
+    col_names = FALSE,
+    col_types = cols(.default = "c")
+  ) %>%
+    # and transpose
+    as.matrix() %>%
+    t()
+
+  message(glue("doing colnames for {filename}..."))
+  
+  # make colnames manually to avoid pairwise compute
+  colnames(data) <- sprintf("V%i", seq_len(ncol(data)))
+
+  message(glue("as_tibble for {filename}..."))
+  # wrap it in a tibble with NO name repair overhead
+  data <- as_tibble(data, .name_repair = "minimal")
+  
   message(glue("read {filename}, doing headers..."))
   
   # Extract the header row
