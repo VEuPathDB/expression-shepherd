@@ -1,13 +1,14 @@
 # Expression Shepherd
 
-This is a lightweight proof-of-concept tool for summarising the expression data on a gene page using OpenAI's GPT-4o model.
+This is a lightweight proof-of-concept tool for summarising the expression data on a gene page using OpenAI's GPT-4o model or Anthropic's Claude 4 Sonnet.
 
 ## Non-Docker usage
 
 ### 0. Requirements
 
-- OpenAI API key
-  - add `OPENAI_API_KEY=xxxxxxxxxxxxx` to a file called `.env` in this directory
+- API key for your chosen model:
+  - OpenAI: add `OPENAI_API_KEY=xxxxxxxxxxxxx` to a file called `.env` in this directory
+  - Anthropic: add `ANTHROPIC_API_KEY=xxxxxxxxxxxxx` to a file called `.env` in this directory
 - volta if possible: https://docs.volta.sh/guide/getting-started
   - it takes care of your node and yarn versions
 - node - 18.20.5 tested (higher versions will likely work) 
@@ -33,17 +34,25 @@ This compiles `src/main.ts` into `dist/main.js`
 
 You can run the script with any PlasmoDB gene ID:
 
+**With OpenAI GPT-4o (default):**
 ```bash
-yarn start PF3D7_1016300
+node dist/main.js PF3D7_1016300
 ```
 
-This runs `node dist/main.js PF3D7_1016300`.
+**With Claude 4 Sonnet:**
+```bash
+node dist/main.js PF3D7_1016300 --claude
+```
+
+**Note:** Use `node dist/main.js` directly instead of `yarn start` when using the `--claude` flag, as npm/yarn scripts don't pass through additional arguments.
 
 It will output three files in the `example-output` directory:
 
-1. `GENE_ID.summaries.json` - the per experiment AI summaries (JSON)
-2. `GENE_ID.summary.json` - the AI summary-of-summaries and grouping (JSON)
-3. `GENE_ID.summary.html` - a nice HTML version of the summary
+1. `GENE_ID.01.MODEL.summaries.json` - the per experiment AI summaries (JSON)
+2. `GENE_ID.01.MODEL.summary.json` - the AI summary-of-summaries and grouping (JSON)  
+3. `GENE_ID.01.MODEL.summary.html` - a nice HTML version of the summary
+
+Where `MODEL` is either `OpenAI` or `Claude` depending on which API you used.
 
 To view the HTML open it as a local file in your web browser (Ctrl-O usually).
 

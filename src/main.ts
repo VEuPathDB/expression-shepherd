@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import Anthropic from "@anthropic-ai/sdk";
 import "dotenv/config";
 import { expressionDataRequestPostData } from "./post-templates/expression_data_request";
 import axios from "axios";
@@ -8,26 +9,53 @@ import { zodResponseFormat } from "openai/helpers/zod";
 import { consolidateSummary, summaryJSONtoHTML, writeToFile } from "./utils";
 
 //
-// yarn build && yarn start PF3D7_0616000
+// yarn build && node dist/main.js PF3D7_0616000
 //
 // or
 //
-// yarn start PF3D7_0716300 DS_e973eadd57 10 0
+// node dist/main.js PF3D7_0716300 DS_e973eadd57 10 0
 //
-// which will run 10 replicates of a single experiment with no pretty print and make numbered output files
-// * it will NOT run the summary-of-summaries, because there's only one
+// or with Claude 4 Sonnet:
+//
+// node dist/main.js PF3D7_0616000 --claude
+//
+// Note: Use 'node dist/main.js' directly instead of 'yarn start' to pass the --claude flag
+// Set ANTHROPIC_API_KEY environment variable for Claude, OPENAI_API_KEY for OpenAI
+// Output files will include model name: e.g., GENE.01.Claude.summary.html
+//
+// Arguments: [geneId] [datasetId] [numReps] [prettyPrint] [--claude]
+// * numReps: number of replicates (default: 1)
+// * prettyPrint: boolean for JSON formatting (default: true)  
+// * --claude: use Claude 4 Sonnet instead of OpenAI GPT-4
+// * if datasetId specified, only that dataset will be processed (no summary-of-summaries)
 // * these run in parallel asynchronously - not sure if client retries if hitting the rate-limit
 //
 
 const args = process.argv.slice(2); // Skip the first two entries
-const geneId = args[0];
-const datasetId = args[1];
-const numReps = args[2] ? Number(args[2]) : 1;
-const prettyPrint = args[3] ? Boolean(args[3]) : true;
 
-const modelId = "gpt-4o-2024-11-20";
+// Parse command line arguments
+let geneId = args[0];
+let datasetId: string | undefined;
+let numReps = 1;
+let prettyPrint = true;
+let useAnthropic = false;
+
+// Parse arguments, handling --claude flag
+const filteredArgs = args.filter(arg => arg !== '--claude');
+useAnthropic = args.includes('--claude');
+
+geneId = filteredArgs[0];
+if (filteredArgs.length > 1) datasetId = filteredArgs[1];
+if (filteredArgs.length > 2) numReps = Number(filteredArgs[2]);
+if (filteredArgs.length > 3) prettyPrint = Boolean(filteredArgs[3]);
+
+console.log(`Using ${useAnthropic ? 'Claude' : 'OpenAI'} API`);
+
+const openaiModelId = "gpt-4o-2024-11-20";
 // "gpt-4o-2024-11-20";
 // "gpt-4o-2024-08-06"
+
+const anthropicModelId = "claude-sonnet-4-20250514";
 
 // these could be ENV vars or commandline args in future
 const projectId = 'PlasmoDB';
@@ -37,6 +65,10 @@ const serviceBaseUrl = 'https://plasmodb.org/plasmo/service';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Ensure this is set in your environment
+});
+
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY, // Ensure this is set in your environment
 });
 
 // use sleep to throttle requests
@@ -51,6 +83,39 @@ interface SummariseExpressionArgs {
   datasetId?: string;
   rep?: number;
   prettyPrint?: boolean;
+  useAnthropic?: boolean;
+}
+
+const SYSTEM_MESSAGE = "You are a bioinformatician working for VEuPathDB.org. You are an expert at providing biologist-friendly summaries of transcriptomic data.";
+
+function getIndividualResponseSchemaDescription(): string {
+  return `
+
+REQUIRED JSON SCHEMA:
+{
+  "one_sentence_summary": "string - one sentence summary of gene expression",
+  "biological_importance": "integer - biological importance score 0-5",
+  "confidence": "integer - confidence score 0-5", 
+  "experiment_keywords": ["array", "of", "strings"],
+  "notes": "optional string - any additional notes"
+}`;
+}
+
+function getSummaryResponseSchemaDescription(): string {
+  return `
+
+REQUIRED JSON SCHEMA:
+{
+  "headline": "string - specific headline for the summary",
+  "one_paragraph_summary": "string - ~100 word paragraph summary",
+  "topics": [
+    {
+      "headline": "string - topic headline",
+      "one_sentence_summary": "string - topic summary",
+      "dataset_ids": ["array", "of", "dataset_id", "strings"]
+    }
+  ]
+}`;
 }
 
 type SummariseExpressionReturnType = Promise<void>; // returns nothing at the moment
@@ -90,8 +155,10 @@ export function getFinalSummaryMessage(experiments: any[], prettyPrint = false):
 
 
 async function summariseExpression(
-  { geneId, projectId, serviceBaseUrl, datasetId, rep = 1, prettyPrint = false } : SummariseExpressionArgs
-) : SummariseExpressionReturnType { 
+  { geneId, projectId, serviceBaseUrl, datasetId, rep = 1, prettyPrint = false, useAnthropic = false } : SummariseExpressionArgs
+) : SummariseExpressionReturnType {
+  
+  const modelSuffix = useAnthropic ? 'Claude' : 'OpenAI'; 
   
   const postData = {
     ...expressionDataRequestPostData,
@@ -158,22 +225,51 @@ async function summariseExpression(
       
       try {
 	// Note that the LLM will not get the `geneId`. This is intentional.
-	const completion = await openai.chat.completions.create({
-	  model: modelId,
-	  messages: [
-	    {
-	      role: "system",
-	      content: "You are a bioinformatician working for VEuPathDB.org. You are an expert at providing biologist-friendly summaries of transcriptomic data."
-	    },
-	    {
-	      role: "user",
-	      content: getExperimentMessage(experimentInfoWithData, prettyPrint),
-	    },
-	  ],
-	  response_format: zodResponseFormat(individualResponseSchema, 'individual_response')
-	});
+	let completion: any;
+	let rawResponse: string | null = null;
+	let usage: any = null;
 
-	const rawResponse = completion.choices[0].message.content; // Raw text response
+	if (useAnthropic) {
+	  const anthropicCompletion = await anthropic.messages.create({
+	    model: anthropicModelId,
+	    max_tokens: 1000,
+	    system: SYSTEM_MESSAGE,
+	    messages: [
+	      {
+	        role: "user",
+	        content: getExperimentMessage(experimentInfoWithData, prettyPrint) + getIndividualResponseSchemaDescription() + "\n\nPlease respond with valid JSON matching the required schema exactly.",
+	      },
+	    ],
+	  });
+	  let claudeResponse = anthropicCompletion.content[0].type === 'text' ? anthropicCompletion.content[0].text : null;
+	  // Strip markdown code blocks if present
+	  if (claudeResponse?.startsWith('```json')) {
+	    claudeResponse = claudeResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+	  } else if (claudeResponse?.startsWith('```')) {
+	    claudeResponse = claudeResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+	  }
+	  rawResponse = claudeResponse;
+	  usage = anthropicCompletion.usage;
+	} else {
+	  completion = await openai.chat.completions.create({
+	    model: openaiModelId,
+	    messages: [
+	      {
+	        role: "system",
+	        content: SYSTEM_MESSAGE
+	      },
+	      {
+	        role: "user",
+	        content: getExperimentMessage(experimentInfoWithData, prettyPrint),
+	      },
+	    ],
+	    response_format: zodResponseFormat(individualResponseSchema, 'individual_response')
+	  });
+	  rawResponse = completion.choices[0].message.content;
+	  usage = completion.usage;
+	}
+
+	// rawResponse is already set above
 
 	if (rawResponse) {
 	  try {
@@ -187,14 +283,27 @@ async function summariseExpression(
 	    };
 
 	    individualResults.push(fullIndividualResponse); // SUCCESS!
-	    console.log(`total_tokens: ${completion.usage?.total_tokens}`);
-	    const cost = ((completion.usage?.prompt_tokens ?? 0)*250 + (completion.usage?.completion_tokens ?? 0)*1000)/1000000;
-	    console.log(`cost: ${cost}`);
-	    sum_costs += cost;
-	    num_costs++;
-	    console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
+	    
+	    if (useAnthropic) {
+	      console.log(`input_tokens: ${usage?.input_tokens}, output_tokens: ${usage?.output_tokens}`);
+	      // Anthropic pricing: $3/1M input tokens, $15/1M output tokens for Claude 4 Sonnet
+	      const cost = ((usage?.input_tokens ?? 0)*3 + (usage?.output_tokens ?? 0)*15)/1000000;
+	      console.log(`cost: ${cost}`);
+	      sum_costs += cost;
+	      num_costs++;
+	    } else {
+	      console.log(`total_tokens: ${usage?.total_tokens}`);
+	      const cost = ((usage?.prompt_tokens ?? 0)*250 + (usage?.completion_tokens ?? 0)*1000)/1000000;
+	      console.log(`cost: ${cost}`);
+	      sum_costs += cost;
+	      num_costs++;
+	      console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
+	    }
 	  } catch (error) {
 	    console.error("Response validation failed. Full report at end.");
+	    if (useAnthropic) {
+	      console.error("Raw Claude response:", rawResponse?.substring(0, 500) + "...");
+	    }
 	    individualErrors.push({ dataset_id, error });
 	  }
 	} else {
@@ -219,7 +328,7 @@ async function summariseExpression(
 
     // write a pretty version to file, just for reference
     await writeToFile(
-      `example-output/${geneId}.${rep.toString().padStart(2, "0")}.summaries.json`,
+      `example-output/${geneId}.${rep.toString().padStart(2, "0")}.${modelSuffix}.summaries.json`,
       JSON.stringify(sortedIndividualResults, null, 2)
     );
 
@@ -229,22 +338,51 @@ async function summariseExpression(
     
     try {
       // Note that the LLM will not get the `geneId`. This is intentional.
-      const completion = await openai.chat.completions.create({
-	model: modelId,
-	messages: [
-	  {
-	    role: "system",
-	    content: "You are a bioinformatician working for VEuPathDB.org. You are an expert at providing biologist-friendly summaries of transcriptomic data."
-	  },
-	  {
-	    role: "user",
-	    content: getFinalSummaryMessage(sortedIndividualResults, prettyPrint),
-	  },
-	],
-	response_format: zodResponseFormat(summaryResponseSchema, 'summary_response')
-      });
+      let completion: any;
+      let rawResponse: string | null = null;
+      let usage: any = null;
 
-      const rawResponse = completion.choices[0].message.content; // Raw text response
+      if (useAnthropic) {
+        const anthropicCompletion = await anthropic.messages.create({
+          model: anthropicModelId,
+          max_tokens: 2000,
+          system: SYSTEM_MESSAGE,
+          messages: [
+            {
+              role: "user",
+              content: getFinalSummaryMessage(sortedIndividualResults, prettyPrint) + getSummaryResponseSchemaDescription() + "\n\nPlease respond with valid JSON matching the required schema exactly.",
+            },
+          ],
+        });
+        let claudeResponse = anthropicCompletion.content[0].type === 'text' ? anthropicCompletion.content[0].text : null;
+        // Strip markdown code blocks if present
+        if (claudeResponse?.startsWith('```json')) {
+          claudeResponse = claudeResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+        } else if (claudeResponse?.startsWith('```')) {
+          claudeResponse = claudeResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+        }
+        rawResponse = claudeResponse;
+        usage = anthropicCompletion.usage;
+      } else {
+        completion = await openai.chat.completions.create({
+          model: openaiModelId,
+          messages: [
+            {
+              role: "system",
+              content: SYSTEM_MESSAGE
+            },
+            {
+              role: "user",
+              content: getFinalSummaryMessage(sortedIndividualResults, prettyPrint),
+            },
+          ],
+          response_format: zodResponseFormat(summaryResponseSchema, 'summary_response')
+        });
+        rawResponse = completion.choices[0].message.content;
+        usage = completion.usage;
+      }
+
+      // rawResponse is already set above
 
       if (rawResponse) {
 	try {
@@ -252,17 +390,25 @@ async function summariseExpression(
 	  const summaryResponse = summaryResponseSchema.parse(parsedResponse);
 
 	  // write a pretty version to file, just for reference
-	  await writeToFile(`example-output/${geneId}.${rep.toString().padStart(2, "0")}.summary.json`, JSON.stringify(summaryResponse, null, 2));
+	  await writeToFile(`example-output/${geneId}.${rep.toString().padStart(2, "0")}.${modelSuffix}.summary.json`, JSON.stringify(summaryResponse, null, 2));
 
 	  // remove any duplicates and add an "Others" topic if any were missed
 	  const summary = consolidateSummary(summaryResponse, sortedIndividualResults);
 	  
 	  const html = summaryJSONtoHTML(summary, geneId, sortedIndividualResults, expressionGraphs, serverUrl, geneBaseUrl);
-	  await writeToFile(`example-output/${geneId}.${rep.toString().padStart(2, "0")}.summary.html`, html);
-	  console.log(`total_tokens: ${completion.usage?.total_tokens}`);
-	  const cost = ((completion.usage?.prompt_tokens ?? 0)*250 + (completion.usage?.completion_tokens ?? 0)*1000)/1000000;
-	  console.log(`cost: ${cost}`);
-	  console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
+	  await writeToFile(`example-output/${geneId}.${rep.toString().padStart(2, "0")}.${modelSuffix}.summary.html`, html);
+	  
+	  if (useAnthropic) {
+	    console.log(`input_tokens: ${usage?.input_tokens}, output_tokens: ${usage?.output_tokens}`);
+	    // Anthropic pricing: $3/1M input tokens, $15/1M output tokens for Claude 4 Sonnet
+	    const cost = ((usage?.input_tokens ?? 0)*3 + (usage?.output_tokens ?? 0)*15)/1000000;
+	    console.log(`cost: ${cost}`);
+	  } else {
+	    console.log(`total_tokens: ${usage?.total_tokens}`);
+	    const cost = ((usage?.prompt_tokens ?? 0)*250 + (usage?.completion_tokens ?? 0)*1000)/1000000;
+	    console.log(`cost: ${cost}`);
+	    console.log(`finish_reason: ${completion.choices[0].finish_reason}`);
+	  }
 	} catch (error) {
 	  console.error("Error in parsing response: ", error);
 	}
@@ -282,5 +428,5 @@ async function summariseExpression(
 }
 
 for (let rep = 1; rep <= numReps; rep++) {
-  summariseExpression({ geneId, projectId, serviceBaseUrl, datasetId, rep, prettyPrint });
+  summariseExpression({ geneId, projectId, serviceBaseUrl, datasetId, rep, prettyPrint, useAnthropic });
 }

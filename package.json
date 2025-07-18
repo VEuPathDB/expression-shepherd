@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.56.0",
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
     "exceljs": "^4.4.0",
