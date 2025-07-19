@@ -368,7 +368,8 @@ async function summariseExpression(
 	      num_costs++;
 	    } else {
 	      console.log(`total_tokens: ${usage?.total_tokens}`);
-	      const cost = ((usage?.prompt_tokens ?? 0)*250 + (usage?.completion_tokens ?? 0)*1000)/1000000;
+	      // OpenAI pricing for gpt-4o: $2.50/1M input, $10.00/1M output tokens
+	      const cost = ((usage?.prompt_tokens ?? 0)*2.50 + (usage?.completion_tokens ?? 0)*10.00)/1000000;
 	      console.log(`cost: ${cost}`);
 	      sum_costs += cost;
 	      num_costs++;
