@@ -1,0 +1,22 @@
+{
+  "headline": "Ookinete-specific expression with female gametocyte preference in Plasmodium berghei",
+  "one_paragraph_summary": "This gene exhibits <strong>dramatic stage-specific expression</strong> in <i>Plasmodium berghei</i>, with its most striking feature being >100-fold upregulation in ookinetes (>2000 TPM) compared to all other life cycle stages. Expression patterns show <strong>sexual stage preference</strong>, with moderate levels in gametocytes (~30-60 TPM) and particularly strong female gametocyte bias (6-fold higher than males). The gene shows <strong>minimal expression in asexual blood stages</strong> (~1 TPM) and variable, generally low expression during liver stages. <ul><li>Ookinete-specific expression suggests critical roles in mosquito stage development and transmission</li><li>Female gametocyte preference indicates involvement in sexual differentiation processes</li><li>Regulation by AP2 transcription factors suggests integration into sexual development pathways</li></ul>",
+  "topics": [
+    {
+      "headline": "Dramatic ookinete-specific upregulation with partial AP2 transcription factor regulation",
+      "one_sentence_summary": "The gene shows >100-fold upregulation in ookinetes compared to other life cycle stages, with AP2-O3 knockout reducing ookinete expression by ~70% while AP2-O2 knockout shows minimal impact.",
+      "dataset_ids": [
+        "DS_49781e8c33",
+        "DS_9b450524d1"
+      ]
+    },
+    {
+      "headline": "Female gametocyte-biased expression during sexual differentiation",
+      "one_sentence_summary": "Expression is strongly biased toward female gametocytes (6-fold higher than males) and shows early activation during gametocyte commitment with biphasic peaks at 0 and 12 hours post-induction.",
+      "dataset_ids": [
+        "DS_5dacfed867",
+        "DS_7b1bac6cd1"
+      ]
+    }
+  ]
+}

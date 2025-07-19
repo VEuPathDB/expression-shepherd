@@ -1,0 +1,364 @@
+[
+  {
+    "one_sentence_summary": "The expression of this gene in <i>Trypanosoma brucei</i> peaks during the early transition from stumpy to procyclic stage (6 hr time point) and is relatively stable before and after.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "gene expression",
+      "Trypanosoma brucei",
+      "life cycle stages",
+      "microarray"
+    ],
+    "notes": "Expression values suggest a peak at 6 hr followed by a minor decrease, indicating likely regulation during differentiation.",
+    "dataset_id": "DS_b7dc54ebad",
+    "assay_type": "array",
+    "experiment_name": "Life cycle stages and differentiation time course"
+  },
+  {
+    "one_sentence_summary": "This gene is expressed at higher levels in <i>Trypanosoma brucei</i> from human cerebrospinal fluid compared to blood and rodent samples, with a stronger signal in the sense direction.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "T. brucei",
+      "RNA-Seq",
+      "human samples",
+      "rodent infection",
+      "comparative transcriptomics"
+    ],
+    "notes": "The expression data indicates significant differential expression in specific conditions and orientation, with supporting metadata providing robustness to this conclusion.",
+    "dataset_id": "DS_8293b78640",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of T. brucei rhodesiense from human, rodent, culture"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits significant upregulation under glucose-rich conditions in short stumpy forms of <i>Trypanosoma brucei</i>, with moderate variance in biological replicates.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "glucose availability",
+      "short stumpy",
+      "RNA-Seq",
+      "Trypanosoma brucei",
+      "metabolic conditions"
+    ],
+    "notes": "Replicate variability appears moderate, and sense strand results show stronger trends than antisense.",
+    "dataset_id": "DS_f18da9c611",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Influence of glucose on transcriptome of SS, LS, PC"
+  },
+  {
+    "one_sentence_summary": "This gene is moderately expressed throughout the <i>Trypanosoma brucei</i> cell cycle with higher expression during the early G1 phase and decreases in expression during later stages.",
+    "biological_importance": 3,
+    "confidence": 5,
+    "experiment_keywords": [
+      "cell cycle",
+      "RNA-Seq",
+      "Trypanosoma brucei",
+      "time course",
+      "transcriptomics"
+    ],
+    "notes": "Expression shows a clear pattern with peak expression early in G1 phase, indicating possible regulatory significance. Biological importance is moderate considering the observable pattern, and confidence is high due to the consistency of the data.",
+    "dataset_id": "DS_0de2f64330",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Cell Cycle Transcriptome"
+  },
+  {
+    "one_sentence_summary": "The gene shows moderate expression with enrichment at the 3'-end (especially under random priming conditions) and negligible expression at the 5'-triphosphate-end within <i>Trypanosoma brucei</i> procyclic forms in this experiment.",
+    "biological_importance": 3,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "5' and 3' enriched libraries",
+      "procyclic form",
+      "Trypanosoma brucei",
+      "gene expression profile"
+    ],
+    "notes": "The data displays clear enrichment patterns at specific transcript ends, likely reflecting valid biological processing events of interest for this gene.",
+    "dataset_id": "DS_1ede7b449f",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Procyclic form 5 and 3 end-enriched transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene shows low expression in ribosome profiling samples across all conditions and moderate expression in mRNA samples, indicative of transcriptional activity without significant ribosomal engagement in <i>Trypanosoma brucei</i>.",
+    "biological_importance": 3,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Trypanosoma brucei</i>",
+      "procyclic form",
+      "bloodstream form",
+      "RNA-Seq",
+      "ribosome profiling"
+    ],
+    "notes": "The absence of ribosome profiling signal does not necessarily mean lack of functional importance, but suggests limited active translation for this gene.",
+    "dataset_id": "DS_f8e525f9b0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Procyclic and bloodstream form transcriptomes and ribosome profiling"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits a slight upregulation under heat shock conditions compared to the control in <i>Trypanosoma brucei</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "heat shock",
+      "microarray",
+      "procyclic stage",
+      "Trypanosoma brucei"
+    ],
+    "notes": "The expression value (log2 fold change) is moderate, and though the standard error is considerable, the dataset supports a slight upregulation interpretation.",
+    "dataset_id": "DS_36e67bfae4",
+    "assay_type": "array",
+    "experiment_name": "Procyclic trypanosomes: heat shock vs untreated control"
+  },
+  {
+    "one_sentence_summary": "This gene is expressed at a higher level in the procyclic form compared to the bloodstream form of <i>Trypanosoma brucei</i>, with transcript abundance values indicating a notable upregulation in the procyclic form.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "procyclic form",
+      "bloodstream form",
+      "Trypanosoma brucei",
+      "differential expression"
+    ],
+    "notes": "Expression patterns suggest a clear difference between the two forms, favoring the procyclic form. Percentile rankings also support increased expression in that condition relative to the blood form.",
+    "dataset_id": "DS_66fdbd45d7",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Bloodstream and Procyclic Form Transcriptomes"
+  },
+  {
+    "one_sentence_summary": "The gene in this study exhibits higher transcript expression levels in the adipose tissue condition compared to the bloodstream condition, suggesting modest upregulation in adipose tissue.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "adipose tissue",
+      "bloodstream",
+      "Trypanosoma brucei",
+      "RNA-Seq",
+      "gene expression"
+    ],
+    "notes": "Despite the existence of biological replicates, differences between conditions are moderate, and confidence is derived from consistent trends in expression levels and sample-specific values.",
+    "dataset_id": "DS_820537ffae",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Adipose tissue vs bloodstream form transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits marginally higher transcript levels in the bloodstream form compared to the procyclic form in the given experimental setup, with relatively low ribosome profiling signal under both conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "<i>T. brucei</i> life cycle",
+      "ribosome profiling",
+      "transcript abundance",
+      "bloodstream form",
+      "procyclic form"
+    ],
+    "notes": "The distinction in transcript abundance between the two forms is noticeable but not dramatic; however, the ribosome profiling data suggests limited active translation, which factors into the moderate importance score. Confidence is fairly high due to detailed dataset annotations.",
+    "dataset_id": "DS_da32747f09",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Procyclic and bloodstream form mRNA transcriptome and ribosome profiling"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Trypanosoma brucei</i> shows moderate expression levels in all tested stages, with higher trends observed in the 'Short Stumpy' stage samples.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Trypanosoma brucei",
+      "RNA-Seq",
+      "life-cycle stages",
+      "transcriptome"
+    ],
+    "notes": "Antisense expression levels are negligible, and the trends are relatively consistent across stages.",
+    "dataset_id": "DS_3e90742f0a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of T. brucei culture-derived slender/stumpy bloodstream  and early/late procyclic forms"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Trypanosoma brucei</i> exhibits moderate upregulation of its sense transcripts during the early and mid-stages of induced differentiation, peaking at day 6, and shows negligible antisense transcript expression.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Trypanosoma brucei",
+      "differentiation",
+      "time-course"
+    ],
+    "notes": "The experiment lacks strong replicative data but consistent patterns in the sense transcript data support the findings.",
+    "dataset_id": "DS_9df2112fd9",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "T brucei in vitro-induced differentiation (2020)"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderately lower expression in the metacyclic compared to the procyclic forms of <i>Trypanosoma brucei</i>, considering available sense strand data.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Trypanosoma brucei",
+      "metacyclic vs procyclic forms",
+      "RNA-Seq",
+      "transcript abundance"
+    ],
+    "notes": "The observed difference in sense strand expression between conditions is noticeable, and confidence is reasonable due to replicate measurements, although it is not very large and has some standard variation.",
+    "dataset_id": "DS_a72b4c8650",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Metacyclic vs Procyclic form transcriptomes (2020)"
+  },
+  {
+    "one_sentence_summary": "In <i>Trypanosoma brucei</i>, the gene exhibits moderately higher expression levels under RNAi knockdown of Orc1/Cdc6 compared to the wild type, as observed from RNA-Seq data.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Trypanosoma brucei",
+      "Orc1/Cdc6",
+      "RNAi knockdown"
+    ],
+    "notes": "The expression shows a moderate increase upon knockdown based on TPM values, and there are no replicates to evaluate variability.",
+    "dataset_id": "DS_fd84c79a71",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome during RNAi knockdown of Orc1/Cdc6"
+  },
+  {
+    "one_sentence_summary": "The gene shows moderate and consistent expression across all five life-cycle stages of <i>Trypanosoma brucei</i>, with no substantial upregulation or downregulation observed in this experiment.",
+    "biological_importance": 2,
+    "confidence": 5,
+    "experiment_keywords": [
+      "gene expression",
+      "life cycle stages",
+      "microarray",
+      "Trypanosoma brucei"
+    ],
+    "notes": "Expression values are relatively consistent across the conditions with low variability in the biological replicates; there is no significant differential expression in this context.",
+    "dataset_id": "DS_2e9f1cbf33",
+    "assay_type": "array",
+    "experiment_name": "Expression profiling of five life cycle stages"
+  },
+  {
+    "one_sentence_summary": "During the in vitro differentiation of <i>Trypanosoma brucei</i> from bloodstream to procyclic forms, this gene shows modest changes in expression with no strong consistent upregulation or downregulation.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "in vitro differentiation",
+      "Trypanosoma brucei",
+      "expression profiling",
+      "time series"
+    ],
+    "notes": "The changes in expression are generally small, and there is no clear pattern of regulation. However, slight fluctuations suggest potential subtle biological roles under these conditions.",
+    "dataset_id": "DS_0c4be69d67",
+    "assay_type": "array",
+    "experiment_name": "Expression profiling of in vitro differentiation"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Trypanosoma brucei</i> shows varying expression levels which decrease over time within each condition, with slightly higher values in the polyA-selected samples and no extreme differential expression observed.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "mRNA degradation",
+      "time-series",
+      "<i>Trypanosoma brucei</i>"
+    ],
+    "notes": "The expression levels are varied across conditions but do not exhibit extremely pronounced differences, suggesting some modulation rather than strong regulation by experimental treatment.",
+    "dataset_id": "DS_378ed5098b",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "mRNA degradation"
+  },
+  {
+    "one_sentence_summary": "This gene is observed to have relatively low to moderate expression levels in the midgut, proventriculus, and salivary glands of <i>Trypanosoma brucei</i> during the time course, with no drastic changes indicating substantial regulation.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Trypanosoma brucei",
+      "RNA-Seq",
+      "midgut",
+      "proventriculus",
+      "salivary glands",
+      "transcriptomics",
+      "tsetse fly"
+    ],
+    "notes": "Antisense expression levels are negligible throughout, indicating a unidirectional transcription pattern for this gene.",
+    "dataset_id": "DS_f01ace4781",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of T brucei from midgut (days 3-28), proventriculus and salivary glands"
+  },
+  {
+    "one_sentence_summary": "The gene does not exhibit differential expression across the tested life cycle stages of <i>Trypanosoma brucei</i> based on the provided RNA-Seq experiment data.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Trypanosoma brucei",
+      "spliced leader sites",
+      "life cycle stages"
+    ],
+    "notes": "No expression data points were provided, which limits direct interpretation of differential expression; importance and confidence estimations are made conservatively based on the experimental design details.",
+    "dataset_id": "DS_2ffc0211e6",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Bloodstream and Procyclic for spliced leader transcriptomes (927, 427)(2014)"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Trypanosoma brucei</i> displays a relatively stable expression level across all conditions tested, with slight variations that do not indicate any significant upregulation or downregulation.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "circadian regulation",
+      "time-course",
+      "temperature variation",
+      "bloodstream forms",
+      "procyclic forms"
+    ],
+    "notes": "Expression values are relatively constant and percentile ranges further indicate the lack of strong differential expression in this experimental setup.",
+    "dataset_id": "DS_77b994d105",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Circadian control of bloodstream and procyclic form transcriptome (AnTat1.1)"
+  },
+  {
+    "one_sentence_summary": "This gene does not show significant differential expression between bloodstream and procyclic forms of <i>Trypanosoma brucei</i>.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "spliced leader sites",
+      "polyadenylation sites",
+      "Trypanosoma brucei",
+      "bloodstream form",
+      "procyclic form"
+    ],
+    "notes": "The data availability does not provide specific expression values for this gene directly, limiting precise conclusion.",
+    "dataset_id": "DS_b86bb1d4ad",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Spliced Leader and Poly A Sites from bloodstream and procyclic forms"
+  },
+  {
+    "one_sentence_summary": "In this experiment involving <i>Trypanosoma brucei</i>, the gene does not exhibit significant differential expression between the tested conditions and the control.",
+    "biological_importance": 1,
+    "confidence": 5,
+    "experiment_keywords": [
+      "DHH1 gene",
+      "RNA helicase activity",
+      "microarray",
+      "DHH1 wild type",
+      "mutant DHH1",
+      "gene expression",
+      "Trypanosoma brucei"
+    ],
+    "notes": "The data shows minimal changes in expression values with low variability, indicating no substantial expression differences across conditions.",
+    "dataset_id": "DS_a4dae129e9",
+    "assay_type": "array",
+    "experiment_name": "mRNA profiles of induced DHH1 vs DEAD:DQAD mutant"
+  },
+  {
+    "one_sentence_summary": "Due to the lack of specific expression data provided for this gene within this experiment, a detailed expression summary cannot be generated.",
+    "biological_importance": 0,
+    "confidence": 1,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Trypanosoma brucei",
+      "spliced leader sequence",
+      "transcriptome"
+    ],
+    "notes": "The data array is empty, indicating no direct expression data is available for analysis in this dataset.",
+    "dataset_id": "DS_c23bc65b49",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Procyclic form spliced leader transcriptome"
+  }
+]

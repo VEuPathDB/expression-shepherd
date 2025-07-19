@@ -1,0 +1,34 @@
+{
+  "headline": "Cyclic and Stage-Specific Expression in Plasmodium falciparum",
+  "one_paragraph_summary": "<strong>Overview of Expression Profile:</strong> <ul> <li>The gene exhibits cyclic expression through the intraerythrocytic developmental cycle of <i>Plasmodium falciparum</i>, with peaks at specific stages like the trophozoite and schizont stages, sometimes corresponding to intracellular processes of the parasite.</li> <li>Expression levels are notably high in early stages of the cycle, followed by downregulation later, with some experiments showing upticks toward the end of the cycle.</li> <li>Stage-specific expression patterns are observed, particularly in the ring stage and gametocyte development, suggesting a role in development or survival.</li> <li>The gene expression correlates tightly with the life cycle of <i>P. falciparum</i>, particularly insexual and asexual blood stages, indicating its potential functional importance in stage-specific physiology of malaria parasites.</li> </ul>",
+  "topics": [
+    {
+      "headline": "Cyclic Expression in Intraerythrocytic Developmental Cycle",
+      "one_sentence_summary": "The gene shows periodic expression during <i>P. falciparum</i>'s intraerythrocytic cycle, with specific late trophozoite and schizont-stage peaks coinciding with developmental transitions.",
+      "dataset_ids": [
+        "DS_715bf2deda",
+        "DS_0fa4237b4b",
+        "DS_8ecf65d1b7",
+        "DS_a239464cb4",
+        "DS_fe2b5a278f"
+      ]
+    },
+    {
+      "headline": "Gametocyte Stage Expression Patterns",
+      "one_sentence_summary": "The gene expression increases progressively during gametocytogenesis in <i>P. falciparum</i>, with a peak in stage V gametocytes.",
+      "dataset_ids": [
+        "DS_6d6cf09eae",
+        "DS_a518f45975"
+      ]
+    },
+    {
+      "headline": "Expression Specifics Between Life Cycle Stages",
+      "one_sentence_summary": "The gene exhibits high expression in the ring and schizont stages compared to gametocytes in <i>P. falciparum</i> lifecycle analyses.",
+      "dataset_ids": [
+        "DS_b6cdce990b",
+        "DS_2aa311d6a0",
+        "DS_d18037ecc4"
+      ]
+    }
+  ]
+}

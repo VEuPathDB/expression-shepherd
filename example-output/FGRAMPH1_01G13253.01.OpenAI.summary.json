@@ -1,0 +1,24 @@
+{
+  "headline": "Differential expression of a gene during infection and stress in Fusarium graminearum",
+  "one_paragraph_summary": "<strong>Summary of gene expression patterns:</strong> <ul> <li>This gene shows significant upregulation during the infectious growth phase of <i>Fusarium graminearum</i> compared to vegetative growth and during interactions with both wheat and maize hosts, particularly in active infection stages with notable peaks at intermediate time points.</li> <li>Minimal expression is observed under non-infectious or stress conditions such as heat stress or developmental transitions, despite minor upregulation in specific mutant backgrounds.</li> <li>These results suggest the gene's probable involvement in infection pathology and host interactions, especially during host colonization and manifestation of symptoms.</li> </ul> Further functional studies could expand on its potential roles in pathogenesis.",
+  "topics": [
+    {
+      "headline": "Upregulation during infection across hosts and growth phases",
+      "one_sentence_summary": "This gene is significantly upregulated during infectious growth phases of <i>Fusarium graminearum</i> and host plant infections, indicating infection-specific activity.",
+      "dataset_ids": [
+        "DS_d0e311bf25",
+        "DS_4a1d8e1905",
+        "DS_f5b8d4ff37",
+        "DS_4d16290906"
+      ]
+    },
+    {
+      "headline": "Limited but conditionally increased expression in mutants and stress conditions",
+      "one_sentence_summary": "While exhibiting generally low expression, this gene shows noticeable upregulation under certain mutant backgrounds and stress conditions in <i>Fusarium graminearum</i>.",
+      "dataset_ids": [
+        "DS_36c1c0082f",
+        "DS_326fa801af"
+      ]
+    }
+  ]
+}

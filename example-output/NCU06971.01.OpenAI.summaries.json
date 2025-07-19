@@ -1,0 +1,426 @@
+[
+  {
+    "one_sentence_summary": "This gene in <i>Neurospora crassa</i> is highly upregulated in wild-type cells transferring from sucrose to Avicel as a carbon source, demonstrating its strong response to cellulose induction.",
+    "biological_importance": 5,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Neurospora crassa</i>",
+      "cellulose",
+      "RNA-Seq",
+      "Gene Expression",
+      "TBGK mutant"
+    ],
+    "notes": "The expression data indicate a robust response to cellulose exposure in the wild-type, although additional context about paralogs is not directly influential here.",
+    "dataset_id": "DS_c14d26a0a3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptional profiles of WT and NCU04952, NCU00130, NCU08755 deletion mutant induced by exposure to Avicel"
+  },
+  {
+    "one_sentence_summary": "The gene in <i>Neurospora crassa</i> shows significantly reduced expression (measured in TPM) in the delta sah-2 mutant and the Mclr-2 delta sah-2 double mutant, compared to the wild type, indicating its negative regulation by sah-2.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "gene expression",
+      "RNA-Seq",
+      "mutant analysis",
+      "sucrose minimal media"
+    ],
+    "notes": "The analysis is supported by consistent biological replicates and significant fold change across conditions, lending strong confidence to the summary.",
+    "dataset_id": "DS_16bc228c8e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The role of the SREBP pathway in the secretion of lignocellulolytic enzymes"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Neurospora crassa</i> shows increased expression levels across perithecia development stages, most notably at 5 dpf and in the stc-1 mutant condition.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Neurospora crassa</i>",
+      "RNA-Seq",
+      "gene expression",
+      "reproductive development",
+      "mutant analysis"
+    ],
+    "notes": "Expression appears to rise during perithecia development, with notable high levels in the stc-1 mutant and a general shift in the sad-1 mutant at 5 dpf; strand-specific RNA-seq confirms unique transcript abundance.",
+    "dataset_id": "DS_f2913d9eb1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes during vegetative and sexual development stage"
+  },
+  {
+    "one_sentence_summary": "The gene shows a significant upregulation in expression when <i>Neurospora crassa</i> is cultured on Avicel compared to no carbon or sucrose media.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "cellulose",
+      "response",
+      "Neurospora crassa",
+      "clr-2",
+      "mutation",
+      "RNA-Seq",
+      "transcriptomics"
+    ],
+    "notes": "Expression analysis shows higher transcription levels in the wild type and mutant responses to Avicel, suggesting notable regulation linked to the nutrient environment.",
+    "dataset_id": "DS_f210d58388",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptional profiles induced by exposure to crystalline cellulose"
+  },
+  {
+    "one_sentence_summary": "The gene shows significantly higher expression levels in <i>Neurospora crassa</i> when grown on Avicel compared to sucrose, particularly in the wild-type, indicating regulation responsive to cellulose.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Neurospora crassa",
+      "cellulose response",
+      "WT vs mutants",
+      "Avicel"
+    ],
+    "notes": "The data clearly shows upregulation in Avicel conditions, consistent across most time points, and the WT has rigorous replicates providing robust results.",
+    "dataset_id": "DS_a7a14c7e0f",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Profiling of transcriptional response of clr-1 and clr-2 mutants to cellulose"
+  },
+  {
+    "one_sentence_summary": "The gene shows substantial upregulation on most carbon sources like Miscanthus and energy cane, reflected in higher expression levels during the conditions tested in <i>Neurospora crassa</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "expression profiling",
+      "carbon sources",
+      "filamentous fungi",
+      "plant biomass"
+    ],
+    "notes": "The high expression response to specific substrates like Miscanthus and energy cane, along with robust standard error values, lends high confidence to the assessment of its significant upregulation under these conditions.",
+    "dataset_id": "DS_1dd4f50bad",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of strains grown on different carbon sources (plant biomass)"
+  },
+  {
+    "one_sentence_summary": "This gene shows substantial expression variability across conditions in this RNA-Seq experiment with the highest transcript abundance measured on specific polysaccharide-rich media, such as avicel.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "carbon sources",
+      "Neurospora crassa",
+      "transcriptional profiling"
+    ],
+    "notes": "The experiment demonstrates clear differential expression across media conditions with some samples showing markedly higher expression levels for this gene.",
+    "dataset_id": "DS_d5cb6ab9a2",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of N. crassa strains grown on different carbon sources (complex polysaccharides)"
+  },
+  {
+    "one_sentence_summary": "This gene is significantly upregulated in samples under xylan growth conditions and substantially downregulated in mutant strains, indicating a role in the response to xylan in <i>Neurospora crassa</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Neurospora crassa",
+      "xylan growth",
+      "xlr-1 mutant",
+      "RNA-Seq",
+      "differential expression"
+    ],
+    "notes": "The expression is remarkably higher in wild type conditions with xylan compared to mutant and other conditions, and the standard error and percentiles corroborate significant differential expression.",
+    "dataset_id": "DS_5781e07160",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomic investigation of CLR-1, CLR-2, and XLR-1 roles in plant cell wall degradation"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Neurospora crassa</i> exhibits dynamic changes in transcript abundance across the time series, with notable peaks at 72 hours and nadirs around 24 and 144 hours.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "time series",
+      "sexual development",
+      "RNA-Seq"
+    ],
+    "notes": "The expression appears time-variable with distinguishable dynamics suggesting potential regulatory roles during development.",
+    "dataset_id": "DS_14cdcc2c58",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Genome-wide transcriptome during sexual development"
+  },
+  {
+    "one_sentence_summary": "The examined gene in <i>Neurospora crassa</i> exhibits significantly higher expression levels in treatments with amylose and mutant strains, suggesting condition-specific upregulation.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Neurospora crassa",
+      "carbon source response",
+      "metabolic gene expression",
+      "wildtype vs mutant comparison"
+    ],
+    "notes": "High gene expression in specific conditions implies potential relevance to the metabolism of the tested substrates; expression trends and statistical measures support this conclusion.",
+    "dataset_id": "DS_33fc617b03",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome analysis of the col-26 mutant and its wild type parental strain"
+  },
+  {
+    "one_sentence_summary": "In the Neurospora crassa experiment, the measured gene exhibits differential expression, with higher transcript abundance in the ∆adv-1 condition compared to wild-type and ∆pp-1 conditions.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "gene expression",
+      "mutants",
+      "Neurospora crassa",
+      "ADV-1",
+      "PP-1",
+      "wild-type"
+    ],
+    "notes": "The data shows clear differences in transcription levels across conditions, and the statistical replicates improve confidence in the findings.",
+    "dataset_id": "DS_ae93d6cae4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression analysis of ADV-1 and PP-1 mutants"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits moderate to high upregulation when <i>Neurospora crassa</i> is grown on plant straws as opposed to sucrose, with the highest expression seen on corn straw.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "plant straws",
+      "expression profiling",
+      "Neurospora crassa",
+      "carbon source utilization"
+    ],
+    "notes": "The differential expression pattern suggests the gene's involvement in response to plant-based carbon sources, with substantial expression variability between conditions.",
+    "dataset_id": "DS_a4188c2dd4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptional responses to various plant straws"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Neurospora crassa</i> exhibits the highest expression when grown on substrates like mixed-linked glucan, indicating a potential role in the corresponding metabolic processes.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Neurospora crassa",
+      "plant cell wall",
+      "transcriptome",
+      "substrate specificity"
+    ],
+    "notes": "The data shows marked expression variation depending on the substrates tested, suggesting regulated expression in response to environmental conditions related to plant cell wall components.",
+    "dataset_id": "DS_a0004d905e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Systems analysis of plant cell wall deconstruction by Neurospora crassa"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Neurospora crassa</i> exhibits significant variation in expression levels between wild-type and msn-1 knockout strains, with notable differences at specific time points, suggesting potential gene regulation involvement.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "circadian",
+      "RNA-Seq",
+      "gene expression profiling",
+      "<i>Neurospora crassa</i>"
+    ],
+    "notes": "The dataset shows marked changes in expression between wild-type and msn-1 knockout strains, especially at the 8-hour time point, hinting at a regulatory role, though no replicate-based statistics are provided.",
+    "dataset_id": "DS_c05fd37f3c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-sequencing of WT and delta MSN1 strains of N. crassa over a circadian time course"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits substantially high expression at the initial time point (15 minutes) specifically on Bird media, with significantly lower levels at later time points and on PDA media, indicating its potential role in early conidia germination in <i>Neurospora crassa</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "conidia germination",
+      "media-specific response",
+      "RNA-Seq",
+      "<i>Neurospora crassa</i> expression"
+    ],
+    "notes": "The significant initial expression on Bird media, followed by later reduction, suggests a potential transcriptional regulation important for adaptation to this medium during early germination stages.",
+    "dataset_id": "DS_1a51a536a0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression during conidia germination on PDA and Bird media"
+  },
+  {
+    "one_sentence_summary": "This gene shows significant upregulation in <i>Neurospora crassa</i> under multiple carbon source conditions, with notably higher expression when exposed to cellobiose compared to no carbon.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "carbon sources",
+      "gene expression",
+      "fungi"
+    ],
+    "notes": "The assessment is based on the TPM values across conditions, showing clear differential expression. Biological replicates support the interpretation.",
+    "dataset_id": "DS_bb6e5ae0e5",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of strains grown on different carbon sources (mono-, di- and polysaccharides)"
+  },
+  {
+    "one_sentence_summary": "The gene exhibits higher expression levels at the early time points of conidia germination, particularly on maple sap medium, with a decrease in expression over time.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "gene expression profiling",
+      "RNA-Seq",
+      "conidia germination",
+      "media-specific expression",
+      "time series"
+    ],
+    "notes": "The distinction between sense and antisense strand expression is clear, and it is useful that only minimal antisense expression is observed. The analysis is consistent given the replicates and sampling time points.",
+    "dataset_id": "DS_7b3238ce05",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression during conidia germination in Neurospora crassa on different media"
+  },
+  {
+    "one_sentence_summary": "The gene shows noticeable differential expression across conditions, with highest expression during the asexual development phase in the dark in both wild-type and △ve-1 mutant strains of <i>Neurospora crassa</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "transcriptomic analysis",
+      "light regulation",
+      "asexual development",
+      "RNA-Seq",
+      "<i>Neurospora crassa</i>"
+    ],
+    "notes": "The experiment indicates significant regulation of this gene by both lighting conditions and the VE-1 gene during developmental transition stages; caution is advised for comparisons as variances in standard errors exist.",
+    "dataset_id": "DS_f95c45420d",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptional regulation by the Velvet complex during asexual development in Neurospora crassa"
+  },
+  {
+    "one_sentence_summary": "This gene shows a downregulation of expression in the cpsf5 cpsf6 knockout mutant relative to the control condition in <i>Neurospora crassa</i>.",
+    "biological_importance": 3,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "circadian clock",
+      "3' end sequencing",
+      "cpsf5 cpsf6 gene knockout",
+      "transcript abundance"
+    ],
+    "notes": "Confidence is high due to consistent expression metrics and the presence of biological replicates. Biological importance is moderate due to some differential expression observed.",
+    "dataset_id": "DS_5833d6d3b7",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "3-prime enriched transcriptome in WT (FGSC2489) and cpsf5 cpsf6 knockout mutant"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Neurospora crassa</i> is expressed moderately, with a trend of reduced expression in H3K9me3-deficient mutants compared to wild type.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Neurospora crassa",
+      "H3K9me3 deficiency",
+      "gene expression"
+    ],
+    "notes": "Expression trends show some downregulation in mutant conditions, but values are moderate overall and require further validation for definitive biological impact.",
+    "dataset_id": "DS_418996c9ec",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome changes in response to genotoxic stress"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits moderate and diverse expression, with levels ranging primarily from 4 to 16 TPM across most strains of <i>Neurospora crassa</i> in this dataset.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Neurospora crassa",
+      "transcript abundance",
+      "population genomics"
+    ],
+    "notes": "Expression values are variable across strains but generally within a midrange, indicating moderate activity. No experimental details indicate a strong deviation, hence assigning moderate biological importance.",
+    "dataset_id": "DS_81f4e87069",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Population genomics transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in the delta mus-52 strain compared to the wild-type under low-phosphate conditions in <i>Neurospora crassa</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "phosphate availability",
+      "delta mus-52 mutant",
+      "wild-type comparison",
+      "RNA-Seq"
+    ],
+    "notes": "Conclusions are primarily based on the unique aligned sample values; other factors like biological replicates and standard error analyses also support the observation.",
+    "dataset_id": "DS_a03298576e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Comparative transcriptome of Neurospora crassa WT and delta mus52 strains"
+  },
+  {
+    "one_sentence_summary": "The gene in <i>Neurospora crassa</i> exhibits variable expression across conditions, with upregulation in the ve-1_FeFREE condition.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Neurospora crassa",
+      "RNA-Seq",
+      "iron starvation",
+      "gene regulation",
+      "transcriptomics"
+    ],
+    "notes": "Expression in other conditions showed no stark deviations suggesting moderate biological significance in this setup.",
+    "dataset_id": "DS_c764829c69",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome under standard minimal and iron strarvation conditions"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Neurospora crassa</i> exhibits periodic fluctuations in expression over time with notable modulation but no extreme differential expression.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "circadian expression",
+      "RNA-Seq",
+      "time-course",
+      "<i>Neurospora crassa</i>"
+    ],
+    "notes": "The expression showed rhythmic patterns consistent with circadian regulation, though variations are relatively moderate; confidence is bolstered by the periodicity observed with multiple time points.",
+    "dataset_id": "DS_eb1f1d3a5c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Analysis of clock-regulated genes"
+  },
+  {
+    "one_sentence_summary": "In <i>Neurospora crassa</i>, this gene is not strongly differentially expressed during the asexual development time points or between the mating types under constant light conditions.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Neurospora crassa",
+      "two-channel microarray",
+      "asexual development",
+      "mating type comparison",
+      "time course"
+    ],
+    "notes": "Expression differences appear minimal, and notable changes stay close to baseline levels, suggesting limited biological impact under these conditions.",
+    "dataset_id": "DS_0dab2d9109",
+    "assay_type": "array",
+    "experiment_name": "Sex-specific gene expression during asexual development under constant light condition"
+  },
+  {
+    "one_sentence_summary": "The gene in <i>Neurospora crassa</i> shows slight variation in expression levels under light exposure, with a moderate increase over time, but no clear differential expression relative to dark conditions is evident.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "light regulation",
+      "time series",
+      "gene expression",
+      "TPM"
+    ],
+    "notes": "Expression levels across conditions show limited variation, but confidence is higher due to the presence of replicate standard errors and consistent trends within the data.",
+    "dataset_id": "DS_e454d418a8",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Characterization of light regulated genes"
+  },
+  {
+    "one_sentence_summary": "This gene shows slightly elevated expression during sulfur starvation compared to normal sulfur conditions, but the differential expression is not striking.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Neurospora crassa",
+      "sulfur starvation",
+      "CYS-3",
+      "transcription factor role"
+    ],
+    "notes": "The gene appears to have some moderate response to sulfur conditions; however, expression changes are not pronounced and remain within a narrow range of differences. Additionally, the standard errors are relatively low, providing confidence in the measurements.",
+    "dataset_id": "DS_f3c5e75a81",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptional Profiling of sulfur starvation response"
+  }
+]

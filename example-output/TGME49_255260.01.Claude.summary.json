@@ -1,0 +1,68 @@
+{
+  "headline": "Extremely High Expression Across Tachyzoites and Bradyzoites with Dramatic Silencing During Sexual Development",
+  "one_paragraph_summary": "This gene exhibits <strong>exceptionally high expression</strong> in <i>Toxoplasma gondii</i> asexual stages, consistently ranking in the <strong>98th-99th percentile</strong> across multiple experiments. Key expression patterns include: <ul><li>Peak expression in bradyzoites (2,713 TPM, 99.66th percentile) and tachyzoites (1,593-4,767 TPM)</li><li>Dramatic >400-fold upregulation during oocyst sporulation</li><li>Complete silencing (<3 TPM) in all feline enteroepithelial sexual stages</li><li>Biphasic expression pattern during tachyzoite time courses</li></ul> The consistent high expression in replicating stages and complete repression during sexual development suggests this gene encodes a <strong>critical component of the asexual replication machinery</strong>, possibly involved in DNA replication, cell division, or metabolic processes essential for rapid parasite multiplication but incompatible with sexual differentiation.",
+  "topics": [
+    {
+      "headline": "Exceptionally High Expression in Bradyzoites and Tissue Cysts",
+      "one_sentence_summary": "The gene shows peak expression levels (758-2,713 TPM, 97th-99th percentile) across multiple bradyzoite experiments, indicating critical importance during chronic infection stages.",
+      "dataset_ids": [
+        "DS_408f2c4cda",
+        "DS_dac07dbf93",
+        "DS_386bac2860"
+      ]
+    },
+    {
+      "headline": "Biphasic Expression Pattern During Tachyzoite Development",
+      "one_sentence_summary": "Multiple tachyzoite time-course experiments reveal a characteristic biphasic expression pattern with early peaks (2-4 hours), mid-course dips (8-22 hours), and late recovery phases (36-44 hours).",
+      "dataset_ids": [
+        "DS_78959dea55",
+        "DS_d5645bc639",
+        "DS_6529b4f68d",
+        "DS_ef984802b1"
+      ]
+    },
+    {
+      "headline": "Massive Upregulation During Oocyst Sporulation",
+      "one_sentence_summary": "Expression increases over 400-fold from unsporulated to sporulated oocysts, reaching 99th percentile levels and indicating essential roles in sporozoite formation and oocyst maturation.",
+      "dataset_ids": [
+        "DS_72dce52949",
+        "DS_173528b522"
+      ]
+    },
+    {
+      "headline": "Complete Silencing During Sexual Development in Feline Host",
+      "one_sentence_summary": "The gene shows >300-fold downregulation from asexual stages to all feline enteroepithelial stages, representing one of the most dramatic stage-specific repressions observed in the parasite lifecycle.",
+      "dataset_ids": [
+        "DS_e7467c0306"
+      ]
+    },
+    {
+      "headline": "Strong Stage-Specific Expression Favoring Tachyzoites Over Merozoites",
+      "one_sentence_summary": "Tachyzoites show 355-fold higher expression than merozoites, indicating strong stage-specific upregulation during the rapidly dividing asexual phase compared to the sexual merozoite stage.",
+      "dataset_ids": [
+        "DS_75742b9a0a",
+        "DS_45b4123102"
+      ]
+    },
+    {
+      "headline": "Cell Cycle-Regulated Expression in Synchronized Parasites",
+      "one_sentence_summary": "Expression shows clear periodic regulation during the cell cycle with two peaks (early-mid and late cycle phases) and 2.5-fold differential expression between minimum and maximum levels.",
+      "dataset_ids": [
+        "DS_c1a3dbb014"
+      ]
+    },
+    {
+      "headline": "Consistent High Expression Across Host Cell Types and Infection Models",
+      "one_sentence_summary": "The gene maintains exceptionally high expression (97th-99th percentile) across diverse host cell types, infection conditions, and parasite strains, indicating constitutive importance during active infection.",
+      "dataset_ids": [
+        "DS_a48cc7c61e",
+        "DS_930295d0b5",
+        "DS_b0427cd47b",
+        "DS_59fb8debdb",
+        "DS_4362334059",
+        "DS_749cb10dcf",
+        "DS_79e1396920"
+      ]
+    }
+  ]
+}

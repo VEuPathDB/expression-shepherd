@@ -1,0 +1,262 @@
+[
+  {
+    "one_sentence_summary": "This gene is dramatically downregulated in the ACE1 deletion mutant compared to wild-type <i>Aspergillus fumigatus</i>, with expression dropping from 12.08 TPM to 0.2 TPM, indicating strong positive regulation by the ACE1 transcription factor.",
+    "biological_importance": 5,
+    "confidence": 4,
+    "experiment_keywords": [
+      "transcription factor",
+      "ACE1 deletion",
+      "zinc deficiency",
+      "gene regulation",
+      "fungal pathogenesis"
+    ],
+    "notes": "The 60-fold reduction in expression represents one of the most dramatic regulatory responses possible, suggesting this gene may be a direct or highly dependent target of ACE1. The high paralog number (11) suggests caution in interpretation, though the consistent pattern between unique and non-unique mapping supports the conclusion.",
+    "dataset_id": "DS_2b76656bb1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Determining Aspergillus fumigatus transcription factor expression and function during invasion of the mammalian lung"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in dormant conidia (68.1 TPM, 78th percentile) compared to hyphae and germinated conidia, with moderate expression levels maintained in mutant conidia strains.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "conidia",
+      "dormancy",
+      "germination",
+      "hyphal",
+      "developmental_stages",
+      "Aspergillus_fumigatus"
+    ],
+    "notes": "Clear developmental stage-specific expression pattern with ~40-fold higher expression in dormant vs germinated conidia, suggesting important role in conidial dormancy maintenance. High paralog number (11) may affect interpretation but unique mapping data available.",
+    "dataset_id": "DS_62ebc12b94",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Comparative transcriptomics of dormant and germinating conidia"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong downregulation under iron starvation conditions in <i>Aspergillus fumigatus</i>, with expression dropping approximately 7-fold compared to control conditions, while hydrogen peroxide treatment alone does not significantly affect expression levels.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "iron starvation",
+      "oxidative stress",
+      "hydrogen peroxide",
+      "stress response",
+      "fungal pathogen"
+    ],
+    "notes": "The gene shows consistent iron-dependent expression regardless of oxidative stress presence, suggesting a primary role in iron metabolism or iron-responsive processes. High paralog number (11) may complicate interpretation but the clear pattern across conditions suggests robust regulation.",
+    "dataset_id": "DS_dd0139d2b0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression under oxidative and iron stresses"
+  },
+  {
+    "one_sentence_summary": "This gene shows upregulation in <i>Aspergillus fumigatus</i> during hypoxic adaptation, with expression increasing from baseline at T0 (6.58-6.74 TPM) to peak levels at T36 (27.01-27.19 TPM), demonstrating a ~4-fold induction over the 36-hour time course.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "hypoxia",
+      "oxygen limitation",
+      "stress response",
+      "temporal adaptation",
+      "Aspergillus fumigatus"
+    ],
+    "notes": "High paralog number (11) suggests potential cross-hybridization effects, but consistent pattern between unique and non-unique counts supports reliability of the upregulation trend. Peak expression occurs at the latest time point, suggesting sustained or delayed hypoxic response.",
+    "dataset_id": "DS_93c159b846",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome under normoxia and hypoxia conditions"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatic strand-specific expression in <i>Aspergillus fumigatus</i>, with antisense transcripts being 5-15 times more abundant than sense transcripts across all genotypes and conditions, and both sense and antisense expression are consistently upregulated under hypoxia compared to normoxia.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "hypoxia",
+      "normoxia",
+      "hrmA",
+      "antisense transcription",
+      "strand-specific",
+      "oxygen response"
+    ],
+    "notes": "The high paralog number (11) suggests caution in interpretation, but the consistent pattern across all conditions and the dramatic antisense/sense ratio difference indicate robust biological significance. The antisense transcripts may represent regulatory RNA or overlapping gene expression.",
+    "dataset_id": "DS_f6dd8e44a3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression in WT, hrmA deletion, hrmA OE, hrmA_REV, EVOL under hypoxia and normoxia conditions"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong downregulation in response to Congo Red treatment across multiple <i>Aspergillus fumigatus</i> mutant strains, with sense transcript levels dropping dramatically from ~4-30 TPM to <1 TPM upon drug exposure, while antisense transcripts remain relatively stable or slightly increase.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Congo Red",
+      "antifungal",
+      "transcription factor mutants",
+      "cell wall stress",
+      "sense-antisense transcripts",
+      "drug resistance"
+    ],
+    "notes": "High paralog number (11) may complicate interpretation; the consistent downregulation pattern across different mutant backgrounds suggests this gene may be involved in cell wall biosynthesis or stress response pathways that are inhibited by Congo Red treatment.",
+    "dataset_id": "DS_d360a3549c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Sensitivity of transcription factor mutants of Aspergillus fumigatus to Congo Red"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate expression levels that are consistently downregulated by itraconazole treatment in wild-type <i>Aspergillus fumigatus</i>, with the ΔnctA mutant showing the lowest baseline expression but some recovery upon drug treatment, while the ΔnctB mutant maintains intermediate expression levels.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antifungal resistance",
+      "itraconazole",
+      "drug response",
+      "nct transporters",
+      "Aspergillus fumigatus"
+    ],
+    "notes": "High paralog number (11) suggests caution in interpretation; the ΔnctA mutant shows an interesting pattern of low baseline expression with partial recovery upon itraconazole treatment, contrasting with the general downregulation seen in other strains.",
+    "dataset_id": "DS_f65ede9fbd",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of WT, nctA, and nctB mutants in response to itraconazole."
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in the HapB mutant strain (2.4-2.8 fold higher than A1160) with minimal response to itraconazole treatment, while expression in the 29.9 mutant remains lower than the parental strain.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antifungal resistance",
+      "itraconazole",
+      "Aspergillus fumigatus",
+      "HapB mutant",
+      "drug response"
+    ],
+    "notes": "High paralog number (11) suggests this gene family may have functional redundancy; the strain-specific expression differences are more pronounced than drug treatment effects",
+    "dataset_id": "DS_9afe38853e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of itraconazole-resistant strains"
+  },
+  {
+    "one_sentence_summary": "This gene shows progressive upregulation in <i>Aspergillus fumigatus</i> under hypoxic conditions, with expression increasing from 2 hours (1.12-fold) to 24 hours (1.54-fold) after the switch to low oxygen.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "hypoxia",
+      "oxygen stress",
+      "time course",
+      "microarray",
+      "chemostat"
+    ],
+    "notes": "The upregulation is modest but consistent across the time series, with the highest expression at 24 hours. Standard errors are relatively small, supporting reliability of the trend.",
+    "dataset_id": "DS_1ca49919f6",
+    "assay_type": "array",
+    "experiment_name": "Response to hypoxia"
+  },
+  {
+    "one_sentence_summary": "This gene shows progressive upregulation in <i>Aspergillus fumigatus</i> mycelium treated with 5,8-diHODE, with expression increasing from ~6 TPM in ethanol controls to ~11 TPM after 120 minutes of oxylipin treatment.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "oxylipin",
+      "5,8-diHODE",
+      "mycelium",
+      "time-course",
+      "host-microbe signaling"
+    ],
+    "notes": "The gene shows a clear dose-response pattern over time with oxylipin treatment, suggesting involvement in oxylipin signaling pathways. High paralog number (11) may complicate interpretation of unique vs total transcript counts.",
+    "dataset_id": "DS_0e1ec2bd61",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mycelial gene expression in response to treatment with 5,8-diHODE"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatically higher antisense transcript expression (4.4-6.06 TPM, 88-93rd percentiles) compared to very low sense transcript expression (0.04-0.68 TPM, 6-13th percentiles) across all conditions, with the antisense expression remaining consistently high regardless of caspofungin treatment or fhdA deletion in <i>Aspergillus fumigatus</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antifungal resistance",
+      "caspofungin",
+      "antisense transcription",
+      "fhdA transcription factor",
+      "Aspergillus fumigatus"
+    ],
+    "notes": "The striking pattern shows this gene produces primarily antisense transcripts rather than sense transcripts, which may indicate regulatory antisense RNA function. The high paralog number (11) suggests interpretation should be cautious, but the consistent antisense expression pattern across all conditions is notable.",
+    "dataset_id": "DS_64e126f34e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Response to caspofungin"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation over time in <i>Aspergillus fumigatus</i> grown alone but is consistently downregulated when co-cultured with human A549 cells, particularly at the 6-hour timepoint.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "host-pathogen interaction",
+      "airway epithelial cells",
+      "time course",
+      "co-culture",
+      "fungal pathogenesis"
+    ],
+    "notes": "High paralog number (11) suggests interpretation should consider potential cross-mapping issues; the consistent pattern across both strains strengthens confidence in the host-induced downregulation effect.",
+    "dataset_id": "DS_47a1a2ad67",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomics of Aspergillus fumigatus upon exposure to human airway epithelial cells"
+  },
+  {
+    "one_sentence_summary": "This gene shows a consistent time-dependent increase in expression across all conditions, with transcript levels rising approximately 5-fold from 45 to 180 minutes regardless of whether <i>Aspergillus fumigatus</i> is grown alone, co-cultivated with <i>Pseudomonas aeruginosa</i>, or exposed to heat-inactivated bacteria.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "fungal-bacterial interaction",
+      "time-series",
+      "co-cultivation",
+      "Aspergillus fumigatus",
+      "Pseudomonas aeruginosa",
+      "temporal expression"
+    ],
+    "notes": "The gene expression pattern appears to be primarily time-driven rather than influenced by bacterial presence, suggesting it may be involved in normal growth or metabolic processes rather than specific inter-kingdom interactions. High paralog number (11) may complicate interpretation.",
+    "dataset_id": "DS_c339242e7e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomics analysis of Aspergillus fumigatus co-cultivated with Pseudomonas aeruginosa"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest upregulation under oxygen limitation conditions in <i>Aspergillus fumigatus</i>, with expression decreasing initially at 15 minutes of hypoxia (5% O2) but then increasing above baseline levels at 30 minutes, suggesting a delayed adaptive response to low oxygen stress.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "oxygen limitation",
+      "hypoxia",
+      "stress response",
+      "metabolic adaptation",
+      "time course"
+    ],
+    "notes": "The expression pattern shows an initial decrease followed by recovery and modest increase, which may reflect a biphasic response to oxygen stress. The moderate paralog number (11) suggests interpretation should consider potential cross-hybridization effects.",
+    "dataset_id": "DS_29e8541153",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Adaptation to oxygen limitation"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate downregulation in both the ΔveA mutant (approximately 45% reduction) and the ΔmtfA mutant (slight reduction of ~3%) compared to wild-type <i>Aspergillus fumigatus</i>, with the veA deletion having a more pronounced effect on expression.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "secondary metabolite regulation",
+      "veA deletion",
+      "mtfA deletion",
+      "transcriptional control",
+      "Aspergillus fumigatus"
+    ],
+    "notes": "The gene shows 11 paralogs which may complicate interpretation; veA deletion shows more substantial effect than mtfA deletion; antisense reads are present but much lower than sense reads in all conditions.",
+    "dataset_id": "DS_118e6fa430",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of wild-type vs veA and mtfA deletion mutants"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in minimal medium compared to GPA medium during conidial germination in <i>Aspergillus fumigatus</i>, with sense transcript levels increasing approximately 2-fold (1.4 to 2.98 TPM).",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "conidial germination",
+      "growth medium",
+      "Aspergillus fumigatus",
+      "minimal medium",
+      "GPA medium"
+    ],
+    "notes": "High paralog number (11) may complicate interpretation; antisense transcripts show opposite pattern with higher expression in GPA medium, suggesting potential regulatory complexity.",
+    "dataset_id": "DS_faa5674b55",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome analysis of conidium germination of Aspergillus fumigatus in different growth conditions"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "headline": "Developmental stage-specific and intestinal expression profile of a Cryptosporidium parvum gene",
+  "one_paragraph_summary": "<strong>Transcriptomic studies reveal the expression profile of a gene in <i>Cryptosporidium parvum</i>, showcasing developmental stage-specific and tissue-specific dynamics:</strong> <ul> <li>The gene exhibits notably elevated expression in intracellular stages relative to oocysts, as well as significant expression changes through infection stages, peaking at 24-hour post-infection.</li> <li>High expression levels were observed in calf intestine samples compared to sporozoites, suggesting intestinal tissue-specific upregulation.</li> <li>The expression increases significantly during infection, with dynamic changes at different time points post-infection, pointing to a potentially active role in parasitic development inside hosts.</li> </ul> These observations hint at a biologically vital functional role related to intracellular parasitism and host interaction.",
+  "topics": [
+    {
+      "headline": "Expression dynamics during parasite development in intracellular stages",
+      "one_sentence_summary": "This gene demonstrates significantly increased expression in intracellular stages of <i>Cryptosporidium parvum</i> compared to other lifecycle stages across various experimental setups.",
+      "dataset_ids": [
+        "DS_eb01624959",
+        "DS_b14c36920f",
+        "DS_db22744127"
+      ]
+    },
+    {
+      "headline": "Tissue-specific expression levels during host infection",
+      "one_sentence_summary": "The gene shows high expression in calf intestinal tissue, compared to lower levels in sporozoites and infected cells, indicating tissue specificity in <i>C. parvum</i>.",
+      "dataset_ids": [
+        "DS_865efa49f4"
+      ]
+    }
+  ]
+}

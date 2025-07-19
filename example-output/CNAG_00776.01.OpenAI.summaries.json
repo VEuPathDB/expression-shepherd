@@ -1,0 +1,475 @@
+[
+  {
+    "one_sentence_summary": "The gene is upregulated in the nrg1 knockout condition compared to both wild-type and nrg1 overexpression conditions in <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "RNA-Seq",
+      "nrg1 knockout",
+      "gene regulation"
+    ],
+    "notes": "The data exhibits clear differential expression among the conditions, no apparent biases or significant caveats to analysis are present.",
+    "dataset_id": "DS_1a3aa18fbf",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Nrg1 Expression"
+  },
+  {
+    "one_sentence_summary": "In this experiment, the gene in question is expressed at high levels (TPM ~675) in wild-type <i>Cryptococcus neoformans</i> samples without fluconazole, and exhibits slightly decreased expression across all tested conditions, with the lowest expression (~409 TPM) observed in the cfo1 mutant treated with fluconazole.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "fluconazole treatment",
+      "RNA-Seq",
+      "cfo1 mutant",
+      "expression analysis"
+    ],
+    "notes": "There are no significant peculiarities in this dataset; interpretations are based on consistent reduction in expression levels across samples and supported by percentile rankings.",
+    "dataset_id": "DS_f3165f5774",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Fluconazole Sensitivity of Wild-type vs cfo1 Mutant"
+  },
+  {
+    "one_sentence_summary": "This gene shows very high expression in the <i>H99</i> log phase conditions, moderate expression in the lung samples from <i>Mus musculus</i> and <i>Macaca fascicularis</i>, and little to no expression in brain samples.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Cryptococcus neoformans</i> gene expression",
+      "host-pathogen interaction",
+      "RNA-Seq analysis",
+      "lung and brain tissue expression"
+    ],
+    "notes": "Highly expressed specifically in log phase <i>H99</i> condition.",
+    "dataset_id": "DS_5f2f1c9822",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptional landscape of Cryptococcus-host response"
+  },
+  {
+    "one_sentence_summary": "The gene in <i>Cryptococcus neoformans</i> displays significantly variable expression across different environmental and host-mimicking stresses, with notably higher expression in nutrient-limited conditions.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "transcriptional profiling",
+      "environmental stresses",
+      "<i>Cryptococcus neoformans</i>"
+    ],
+    "notes": "The variability in expression between conditions such as YPD, LIM, and CSF demonstrates its significant regulatory response to external stresses, especially nutrient deprivation.",
+    "dataset_id": "DS_7ce8a791f1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression variation in response to biologically relevant stresses"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits high expression under stationary phase and log phase in <i>Cryptococcus neoformans</i>, with slightly elevated expression during hypoxia compared to normoxia in both phases.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "RNA-Seq",
+      "hypoxia",
+      "normoxia",
+      "stationary phase",
+      "log phase"
+    ],
+    "notes": "The unique reads suggest expression differences, especially under stationary phase and modified conditions, while antisense transcription is negligible.",
+    "dataset_id": "DS_93a50639b6",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Cryptococcus transcriptomes in hypoxia and normoxia conditions"
+  },
+  {
+    "one_sentence_summary": "The gene shows substantial expression in the sense orientation under all conditions tested, with higher levels observed during the stationary phase compared to the exponential phase, and negligible expression in the antisense orientation.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Cryptococcus neoformans</i>",
+      "RNA-Seq",
+      "stationary phase",
+      "exponential phase",
+      "temperature variation",
+      "sense and antisense expression"
+    ],
+    "notes": "The differential expression is predominantly in the sense strand, with clear differences between the stationary and exponential phases at both temperatures.",
+    "dataset_id": "DS_766c6b1ce3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mapping 3-prime ends of coding genes with QuantSeq 3-prime mRNA-Seq (PAS-Seq)"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptococcus neoformans</i> is highly expressed predominantly in the sense direction, particularly under 37°C and stationary phase conditions, with minimal antisense transcription observed.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Cryptococcus neoformans",
+      "temperature response",
+      "stationary phase",
+      "QuantSeq"
+    ],
+    "notes": "Expression levels in the sense direction are markedly higher compared to antisense, and temperature and phase appear to influence expression positively.",
+    "dataset_id": "DS_34f2ba224c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mapping 3-prime ends of coding genes with QuantSeq 3-prime mRNA-Seq (PAS-Seq)"
+  },
+  {
+    "one_sentence_summary": "This gene shows variable expression across conditions, with increased expression notably in the YPD media compared to lower levels in human CSF samples for <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "expression",
+      "RNA-Seq",
+      "Cryptococcus neoformans",
+      "CSF",
+      "YPD",
+      "transcriptomic analysis"
+    ],
+    "notes": "Expression levels are notably higher in YPD, emphasizing the media's influence on this gene's activity, and inter-sample variability is apparent.",
+    "dataset_id": "DS_c7fd03bc1e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The Cryptococcal central nervous system transcriptome during human disease"
+  },
+  {
+    "one_sentence_summary": "In the provided experiment, the gene of interest exhibits a significant upregulation in expression between 0 and 24 hours in Pdr802 cells, whereas expression is relatively steady or slightly reduced in wild-type cells of <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Cryptococcus neoformans</i>",
+      "RNA-Seq",
+      "Pdr802 mutant strain",
+      "transcript abundance change",
+      "pathogenicity-related gene expression"
+    ],
+    "notes": "The gene appears to have conditionally increased transcriptional activity specific to the Pdr802 mutant strain during the experiment, indicating a role in adaptive or pathogenic response mechanisms.",
+    "dataset_id": "DS_5cb78d3a97",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The transcription factor Pdr802 regulates Titan cell production and Cryptococcus neoformans pathogenicity"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptococcus neoformans</i> shows a substantial and significant upregulation in the mutant strain ccr4 under host temperature stress conditions compared to the wild type.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "host temperature stress",
+      "RNA-Seq",
+      "gene expression profiles"
+    ],
+    "notes": "The data clearly indicate changes in expression between conditions and strains, with consistent patterns across replicates. However, the change in polysome-associated RNA at 37°C in the wild type suggests additional regulatory layers that warrant further exploration.",
+    "dataset_id": "DS_5b0caebb4c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome and translatome changes in response to host temperature stress"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptococcus neoformans</i> displays substantial and consistent expression across multiple conditions, with notable upregulation under the YPG condition at 72h, indicating potential differential regulatory responses.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "sexual reproduction",
+      "quorum sensing",
+      "RNA-Seq",
+      "pheromone pathways"
+    ],
+    "notes": "While the overall expression levels are high and display some variation across conditions, the relative changes suggest biological significance in differential expression studies, particularly under the YPG condition.",
+    "dataset_id": "DS_ed3e7d4f66",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Cryptococcus neoformans sexual reproduction is controlled by a quorum sensing peptide"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits upregulation in the ada2 knockout condition at 37°C with CO2, suggesting substantial differential expression in these conditions within <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "expression levels",
+      "Cryptococcus neoformans",
+      "ada2 knockouts",
+      "temperature and CO2 effects"
+    ],
+    "notes": "Expression increases in ada2 knockout conditions under 37°C and CO2, marking significant differential expression; standard errors are available suggesting high data reliability.",
+    "dataset_id": "DS_24387c57d1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomics analysis of cells in capsule inducing and non-inducing conditions"
+  },
+  {
+    "one_sentence_summary": "This gene displays significantly higher expression in the YPD condition compared to the in vivo CSF condition, particularly notable in the G0 strain of <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "in vivo CSF",
+      "YPD",
+      "Cryptococcus neoformans",
+      "strain comparison"
+    ],
+    "notes": "The data shows notably higher transcript abundance in the YPD condition compared to the in vivo CSF condition, especially in the G0 strain, which may suggest differential regulation based on environmental conditions.",
+    "dataset_id": "DS_6cb59feb38",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The Cryptococcus neoformans transcriptome at the site of human meningitis (single-read data)"
+  },
+  {
+    "one_sentence_summary": "The gene displays elevated expression levels, with TPM values over 161, and falls into the higher percentile deciles (90-97%) when compared to others in this RNA-Seq analysis of <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Gene expression",
+      "Transcriptomics",
+      "Cryptococcus neoformans",
+      "RNA-Seq",
+      "Ex vivo cerebrospinal fluid"
+    ],
+    "notes": "The gene shows consistent and relatively high expression levels in the reported data, although the absence of standard error and experimental replicates limits confidence.",
+    "dataset_id": "DS_3e2cfef9d4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The Cryptococcus neoformans transcriptome at the site of human meningitis (paired-end data)"
+  },
+  {
+    "one_sentence_summary": "The gene in <i>Cryptococcus neoformans</i> exhibits distinct peaks and troughs of expression over the cell cycle, indicating a periodic upregulation pattern.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "cell cycle",
+      "transcript abundance",
+      "time course",
+      "<i>Cryptococcus neoformans</i>"
+    ],
+    "notes": "Expression is consistently elevated in the sense orientation compared to the antisense orientation, and it shows a clear periodicity aligned with the cell cycle time points.",
+    "dataset_id": "DS_6393f11883",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Cell cycle transcriptome of Cryptococcus neoformans var. grubii"
+  },
+  {
+    "one_sentence_summary": "This gene shows reduced expression in titan-promoting conditions compared to standard conditions in <i>Cryptococcus neoformans</i>, regardless of the time point.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "titan-promoting condition",
+      "time-series",
+      "Cryptococcus neoformans"
+    ],
+    "notes": "Expression levels are derived from TPM values and consistent across multiple time points; however, variation within replicates and categories is relatively modest, so confidence in magnitude is inferred conservatively.",
+    "dataset_id": "DS_eb589156b3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomic profiling of the Cryptococcus neoformans transition to titan-like cells"
+  },
+  {
+    "one_sentence_summary": "The gene exhibits high and varying expression during the unisexual development time course, with maximum expression obtained in the overexpression condition of <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "unisexual development",
+      "RNA-Seq",
+      "gene expression profiling",
+      "time course"
+    ],
+    "notes": "The gene displayed significant changes in expression levels throughout the time course and under the overexpression condition, highlighting its relevance but with possible noise to consider in antisense directions.",
+    "dataset_id": "DS_dc0fde1cf3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Time course transcriptomics during unisexual development of Cryptococcus"
+  },
+  {
+    "one_sentence_summary": "The gene under study shows variable transcript abundance across different genotypic and experimental conditions in <i>Cryptococcus neoformans</i>, indicating potentially relevant but context-dependent regulation.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "RNA-Seq",
+      "gene expression profile",
+      "transcript abundance",
+      "genotypic variation"
+    ],
+    "notes": "Gene expression levels are notably higher in some genotype/condition pairings. Users should carefully consider experimental conditions when interpreting these results.",
+    "dataset_id": "DS_2a4a095021",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq to compare multiple Cryptococcus neoformans genotypes"
+  },
+  {
+    "one_sentence_summary": "This gene shows high expression primarily in the sense orientation, with significant differences observed between the exponential and stationary phases in <i>Cryptococcus neoformans</i> under both 30°C and 37°C conditions.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "RNA-Seq",
+      "gene expression",
+      "temperature response",
+      "growth phase"
+    ],
+    "notes": "Expression levels are substantially higher in stationary phases compared to exponential phases and show temperature-related changes, but no biological replicates are apparent for some observations.",
+    "dataset_id": "DS_b652373fe0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Stranded mRNA-Seq for delineation of transcript ends in C. neoformans alphaKN99"
+  },
+  {
+    "one_sentence_summary": "The gene is highly expressed in the sense orientation across all tested conditions, with variation in expression levels observed between exponential and stationary phases and between 30°C and 37°C.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Transcription Start Sites",
+      "Cryptococcus neoformans",
+      "Temperature response",
+      "Growth phase"
+    ],
+    "notes": "Expression values are consistent between tested conditions, showing a stronger trend in stationary phases, with confidence influenced by the presence of replicate error estimates.",
+    "dataset_id": "DS_09d688636a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mapping TSS with TSS-Seq"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptococcus neoformans</i> shows substantial upregulation at 37°C compared to 24°C in the mutant and wild-type strains, indicating temperature-dependent differential expression.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "temperature stress",
+      "RNA-Seq",
+      "KO and complemented strains",
+      "gene expression"
+    ],
+    "notes": "The data indicates consistent upregulation of gene expression at 37°C across most samples, with low deviation, indicating strong confidence and relevance in its involvement in temperature stress response.",
+    "dataset_id": "DS_7f5e5653d5",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Examination of the Calcineurin-Crz1 stress response network"
+  },
+  {
+    "one_sentence_summary": "The gene shows slightly lower expression in the mutant (<i>gsb1</i>) under oxidative stress compared to the wild-type (<i>WT</i>), indicating potential differential regulation under this condition.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "oxidative stress",
+      "Cryptococcus neoformans",
+      "gsb1 mutant",
+      "transcriptional profiling"
+    ],
+    "notes": "The expression differences are noted primarily under oxidative stress, and while overall changes are modest, the specific context of stress response may elevate the biological relevance of these observations.",
+    "dataset_id": "DS_968584e5d2",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomic profiling of Cryptococcus cells in response to oxidative stress."
+  },
+  {
+    "one_sentence_summary": "This gene demonstrates relatively high expression in the sense strand in all tested conditions, with some variation, but negligible expression in the antisense strand.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "RNA-Seq",
+      "Gene expression",
+      "Sexual development"
+    ],
+    "notes": "Values are derived from TPM; antisense expression is undetectable or negligible; expression in sense strand shows noticeable quantitative differences indicative of regulation.",
+    "dataset_id": "DS_e20baa3a59",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq of WT and cqs1delta strains during sexual development stage"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits high transcript abundance in both sense and antisense measurements, with modest increases in certain mutant conditions in <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "mutant expression profiles",
+      "heterochromatin regulation",
+      "RNA-Seq",
+      "<i>Cryptococcus neoformans</i>"
+    ],
+    "notes": "The gene shows substantial expression under all conditions tested, especially in the sense direction, but the magnitude of differences between conditions is moderate. Percentile rank and statistical consistency increase confidence.",
+    "dataset_id": "DS_4338716bc6",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Comparative transcriptomics of C. neoformans mutants defective in heterochromatin regulation"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptococcus neoformans</i> shows variable expression levels depending on temperature, with higher expression in sense orientation at 37°C compared to 30°C.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "RNA-Seq",
+      "gene expression",
+      "temperature stress",
+      "TSS mapping"
+    ],
+    "notes": "Expression level is higher in sense orientation and under elevated temperature; variability in antisense data could indicate complex regulation.",
+    "dataset_id": "DS_5c98701c8c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mapping TSS with TSS-Seq"
+  },
+  {
+    "one_sentence_summary": "This gene is highly expressed in sense orientation and shows slightly higher expression at 37°C compared to 30°C in <i>Cryptococcus neoformans</i>, suggesting a minor regulation by temperature under the experimental conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "temperature response",
+      "transcript orientation",
+      "<i>Cryptococcus neoformans</i>"
+    ],
+    "notes": "The experimental setup provides reliable expression data, and the observed response to temperature change aligns with moderate biological regulation. No significant issues with paralogy or replicates affect confidence in conclusions.",
+    "dataset_id": "DS_2d477b2338",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Stranded mRNA-Seq for delineation of transcript ends in C. neoformans JEC21"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptococcus neoformans</i> shows a slight upregulation in transcript abundance under eltrombopag treatment compared to the untreated condition.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "transcript abundance",
+      "eltrombopag",
+      "virulence factors",
+      "antifungal treatment"
+    ],
+    "notes": "The sense transcripts demonstrated a mild increase in TPM under treatment conditions. The absence of standard error values suggests limited replicates, which may restrict statistical interpretation, but percentile analysis reaffirms slight changes.",
+    "dataset_id": "DS_de50aeac08",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq of cells treated with eltrombopag"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptococcus neoformans</i> shows slightly higher expression under high copper conditions compared to copper deficiency, and the absence of the CUF1 transcription factor does not appear to substantially alter this response.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "CUF1",
+      "copper regulation",
+      "Cryptococcus neoformans"
+    ],
+    "notes": "Expression changes are detectable but not drastic, suggesting a moderate regulatory response to copper conditions.",
+    "dataset_id": "DS_91e4e6730a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Global transcriptional analysis of wild-type and cuf1delta cells"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptococcus neoformans</i> is expressed at slightly higher levels in the rim101 mutant strain compared to the wild-type strain under the experimental conditions tested, with no indication from the data provided of extreme differential expression.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "cryptococcus",
+      "rim101",
+      "virulence"
+    ],
+    "notes": "There is evidence of a difference in expression between the rim101 and wild-type strains, but without biological replicates or statistical significance measures, the difference is noted with moderate confidence.",
+    "dataset_id": "DS_dcb0db2051",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Virulence of WT vs rim101 Mutant Cells"
+  },
+  {
+    "one_sentence_summary": "The gene shows marginal variation in expression levels across the tested conditions in <i>Cryptococcus neoformans</i>, without marked upregulation or downregulation in response to flucytosine addition.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "expression levels",
+      "flucytosine response",
+      "Cryptococcus neoformans",
+      "sensor kinase mutants",
+      "microarray"
+    ],
+    "notes": "Based on the experiment, the expression variation does not show substantial changes, and while some strain-specific effects are observed, they appear minor.",
+    "dataset_id": "DS_e78b6908c3",
+    "assay_type": "array",
+    "experiment_name": "Flucytosine Susceptiblity"
+  }
+]

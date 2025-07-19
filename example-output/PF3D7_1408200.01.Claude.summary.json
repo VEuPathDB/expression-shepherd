@@ -1,0 +1,49 @@
+{
+  "headline": "Strong cyclical expression peaking in early blood stages with dramatic mRNA stabilization during development",
+  "one_paragraph_summary": "This gene exhibits <strong>highly cyclical expression</strong> during the <i>Plasmodium falciparum</i> intraerythrocytic development cycle, with <strong>peak transcript abundance during ring and early trophozoite stages</strong> (8-20 hours post-invasion) followed by substantial decline in later stages. Expression shows remarkable <strong>10-50 fold dynamic ranges</strong> across multiple independent studies, with consistently high percentile rankings (>90th percentile) during peak periods. Notably, the gene displays <strong>dramatic mRNA stabilization</strong> during development, with half-life increasing over 30-fold from ring (1.67 hours) to late schizont stage (51.12 hours). Additional stage-specific patterns include <strong>male-biased expression in gametocytes</strong> and higher expression in mosquito-derived versus laboratory-produced sporozoites, suggesting roles in early parasite establishment and sexual development.",
+  "topics": [
+    {
+      "headline": "Cyclical intraerythrocytic development with early-stage peak expression",
+      "one_sentence_summary": "Multiple RNA-Seq studies demonstrate consistent cyclical expression peaking during ring and early trophozoite stages (8-20 hpi) with 10-50 fold dynamic ranges across the 48-hour developmental cycle.",
+      "dataset_ids": [
+        "DS_a239464cb4",
+        "DS_66f9e70b8a",
+        "DS_fe2b5a278f",
+        "DS_715bf2deda",
+        "DS_b95a38be5e",
+        "DS_74bf6512eb",
+        "DS_29940f3f82",
+        "DS_416070059c",
+        "DS_ee861a9187",
+        "DS_0cabe39833"
+      ]
+    },
+    {
+      "headline": "Progressive mRNA stabilization across erythrocytic development stages",
+      "one_sentence_summary": "mRNA half-life increases dramatically from 1.67 hours in ring stage to 51.12 hours in late schizont stage, representing over 30-fold stabilization during parasite maturation.",
+      "dataset_ids": [
+        "DS_c6622915ff"
+      ]
+    },
+    {
+      "headline": "Sexual stage expression patterns and mosquito-host differences",
+      "one_sentence_summary": "The gene shows male-biased expression in gametocytes (5-fold higher) and dramatically elevated expression in mosquito-produced versus in vitro sporozoites (14-fold difference).",
+      "dataset_ids": [
+        "DS_a518f45975",
+        "DS_6573eba8f8"
+      ]
+    },
+    {
+      "headline": "Stage-specific expression across multiple life cycle phases",
+      "one_sentence_summary": "Comparative transcriptomic analyses reveal highest expression in ring stages compared to other asexual stages, with moderate expression in transmission stages including oocysts and sporozoites.",
+      "dataset_ids": [
+        "DS_9c91e450ac",
+        "DS_b6cdce990b",
+        "DS_d18037ecc4",
+        "DS_2aa311d6a0",
+        "DS_cf291e2adb",
+        "DS_c28828ce84"
+      ]
+    }
+  ]
+}

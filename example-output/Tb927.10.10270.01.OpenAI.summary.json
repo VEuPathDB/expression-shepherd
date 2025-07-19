@@ -1,0 +1,27 @@
+{
+  "headline": "Diverse expression patterns of a Trypanosoma brucei gene through life cycle and stress conditions",
+  "one_paragraph_summary": "<strong>The expression of a specific gene in <i>Trypanosoma brucei</i> varies across life cycle stages, stress conditions, and environments:</strong><ul><li>The gene is upregulated during the transition from stumpy to procyclic stages, correlating with differentiation processes.</li><li>Expression is altered in response to environmental conditions, such as glucose levels and heat shock.</li><li>It exhibits distinct patterns when sampled from various hosts and tissues, indicating potential environmental specialization.</li></ul><strong>The gene's variability in expression across differing conditions suggests roles in sensing or adapting to environmental cues, particularly during life cycle transitions and stress responses.</strong>",
+  "topics": [
+    {
+      "headline": "Expression changes during Trypanosoma brucei differentiation",
+      "one_sentence_summary": "The gene is upregulated specifically during the early differentiation from stumpy to procyclic forms in <i>Trypanosoma brucei</i>.",
+      "dataset_ids": [
+        "DS_b7dc54ebad"
+      ]
+    },
+    {
+      "headline": "Differential expression in host-specific Trypanosoma brucei samples",
+      "one_sentence_summary": "The gene is highly expressed in <i>Trypanosoma brucei</i> cerebrospinal fluid samples compared to other host environments.",
+      "dataset_ids": [
+        "DS_8293b78640"
+      ]
+    },
+    {
+      "headline": "Metabolic condition-based gene expression in Trypanosoma brucei",
+      "one_sentence_summary": "This gene shows upregulation under glucose-rich conditions in short stumpy <i>Trypanosoma brucei</i> forms.",
+      "dataset_ids": [
+        "DS_f18da9c611"
+      ]
+    }
+  ]
+}

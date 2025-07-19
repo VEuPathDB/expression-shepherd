@@ -1,0 +1,26 @@
+{
+  "headline": "Expression of a cellulose-response gene in <i>Neurospora crassa</i>",
+  "one_paragraph_summary": "<strong>Summary of gene expression across experiments:</strong> This gene in <i>Neurospora crassa</i> displays notable expression changes across various environmental and developmental conditions. <ul> <li>It is upregulated in response to cellulose-like substrates, such as Avicel, cellobiose, and plant straws, indicating a role in plant biomass degradation.</li> <li>The gene is also influenced by developmental processes, with elevated expression during perithecia and conidia development.</li> <li>In mutants for regulatory genes and environmental changes, its expression suggests adaptive modulation in response to external stimuli. </li></ul> The collective data suggests this gene may be involved in the metabolism of plant-derived carbon sources and developmental regulation.",
+  "topics": [
+    {
+      "headline": "Cellulose and plant biomass metabolism in <i>Neurospora crassa</i>",
+      "one_sentence_summary": "This gene is strongly upregulated in response to plant biomass and cellulose-like substrates, suggesting a role in plant matter degradation.",
+      "dataset_ids": [
+        "DS_c14d26a0a3",
+        "DS_f210d58388",
+        "DS_a7a14c7e0f",
+        "DS_1dd4f50bad",
+        "DS_d5cb6ab9a2"
+      ]
+    },
+    {
+      "headline": "Developmental regulation and environmental response",
+      "one_sentence_summary": "The gene's expression is associated with perithecia and conidia development, as well as modulation under specific mutant and environmental conditions.",
+      "dataset_ids": [
+        "DS_f2913d9eb1",
+        "DS_14cdcc2c58",
+        "DS_a4188c2dd4"
+      ]
+    }
+  ]
+}

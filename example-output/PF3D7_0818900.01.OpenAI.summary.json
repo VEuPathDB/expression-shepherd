@@ -1,0 +1,42 @@
+{
+  "headline": "Dynamic Expression of a <i>Plasmodium falciparum</i> Gene Across Developmental Stages and Conditions",
+  "one_paragraph_summary": "<strong>Summary of gene expression:</strong> The analyzed gene in <i>Plasmodium falciparum</i> exhibits dynamic expression patterns during its life cycle, with clear peaks and troughs corresponding to specific developmental stages and conditions. <ul><li>During the intraerythrocytic development cycle, it shows cyclic upregulation, peaking at trophozoite and schizont stages in various studies.</li><li>Stage-specific expression is reported, including higher activity in male gametocytes, field isolates, and responses to febrile conditions.</li><li>In sporozoite studies, this gene is upregulated in salivary glands and mosquito-produced samples compared to lab conditions.</li></ul> This dynamic profile suggests an adaptive role linked to the parasite's developmental needs within the host and vector environments.",
+  "topics": [
+    {
+      "headline": "Cyclic Expression During Intraerythrocytic Development",
+      "one_sentence_summary": "This gene demonstrates repeating upregulated and downregulated phases correlated with intraerythrocytic parasite stages.",
+      "dataset_ids": [
+        "DS_8ecf65d1b7",
+        "DS_a239464cb4",
+        "DS_29940f3f82",
+        "DS_74bf6512eb",
+        "DS_ee861a9187",
+        "DS_fe2b5a278f",
+        "DS_87e4fcafff",
+        "DS_28ef9b0494",
+        "DS_416070059c",
+        "DS_715bf2deda",
+        "DS_090793ccdd",
+        "DS_0cabe39833",
+        "DS_0fa4237b4b"
+      ]
+    },
+    {
+      "headline": "Differential Expression in Gametocyte Stages and Isolated Field Samples",
+      "one_sentence_summary": "The gene is highly expressed in male gametocytes, field isolates, and particular clinical situations.",
+      "dataset_ids": [
+        "DS_a518f45975",
+        "DS_198bfa8376",
+        "DS_b1ac1e329c"
+      ]
+    },
+    {
+      "headline": "Upregulation in Sporozoite and Mosquito Conditions",
+      "one_sentence_summary": "Sporozoite stage experiments show the gene's peak expression aligning with mosquito-derived conditions and salivary gland stages.",
+      "dataset_ids": [
+        "DS_c28828ce84",
+        "DS_6573eba8f8"
+      ]
+    }
+  ]
+}

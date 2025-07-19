@@ -1,0 +1,132 @@
+[
+  {
+    "one_sentence_summary": "The gene displayed significantly higher expression in intracellular stages compared to oocyst stages, with expression levels around 82 TPM and 2 TPM, respectively, on the sense strand.",
+    "biological_importance": 5,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Cryptosporidium parvum",
+      "intracellular stages",
+      "oocysts",
+      "gene expression profiling"
+    ],
+    "notes": "Expression differences are substantial and supported by experimental replicates, but coverage for oocyst samples appears less robust.",
+    "dataset_id": "DS_eb01624959",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of oocyst and intracellular stages"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits the highest expression in 24-hour culture conditions, with notably lower expression under sporozoite conditions, suggesting regulation by developmental stage in <i>Cryptosporidium parvum</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Cryptosporidium parvum</i>",
+      "RNA-Seq",
+      "Lifecycle development",
+      "Asexual",
+      "Sexual stages",
+      "Sporozoites",
+      "Time series"
+    ],
+    "notes": "Expression levels show a clear stage-specific trend, indicating biological relevance for lifecycle progression of this parasite.",
+    "dataset_id": "DS_b14c36920f",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Lifecycle progression and sexual development"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptosporidium parvum</i> demonstrates variable transcript abundance, with notably high expression levels in calf intestine samples compared to lower levels in sporozoites and HCT-8 infected cells.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Transcript Abundance",
+      "Sporozoites",
+      "HCT-8 Cells",
+      "Calf Intestine",
+      "Time Series",
+      "RNA-Seq"
+    ],
+    "notes": "Expression levels in calf intestinal samples are relatively elevated when compared to other conditions, suggesting tissue-specific upregulation, but replicate data is limited.",
+    "dataset_id": "DS_865efa49f4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of sporozoites and HTC-8 infection time course"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits a significant increase in expression in intracellular cultures of <i>Cryptosporidium parvum</i> comparing 2-hour to later time points post-infection.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Cryptosporidium parvum",
+      "infection time course",
+      "MDBK cells"
+    ],
+    "notes": "Expression increases considerably from 2h to 24h and 48h time points, both in sense and antisense reads. Values and percentiles indicate biologically relevant changes.",
+    "dataset_id": "DS_db22744127",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of C. parvum intracellular stages"
+  },
+  {
+    "one_sentence_summary": "The gene displayed a peak in expression at 6 hours post-infection, followed by variable downregulation towards other time points, indicating a possible regulated response.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "time-course analysis",
+      "regulated response",
+      "RT-PCR",
+      "life cycle stages",
+      "post-infection"
+    ],
+    "notes": "Moderate differential expression is observed with distinct peak; patterns suggest potential importance in early infection response, but fold-change magnitudes are not extremely high.",
+    "dataset_id": "DS_2bf995383e",
+    "assay_type": "RT-PCR",
+    "experiment_name": "Expression profiling of life cycle stages post-infection"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate expression levels in the pooled samples of <i>Cryptosporidium parvum</i> during the 48-hour infection time-course, indicating a consistent role in the experimental condition tested.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "infection",
+      "RNA-Seq",
+      "time-course",
+      "48 hours",
+      "HCT-8 cells"
+    ],
+    "notes": "Expression data lacks biological replicates, but percentile positioning suggests moderate reliability.",
+    "dataset_id": "DS_63b0de882c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of 48 hours in vitro infection"
+  },
+  {
+    "one_sentence_summary": "This gene displays moderate expression levels in the experimental conditions, with slight variations observed across treatment groups.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Cryptosporidium parvum",
+      "GalNAc treatment",
+      "transcript abundance",
+      "sporozoites"
+    ],
+    "notes": "The expression profile shows some differences across conditions, but these are not pronounced, and the lack of standard error data limits statistical interpretation.",
+    "dataset_id": "DS_b786df5901",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of C. parvum sporozoites treated with GalNAc"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Cryptosporidium parvum</i> displays moderate transcript levels across both ileum and cecum tissues, with no marked changes between STAg-treated and PBS-infected conditions.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "RNA-Seq",
+      "immune response",
+      "STAg treatment",
+      "IFN-gamma independence"
+    ],
+    "notes": "Expression variation is observed among conditions but lacks substantial differential expression across treatments.",
+    "dataset_id": "DS_4207fdd0fa",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Infected ileum and cecum of IFN-gamma negative, STAg treated mice"
+  }
+]

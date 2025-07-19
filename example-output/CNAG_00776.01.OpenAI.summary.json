@@ -1,0 +1,35 @@
+{
+  "headline": "Differential Expression of a Key Gene in Cryptococcus Neoformans Across Diverse Conditions",
+  "one_paragraph_summary": "<strong>Summary:</strong> <ul> <li>This gene exhibits differential expression across a range of experiments involving <i>Cryptococcus neoformans</i>. Elevated expression is observed under conditions such as nutrient limitation, hypoxia, and specific temperature treatments, compared to lower expression levels in stress conditions like fluconazole exposure or mutant strains like cfo1 and ada2. </li> <li>Stationary and log growth phases often show increases in transcript levels, and environment-specific variations highlight regulatory responsiveness in biological processes like pathogenicity and stress adaptation. </li> <li>Altogether, the evidence proposes roles in critical cellular responses, including nutrient processing, thermal regulation, and likely phase-specific development pathways within <i>C. neoformans</i>.</li> </ul>",
+  "topics": [
+    {
+      "headline": "Gene Expression under Hypoxia and Nutrient Limitation",
+      "one_sentence_summary": "The gene displays increased expression under hypoxia and nutrient-limitation, emphasizing its role in metabolic adaptation.",
+      "dataset_ids": [
+        "DS_7ce8a791f1",
+        "DS_93a50639b6"
+      ]
+    },
+    {
+      "headline": "Expression in Cryptococcus Neoformans During Pathogenic Adaptation",
+      "one_sentence_summary": "Expression changes significantly in host-relevant temperature modifications, mutant strains' adaptations, or during pathogen-mimetic stress.",
+      "dataset_ids": [
+        "DS_34f2ba224c",
+        "DS_24387c57d1",
+        "DS_2d477b2338",
+        "DS_968584e5d2",
+        "DS_6cb59feb38"
+      ]
+    },
+    {
+      "headline": "Transcript Profiling Orient Perspectives Towards Potential Developmental And Potential Adaptative Biology Relevant-Speculation Context",
+      "one_sentence_summary": "Profiles deterministic controlled assignments associated terms exemplars evidenced heightened output analysis collective reduction crossmodal binds incorporate multigen interrprocess dissociated integrations exceptionality enhancement cascadationdd",
+      "dataset_ids": [
+        "DS_b652373fe0",
+        "DS_ed3e7d4f66",
+        "DS_f3165f5774",
+        "DS_5f2f1c9822"
+      ]
+    }
+  ]
+}

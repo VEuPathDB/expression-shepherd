@@ -1,0 +1,259 @@
+[
+  {
+    "one_sentence_summary": "This gene shows markedly higher expression in conidia compared to hyphae and germinated conidia in <i>Aspergillus fumigatus</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Aspergillus fumigatus",
+      "RNA-Seq",
+      "conidia",
+      "hyphae",
+      "gene expression"
+    ],
+    "notes": "The gene exhibits clear differential expression with significant upregulation in conidia, suggesting functional roles in spore biology.",
+    "dataset_id": "DS_62ebc12b94",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Comparative transcriptomics of dormant and germinating conidia"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Aspergillus fumigatus</i> exhibits a marked increase in expression under hypoxic conditions, with a progressive rise over 36 hours.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "hypoxia",
+      "time-course",
+      "<i>Aspergillus fumigatus</i>"
+    ],
+    "notes": "Expression levels showed consistent increment over time, with no observed cyclic behavior.",
+    "dataset_id": "DS_93c159b846",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome under normoxia and hypoxia conditions"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Aspergillus fumigatus</i> exhibits significantly higher expression in the wild-type strain compared to the ACE1 deletion mutant under zinc and nitrate-limited conditions.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Aspergillus fumigatus",
+      "gene expression",
+      "RNA-Seq",
+      "ACE1 deletion",
+      "wild-type",
+      "zinc and nitrate limitation"
+    ],
+    "notes": "Expression differences are substantial and significant based on TPM values and percentiles, providing high confidence in the observation of downregulation in the ACE1 deletion mutant strain.",
+    "dataset_id": "DS_2b76656bb1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Determining Aspergillus fumigatus transcription factor expression and function during invasion of the mammalian lung"
+  },
+  {
+    "one_sentence_summary": "The expression of this gene in <i>Aspergillus fumigatus</i> is notably decreased under iron-starved and iron-starved plus hydrogen-peroxide-treated conditions compared to the control and hydrogen-peroxide-treated conditions.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "oxidative stress",
+      "iron starvation",
+      "RNA-Seq",
+      "Aspergillus fumigatus",
+      "gene expression"
+    ],
+    "notes": "Biological relevance is clear given the contrasting expression levels across conditions; confidence is lower due to this being a single gene and the experiment's potential variability.",
+    "dataset_id": "DS_dd0139d2b0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression under oxidative and iron stresses"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Aspergillus fumigatus</i> exhibits differential expression with notably higher transcript levels in the 'delta fhdA_CT' condition compared to other experimental conditions.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Aspergillus fumigatus",
+      "caspofungin response",
+      "delta fhdA mutant",
+      "gene expression analysis"
+    ],
+    "notes": "Expression levels in the 'delta fhdA_CT- sense' condition are distinctively elevated compared to others; standard errors and percentiles support this finding.",
+    "dataset_id": "DS_64e126f34e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Response to caspofungin"
+  },
+  {
+    "one_sentence_summary": "This gene shows a marked upregulation in expression after 16 hours of cultivation in <i>Aspergillus fumigatus</i> strain Af293 compared to 6 hours, especially in the absence of A549 cells.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Aspergillus fumigatus",
+      "RNA-Seq",
+      "transcriptomics",
+      "time-course",
+      "host-pathogen interaction"
+    ],
+    "notes": "The gene shows a strong time-dependent induction in strain Af293 without A549 cells, but the induction is not as pronounced in the presence of A549 cells, indicating potential regulatory and interaction effects.",
+    "dataset_id": "DS_47a1a2ad67",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomics of Aspergillus fumigatus upon exposure to human airway epithelial cells"
+  },
+  {
+    "one_sentence_summary": "The expression of this gene in <i>Aspergillus fumigatus</i> shows substantial variation under different Congo Red concentrations, with marked upregulation in certain conditions and downregulation in others.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Congo Red treatment",
+      "transcription factor mutants",
+      "RNA-Seq",
+      "fungal stress response"
+    ],
+    "notes": "Interpretation focuses on TPM values and their shifts across conditions; caveats apply to replicate availability and experimental noise.",
+    "dataset_id": "DS_d360a3549c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Sensitivity of transcription factor mutants of Aspergillus fumigatus to Congo Red"
+  },
+  {
+    "one_sentence_summary": "The gene in <i>Aspergillus fumigatus</i> shows higher expression in GPA medium than in MM medium during germination.",
+    "biological_importance": 4,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Aspergillus fumigatus",
+      "germination",
+      "GPA medium",
+      "MM medium",
+      "gene expression",
+      "RNA-Seq"
+    ],
+    "notes": "The expression difference between the conditions is noteworthy, but the limited replicates and standard errors warrant some caution in interpretation.",
+    "dataset_id": "DS_faa5674b55",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome analysis of conidium germination of Aspergillus fumigatus in different growth conditions"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Aspergillus fumigatus</i> shows modest differential expression under itraconazole treatment and between nctA and nctB mutants compared to wild type.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "itraconazole treatment",
+      "nctA mutant",
+      "nctB mutant",
+      "RNA-Seq",
+      "wild type",
+      "<i>Aspergillus fumigatus</i>"
+    ],
+    "notes": "The biological replicates and consistent trends across the mutant and treatment conditions contribute to the confidence in the summary.",
+    "dataset_id": "DS_f65ede9fbd",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of WT, nctA, and nctB mutants in response to itraconazole."
+  },
+  {
+    "one_sentence_summary": "The gene in this experiment shows decreased expression in response to itraconazole in the strain A1160, but it exhibits relatively stable expression in the resistant strains HapB and 29.9.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "itraconazole resistance",
+      "RNA-Seq",
+      "transcriptional regulation",
+      "antifungal response"
+    ],
+    "notes": "The differential expression due to the drug treatment appears to be strain-dependent, with the resistant strains showing consistent expression levels, possibly reflecting their resistance mechanism.",
+    "dataset_id": "DS_9afe38853e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of itraconazole-resistant strains"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Aspergillus fumigatus</i> shows relatively stable expression levels with a slight reduction at 30 minutes into oxygen depletion, and a subsequent increase to higher levels after 75 minutes in full oxygen conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Aspergillus fumigatus",
+      "RNA-Seq",
+      "oxygen limitation",
+      "timecourse"
+    ],
+    "notes": "The gene shows slight fluctuations in expression correlating with oxygen levels, but the overall changes are not dramatic. These dynamics suggest the gene is moderately involved in the conditions tested.",
+    "dataset_id": "DS_29e8541153",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Adaptation to oxygen limitation"
+  },
+  {
+    "one_sentence_summary": "This gene shows relatively consistent expression levels across both wild-type and mutant strains of <i>Aspergillus fumigatus</i>, with no marked upregulation or downregulation observed under the experimental conditions tested.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "gene expression",
+      "Aspergillus fumigatus",
+      "secondary metabolite regulation",
+      "veA and mtfA deletion mutants"
+    ],
+    "notes": "The high percentiles suggest that the gene has significant expression levels overall, yet the lack of major differences implies no significant regulatory effect in the tested conditions.",
+    "dataset_id": "DS_118e6fa430",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of wild-type vs veA and mtfA deletion mutants"
+  },
+  {
+    "one_sentence_summary": "The expression of the gene in <i>Aspergillus fumigatus</i> showed a slight increase upon exposure to 5,8-diHODE at 30 minutes but remained relatively stable across other conditions tested.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "transcriptomics",
+      "RNA-Seq",
+      "time-course",
+      "oxylipin response",
+      "5,8-diHODE",
+      "ethanol control",
+      "<i>Aspergillus fumigatus</i>"
+    ],
+    "notes": "The differences in expression are subtle, but the slight upregulation at 30 minutes post 5,8-diHODE exposure warrants a moderate biological importance rating. Confidence is reasonably high given the data, but variability may warrant further replication.",
+    "dataset_id": "DS_0e1ec2bd61",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mycelial gene expression in response to treatment with 5,8-diHODE"
+  },
+  {
+    "one_sentence_summary": "The gene shows moderate differential expression under different experimental conditions in <i>Aspergillus fumigatus</i>, with generally higher expression in the wild type and certain mutant genotypes under hypoxia, compared to other conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "gene expression",
+      "Aspergillus fumigatus",
+      "hypoxia",
+      "normoxia",
+      "hrmA mutant"
+    ],
+    "notes": "The differential expression appears consistent with the experimental manipulations; however, variability among conditions warrants an intermediate score.",
+    "dataset_id": "DS_f6dd8e44a3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression in WT, hrmA deletion, hrmA OE, hrmA_REV, EVOL under hypoxia and normoxia conditions"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Aspergillus fumigatus</i> shows modest upregulation over time in both isolated and co-cultivation conditions, with its expression levels slightly higher in the presence of heat-inactivated <i>Pseudomonas aeruginosa</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "gene expression",
+      "Aspergillus fumigatus",
+      "Pseudomonas aeruginosa"
+    ],
+    "notes": "The experimental data suggests consistent trends in expression, but variations are within a moderate range, and exact significance levels are not available to assess.",
+    "dataset_id": "DS_c339242e7e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomics analysis of Aspergillus fumigatus co-cultivated with Pseudomonas aeruginosa"
+  },
+  {
+    "one_sentence_summary": "Expression of this gene in <i>Aspergillus fumigatus</i> displays minor variability across the hypoxia time course, with no significant up- or downregulation observed over 24 hours.",
+    "biological_importance": 1,
+    "confidence": 5,
+    "experiment_keywords": [
+      "hypoxia",
+      "chemostat",
+      "time course",
+      "microarray",
+      "gene expression"
+    ],
+    "notes": "The data shows consistent expression levels with minimal log ratio changes, suggesting no strong differential expression.",
+    "dataset_id": "DS_1ca49919f6",
+    "assay_type": "array",
+    "experiment_name": "Response to hypoxia"
+  }
+]

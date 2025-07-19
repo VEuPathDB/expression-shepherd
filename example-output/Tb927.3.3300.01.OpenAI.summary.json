@@ -1,0 +1,31 @@
+{
+  "headline": "Differential and Stage-Specific Expression of a <i>Trypanosoma brucei</i> Transcript",
+  "one_paragraph_summary": "<strong>Expression patterns of a <i>Trypanosoma brucei</i> transcript across multiple datasets provide insights into its role in development and metabolism:</strong> <ul> <li>The gene shows upregulation in adipose tissue compared to blood, and elevated expression in procyclic forms relative to bloodstream forms in some contexts, suggesting lifecycle-dependent roles.</li> <li>Additionally, higher expression is observed in short stumpy cells with nutrient supplementation and during the spliced leader-enriched conditions, implicating metabolic and transcript splicing regulation features.</li> <li>Moderate increases during G1 to S phase and stability otherwise highlight potential developmental regulation.</li> </ul> These contexts assist in profiling this transcript's functions in <i>T. brucei</i> lifecycle and metabolic states.",
+  "topics": [
+    {
+      "headline": "Expression Patterns in Lifecycle and Tissue Specificity",
+      "one_sentence_summary": "Differential expression observed between adipose versus blood, and procyclic versus bloodstream forms.",
+      "dataset_ids": [
+        "DS_820537ffae",
+        "DS_66fdbd45d7",
+        "DS_da32747f09",
+        "DS_f8e525f9b0"
+      ]
+    },
+    {
+      "headline": "Influence of Nutrients and Transcript Splicing",
+      "one_sentence_summary": "Gene expression affected by supplementation of nutrients and pre-splice leader transcript enrichment.",
+      "dataset_ids": [
+        "DS_1ede7b449f",
+        "DS_f18da9c611"
+      ]
+    },
+    {
+      "headline": "Expression During Developmental Stages",
+      "one_sentence_summary": "Modulation in transcription was noted across cell cycle phases.",
+      "dataset_ids": [
+        "DS_0de2f64330"
+      ]
+    }
+  ]
+}

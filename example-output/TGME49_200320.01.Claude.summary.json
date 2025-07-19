@@ -1,0 +1,50 @@
+{
+  "headline": "Dramatically elevated expression during feline enteroepithelial stages with consistent upregulation in merozoites",
+  "one_paragraph_summary": "This gene exhibits <strong>dramatic stage-specific upregulation</strong> during <i>Toxoplasma gondii's</i> sexual cycle, with expression levels exceeding 4,000 TPM in feline enteroepithelial stages compared to ~130 TPM in tachyzoites and ~54 TPM in tissue cysts. The gene shows <strong>consistent upregulation in merozoites</strong> (4-7 fold higher than tachyzoites) and demonstrates <strong>cell cycle-regulated expression</strong> with periodic oscillations in tachyzoites. Expression varies significantly across parasite strains and is consistently high throughout acute infection phases. The gene maintains high expression during chronic bradyzoite stages and shows <strong>strain-dependent responses</strong> to differentiation stimuli. Given its dramatic upregulation during sexual stages and merozoite formation, this gene likely plays a critical role in <i>T. gondii's</i> reproductive cycle and stage transitions within the feline host.",
+  "topics": [
+    {
+      "headline": "Dramatic upregulation during feline sexual development stages",
+      "one_sentence_summary": "Expression increases >30-fold during feline enteroepithelial stages (EES1-EES5) compared to other life cycle stages, with peak levels exceeding 4,000 TPM in early sexual development.",
+      "dataset_ids": [
+        "DS_e7467c0306",
+        "DS_173528b522"
+      ]
+    },
+    {
+      "headline": "Consistent merozoite-specific upregulation across experiments",
+      "one_sentence_summary": "Expression is consistently 4-7 fold higher in merozoites compared to tachyzoites across multiple experimental datasets, suggesting important merozoite-specific functions.",
+      "dataset_ids": [
+        "DS_45b4123102",
+        "DS_75742b9a0a"
+      ]
+    },
+    {
+      "headline": "Cell cycle regulation and high constitutive expression in tachyzoites",
+      "one_sentence_summary": "The gene shows periodic cell cycle-regulated expression with ~12-hour oscillations and maintains consistently high expression (>90th percentile) throughout tachyzoite infection time courses.",
+      "dataset_ids": [
+        "DS_c1a3dbb014",
+        "DS_d5645bc639",
+        "DS_6529b4f68d",
+        "DS_ef984802b1"
+      ]
+    },
+    {
+      "headline": "Strain-dependent expression variation and lineage differences",
+      "one_sentence_summary": "Expression varies significantly among <i>T. gondii</i> strains, with Type I strains showing highest expression and substantial variation observed across 29 different parasite strains during infection.",
+      "dataset_ids": [
+        "DS_73d06a9e7b",
+        "DS_485e6e94e3",
+        "DS_4362334059"
+      ]
+    },
+    {
+      "headline": "Moderate expression in bradyzoites with differentiation-dependent regulation",
+      "one_sentence_summary": "The gene shows moderate to high expression in bradyzoites with strain-specific responses to alkaline pH differentiation conditions and upregulation during chronic infection stages.",
+      "dataset_ids": [
+        "DS_408f2c4cda",
+        "DS_2daab8c933",
+        "DS_930295d0b5"
+      ]
+    }
+  ]
+}

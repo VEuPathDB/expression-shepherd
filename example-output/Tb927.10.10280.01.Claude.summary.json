@@ -1,0 +1,29 @@
+{
+  "headline": "Stage-specific upregulation in adipose tissue and procyclic forms with S-phase cell cycle peak",
+  "one_paragraph_summary": "This gene shows <strong>dynamic stage-specific expression patterns</strong> across <i>Trypanosoma brucei</i> life cycle stages and tissues. <ul><li>Exhibits <strong>highest upregulation in adipose tissue</strong> (6-fold vs bloodstream forms) and <strong>moderate upregulation in procyclic forms</strong> (3-fold vs bloodstream forms)</li><li>Displays <strong>cell cycle-dependent expression</strong> with peak abundance during S-phase, suggesting involvement in DNA synthesis processes</li><li>Shows <strong>consistent enrichment in spliced leader-containing transcripts</strong> rather than primary transcription initiation</li></ul> The gene belongs to a 3-member paralog family, which may indicate functional redundancy or specialization. The coordinated upregulation in non-bloodstream environments (adipose tissue, insect stages) and during DNA replication suggests this gene may facilitate <strong>metabolic adaptation or DNA-related processes</strong> during parasite development and tissue colonization.",
+  "topics": [
+    {
+      "headline": "Tissue and life cycle stage-specific expression patterns",
+      "one_sentence_summary": "The gene shows consistent upregulation in non-bloodstream environments, with 6-fold higher expression in adipose tissue and 3-fold higher expression in procyclic forms compared to bloodstream forms.",
+      "dataset_ids": [
+        "DS_820537ffae",
+        "DS_66fdbd45d7"
+      ]
+    },
+    {
+      "headline": "Cell cycle-dependent expression during DNA synthesis",
+      "one_sentence_summary": "Gene expression peaks during S-phase of the cell cycle with moderate upregulation compared to G1 and G2 phases, indicating involvement in DNA synthesis processes.",
+      "dataset_ids": [
+        "DS_0de2f64330"
+      ]
+    },
+    {
+      "headline": "RNA processing and transcript stability regulation",
+      "one_sentence_summary": "The gene shows enrichment in spliced leader-containing transcripts and altered stability in XRNA mutants, suggesting regulation through RNA processing and degradation pathways.",
+      "dataset_ids": [
+        "DS_378ed5098b",
+        "DS_1ede7b449f"
+      ]
+    }
+  ]
+}

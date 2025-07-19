@@ -1,0 +1,201 @@
+[
+  {
+    "one_sentence_summary": "This gene is dramatically upregulated (~1,900-fold) in <i>Fusarium graminearum</i> during wheat infection at 6 days post-inoculation compared to vegetative mycelia growth, ranking in the 99.47th percentile of all genes.",
+    "biological_importance": 5,
+    "confidence": 5,
+    "experiment_keywords": [
+      "wheat infection",
+      "pathogenesis",
+      "mycelia",
+      "6dpi",
+      "host-pathogen interaction",
+      "vegetative growth"
+    ],
+    "notes": "The massive fold-change (>1900x) and extremely high percentile ranking (99.47%) indicate this is likely a key pathogenicity factor or infection-specific gene with critical biological importance during wheat infection.",
+    "dataset_id": "DS_d0e311bf25",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomic analysis during vegetative and infectious growth of Fusarium graminearum PH-1"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatic upregulation during <i>Fusarium graminearum</i> infection of wheat, with expression levels doubling from 24 to 48 hours post-inoculation and remaining highly elevated (>99th percentile) throughout the infection process from 48-192 hours.",
+    "biological_importance": 5,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Fusarium graminearum",
+      "wheat infection",
+      "pathogenesis",
+      "time-course",
+      "microarray",
+      "host-pathogen interaction"
+    ],
+    "notes": "The expression pattern suggests this gene may play a critical role in the transition from early infection to active colonization, with the sharp increase at 48 hours coinciding with the establishment of infection. The consistently high percentile rankings (>99%) indicate this is among the most highly expressed genes during infection.",
+    "dataset_id": "DS_4a1d8e1905",
+    "assay_type": "array",
+    "experiment_name": "Transcriptome of Fusarium graminearum during the infection of wheat"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatic upregulation in <i>Fusarium graminearum</i> growing on dead wheat tissue (313.12 TPM, 96th percentile) compared to minimal expression on live wheat tissue (2.01 TPM) and control conditions (0.31 TPM).",
+    "biological_importance": 5,
+    "confidence": 4,
+    "experiment_keywords": [
+      "saprophytic growth",
+      "pathogenic growth",
+      "host-pathogen interaction",
+      "wheat infection",
+      "necrotrophic lifestyle"
+    ],
+    "notes": "The >150-fold increase in expression on dead vs. live tissue suggests this gene may be specifically involved in saprophytic metabolism or degradation of dead plant material, representing a clear lifestyle transition response.",
+    "dataset_id": "DS_bfb38f3551",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome in response to an active or passive host"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in the inoculated spikelet and fully symptomatic tissue, with progressively decreasing expression through intermediate symptoms to symptomless infection, indicating strong upregulation associated with <i>Fusarium graminearum</i> pathogenicity and disease progression in wheat.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Fusarium graminearum",
+      "wheat",
+      "pathogenicity",
+      "disease progression",
+      "symptomless infection",
+      "microarray",
+      "virulence"
+    ],
+    "notes": "Expression shows clear gradient from highest in diseased tissue (spikelet/symptomatic ~13) to lowest in symptomless infection (~8.5), with high percentile rankings (99.68-89.34%) suggesting this gene is among the most highly expressed in the pathogen transcriptome during infection.",
+    "dataset_id": "DS_f5b8d4ff37",
+    "assay_type": "array",
+    "experiment_name": "Fusarium graminearum transcriptome during symptomless and symptomatic wheat infection"
+  },
+  {
+    "one_sentence_summary": "This gene shows progressive upregulation during <i>Fusarium graminearum</i> infection of maize stalk, with expression increasing from moderate levels at early timepoints (12-18 hours) to high levels by 144 hours post-inoculation.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Fusarium graminearum",
+      "maize stalk infection",
+      "time course",
+      "pathogenesis",
+      "microarray",
+      "progressive upregulation"
+    ],
+    "notes": "Expression shows a clear temporal pattern with nearly doubling from early (4.4-4.8) to late timepoints (8.04), reaching the 91st percentile by 144 hours, suggesting this gene may play an important role in later stages of infection or disease progression.",
+    "dataset_id": "DS_4d16290906",
+    "assay_type": "array",
+    "experiment_name": "Gene expression of F. graminearum during maize stalk infection"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal expression in wild-type <i>Fusarium graminearum</i> during conidiogenesis but is constitutively upregulated in the ΔflbD and ΔwetA mutants at early (0h) and late (12h) time points, suggesting negative regulation by these transcription factors.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "conidiogenesis",
+      "transcriptional regulation",
+      "flbD",
+      "wetA",
+      "abaA",
+      "fungal development"
+    ],
+    "notes": "Expression pattern suggests this gene may be repressed by FlbD and WetA during normal conidial development, with the 6h time point showing consistent suppression across all conditions.",
+    "dataset_id": "DS_36c1c0082f",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-seq Analysis of FlbD-, AbaA-, and WetA-dependent Genes in Fusarium graminearum Z-3639"
+  },
+  {
+    "one_sentence_summary": "This gene shows low-level expression that is highest during conidiation (5-day-old CMC cultures at 0.73 TPM, 28th percentile), with minimal to no expression during vegetative growth (24h YEPD) and sexual reproduction (8-day perithecia).",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "developmental stages",
+      "conidiation",
+      "sexual reproduction",
+      "vegetative growth",
+      "Fusarium graminearum",
+      "strand-specific RNA-Seq"
+    ],
+    "notes": "Expression levels are generally low across all conditions with high standard errors relative to mean values, suggesting variable or sporadic expression; antisense expression detected only in perithecia samples may indicate regulatory complexity",
+    "dataset_id": "DS_112be26ddb",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Stage-specific and genome-wide gene expression during the different developmental stages of Fusarium graminearum"
+  },
+  {
+    "one_sentence_summary": "This gene shows specific upregulation in the fss1 deletion mutant under normal growth conditions (0.14 TPM, 27th percentile) compared to wild-type and overexpression strains, but this expression is completely suppressed under salt stress conditions in <i>Fusarium graminearum</i>.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "transcription factor",
+      "salt stress",
+      "gene deletion",
+      "overexpression",
+      "stress response"
+    ],
+    "notes": "Expression is only detectable in the fss1 deletion mutant under normal conditions, suggesting this gene may be negatively regulated by FSS1 and its expression is salt-sensitive.",
+    "dataset_id": "DS_326fa801af",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-seq analysis of FSS1-dependent genes in Fusarium graminearum Z-3639"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal expression across all conditions in <i>Fusarium graminearum</i>, with only a slight increase (0.04 TPM) in the delta abaA conidia-deficient mutant compared to wild-type and delta fpo1 strains during sexual development.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "sexual development",
+      "conidia mutant",
+      "Fusarium graminearum",
+      "developmental regulation",
+      "fungal reproduction"
+    ],
+    "notes": "Very low absolute expression levels across all samples suggest this gene may not be actively transcribed during early sexual development, or the slight increase in delta abaA may represent background noise given the low TPM values.",
+    "dataset_id": "DS_a69edfd4b7",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq analysis of transcriptomes at 1 day after sexual induction"
+  },
+  {
+    "one_sentence_summary": "This gene shows no detectable expression in <i>Fusarium graminearum</i> mycelia under either normal (25°C) or heat stress (37°C) conditions, with TPM values of 0 across all samples and conditions.",
+    "biological_importance": 0,
+    "confidence": 5,
+    "experiment_keywords": [
+      "heat stress",
+      "temperature response",
+      "mycelia",
+      "fungal pathogen",
+      "thermal adaptation"
+    ],
+    "notes": "Gene appears to be silent or below detection threshold in both sense and antisense orientations under the tested conditions; percentile values of 0.01 confirm this is among the lowest expressed genes in the experiment.",
+    "dataset_id": "DS_26547dde2a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of heat-stressed Fusarium graminearum Z-3639"
+  },
+  {
+    "one_sentence_summary": "This gene shows no detectable expression (0 TPM) across all conditions in <i>Fusarium graminearum</i>, with no differential expression between wild-type and kmt6 mutant strains or between low and high nitrogen conditions.",
+    "biological_importance": 0,
+    "confidence": 5,
+    "experiment_keywords": [
+      "nitrogen metabolism",
+      "histone methylation",
+      "kmt6 mutant",
+      "secondary metabolite regulation",
+      "gene silencing"
+    ],
+    "notes": "Gene appears to be silent or below detection threshold in all tested conditions, ranking at the 1st percentile for expression levels",
+    "dataset_id": "DS_6b2d1da02e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Fusarium transcriptome in low and high nitrogen conditions"
+  },
+  {
+    "one_sentence_summary": "This gene shows no detectable expression in either spores or mycelium of <i>Fusarium graminearum</i>, with TPM values of 0 in both developmental stages.",
+    "biological_importance": 0,
+    "confidence": 4,
+    "experiment_keywords": [
+      "developmental stages",
+      "spores",
+      "mycelium",
+      "Fusarium graminearum",
+      "fungal development"
+    ],
+    "notes": "Gene appears to be silent or below detection threshold in both conditions tested; percentile rankings of 0.01 confirm very low expression relative to other genes in the experiment",
+    "dataset_id": "DS_f544aef4b1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Genome-wide gene expression analysis of spores and mycelium"
+  }
+]

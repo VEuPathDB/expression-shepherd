@@ -1,0 +1,82 @@
+{
+  "headline": "Dramatic upregulation in feline sexual stages and tachyzoites with cell cycle regulation",
+  "one_paragraph_summary": "This gene exhibits <strong>extreme stage-specific expression</strong> in <i>Toxoplasma gondii</i> with highest levels during sexual development in the definitive feline host. <ul><li>Shows 25-75 fold higher expression in feline enteroepithelial stages (EES1-5) compared to tissue cysts</li><li>Maintains high expression in tachyzoites (~1,100-2,500 TPM) but is dramatically reduced in bradyzoites</li><li>Displays cell cycle-dependent oscillation with biphasic peaks every 6 hours</li><li>Increases significantly during oocyst sporulation from day 0 to day 10</li></ul> The gene appears constitutively expressed at high levels in actively replicating stages but is downregulated during chronic infection phases. This expression pattern suggests a critical role in <strong>parasite replication and sexual reproduction</strong>, potentially functioning in cell division machinery or metabolic processes required for rapid proliferation.",
+  "topics": [
+    {
+      "headline": "Extreme upregulation during sexual development in feline hosts",
+      "one_sentence_summary": "The gene shows dramatic 25-75 fold upregulation in all feline enteroepithelial stages (EES1-5) compared to other life cycle stages, indicating critical importance for sexual reproduction in the definitive host.",
+      "dataset_ids": [
+        "DS_e7467c0306",
+        "DS_173528b522"
+      ]
+    },
+    {
+      "headline": "Strong temporal regulation during oocyst sporulation",
+      "one_sentence_summary": "Expression increases ~72-fold during the 10-day sporulation process from unsporulated to fully mature sporulated oocysts, suggesting essential roles in oocyst development and maturation.",
+      "dataset_ids": [
+        "DS_72dce52949"
+      ]
+    },
+    {
+      "headline": "Cell cycle-dependent oscillatory expression pattern",
+      "one_sentence_summary": "The gene exhibits clear biphasic oscillation during the cell cycle with peaks at 0-1 hours and 7-8 hours post-synchronization, indicating tight regulation linked to cell division processes.",
+      "dataset_ids": [
+        "DS_c1a3dbb014"
+      ]
+    },
+    {
+      "headline": "Enhanced expression during intracellular parasitism",
+      "one_sentence_summary": "Both transcriptional and translational levels are significantly higher in intracellular versus extracellular parasites, suggesting functional importance for host cell exploitation and intracellular survival.",
+      "dataset_ids": [
+        "DS_a48cc7c61e"
+      ]
+    },
+    {
+      "headline": "High tachyzoite expression with downregulation during bradyzoite differentiation",
+      "one_sentence_summary": "The gene maintains high expression in acute tachyzoite stages but shows significant 5-7 fold downregulation during chronic bradyzoite differentiation, indicating stage-specific functional requirements.",
+      "dataset_ids": [
+        "DS_386bac2860",
+        "DS_2750122e82",
+        "DS_749cb10dcf"
+      ]
+    },
+    {
+      "headline": "Upregulation in merozoites compared to tachyzoites",
+      "one_sentence_summary": "Expression levels are consistently 1.5-2.5 fold higher in merozoites compared to tachyzoites, suggesting specialized functions during the sexual cycle stage that occurs in feline intestinal epithelium.",
+      "dataset_ids": [
+        "DS_45b4123102",
+        "DS_75742b9a0a"
+      ]
+    },
+    {
+      "headline": "Consistently high expression throughout tachyzoite development",
+      "one_sentence_summary": "The gene maintains constitutively high expression (96th-98th percentile) across tachyzoite time courses with peak levels at mid-infection timepoints, indicating essential functions throughout asexual replication.",
+      "dataset_ids": [
+        "DS_d5645bc639",
+        "DS_78959dea55",
+        "DS_6529b4f68d"
+      ]
+    },
+    {
+      "headline": "Higher expression during acute versus chronic infection phases",
+      "one_sentence_summary": "Expression is substantially higher during acute infection (429 TPM) compared to chronic infection (87 TPM) in mouse brain, correlating with the transition from actively replicating tachyzoites to dormant bradyzoites.",
+      "dataset_ids": [
+        "DS_b0427cd47b"
+      ]
+    },
+    {
+      "headline": "Stage-specific differences between tachyzoites and sporozoites",
+      "one_sentence_summary": "The gene shows over 10-fold higher expression in tachyzoites (748 TPM) compared to sporozoites (67 TPM), indicating distinct functional requirements between these asexual life cycle stages.",
+      "dataset_ids": [
+        "DS_59fb8debdb"
+      ]
+    },
+    {
+      "headline": "Strain-specific expression differences during neuronal infection",
+      "one_sentence_summary": "Expression is dramatically higher in type III strain-infected neurons (280 TPM) compared to type II strain-infected neurons (61 TPM), suggesting strain-dependent regulation during CNS infection.",
+      "dataset_ids": [
+        "DS_4362334059"
+      ]
+    }
+  ]
+}

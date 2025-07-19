@@ -1,0 +1,23 @@
+{
+  "headline": "Dynamic Expression of a Gene Across Multiple Life Stages and Conditions in <i>Trypanosoma brucei</i>",
+  "one_paragraph_summary": "<strong>The gene exhibits varied expression across conditions in <i>Trypanosoma brucei</i>, suggesting stage-specific and tissue-specific roles supported by experimental data.</strong> <ul> <li>Transcript levels are specifically higher in the procyclic form compared to the bloodstream form, and in adipose tissue compared to blood. Notably, highest expression was observed in 5'-SL-end enriched libraries.</li> <li>Significant increases in expression occur in S and G2 phases of the cell cycle, the LS stage under glucose influence, and upon differentiation via RNAi studies, hinting at diverse regulatory patterns.</li> <li>Insights into expression trends in experimental modifications (e.g., Orc1/Cdc6-depletion) further emphasize this gene's functional relevance across the parasite’s lifecycle and adaptations.</li> </ul>",
+  "topics": [
+    {
+      "headline": "Differential Expression in Life Stages of <i>Trypanosoma brucei</i>",
+      "one_sentence_summary": "This gene shows distinct expression patterns in specific life stages of <i>Trypanosoma brucei</i>, particularly procyclic and bloodstream forms.",
+      "dataset_ids": [
+        "DS_66fdbd45d7",
+        "DS_f18da9c611"
+      ]
+    },
+    {
+      "headline": "Cellular and Conditional Modulation of Gene Expression",
+      "one_sentence_summary": "This gene displays stage and condition-dependent expression, including changes during differentiation, glucose availability, and specific cell-cycle phases.",
+      "dataset_ids": [
+        "DS_820537ffae",
+        "DS_0de2f64330",
+        "DS_f18da9c611"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "headline": "Expression peaks during intracellular stages and fluctuates across the lifecycle in Cryptosporidium parvum",
+  "one_paragraph_summary": "<strong>Summary of gene expression:</strong> This gene in <i>Cryptosporidium parvum</i> shows prominent upregulation during its intracellular stage compared to oocyst stages. It also demonstrates dynamic expression patterns throughout the lifecycle, with peak expression in early infected stages around 12–24 hours post-infection. Comparatively, lower expression levels are observed in sporozoites. Such regulated expression suggests potential stage-specific roles, possibly pivotal in host-pathogen interaction during intracellular colonization. Experiments substantiate these observations with statistically significant and high-confidence data supporting its validity. Meanwhile, some experimental conditions reported negligible transcription levels, implying restricted functional activity under those specific conditions.",
+  "topics": [
+    {
+      "headline": "Intracellular stage upregulation and lifecycle dynamics in Cryptosporidium parvum",
+      "one_sentence_summary": "Gene shows significant upregulation in intracellular stages and varying expression during the lifecycle.",
+      "dataset_ids": [
+        "DS_eb01624959",
+        "DS_b14c36920f"
+      ]
+    },
+    {
+      "headline": "Peak expression in early post-infection",
+      "one_sentence_summary": "Expression peaks observed around 12–24 hours post-infection, indicating early infection activity.",
+      "dataset_ids": [
+        "DS_2bf995383e",
+        "DS_db22744127"
+      ]
+    }
+  ]
+}

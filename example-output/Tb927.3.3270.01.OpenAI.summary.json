@@ -1,0 +1,31 @@
+{
+  "headline": "Expression profile of a Trypanosoma brucei gene across lifecycle and environmental conditions",
+  "one_paragraph_summary": "<strong>Expression Analysis</strong>:<ul><li>This gene exhibits stage-specific expression in <i>Trypanosoma brucei</i>, showing upregulation in the bloodstream form compared to the procyclic form, and significant expression changes across the life cycle stages and in different tissues reflecting physiological or environmental conditions.</li><li>Notably, expression is elevated in the bloodstream and adipose tissue stages, decreased in differentiation and heat shock scenarios, and stage-specific regulation was consistent with a role in lifecycle adaptation.</li><li>Expression dynamics, as demonstrated by robust datasets, indicate importance during parasitic adaptation to host environments.</li></ul>",
+  "topics": [
+    {
+      "headline": "Stage-specific regulation of expression in Trypanosoma brucei lifecycle",
+      "one_sentence_summary": "This gene shows differential expression across lifecycle stages, with significant upregulation in bloodstream forms and changes associated with differentiation.",
+      "dataset_ids": [
+        "DS_f18da9c611",
+        "DS_2e9f1cbf33",
+        "DS_66fdbd45d7",
+        "DS_820537ffae",
+        "DS_f8e525f9b0",
+        "DS_a72b4c8650",
+        "DS_da32747f09"
+      ]
+    },
+    {
+      "headline": "Environmental and experimental conditions affecting expression",
+      "one_sentence_summary": "The gene's expression is influenced by heat shock, cell cycle dynamics, and differentiation, indicating sensitivity to environmental and physiological cues.",
+      "dataset_ids": [
+        "DS_36e67bfae4",
+        "DS_0de2f64330",
+        "DS_3e90742f0a",
+        "DS_b7dc54ebad",
+        "DS_9df2112fd9",
+        "DS_8293b78640"
+      ]
+    }
+  ]
+}

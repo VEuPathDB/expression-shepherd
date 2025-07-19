@@ -1,0 +1,33 @@
+{
+  "headline": "Ookinete-specific upregulation with ring stage periodicity across Plasmodium falciparum lifecycle",
+  "one_paragraph_summary": "This gene exhibits <strong>dramatic stage-specific expression patterns</strong> across the <i>Plasmodium falciparum</i> lifecycle, with <strong>peak expression in ookinetes</strong> (2375.92 TPM, 99th percentile) representing a >500-fold increase over other stages. During intraerythrocytic development, the gene shows <strong>biphasic expression</strong> with highest levels in ring stages (19-32 TPM) and minimal expression during trophozoite and schizont stages (3-9 TPM). <ul><li>Male gametocytes show specific expression while female gametocytes remain silent</li><li>Expression is cyclical with ~24-hour periodicity during blood stages</li><li>Field isolates express higher levels than laboratory strains</li></ul> The extreme ookinete-specific upregulation suggests specialized functions in mosquito midgut development, while the ring-stage periodicity indicates roles in early parasite establishment and cell cycle regulation.",
+  "topics": [
+    {
+      "headline": "Extreme ookinete-specific expression dominates lifecycle transcription",
+      "one_sentence_summary": "The gene shows dramatic 500-fold upregulation specifically in ookinetes (99th percentile) compared to minimal expression across all other <i>P. falciparum</i> lifecycle stages.",
+      "dataset_ids": [
+        "DS_66f9e70b8a"
+      ]
+    },
+    {
+      "headline": "Biphasic ring stage expression patterns across multiple blood stage studies",
+      "one_sentence_summary": "Consistent biphasic expression during intraerythrocytic development shows peak levels in early ring stages (19-66 TPM) followed by dramatic downregulation during trophozoite and schizont stages across multiple independent studies.",
+      "dataset_ids": [
+        "DS_fe2b5a278f",
+        "DS_29940f3f82",
+        "DS_8ecf65d1b7",
+        "DS_090793ccdd",
+        "DS_b95a38be5e",
+        "DS_74bf6512eb",
+        "DS_416070059c"
+      ]
+    },
+    {
+      "headline": "Male-specific gametocyte expression demonstrates sexual differentiation",
+      "one_sentence_summary": "The gene shows exclusive expression in male gametocytes (3.22 FPKM) with complete absence in female gametocytes, indicating sex-specific functional roles.",
+      "dataset_ids": [
+        "DS_a518f45975"
+      ]
+    }
+  ]
+}

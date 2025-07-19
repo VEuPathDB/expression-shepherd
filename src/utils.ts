@@ -105,6 +105,7 @@ export function summaryJSONtoHTML(
             <th>Preview</th>
             <th>Name</th>
             <th>Summary</th>
+            <th>Biological Importance</th>
             <th>Attribution</th>
             <th>Assay Type</th>
           </tr>
@@ -115,11 +116,14 @@ export function summaryJSONtoHTML(
       const individualResult = individualResults.find(({dataset_id} : {dataset_id: string}) => datasetId == dataset_id);
       const thumbnailRaw = (expressionGraph?.['thumbnail'] ?? 'N/A') as string;
       const thumbnailFinal = thumbnailRaw.replace('/cgi-bin', `${serverUrl}/cgi-bin`);
+      const confidenceGrade = individualResult?.confidence != null ? String.fromCharCode(65 + 5 - individualResult.confidence) : '-';
+      const biologicalImportance = individualResult?.biological_importance != null ? `${individualResult.biological_importance}${confidenceGrade}` : '-';
       return `
 <tr>
 <td>${thumbnailFinal}</td>
 <td>${individualResult?.experiment_name}</td>
 <td class="human-readable">${individualResult?.one_sentence_summary}</td>
+<td>${biologicalImportance}</td>
 <td>${expressionGraph?.short_attribution}</td>
 <td>${individualResult?.assay_type}</td>
 </tr>`;

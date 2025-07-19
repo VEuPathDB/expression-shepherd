@@ -1,0 +1,45 @@
+{
+  "headline": "Highly expressed gene shows developmental upregulation and metabolic responsiveness in Neurospora crassa",
+  "one_paragraph_summary": "This gene exhibits consistently high expression levels across diverse experimental conditions in <i>Neurospora crassa</i>, ranking in the 85th-98th percentiles of the transcriptome. <strong>Key expression patterns include:</strong> <ul><li>Strong temporal upregulation during conidia germination (5-15 fold increases)</li><li>Peak expression during sexual development, particularly at 3 days post-fertilization</li><li>Upregulation in response to starch-derived carbon sources like maltose and amylose</li><li>Enhanced expression in several mutant backgrounds including delta sah-2, stc-1, and Δve-1 strains</li></ul> The gene's constitutively high expression combined with developmental and metabolic responsiveness suggests it may encode an essential cellular component involved in growth processes, potentially related to carbohydrate metabolism or cellular development given its strong responses to germination stages and starch substrates.",
+  "topics": [
+    {
+      "headline": "Strong temporal upregulation during conidia germination across different media",
+      "one_sentence_summary": "Expression increases dramatically (5-15 fold) from early to late stages of conidia germination, with consistently higher levels on rich media compared to minimal media.",
+      "dataset_ids": [
+        "DS_7b3238ce05",
+        "DS_1a51a536a0"
+      ]
+    },
+    {
+      "headline": "Peak expression during sexual development with mutant-specific regulation",
+      "one_sentence_summary": "Expression reaches highest levels (200-600+ TPM) during sexual development stages, with dramatic upregulation in the stc-1 mutant and complex temporal patterns during perithecial formation.",
+      "dataset_ids": [
+        "DS_f2913d9eb1",
+        "DS_14cdcc2c58"
+      ]
+    },
+    {
+      "headline": "Enhanced expression in multiple regulatory mutant backgrounds",
+      "one_sentence_summary": "Gene shows consistent upregulation in various mutant strains including delta sah-2 (3.4-fold), Δve-1, and Δpp-1, suggesting negative regulation by multiple transcriptional control pathways.",
+      "dataset_ids": [
+        "DS_16bc228c8e",
+        "DS_f95c45420d",
+        "DS_ae93d6cae4"
+      ]
+    },
+    {
+      "headline": "Preferential upregulation by starch-derived carbon sources",
+      "one_sentence_summary": "Expression approximately doubles in response to maltose and amylose compared to other carbon sources, with the col-26 deletion specifically disrupting amylose-induced expression while maintaining maltose responsiveness.",
+      "dataset_ids": [
+        "DS_33fc617b03"
+      ]
+    },
+    {
+      "headline": "Reduced expression in mus-52 mutant across phosphate conditions",
+      "one_sentence_summary": "Wild-type maintains high expression (>220 TPM) under both low and high phosphate conditions, while the delta mus-52 mutant shows 2.5-fold reduced expression levels, indicating involvement in mus-52-regulated pathways.",
+      "dataset_ids": [
+        "DS_a03298576e"
+      ]
+    }
+  ]
+}

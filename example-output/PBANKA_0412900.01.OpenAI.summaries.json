@@ -1,0 +1,146 @@
+[
+  {
+    "one_sentence_summary": "This gene is significantly upregulated in the Ookinete stage of <i>Plasmodium berghei</i> development, with a notable increase in expression levels compared to other stages.",
+    "biological_importance": 5,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Plasmodium berghei</i>",
+      "RNA-Seq",
+      "developmental stages",
+      "transcription profiling"
+    ],
+    "notes": "The expression pattern is strongly stage-specific, and the much higher expression at the Ookinete stage suggests stage-specific functional relevance.",
+    "dataset_id": "DS_49781e8c33",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "5 asexual and sexual stage transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene is highly expressed in female gametocytes, moderately in male gametocytes, and lowly in asexual erythrocytic stages of <i>Plasmodium berghei</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "gender-specific expression",
+      "gametocyte",
+      "erythrocytic stage",
+      "<i>Plasmodium berghei</i>"
+    ],
+    "notes": "The gene shows a clear differential expression pattern between gametocyte genders and stages, which supports its high biological relevance.",
+    "dataset_id": "DS_5dacfed867",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Female and male gametocyte"
+  },
+  {
+    "one_sentence_summary": "This gene demonstrates notably higher expression levels in ookinete samples compared to schizont and gametocyte samples in <i>Plasmodium berghei</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "gene expression",
+      "RNA-Seq",
+      "Plasmodium berghei",
+      "ApiAP2 mutants",
+      "gametocytes",
+      "ookinetes",
+      "schizonts"
+    ],
+    "notes": "Expression is distinctly higher in ookinete stage, with both absolute values and percentiles indicating substantial upregulation in this stage compared to others tested.",
+    "dataset_id": "DS_9b450524d1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of viable ApiAP2 mutants by directional RNA-seq"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation during the late liver stage (48h to 60h) of <i>Plasmodium berghei</i>'s development compared to its early liver stage and sporozoite expression.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "exo-erythrocytic stages",
+      "liver development",
+      "transcript abundance",
+      "time course",
+      "Plasmodium berghei"
+    ],
+    "notes": "Confidence in expression pattern is based on the clear increase in transcript abundance during the late liver stages, and the absence of strong confounding effects from paralogs.",
+    "dataset_id": "DS_67483bf778",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Ex-erythrocytic stage transcriptomes (sporozoite, liver time course and detached cells)"
+  },
+  {
+    "one_sentence_summary": "In this experiment, the gene is moderately upregulated in the induced gametocyte samples compared to control asexual samples, particularly in early time points post-induction.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Plasmodium berghei",
+      "RNA-Seq",
+      "gametocytogenesis",
+      "time-series"
+    ],
+    "notes": "The early upregulation and trends observed suggest an association with gametocytogenesis; however, the lack of replication data limits absolute confidence.",
+    "dataset_id": "DS_7b1bac6cd1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "P. berghei transcriptome during inducible gametocytogenesis"
+  },
+  {
+    "one_sentence_summary": "The expression of this gene in <i>Plasmodium berghei</i> showed a moderate upregulation in wild type treated with sulfadiazine and a moderate downregulation in the AP2-G2 knockout, relative to the wild type control.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Plasmodium berghei",
+      "AP2-G2 knockout",
+      "wild type",
+      "sulfadiazine treatment",
+      "gene expression"
+    ],
+    "notes": "Expression analysis indicates condition-dependent changes in gene expression, particularly a stronger response in sulfadiazine-treated samples; comparative analysis across mutants reinforces confidence.",
+    "dataset_id": "DS_d4f8765d13",
+    "assay_type": "array",
+    "experiment_name": "AP2-G2 knock out and WT expression profiles"
+  },
+  {
+    "one_sentence_summary": "This gene shows a general low to moderate expression during early and mid-stage liver infection in <i>Plasmodium berghei</i>, with some fluctuating expression levels across different time points and conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "time-course",
+      "liver infection",
+      "<i>Plasmodium berghei</i>",
+      "transcript profiling"
+    ],
+    "notes": "Expression levels are modest with some variation, and no strong trends of upregulation or downregulation are evident, leading to moderate biological relevance and high confidence in interpretation.",
+    "dataset_id": "DS_7dae78ae0b",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome during early and mid-stage P. berghei liver infection"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits lower expression levels under dietary restriction in both wild-type and Δkin mutant conditions of <i>Plasmodium berghei</i>, as measured by transcript abundance.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-seq",
+      "synchronized parasites",
+      "dietary restriction",
+      "kinase mutant",
+      "<i>Plasmodium berghei</i>"
+    ],
+    "notes": "The expression patterns suggest downregulation under dietary restriction conditions, and the biological importance score reflects moderate differential expression with a consistent pattern across samples.",
+    "dataset_id": "DS_2f87d793d9",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Dietary restriction of P berghei WT and Δkin parasites"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits a minor increase in expression in DOZI mutant compared to wild type in <i>Plasmodium berghei</i>, as indicated by log ratios and consistent percentile values.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "DOZI mutant",
+      "wild type comparison",
+      "Plasmodium berghei",
+      "microarray",
+      "gene transcription"
+    ],
+    "notes": "The gene showed moderate differential expression; thus, the importance score was set to reflect a noteworthy but not extreme result.",
+    "dataset_id": "DS_5ae28eebe3",
+    "assay_type": "array",
+    "experiment_name": "DOZI Mutant Transcript Profile"
+  }
+]

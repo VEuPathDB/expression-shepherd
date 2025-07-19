@@ -1,0 +1,42 @@
+{
+  "headline": "ACE1-regulated gene shows developmental stage-specific expression with strong iron and hypoxia responses",
+  "one_paragraph_summary": "This gene exhibits <strong>dramatic developmental regulation</strong>, with highest expression in dormant conidia (68.1 TPM) compared to germinated forms, suggesting a role in maintaining dormancy. Expression is <strong>strongly controlled by the ACE1 transcription factor</strong>, showing a 60-fold reduction in deletion mutants, and responds robustly to environmental stresses. <ul><li>Iron starvation causes 7-fold downregulation</li><li>Hypoxic conditions induce 4-fold upregulation over 36 hours</li><li>Cell wall stress from Congo Red dramatically reduces expression</li></ul> The gene consistently produces more antisense than sense transcripts across conditions, indicating potential regulatory complexity. With 11 paralogs, this gene family likely plays important roles in <i>Aspergillus fumigatus</i> stress adaptation and developmental transitions.",
+  "topics": [
+    {
+      "headline": "ACE1 transcription factor controls dramatic gene downregulation",
+      "one_sentence_summary": "Gene expression drops 60-fold in ACE1 deletion mutants, indicating strong positive regulation by this zinc-responsive transcription factor.",
+      "dataset_ids": [
+        "DS_2b76656bb1"
+      ]
+    },
+    {
+      "headline": "Developmental stage-specific expression peaks in dormant conidia",
+      "one_sentence_summary": "Expression is 40-fold higher in dormant versus germinated conidia, suggesting an important role in maintaining conidial dormancy.",
+      "dataset_ids": [
+        "DS_62ebc12b94"
+      ]
+    },
+    {
+      "headline": "Iron starvation strongly downregulates gene expression",
+      "one_sentence_summary": "Expression decreases 7-fold under iron-limited conditions, indicating involvement in iron-responsive cellular processes.",
+      "dataset_ids": [
+        "DS_dd0139d2b0"
+      ]
+    },
+    {
+      "headline": "Hypoxic conditions induce sustained gene upregulation",
+      "one_sentence_summary": "Gene expression increases 4-fold during hypoxic adaptation, with peak levels reached after 36 hours of oxygen limitation.",
+      "dataset_ids": [
+        "DS_93c159b846",
+        "DS_f6dd8e44a3"
+      ]
+    },
+    {
+      "headline": "Cell wall stress from Congo Red causes dramatic expression reduction",
+      "one_sentence_summary": "Congo Red treatment severely downregulates sense transcripts across multiple mutant strains, suggesting involvement in cell wall stress responses.",
+      "dataset_ids": [
+        "DS_d360a3549c"
+      ]
+    }
+  ]
+}
