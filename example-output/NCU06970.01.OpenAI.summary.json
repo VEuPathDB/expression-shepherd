@@ -1,0 +1,38 @@
+{
+  "headline": "Expression Patterns of a Gene in Relation to Developmental Stages and Nutritional Conditions in Neurospora crassa",
+  "one_paragraph_summary": "<strong>Summary of the gene's expression profile:</strong> The expression profile of this gene in <i>Neurospora crassa</i> suggests diverse roles across a range of conditions. <ul><li>It is upregulated during specific developmental stages like sexual development and conidiation, as well as under stress conditions including iron deprivation and phosphate limitation.</li><li>The gene responds to different nutritional conditions significantly, showing varied expression based on carbon source availability, including increases with amylose, amylopectin, and sucrose supplementation.</li><li>Expression also varies with genetic backgrounds, such as mutants affecting the Velvet complex or carbon source regulatory pathways. These observations suggest the gene might participate in regulating developmental processes and adaptive metabolic responses to environmental changes.</li></ul>",
+  "topics": [
+    {
+      "headline": "Expression Response to Sexual Development and Developmental Stages in Neurospora crassa",
+      "one_sentence_summary": "The studied gene demonstrates increased expression in specific developmental stages, including sexual development and conidiation, indicating its involvement in these processes.",
+      "dataset_ids": [
+        "DS_f2913d9eb1",
+        "DS_14cdcc2c58",
+        "DS_f95c45420d",
+        "DS_0dab2d9109",
+        "DS_1a51a536a0"
+      ]
+    },
+    {
+      "headline": "Nutritional Responses across Various Carbon Sources",
+      "one_sentence_summary": "The gene is differentially regulated in response to carbon source types, significantly upregulated under sucrose, amylose, amylopectin, and some polysaccharides.",
+      "dataset_ids": [
+        "DS_a0004d905e",
+        "DS_f210d58388",
+        "DS_5781e07160",
+        "DS_d5cb6ab9a2",
+        "DS_bb6e5ae0e5",
+        "DS_a7a14c7e0f",
+        "DS_c764829c69"
+      ]
+    },
+    {
+      "headline": "Mutant Strain Expression Variability",
+      "one_sentence_summary": "The gene exhibits distinct expression modulation in mutant strains such as delta mus-52 and VE-1 knockouts, revealing its association with specific biological pathways.",
+      "dataset_ids": [
+        "DS_a03298576e",
+        "DS_f95c45420d"
+      ]
+    }
+  ]
+}

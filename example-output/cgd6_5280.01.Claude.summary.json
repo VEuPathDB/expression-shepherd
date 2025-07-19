@@ -1,0 +1,29 @@
+{
+  "headline": "Expression peaks during early intracellular infection stages with strong female-specific upregulation",
+  "one_paragraph_summary": "This gene exhibits <strong>stage-specific expression patterns</strong> in <i>Cryptosporidium parvum</i> with several key characteristics: <ul><li>Peak expression occurs 12-24 hours post-infection during early intracellular stages, with up to 24-fold higher expression compared to oocysts</li><li>Dramatic upregulation in female stages in vivo (682 TPM, 93rd percentile), suggesting important roles in sexual development</li><li>Strong antisense transcription activity, indicating potential regulatory functions through natural antisense transcripts</li><li>Minimal expression in sporozoites but consistent high expression during active infection</li></ul> The temporal and stage-specific expression patterns suggest this gene plays critical roles in establishing intracellular infection and sexual differentiation, potentially functioning as both a protein-coding gene and regulatory RNA through its antisense activity.",
+  "topics": [
+    {
+      "headline": "Early intracellular infection shows dramatic temporal upregulation",
+      "one_sentence_summary": "Expression increases dramatically from 2-12 hours post-infection, reaching peak levels at 12-24 hours with 20-24 fold higher expression compared to dormant oocysts, indicating critical roles in establishing intracellular infection.",
+      "dataset_ids": [
+        "DS_2bf995383e",
+        "DS_eb01624959",
+        "DS_db22744127"
+      ]
+    },
+    {
+      "headline": "Sexual development stages exhibit highest expression levels",
+      "one_sentence_summary": "Female stages in vivo show the highest expression (682 TPM, 93rd percentile) across all lifecycle stages, with moderate expression during culture development and minimal expression in sporozoites.",
+      "dataset_ids": [
+        "DS_b14c36920f"
+      ]
+    },
+    {
+      "headline": "Strong antisense transcription suggests regulatory function",
+      "one_sentence_summary": "Dramatically higher antisense compared to sense strand expression during infection indicates this locus produces natural antisense transcripts that may regulate gene expression post-transcriptionally.",
+      "dataset_ids": [
+        "DS_865efa49f4"
+      ]
+    }
+  ]
+}

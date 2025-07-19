@@ -1,0 +1,53 @@
+{
+  "headline": "Expression strongly regulated by nutrient availability, stress conditions, and developmental stage",
+  "one_paragraph_summary": "This gene exhibits <strong>dramatic expression changes</strong> in response to multiple environmental and developmental cues in <i>Aspergillus fumigatus</i>. Key patterns include: <ul><li><strong>Nutrient-dependent regulation</strong> - severely downregulated under zinc/nitrate limitation (77-fold) and iron starvation (14-fold)</li><li><strong>Developmental specificity</strong> - highly expressed in dormant conidia but strongly repressed during germination and hyphal growth</li><li><strong>Stress responsiveness</strong> - upregulated by hypoxia (3-7 fold) and hydrogen peroxide, but downregulated by antifungal treatments</li><li><strong>Antisense transcription</strong> - consistently high antisense expression across conditions suggests complex transcriptional regulation</li></ul>The coordinated responses to metal availability, oxidative stress, and developmental transitions suggest this gene may function in <strong>stress-responsive metabolic regulation</strong> or cellular homeostasis pathways.",
+  "topics": [
+    {
+      "headline": "Transcription factor-mediated regulation under nutrient limitation",
+      "one_sentence_summary": "The gene is dramatically downregulated in ACE1 deletion mutants under zinc/nitrate limitation and shows elevated expression in atfA deletion mutants in conidia, indicating regulation by multiple transcription factors.",
+      "dataset_ids": [
+        "DS_2b76656bb1",
+        "DS_62ebc12b94"
+      ]
+    },
+    {
+      "headline": "Opposing responses to oxidative stress and iron availability",
+      "one_sentence_summary": "The gene is upregulated by hydrogen peroxide treatment but severely downregulated by iron starvation, with iron limitation overriding oxidative stress induction in combined treatments.",
+      "dataset_ids": [
+        "DS_dd0139d2b0"
+      ]
+    },
+    {
+      "headline": "Hypoxic adaptation and progressive upregulation under oxygen limitation",
+      "one_sentence_summary": "The gene shows consistent progressive upregulation during hypoxic conditions across multiple experiments, increasing 3-7 fold over time periods ranging from hours to days.",
+      "dataset_ids": [
+        "DS_93c159b846",
+        "DS_1ca49919f6",
+        "DS_f6dd8e44a3"
+      ]
+    },
+    {
+      "headline": "Antifungal drug responses and strain-dependent effects",
+      "one_sentence_summary": "The gene exhibits differential responses to antifungal treatments including itraconazole and caspofungin, with responses varying significantly between wild-type and mutant strains.",
+      "dataset_ids": [
+        "DS_9afe38853e",
+        "DS_64e126f34e"
+      ]
+    },
+    {
+      "headline": "Host-pathogen interaction and cell wall stress responses",
+      "one_sentence_summary": "The gene is downregulated during co-culture with human epithelial cells and shows dramatic repression in response to Congo Red treatment across multiple transcription factor mutants.",
+      "dataset_ids": [
+        "DS_47a1a2ad67",
+        "DS_d360a3549c"
+      ]
+    },
+    {
+      "headline": "Growth medium-dependent antisense transcription patterns",
+      "one_sentence_summary": "The gene displays striking antisense transcript expression that varies dramatically between different growth media, with minimal sense transcript expression across conditions.",
+      "dataset_ids": [
+        "DS_faa5674b55"
+      ]
+    }
+  ]
+}

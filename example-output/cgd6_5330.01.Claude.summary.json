@@ -1,0 +1,29 @@
+{
+  "headline": "Stage-specific upregulation during early intracellular development in Cryptosporidium parvum",
+  "one_paragraph_summary": "This <i>Cryptosporidium parvum</i> gene exhibits <strong>stage-specific expression patterns</strong> with peak activity during early intracellular development. Expression is <strong>dramatically upregulated</strong> in intracellular stages (15.7-66.63 TPM) compared to oocysts (0.37 TPM), representing a ~42-fold increase. The gene shows <strong>temporal regulation</strong> with highest expression at 12-24 hours post-infection, followed by decline at later time points. Expression remains <strong>consistently low or undetectable</strong> in sporozoites and oocysts across multiple studies. This expression pattern suggests the gene plays a <strong>critical role in early infection establishment</strong> and parasite development within host cells, potentially involved in metabolic processes or host cell manipulation during the initial stages of parasitic life cycle progression.",
+  "topics": [
+    {
+      "headline": "Dramatic upregulation in intracellular stages versus dormant oocysts",
+      "one_sentence_summary": "Gene expression increases ~42-fold from oocysts (0.37 TPM) to intracellular stages (15.7-66.63 TPM), demonstrating clear stage-specific activation during parasitic development.",
+      "dataset_ids": [
+        "DS_eb01624959",
+        "DS_b14c36920f"
+      ]
+    },
+    {
+      "headline": "Temporal expression peaks at 12-24 hours post-infection",
+      "one_sentence_summary": "Expression reaches maximum levels during early infection (12-24 hours post-infection) before declining sharply, indicating involvement in early developmental processes.",
+      "dataset_ids": [
+        "DS_2bf995383e",
+        "DS_db22744127"
+      ]
+    },
+    {
+      "headline": "Complex transcriptional regulation with antisense expression in vitro",
+      "one_sentence_summary": "Gene shows moderate expression in host tissue infections but exhibits prominent antisense transcription in HCT-8 cell culture, suggesting complex regulatory mechanisms.",
+      "dataset_ids": [
+        "DS_865efa49f4"
+      ]
+    }
+  ]
+}

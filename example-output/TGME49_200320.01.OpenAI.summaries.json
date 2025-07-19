@@ -1,0 +1,565 @@
+[
+  {
+    "one_sentence_summary": "In the transcriptomic study of <i>Toxoplasma gondii</i>, this gene is markedly upregulated in feline enteroepithelial stages, particularly EES1 and EES2 stages, compared to tachyzoite or bradyzoite stages.",
+    "biological_importance": 5,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Toxoplasma gondii</i>",
+      "feline stages",
+      "intestinal",
+      "tachyzoite",
+      "bradyzoite",
+      "RNA-Seq"
+    ],
+    "notes": "This gene exhibits significant upregulation, with clear distinction between stages, paired with high percentile ranks, supporting confidence in the description.",
+    "dataset_id": "DS_e7467c0306",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Feline enterocyte, tachyzoite, bradyzoite stage transcriptome"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits significantly higher expression in Type I strains compared to Type II and Type III strains of <i>Toxoplasma gondii</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "strain differences",
+      "gene expression profiling",
+      "Type I vs Type II vs Type III comparison"
+    ],
+    "notes": "The expression patterns and percentiles clearly delineate expression levels, with Type I exhibiting marked expression compared to Types II and III, supporting strong confidence in this summary.",
+    "dataset_id": "DS_73d06a9e7b",
+    "assay_type": "array",
+    "experiment_name": "Expression profiling of 3 archetypal lineages"
+  },
+  {
+    "one_sentence_summary": "This gene is significantly upregulated in the merozoite form compared to the tachyzoite form of <i>Toxoplasma gondii</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "merozoite",
+      "tachyzoite",
+      "gene expression",
+      "<i>Toxoplasma gondii</i>",
+      "microarray"
+    ],
+    "notes": "Expression for the gene in tauchzyoites is markedly lower than in merozoites, confirmed by independent measures across samples.",
+    "dataset_id": "DS_45b4123102",
+    "assay_type": "array",
+    "experiment_name": "Merozoite Gene Expression"
+  },
+  {
+    "one_sentence_summary": "The expression of this gene in <i>Toxoplasma gondii</i> shows a gradual increase during the experimental time-course, with higher levels observed in later time points.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "expression profiling",
+      "time-series",
+      "Toxoplasma gondii",
+      "bradyzoite differentiation",
+      "microarray"
+    ],
+    "notes": "Expression values steadily rise as the time points progress, suggesting differential expressions tied to the differentiation process.",
+    "dataset_id": "DS_994d646c6a",
+    "assay_type": "array",
+    "experiment_name": "Bradyzoite Differentiation (Multiple 6-hr time points and Extended time series)"
+  },
+  {
+    "one_sentence_summary": "The gene shows higher expression in the GCN5-A knockout samples compared to wild type across both stressed and unstressed conditions in <i>Toxoplasma gondii</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Differential expression",
+      "TgGCN5-A knockout",
+      "Alkaline stress",
+      "Toxoplasma gondii",
+      "microarray"
+    ],
+    "notes": "The higher expression in knockout samples compared to wild type suggests a potential repression mechanism under normal conditions; experimental design and replicates provide confidence in these observations.",
+    "dataset_id": "DS_e8c4cf2187",
+    "assay_type": "array",
+    "experiment_name": "Differential Expression Profiling GCN5-A mutant"
+  },
+  {
+    "one_sentence_summary": "The gene demonstrates sustained and significant expression levels throughout the investigated timeline in <i>Toxoplasma gondii</i> tachyzoites, peaking at 16 hours post-infection.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "time series",
+      "tachyzoite expression",
+      "Toxoplasma gondii",
+      "gene regulation"
+    ],
+    "notes": "Expression levels appear highly consistent and rank among the top 20%, providing strong evidence for the gene's importance in the tachyzoite stage during the experiment.",
+    "dataset_id": "DS_78959dea55",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Tachyzoite Transcriptome Time Series (VEG)"
+  },
+  {
+    "one_sentence_summary": "This gene shows significantly higher transcript levels in merozoites than in tachyzoites of <i>Toxoplasma gondii</i>.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "Tachyzoite",
+      "Merozoite",
+      "RNA-Seq",
+      "SOLiD5 technology"
+    ],
+    "notes": "The experiment indicates strong differential expression between the two life stages, with robust statistical support for the observed difference in transcript levels.",
+    "dataset_id": "DS_75742b9a0a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Tachyzoite and merozoite transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits higher expression levels in intracellular compared to extracellular conditions in <i>Toxoplasma gondii</i>, based on RNA-Seq data.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "gene expression",
+      "ribosome profiling",
+      "RNA-Seq",
+      "<i>Toxoplasma gondii</i>",
+      "intracellular vs extracellular conditions"
+    ],
+    "notes": "The expression data shows significant differences between intracellular and extracellular conditions for RNA-Seq, and some indications on ribosome profiling data.",
+    "dataset_id": "DS_a48cc7c61e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Comparative ribosome profiling of intracellular and extracellular parasites"
+  },
+  {
+    "one_sentence_summary": "This gene shows significantly higher expression during acute infection (10 days post-infection) compared to chronic infection (28 days post-infection) in the forebrains of <i>Toxoplasma gondii</i>-infected CBA/J mice.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "acute infection",
+      "chronic infection",
+      "CBA/J mice",
+      "forebrain",
+      "RNA-Seq"
+    ],
+    "notes": "The observed lower expression during chronic infection suggests a potential role in processes active during acute infection.",
+    "dataset_id": "DS_b0427cd47b",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome during acute or chronic infection in mouse brain"
+  },
+  {
+    "one_sentence_summary": "In this experiment, the gene shows substantial upregulation across various strains of <i>Toxoplasma gondii</i> during murine macrophage infection, with expression levels notably high in certain strains.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "<i>Toxoplasma gondii</i>",
+      "murine macrophage infection",
+      "RNA-Seq",
+      "strain comparison",
+      "transcriptomics"
+    ],
+    "notes": "Expression levels and percentiles indicate meaningful differential expression between strains, suggesting potential biological relevance that merits further investigation.",
+    "dataset_id": "DS_485e6e94e3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of 29 strains during murine macrophage infection"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Toxoplasma gondii</i> shows a marked upregulation during enteroepithelial stages compared to other life-cycle stages, with the highest expression observed in the EES1 sense strand.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Toxoplasma gondii",
+      "oocyst sporulation",
+      "transcription profiling",
+      "life cycle"
+    ],
+    "notes": "Expression is notably higher in the enteroepithelial stages, giving high biological relevance to this dataset. Standard errors provided suggest the confidence is solid.",
+    "dataset_id": "DS_173528b522",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Full life-cycle transcriptome of T. gondii"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Toxoplasma gondii</i> demonstrates significant upregulation in expression levels in the sense strand following CPSF4 knockdown after 24 and 48 hours of auxin treatment compared to untreated conditions.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "CPSF4 knockdown",
+      "Toxoplasma gondii",
+      "RNA-Seq",
+      "auxin treatment",
+      "differential expression"
+    ],
+    "notes": "The sense data exhibits increasing TPM values over time in knockdown conditions, suggesting progressive transcriptional activation, while antisense data remain negligible throughout, underpinning confidence in the interpretation.",
+    "dataset_id": "DS_4a81d92b98",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq of CPSF4 WT and CPSF4 KD parasites"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Toxoplasma gondii</i> shows varied expression with generally increasing transcript levels observed during differentiation in infected rat brain cells, while being low in tachyzoites.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "RNA-Seq",
+      "differentiation",
+      "rat brain cells",
+      "time series"
+    ],
+    "notes": "The expression increases over the time course of the experiment, suggesting biological significance, and there's enough replicable data to support the observed trends.",
+    "dataset_id": "DS_386bac2860",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "T. gondii during spontaneous differentiation in primary rat brain cells."
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Toxoplasma gondii</i> exhibits periodic expression during the cell cycle, with a peak in expression between 4 to 6 hours post-thymidine synchronization.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "cell cycle",
+      "microarray",
+      "periodic expression",
+      "synchronized growth",
+      "Toxoplasma gondii"
+    ],
+    "notes": "Expression data indicates a clear periodic pattern correlating with cell cycle progression, suggesting a role in cell cycle-regulated processes.",
+    "dataset_id": "DS_c1a3dbb014",
+    "assay_type": "array",
+    "experiment_name": "Cell Cycle Expression Profiles (RH)"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits higher expression levels during in vitro tachyzoite development and later stages of bradyzoite differentiation, compared to earlier oocyst stages in <i>Toxoplasma gondii</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Developmental stages",
+      "Oocyst",
+      "Bradyzoite",
+      "Tachyzoite",
+      "Sporulation",
+      "Toxoplasma gondii",
+      "Microarray"
+    ],
+    "notes": "The expression profile suggests significant variation across developmental stages, with clear increases in tachyzoite and bradyzoite stages, indicating biological relevance in these transitions.",
+    "dataset_id": "DS_2750122e82",
+    "assay_type": "array",
+    "experiment_name": "Oocyst, tachyzoite, and bradyzoite developmental expression profiles (M4)"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>T. gondii</i> demonstrates high transcript abundance at early post-infection time points which decreases progressively over the time course studied, indicating potential transcriptional regulation during tachyzoite infection.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "time course",
+      "gene expression dynamics",
+      "RNA-Seq",
+      "tachyzoite",
+      "Toxoplasma gondii"
+    ],
+    "notes": "Expression levels are substantially high initially and progressively diminish, which could indicate regulatory control responding to the environment or biological stage progression; confidence is moderate to high, but independent validation is advised.",
+    "dataset_id": "DS_6529b4f68d",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Tachyzoite Transcriptome Time Series (RH)"
+  },
+  {
+    "one_sentence_summary": "Expression of the gene in <i>Toxoplasma gondii</i> shows a significant increase in sense-oriented transcripts at day 10 post-sporulation compared to days 0 and 4, while antisense expression remains relatively low and unchanged.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "oocyst",
+      "timepoint",
+      "gene expression",
+      "RNA-Seq"
+    ],
+    "notes": "The dramatic increase in sense transcript levels at day 10 is noteworthy, suggesting potential functional relevance at that stage, while antisense levels appear less significant in magnitude.",
+    "dataset_id": "DS_72dce52949",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Oocyst Time Series (M4)"
+  },
+  {
+    "one_sentence_summary": "The gene shows high expression in <i>Toxoplasma gondii</i> infected murine neurons compared to other tested cell types such as skeletal muscle cells, astrocytes, and fibroblasts.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "Toxoplasma gondii",
+      "host cell specificity",
+      "neurons",
+      "astrocytes",
+      "skeletal muscle cells",
+      "fibroblasts"
+    ],
+    "notes": "The data indicates a significant variation in expression depending on the cell type, particularly highlighting neurons, but the absence of replicates slightly decreases confidence.",
+    "dataset_id": "DS_930295d0b5",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "T gondii Transcriptome during infection in 4 mouse cell types"
+  },
+  {
+    "one_sentence_summary": "This gene is significantly expressed during <i>T. gondii</i> tachyzoite and sporozoite infection, with its highest expression observed in the tachyzoite condition.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "tachyzoites",
+      "sporozoites",
+      "rat intestinal epithelial cells",
+      "RNA-Seq"
+    ],
+    "notes": "The expression levels indicate a strong association with the tachyzoite life stage; however, no expression was observed in the frozen sporozoite condition.",
+    "dataset_id": "DS_59fb8debdb",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "T. gondii during infection in IEC18 cells (Dual RNA-Seq)"
+  },
+  {
+    "one_sentence_summary": "The gene is significantly upregulated in the 'Gra18 complemented infected' conditions compared to 'Gra18 KO infected' and other conditions, indicating a potential role linked to Gra18 in <i>Toxoplasma gondii</i> infection scenarios.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "Gra18",
+      "RNA-Seq",
+      "gene expression",
+      "LPS stimulation"
+    ],
+    "notes": "The clear difference in expression between the complemented and knockout/comparison states highlights the potential importance, although lack of variance data might limit absolute confidence.",
+    "dataset_id": "DS_3a839edb9c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of Wild-Type and gra18 mutant strains of T. gondii"
+  },
+  {
+    "one_sentence_summary": "This gene is significantly upregulated in Type II Toxoplasma-injected neurons (TINs), with minor expression in the bystander neurons.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "mouse brain",
+      "Toxoplasma gondii",
+      "neurons",
+      "infection"
+    ],
+    "notes": "The gene exhibits clear expression patterns with high TPM in Type II TINs; however, replicate variation (high standard error) warrants caution in interpretations.",
+    "dataset_id": "DS_4362334059",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Parasite transcriptome during infection in mouse brain."
+  },
+  {
+    "one_sentence_summary": "This gene demonstrates varying expression levels across conditions, with notable upregulation observed in response to particular experimental treatments in <i>Toxoplasma gondii</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "RNA-Seq",
+      "transcript abundance",
+      "MORC KD",
+      "differential expression"
+    ],
+    "notes": "Expression changes appear significant and treatment-responsive, with good replicate data for confidence.",
+    "dataset_id": "DS_79e1396920",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq of MORC WT and MORC KD parasites"
+  },
+  {
+    "one_sentence_summary": "In the given experiment, this gene shows moderate upregulation under the bradyzoite-inducing pH 8.2 condition compared to the tachyzoite stage, especially pronounced in the CTGara strain of <i>Toxoplasma gondii</i>.",
+    "biological_importance": 3,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Bradyzoite differentiation",
+      "pH stress response",
+      "Microarray",
+      "<i>Toxoplasma gondii</i> gene expression"
+    ],
+    "notes": "The clear upregulation in CTGara with pH 8.2 suggests that this gene is responsive under certain bradyzoite-inducing conditions; however, there is strain-specific variability observed in the extent of differential gene expression.",
+    "dataset_id": "DS_2daab8c933",
+    "assay_type": "array",
+    "experiment_name": "Bradyzoite Differentiation Expression Profiles (ME49, GT1, CTGara)"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>T. gondii</i> exhibits a peak of expression at 4 hours post-infection, with moderated decreases observed at 8 and 16 hours.",
+    "biological_importance": 3,
+    "confidence": 5,
+    "experiment_keywords": [
+      "Time course",
+      "Transcriptomics",
+      "Tachyzoites"
+    ],
+    "notes": "The expression levels are detected in the sense strand data only, and there is a clear temporal trend, but no additional replicates are provided for statistical validation.",
+    "dataset_id": "DS_ef984802b1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Tachyzoite Transcriptome Time Series (GT1)"
+  },
+  {
+    "one_sentence_summary": "The expression of this gene in <i>Toxoplasma gondii</i> exhibits mild upregulation at 2 days post-induction followed by a slight decline during later stages of the bradyzoite differentiation process.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "tachyzoites",
+      "bradyzoites",
+      "differentiation",
+      "time-series",
+      "microarray"
+    ],
+    "notes": "The observed expression pattern shows minor changes, with the gene expressed at moderately consistent levels across the time points. No drastic or highly dynamic regulation is seen here.",
+    "dataset_id": "DS_50943f57a2",
+    "assay_type": "array",
+    "experiment_name": "Bradyzoite Differentiation (3-day time series)(Pru)"
+  },
+  {
+    "one_sentence_summary": "The expression of this gene is slightly higher in the PRMT1 knockout and complemented strains compared to the wild type strain in this experimental setup for <i>Toxoplasma gondii</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "microarray",
+      "PRMT1 knockout",
+      "complementation",
+      "gene expression",
+      "Toxoplasma gondii"
+    ],
+    "notes": "The small variation in expression levels between conditions suggests a moderate differential expression, corroborated by low standard error values hinting at dataset reliability.",
+    "dataset_id": "DS_1bdad09720",
+    "assay_type": "array",
+    "experiment_name": "PMRT1 KO, WT and KOCM expression profiles"
+  },
+  {
+    "one_sentence_summary": "This gene in <i>Toxoplasma gondii</i> shows persistent expression across the time course with slightly higher expression levels between 4 and 36 hours post-infection.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "time series",
+      "tachyzoite stage",
+      "gene expression",
+      "infection model"
+    ],
+    "notes": "Expression was robust but lacked sharp changes; the consistency suggests reliable expression over time but no significant differential expression events.",
+    "dataset_id": "DS_d5645bc639",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Tachyzoite Transcriptome Time Series (ME49)"
+  },
+  {
+    "one_sentence_summary": "In this experiment, the gene is expressed moderately in the sense strand (116.01 TPM) and is nearly inactive in the antisense strand (0.24 TPM).",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "Bradyzoite stage",
+      "RNA-Seq",
+      "transcriptome",
+      "sense and antisense strands",
+      "gene expression"
+    ],
+    "notes": "The gene exhibits notable activity in the sense orientation, whereas the antisense orientation shows minimal transcription. Absence of replicate datasets limits statistical robustness.",
+    "dataset_id": "DS_408f2c4cda",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Bradyzoite in vitro Transcriptome (ME49)"
+  },
+  {
+    "one_sentence_summary": "This gene is moderately expressed during the bradyzoite stage in <i>Toxoplasma gondii</i>, with sense transcripts showing a relative abundance of 69.38 TPM.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "RNA-Seq",
+      "bradyzoites",
+      "gene expression",
+      "Illumina Hi-Seq 2000",
+      "M4 strain"
+    ],
+    "notes": "Expression indicates a moderate level of activity specific to the bradyzoite stage. Evaluation is confident considering provided percentiles and measured values.",
+    "dataset_id": "DS_dac07dbf93",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Bradyzoite in vivo transcriptome (M4)"
+  },
+  {
+    "one_sentence_summary": "In <i>Toxoplasma gondii</i>, this gene's expression rises modestly from 24-hour tachyzoites to 48-hour bradyzoites, with levels in both stages being moderately high.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "stage-specific expression",
+      "tachyzoites",
+      "bradyzoites",
+      "RNA-Seq"
+    ],
+    "notes": "Expression change between stages is observable but not drastic, and standard error metrics add confidence to the observed trend.",
+    "dataset_id": "DS_749cb10dcf",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Stage-specific RNA-sequencing in Toxoplasma gondii"
+  },
+  {
+    "one_sentence_summary": "This gene is mildly upregulated in response to tartrolon E treatment compared to the control in <i>Toxoplasma gondii</i>, with higher expression levels at higher treatment concentration and longer durations.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "<i>Toxoplasma gondii</i>",
+      "tartrolon E response",
+      "time-course study"
+    ],
+    "notes": "The expression shows a mild upregulation with tartrolon E treatment; antisense values indicate consistent absence of expression throughout.",
+    "dataset_id": "DS_95bf119b5c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-seq of tartrolon E-treated T. gondii RH parasites"
+  },
+  {
+    "one_sentence_summary": "The gene under study appears to be expressed strongly and fairly stably across the experimental conditions, with a slight but not substantial decrease from extracellular to intracellular states in <i>Toxoplasma gondii</i>.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Tachyzoite",
+      "invasion",
+      "microarray",
+      "expression profiling",
+      "parasite host interaction"
+    ],
+    "notes": "The expression values are within a narrow range and changes between conditions are minor, suggesting relative stability in gene expression under these conditions. Further replication might clarify subtle trends.",
+    "dataset_id": "DS_d459caa7da",
+    "assay_type": "array",
+    "experiment_name": "Tachyzoite transcriptome during invasion (RH)"
+  },
+  {
+    "one_sentence_summary": "The expression data suggests no significant or consistent differential expression of this gene across the tested conditions in <i>T. gondii</i>.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "T. gondii",
+      "expression profiling",
+      "differentiation mutants",
+      "bradyzoite",
+      "tachyzoite",
+      "microarray"
+    ],
+    "notes": "The expression levels have some variation but do not point to a clear pattern of differential expression, and the percentiles also indicate consistently high expression in all samples.",
+    "dataset_id": "DS_35bb13db5b",
+    "assay_type": "array",
+    "experiment_name": "Mutants and wild-type expression profiles during bradyzoite differentiation"
+  },
+  {
+    "one_sentence_summary": "The expression of this gene in <i>Toxoplasma gondii</i> bradyzoites from mouse brain cysts demonstrates moderate and consistent transcript abundance across all time points tested (28, 90, and 120 days post-infection) without substantial changes.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Toxoplasma gondii",
+      "bradyzoites",
+      "RNA-Seq",
+      "mouse brain cysts",
+      "gene expression"
+    ],
+    "notes": "The expression levels are relatively consistent across the time points, indicating no significant differential expression. Confidence is high due to provided replicate statistics, but the biological importance is moderate due to the lack of notable variation.",
+    "dataset_id": "DS_0d220fc0c6",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mouse brain bradyzoite transcriptomes at 28, 90, 120 days post infection"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits consistent expression levels across day 3 and day 4 tachyzoites of <i>T. gondii</i>, with no pronounced differential expression between these time points.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "RNA-Seq",
+      "tachyzoite",
+      "T. gondii",
+      "gene expression",
+      "developmental stages"
+    ],
+    "notes": "The values and percentile ranks suggest consistent expression, and there are no significant expression changes between the evaluated conditions.",
+    "dataset_id": "DS_94e899930e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Tachyzoite Transcriptome 3 and 4 days post-infection (VEG NcLIV)"
+  }
+]

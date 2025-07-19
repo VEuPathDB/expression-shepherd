@@ -1,0 +1,55 @@
+{
+  "headline": "Ring Stage-Specific Expression with Dramatic Life Cycle Variation",
+  "one_paragraph_summary": "This gene exhibits <strong>highly dynamic expression throughout the <i>Plasmodium falciparum</i> life cycle</strong>, with peak expression consistently observed during <strong>early ring stages and merozoites</strong> (reaching >2000 TPM, 96th-99th percentile) followed by dramatic decline through trophozoite and schizont stages. <ul><li>Expression shows remarkable stage specificity with >80-fold differences between ring stages and sporozoites</li><li>Demonstrates clear cyclical patterns matching the 48-hour intraerythrocytic developmental cycle</li><li>Maintains consistently high percentile rankings (>90th percentile) during peak expression periods</li></ul> The gene shows female-biased expression in gametocytes and substantially higher expression in blood stages compared to mosquito stages. This expression pattern strongly suggests <strong>essential roles in erythrocyte invasion and early parasite establishment within red blood cells</strong>.",
+  "topics": [
+    {
+      "headline": "Peak Expression During Ring Stage and Merozoite Development",
+      "one_sentence_summary": "The gene consistently shows highest expression during ring stages (300-2300 TPM, 92nd-99th percentile) and merozoites, with dramatic declines through trophozoite and schizont stages across multiple intraerythrocytic development cycle studies.",
+      "dataset_ids": [
+        "DS_fe2b5a278f",
+        "DS_8ecf65d1b7",
+        "DS_29940f3f82",
+        "DS_416070059c",
+        "DS_ee861a9187",
+        "DS_715bf2deda",
+        "DS_b95a38be5e",
+        "DS_87e4fcafff",
+        "DS_0cabe39833",
+        "DS_4582562a4b"
+      ]
+    },
+    {
+      "headline": "Dramatic Life Cycle Stage Specificity with Blood Stage Preference",
+      "one_sentence_summary": "Expression shows extreme stage specificity with >50-fold higher levels in blood stages (200-300 TPM) compared to sporozoites and oocysts (3-8 TPM), indicating blood stage-specific functional importance.",
+      "dataset_ids": [
+        "DS_b6cdce990b",
+        "DS_66f9e70b8a",
+        "DS_2aa311d6a0",
+        "DS_cf291e2adb"
+      ]
+    },
+    {
+      "headline": "Strong Cyclical Expression Patterns Matching Parasite Cell Cycle",
+      "one_sentence_summary": "The gene demonstrates robust cyclical expression with approximately 24-48 hour periodicity, showing >10-fold dynamic ranges between peaks and troughs that align with the parasite's intraerythrocytic development cycle.",
+      "dataset_ids": [
+        "DS_0fa4237b4b",
+        "DS_74bf6512eb",
+        "DS_28ef9b0494"
+      ]
+    },
+    {
+      "headline": "Female-Biased Expression in Sexual Stages",
+      "one_sentence_summary": "During gametocyte development, the gene shows strong female-specific expression with approximately 7-fold higher levels in female compared to male gametocytes (199 vs 29 FPKM).",
+      "dataset_ids": [
+        "DS_a518f45975"
+      ]
+    },
+    {
+      "headline": "High Constitutional Expression in Clinical Infections",
+      "one_sentence_summary": "The gene maintains consistently high expression (568-6026 TPM, >96th percentile) across malaria-infected patients regardless of disease severity, indicating robust transcriptional activity during natural infections.",
+      "dataset_ids": [
+        "DS_b1ac1e329c"
+      ]
+    }
+  ]
+}

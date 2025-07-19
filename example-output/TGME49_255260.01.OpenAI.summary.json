@@ -1,0 +1,27 @@
+{
+  "headline": "Expression profile of a Toxoplasma gondii gene across life stages and conditions.",
+  "one_paragraph_summary": "<strong>Summary of gene expression data:</strong> This gene in <i>Toxoplasma gondii</i> exhibits dynamic expression patterns across various life stages and environmental conditions, with notable high expression levels in the sporulated oocyst, bradyzoite, and tachyzoite stages. <ul><li>It is significantly upregulated during oocyst sporulation and bradyzoite formation, indicating potential roles in differentiation processes.</li><li>Expression is relatively higher in tachyzoites compared to merozoites and is tightly regulated during the cell cycle.</li><li>Time-course experiments show peaks of expression at specific points of infection or during differentiation.</li><li>Notably, the gene is highly active in infected host cells, suggesting relevance in pathogenicity or host interaction.</li></ul> This expression profile supports a possible function in stage-specific development or infection-related processes.",
+  "topics": [
+    {
+      "headline": "Gene expression during parasite life cycle stages",
+      "one_sentence_summary": "The gene exhibits significant expression changes linked to the oocyst, bradyzoite, and tachyzoite stages of the T. gondii life cycle.",
+      "dataset_ids": [
+        "DS_2750122e82",
+        "DS_173528b522",
+        "DS_c1a3dbb014",
+        "DS_78959dea55",
+        "DS_e7467c0306"
+      ]
+    },
+    {
+      "headline": "Stage-specific expression in response to infection and conditions",
+      "one_sentence_summary": "The gene shows stage-specific and condition-dependent expression, especially during host-pathogen interactions and stress responses.",
+      "dataset_ids": [
+        "DS_a48cc7c61e",
+        "DS_930295d0b5",
+        "DS_b0427cd47b",
+        "DS_4362334059"
+      ]
+    }
+  ]
+}

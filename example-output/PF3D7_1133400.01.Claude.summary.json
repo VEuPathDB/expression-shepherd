@@ -1,0 +1,38 @@
+{
+  "headline": "Stage-Specific Expression Pattern with Extreme Sporozoite and Late Schizont Upregulation",
+  "one_paragraph_summary": "This gene exhibits one of the most dramatic stage-specific expression patterns in <i>Plasmodium falciparum</i>, with <strong>exceptionally high expression in sporozoites (>3000 TPM, 99th percentile) and late schizont stages (>1500 TPM, 96-99th percentile)</strong>, while maintaining minimal expression during trophozoite stages (<50 TPM). The gene shows <ul><li>Over 300-fold upregulation from trophozoites to schizonts during asexual development</li><li>Dramatically higher expression in mosquito-derived versus cultured sporozoites</li><li>Consistent biphasic expression patterns during intraerythrocytic development cycles</li></ul>. The extreme sporozoite-specific expression and late schizont upregulation suggest this gene plays critical roles in <strong>parasite transmission, host cell invasion, or late-stage replication processes</strong>, potentially functioning in sporozoite infectivity or merozoite formation.",
+  "topics": [
+    {
+      "headline": "Dramatic Stage-Specific Upregulation During Intraerythrocytic Development",
+      "one_sentence_summary": "The gene shows consistent >300-fold upregulation from trophozoite to late schizont stages across multiple intraerythrocytic development studies, with peak expression reaching 1500-6000 TPM during schizont stages.",
+      "dataset_ids": [
+        "DS_9c91e450ac",
+        "DS_fe2b5a278f",
+        "DS_74bf6512eb",
+        "DS_29940f3f82",
+        "DS_090793ccdd"
+      ]
+    },
+    {
+      "headline": "Exceptional Sporozoite-Specific Expression with Mosquito Vector Dependency",
+      "one_sentence_summary": "Expression reaches extremely high levels in sporozoites (>3000 TPM, 99th percentile) with dramatically higher expression in mosquito-derived compared to cultured sporozoites, indicating critical roles in natural transmission.",
+      "dataset_ids": [
+        "DS_b6cdce990b",
+        "DS_2aa311d6a0",
+        "DS_cf291e2adb",
+        "DS_6573eba8f8"
+      ]
+    },
+    {
+      "headline": "Biphasic Expression Patterns During Asexual Blood Stage Cycles",
+      "one_sentence_summary": "The gene displays consistent biphasic expression with peaks during early ring and late schizont stages across multiple time-series studies, showing >20-fold dynamic expression ranges.",
+      "dataset_ids": [
+        "DS_ee861a9187",
+        "DS_8ecf65d1b7",
+        "DS_715bf2deda",
+        "DS_87e4fcafff",
+        "DS_416070059c"
+      ]
+    }
+  ]
+}

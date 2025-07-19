@@ -1,0 +1,47 @@
+{
+  "headline": "Cellulose-responsive gene with developmental regulation and transcription factor dependencies",
+  "one_paragraph_summary": "This gene exhibits <strong>strong upregulation in response to cellulose and complex plant biomass substrates</strong>, with expression levels reaching 144-356 TPM compared to baseline levels of 3-50 TPM on simple sugars or under starvation conditions. <ul><li>Expression is dramatically dependent on transcription factors XLR-1, CLR-1, and CLR-2, showing 18-fold reduction in xlr-1 knockouts</li><li>Shows clear developmental regulation during sexual development in <i>Neurospora crassa</i>, peaking at mid-stage perithecia formation</li><li>Exhibits substrate specificity, with highest response to mixed-linkage glucan and crystalline cellulose</li><li>Strongly repressed by sucrose, indicating carbon catabolite repression</li></ul>The consistent cellulose-responsive expression pattern and transcription factor dependencies strongly suggest this gene encodes a <strong>cellulase or cellulose-degrading enzyme</strong> critical for plant biomass utilization.",
+  "topics": [
+    {
+      "headline": "Strong cellulose and plant biomass induction with transcription factor dependencies",
+      "one_sentence_summary": "The gene shows dramatic upregulation (3-220 fold) in response to cellulose, plant straws, and complex polysaccharides, with this response being dependent on the CLR-1, CLR-2, and XLR-1 transcription factors that regulate plant cell wall degradation pathways.",
+      "dataset_ids": [
+        "DS_f210d58388",
+        "DS_a7a14c7e0f",
+        "DS_c14d26a0a3",
+        "DS_a4188c2dd4",
+        "DS_a0004d905e",
+        "DS_1dd4f50bad",
+        "DS_d5cb6ab9a2",
+        "DS_5781e07160"
+      ]
+    },
+    {
+      "headline": "Developmental regulation during sexual reproduction and conidiation",
+      "one_sentence_summary": "Expression increases progressively during sexual development in <i>Neurospora crassa</i>, peaking during mid-stage perithecia formation, and shows highest levels in fresh conidia that decrease during germination, indicating roles in both sexual and asexual developmental processes.",
+      "dataset_ids": [
+        "DS_f2913d9eb1",
+        "DS_14cdcc2c58",
+        "DS_1a51a536a0",
+        "DS_7b3238ce05",
+        "DS_f95c45420d"
+      ]
+    },
+    {
+      "headline": "Carbon source-specific regulation with sucrose repression",
+      "one_sentence_summary": "The gene shows strong upregulation on starch-derived substrates and is dramatically repressed by sucrose compared to other carbon sources, demonstrating carbon catabolite repression and involvement in alternative carbon metabolism pathways.",
+      "dataset_ids": [
+        "DS_33fc617b03",
+        "DS_bb6e5ae0e5"
+      ]
+    },
+    {
+      "headline": "Regulatory pathway interactions affecting expression levels",
+      "one_sentence_summary": "Expression is modulated by multiple regulatory pathways including the SREBP pathway (sah-2 dependence), iron homeostasis (ve-1 interaction), and shows strain-dependent differences, indicating complex multilevel transcriptional control.",
+      "dataset_ids": [
+        "DS_16bc228c8e",
+        "DS_c764829c69"
+      ]
+    }
+  ]
+}

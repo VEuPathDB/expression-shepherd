@@ -1,0 +1,59 @@
+{
+  "headline": "Bradyzoite-specific expression with dramatic upregulation during chronic infection",
+  "one_paragraph_summary": "This gene exhibits <strong>remarkable stage-specific expression</strong> in <i>Toxoplasma gondii</i>, being dramatically upregulated in bradyzoites compared to all other life cycle stages. Expression increases <strong>over 3000-fold during tachyzoite-to-bradyzoite conversion</strong> and reaches extremely high levels (>6000 TPM) in tissue cysts during chronic infection. The gene shows <strong>minimal expression in tachyzoites, merozoites, oocysts, and enteroepithelial stages</strong>, but ranks in the 99th percentile during bradyzoite differentiation across multiple experimental systems. This consistent and dramatic bradyzoite-specific expression pattern suggests the gene likely plays a <strong>critical role in chronic infection biology</strong>, potentially involved in cyst formation, maintenance, or bradyzoite-specific metabolic processes essential for parasite persistence in the host.",
+  "topics": [
+    {
+      "headline": "Dramatic bradyzoite-specific upregulation across multiple experimental systems",
+      "one_sentence_summary": "The gene shows consistent and dramatic upregulation (3-4000 fold increases) during bradyzoite differentiation across multiple time series experiments, reaching 96-99th percentile expression levels and maintaining high expression in mature bradyzoites both in vitro and in vivo.",
+      "dataset_ids": [
+        "DS_2750122e82",
+        "DS_994d646c6a",
+        "DS_50943f57a2",
+        "DS_35bb13db5b",
+        "DS_dac07dbf93",
+        "DS_2daab8c933"
+      ]
+    },
+    {
+      "headline": "Strong downregulation in merozoites versus tachyzoites",
+      "one_sentence_summary": "Expression is dramatically reduced in merozoites compared to tachyzoites, with 8-400 fold decreases observed across independent studies, indicating stage-specific suppression during the merozoite phase of the life cycle.",
+      "dataset_ids": [
+        "DS_45b4123102",
+        "DS_75742b9a0a"
+      ]
+    },
+    {
+      "headline": "Extremely high expression during chronic brain infection",
+      "one_sentence_summary": "The gene shows exceptionally high expression (>4000-6000 TPM, 99th percentile) during chronic infection in mouse brain tissue and maintains stable high levels across extended chronic infection timepoints.",
+      "dataset_ids": [
+        "DS_b0427cd47b",
+        "DS_386bac2860",
+        "DS_0d220fc0c6"
+      ]
+    },
+    {
+      "headline": "Comprehensive life cycle analysis confirms bradyzoite specificity",
+      "one_sentence_summary": "Full life cycle transcriptome studies demonstrate that this gene has the most dramatic stage-specific expression pattern possible, with tissue cyst expression being 27-fold higher than tachyzoites and over 3000-fold higher than all other life cycle stages.",
+      "dataset_ids": [
+        "DS_e7467c0306",
+        "DS_173528b522",
+        "DS_749cb10dcf"
+      ]
+    },
+    {
+      "headline": "Strain-dependent expression variation in tachyzoites",
+      "one_sentence_summary": "Expression shows remarkable variation across different <i>T. gondii</i> strains, with some strains showing high expression while others have virtually undetectable levels, suggesting strain-specific regulatory mechanisms.",
+      "dataset_ids": [
+        "DS_485e6e94e3",
+        "DS_73d06a9e7b"
+      ]
+    },
+    {
+      "headline": "MORC-mediated gene silencing controls expression",
+      "one_sentence_summary": "The gene is dramatically upregulated (200-600 fold) following MORC knockdown, indicating it is normally silenced by MORC-mediated chromatin regulation in tachyzoites.",
+      "dataset_ids": [
+        "DS_79e1396920"
+      ]
+    }
+  ]
+}

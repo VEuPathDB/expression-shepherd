@@ -1,0 +1,33 @@
+{
+  "headline": "Expression of a Plasmodium falciparum gene across life cycle stages",
+  "one_paragraph_summary": "<strong>Overview of Gene Expression Across <i>Plasmodium falciparum</i> Lifecycle Stages:</strong><br/><ul><li>This gene exhibits stage-specific expression in <i>Plasmodium falciparum</i>, showing significant upregulation during the schizont stage of the intraerythrocytic cycle, suggesting a critical role in parasite development during this stage.</li><li>Throughout intraerythrocytic and erythrocytic development, oscillatory patterns are present, highlighting its likely regulatory importance.</li><li>Expression during asexual blood stages and under stress conditions varies but indicates moderated activity in adaptation and pathogenicity mechanisms.</li></ul>In summary, evidence strongly implies its involvement in critical cellular processes, particularly during stress responses and schizogony.",
+  "topics": [
+    {
+      "headline": "Schizont-stage gene expression",
+      "one_sentence_summary": "The gene is consistently upregulated during the schizont stage of intraerythrocytic development, indicating stage-specific regulation and potential functional significance.",
+      "dataset_ids": [
+        "DS_9c91e450ac",
+        "DS_28ef9b0494",
+        "DS_8ecf65d1b7"
+      ]
+    },
+    {
+      "headline": "Intraerythrocytic development cycle transcriptional oscillations",
+      "one_sentence_summary": "The gene shows periodic transcriptional oscillations throughout the intraerythrocytic development cycle of <i>Plasmodium falciparum</i>.",
+      "dataset_ids": [
+        "DS_715bf2deda",
+        "DS_66f9e70b8a",
+        "DS_29940f3f82"
+      ]
+    },
+    {
+      "headline": "Life-stage specific gene expression shifts",
+      "one_sentence_summary": "Gene expression changes notably in specific life stages, such as the schizont and ring stages, supporting its role in lifecycle adaptation.",
+      "dataset_ids": [
+        "DS_a239464cb4",
+        "DS_cf291e2adb",
+        "DS_c28828ce84"
+      ]
+    }
+  ]
+}

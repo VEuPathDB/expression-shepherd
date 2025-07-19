@@ -1,0 +1,53 @@
+{
+  "headline": "Highly expressed gene shows dramatic host environment suppression and temperature-dependent regulation",
+  "one_paragraph_summary": "This gene exhibits consistently high expression levels (typically >95th percentile) across diverse laboratory conditions in <i>Cryptococcus neoformans</i>, but undergoes dramatic downregulation (10-150 fold) when exposed to host environments, particularly cerebrospinal fluid. <strong>Key expression patterns include:</strong> <ul><li>Strong upregulation during stationary phase versus exponential growth</li><li>Temperature-dependent responses with variable effects at 37°C</li><li>Significant suppression in clinical isolates from cerebrospinal fluid</li><li>Enhanced expression in various transcriptional regulator mutants (nrg1Δ, ada2Δ, ccr4Δ)</li></ul> The gene's high constitutive expression in laboratory conditions combined with its dramatic suppression in host environments suggests it may encode a metabolic enzyme or stress response protein that is actively repressed during pathogenesis to facilitate host adaptation.",
+  "topics": [
+    {
+      "headline": "Growth phase and temperature responses show stationary phase upregulation with variable temperature effects",
+      "one_sentence_summary": "The gene consistently shows higher expression during stationary phase compared to exponential phase, with temperature effects varying by strain and experimental conditions but generally indicating stress responsiveness.",
+      "dataset_ids": [
+        "DS_b652373fe0",
+        "DS_766c6b1ce3",
+        "DS_34f2ba224c",
+        "DS_09d688636a",
+        "DS_2d477b2338"
+      ]
+    },
+    {
+      "headline": "Host environment adaptation reveals dramatic suppression in cerebrospinal fluid versus laboratory conditions",
+      "one_sentence_summary": "Expression is dramatically reduced (10-150 fold) when <i>Cryptococcus neoformans</i> grows in cerebrospinal fluid compared to laboratory media, suggesting active repression during CNS infection.",
+      "dataset_ids": [
+        "DS_6cb59feb38",
+        "DS_7ce8a791f1",
+        "DS_c7fd03bc1e",
+        "DS_3e2cfef9d4"
+      ]
+    },
+    {
+      "headline": "Transcriptional regulators control expression with multiple factors acting as repressors",
+      "one_sentence_summary": "The gene is upregulated in knockout mutants of several transcriptional regulators including nrg1, ada2, and ccr4, indicating these factors normally repress its expression under specific conditions.",
+      "dataset_ids": [
+        "DS_5b0caebb4c",
+        "DS_1a3aa18fbf",
+        "DS_24387c57d1"
+      ]
+    },
+    {
+      "headline": "Stress response pathways show context-dependent regulation under various cellular stresses",
+      "one_sentence_summary": "The gene exhibits differential responses to multiple stress conditions including temperature stress, oxidative stress, and metal stress, with effects often dependent on specific regulatory pathway components.",
+      "dataset_ids": [
+        "DS_7f5e5653d5",
+        "DS_968584e5d2",
+        "DS_91e4e6730a"
+      ]
+    },
+    {
+      "headline": "Cell cycle and developmental processes show temporal expression changes during growth transitions",
+      "one_sentence_summary": "Expression increases during cell cycle progression and shows time-dependent changes during sexual reproduction processes, suggesting roles in growth regulation and developmental transitions.",
+      "dataset_ids": [
+        "DS_6393f11883",
+        "DS_ed3e7d4f66"
+      ]
+    }
+  ]
+}

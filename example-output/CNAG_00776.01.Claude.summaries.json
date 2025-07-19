@@ -1,0 +1,509 @@
+[
+  {
+    "one_sentence_summary": "This gene shows markedly higher expression in stationary phase compared to exponential phase conditions in <i>Cryptococcus neoformans</i>, with the strongest upregulation observed in stationary phase at 30°C (3298 TPM, 99.7th percentile) versus exponential phase levels of ~1400-1500 TPM.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "growth phase",
+      "temperature response",
+      "stationary phase",
+      "exponential phase",
+      "Cryptococcus neoformans",
+      "strand-specific RNA-seq"
+    ],
+    "notes": "Very low antisense expression (<1 TPM) across all conditions indicates clean sense-strand transcription. The gene ranks in the top 1-2% of all genes during stationary phase conditions, suggesting important biological function during growth arrest or stress response.",
+    "dataset_id": "DS_b652373fe0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Stranded mRNA-Seq for delineation of transcript ends in C. neoformans alphaKN99"
+  },
+  {
+    "one_sentence_summary": "This gene shows markedly higher expression in the ccr4 mutant strain compared to wild-type, with particularly dramatic upregulation (3-4 fold) during host temperature stress at 37°C in <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "temperature stress",
+      "host temperature",
+      "ccr4 mutant",
+      "polysome profiling",
+      "translational regulation",
+      "Cryptococcus neoformans"
+    ],
+    "notes": "The gene shows consistently high percentile rankings (92-98th percentiles) across conditions, with the most pronounced strain-dependent differences observed at elevated temperature, suggesting potential involvement in temperature stress response pathways that are dysregulated in ccr4 mutants.",
+    "dataset_id": "DS_5b0caebb4c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome and translatome changes in response to host temperature stress"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all conditions in <i>Cryptococcus neoformans</i>, with notable time-dependent increases peaking at 72 hours (reaching ~2800 TPM) in both wild-type and cqs1Δ mutant strains, while showing minimal response to quorum sensing peptide treatments or carbon source changes.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "quorum sensing",
+      "sexual reproduction",
+      "time course",
+      "carbon source",
+      "pheromone signaling",
+      "mating response"
+    ],
+    "notes": "Expression values are consistently in the 96-99th percentile, indicating this is a highly expressed gene. The time-dependent increase suggests potential involvement in late-stage mating processes, but the lack of strong differential response to quorum sensing manipulations indicates it may not be directly regulated by the CQS1 pathway.",
+    "dataset_id": "DS_ed3e7d4f66",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Cryptococcus neoformans sexual reproduction is controlled by a quorum sensing peptide"
+  },
+  {
+    "one_sentence_summary": "This gene shows substantial upregulation in the nrg1 knockout condition (~1.8-fold increase to ~1800 TPM) compared to wild-type and nrg1 overexpression conditions in <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "nrg1",
+      "knockout",
+      "overexpression",
+      "transcriptional regulation",
+      "Cryptococcus neoformans",
+      "fungal pathogen"
+    ],
+    "notes": "Gene expression is consistently high across replicates in nrg1 KO (>99th percentile) but returns to wild-type levels with nrg1 overexpression, suggesting negative regulation by Nrg1. The robust and consistent response pattern indicates this gene is likely a direct or early target of Nrg1-mediated repression.",
+    "dataset_id": "DS_1a3aa18fbf",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Nrg1 Expression"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in the ada2Δ mutant under capsule-inducing conditions (442 TPM), with moderate upregulation in wild-type cells at 37°C CO2 compared to 30°C, while cir1Δ and nrg1Δ mutants show relatively stable expression across temperature conditions.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "capsule regulation",
+      "temperature response",
+      "ada2 knockout",
+      "transcriptional regulation",
+      "virulence factors"
+    ],
+    "notes": "The dramatic ~6-fold increase in ada2Δ mutant under capsule-inducing conditions (442 vs 72 TPM in WT 30°C) suggests this gene may be normally repressed by Ada2 and could play a role in capsule formation or stress response.",
+    "dataset_id": "DS_24387c57d1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomics analysis of cells in capsule inducing and non-inducing conditions"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatically higher expression in laboratory culture (YPD medium) compared to the in vivo cerebrospinal fluid environment in both <i>Cryptococcus neoformans</i> strains, with expression levels 15-150 fold higher in YPD conditions.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "cerebrospinal fluid",
+      "laboratory culture",
+      "YPD medium",
+      "clinical strains",
+      "environmental adaptation",
+      "growth conditions"
+    ],
+    "notes": "Strong strain-specific differences observed, with G0 showing the most dramatic upregulation in laboratory conditions (5400 TPM vs 35 TPM in CSF). High percentile rankings (98-99th) in YPD suggest this gene is among the most highly expressed under laboratory conditions.",
+    "dataset_id": "DS_6cb59feb38",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The Cryptococcus neoformans transcriptome at the site of human meningitis (single-read data)"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong cell cycle-dependent expression in <i>Cryptococcus neoformans</i>, with sense strand transcript levels steadily increasing approximately 2-fold from early G1 phase (387-447 TPM at 0-10 minutes) to late time points (715-850 TPM at 200-230 minutes), while antisense expression remains negligible throughout.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "cell cycle",
+      "G1 phase",
+      "synchronous culture",
+      "temporal dynamics",
+      "budding yeast",
+      "sense strand"
+    ],
+    "notes": "The gene shows a clear temporal pattern with sustained upregulation during cell cycle progression, consistently ranking in the 95th-98th percentile for expression levels, suggesting important cell cycle-related function.",
+    "dataset_id": "DS_6393f11883",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Cell cycle transcriptome of Cryptococcus neoformans var. grubii"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in <i>Cryptococcus neoformans</i> H99 log phase culture (1,272 TPM, 98th percentile), with substantial expression in <i>Macaca fascicularis</i> lung tissue (282 TPM, 95th percentile) but much lower expression in <i>Mus musculus</i> lung (30 TPM, 54th percentile) and no detectable expression in brain tissue from either host.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "host-pathogen",
+      "infection",
+      "tissue-specific",
+      "species-specific",
+      "cryptococcosis",
+      "primate",
+      "rodent",
+      "lung",
+      "brain"
+    ],
+    "notes": "The dramatic difference between primate and rodent lung expression (10-fold) suggests species-specific host response or pathogen adaptation, while brain samples show complete absence of expression in both hosts, indicating strong tissue tropism.",
+    "dataset_id": "DS_5f2f1c9822",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptional landscape of Cryptococcus-host response"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all environmental and in vitro conditions (YPD, LIM, PG, MP) with TPM values ranging from ~1,200-7,800, but is dramatically downregulated (~10-40 fold) in rabbit cerebrospinal fluid across all <i>Cryptococcus neoformans</i> strains tested.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "environmental conditions",
+      "host mimicry",
+      "cerebrospinal fluid",
+      "pathogenesis",
+      "stress response",
+      "cryptococcal virulence"
+    ],
+    "notes": "The gene shows remarkably consistent high expression across diverse growth conditions but exhibits striking repression specifically in CSF, suggesting potential role in pathogenesis or host adaptation. Some strain-specific variation is observed, particularly with Bt85 showing highest expression in LIM conditions.",
+    "dataset_id": "DS_7ce8a791f1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression variation in response to biologically relevant stresses"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong expression in <i>Cryptococcus neoformans</i> with highest levels during stationary phase at 30°C (828.79 TPM, 97.5th percentile), reduced expression at 37°C in both growth phases, and negligible antisense transcription across all conditions.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "temperature response",
+      "growth phase",
+      "stationary phase",
+      "exponential phase",
+      "sense strand",
+      "antisense strand",
+      "PAS-Seq"
+    ],
+    "notes": "The gene demonstrates clear temperature sensitivity with ~2.4-fold reduction at 37°C during stationary phase and ~1.5-fold reduction during exponential phase, suggesting potential involvement in temperature stress response or phase-specific processes.",
+    "dataset_id": "DS_766c6b1ce3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mapping 3-prime ends of coding genes with QuantSeq 3-prime mRNA-Seq (PAS-Seq)"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong upregulation in stationary phase compared to exponential phase conditions in <i>Cryptococcus neoformans</i>, with highest expression in stationary phase at 37°C (452 TPM, 96th percentile) and additional upregulation in the upf1 deletion mutant during exponential phase.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "growth phase",
+      "temperature stress",
+      "stationary phase",
+      "upf1 deletion",
+      "nonsense-mediated decay",
+      "PAS-Seq"
+    ],
+    "notes": "Expression is predominantly sense-strand specific with minimal antisense transcription. The upf1 deletion shows intermediate upregulation, suggesting potential regulation by nonsense-mediated decay pathway.",
+    "dataset_id": "DS_34f2ba224c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mapping 3-prime ends of coding genes with QuantSeq 3-prime mRNA-Seq (PAS-Seq)"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in rich YPD media (1,000-4,400 TPM) and capsule-inducing conditions (150-1,900 TPM), with notably variable and generally lower expression in human CSF samples (0-3,000 TPM), while maintaining moderate expression in artificial and rabbit CSF conditions in <i>Cryptococcus neoformans</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "central nervous system",
+      "cryptococcal infection",
+      "CSF adaptation",
+      "capsule induction",
+      "nutritional stress",
+      "host-pathogen interaction"
+    ],
+    "notes": "The gene shows strain-specific variability in human CSF with some isolates showing zero expression while others reach very high levels (>2,000 TPM), suggesting potential regulatory differences between clinical isolates that may be relevant to virulence or CNS adaptation.",
+    "dataset_id": "DS_c7fd03bc1e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The Cryptococcal central nervous system transcriptome during human disease"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong temperature-dependent upregulation in <i>Cryptococcus neoformans</i>, with expression increasing approximately 2-fold at 37°C compared to 24°C across wild-type and complemented strains, while knockout strains (cna1Δ and crz1Δ) exhibit reduced temperature responsiveness and overall lower expression levels.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "temperature stress",
+      "heat shock",
+      "calcineurin",
+      "Crz1",
+      "knockout",
+      "complementation",
+      "stress response"
+    ],
+    "notes": "The gene shows consistent high percentile rankings (94-98th percentile) across all conditions, indicating it is among the most highly expressed genes in the genome. The temperature response is blunted in knockout strains, suggesting involvement in the calcineurin-Crz1 stress response pathway.",
+    "dataset_id": "DS_7f5e5653d5",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Examination of the Calcineurin-Crz1 stress response network"
+  },
+  {
+    "one_sentence_summary": "This gene shows high expression levels across all conditions but exhibits a notable decrease in expression specifically in the <i>gsb1</i> mutant under oxidative stress (H2O2) compared to other conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "oxidative stress",
+      "H2O2",
+      "gsb1 mutant",
+      "stress response",
+      "Cryptococcus neoformans"
+    ],
+    "notes": "The gene maintains consistently high expression (>620 TPM, >97th percentile) in wild-type and gsb1 mutant under normal conditions, but shows a specific reduction to ~442 TPM in the gsb1 mutant under oxidative stress, suggesting potential regulation by the Gsb1 stress response pathway.",
+    "dataset_id": "DS_968584e5d2",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomic profiling of Cryptococcus cells in response to oxidative stress."
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all conditions, with moderate upregulation in response to high copper treatment in both wild-type and <i>cuf1</i> deletion strains, and slightly higher expression in the <i>cuf1</i> knockout compared to wild-type under both copper conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "copper homeostasis",
+      "transcriptional regulation",
+      "CUF1",
+      "metal stress response",
+      "Cryptococcus neoformans"
+    ],
+    "notes": "Expression levels are consistently very high (>98th percentile) across all conditions, suggesting this is a highly expressed gene with modest but consistent copper responsiveness that appears partially CUF1-independent.",
+    "dataset_id": "DS_91e4e6730a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Global transcriptional analysis of wild-type and cuf1delta cells"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression (500-800 TPM, >97th percentile) in the sense orientation across all <i>Cryptococcus neoformans</i> strains tested, with the highest expression in the msl1 knockout strain (~820 TPM) and minimal antisense expression across all conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "chromatin regulation",
+      "histone methylation",
+      "PRC2 complex",
+      "heterochromatin",
+      "knockout strains"
+    ],
+    "notes": "Gene shows moderate upregulation in chromatin modifier knockouts (especially msl1Δ) compared to wild-type, suggesting possible repression by these factors under normal conditions.",
+    "dataset_id": "DS_4338716bc6",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Comparative transcriptomics of C. neoformans mutants defective in heterochromatin regulation"
+  },
+  {
+    "one_sentence_summary": "This gene shows high expression levels (>400 TPM, >95th percentile) across all conditions in <i>Cryptococcus neoformans</i>, with modest downregulation in response to fluconazole treatment in both wild-type and cfo1 mutant strains.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "fluconazole",
+      "antifungal",
+      "cfo1",
+      "drug_resistance",
+      "iron_homeostasis"
+    ],
+    "notes": "Gene is highly expressed relative to the transcriptome (consistently >95th percentile), suggesting constitutive importance; fluconazole effect is consistent across genotypes but moderate in magnitude.",
+    "dataset_id": "DS_f3165f5774",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Fluconazole Sensitivity of Wild-type vs cfo1 Mutant"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderately high expression in both <i>Cryptococcus neoformans</i> strains under ex vivo cerebrospinal fluid conditions, with strain G0 exhibiting approximately 2.7-fold higher expression (436 TPM) compared to strain HC1 (162 TPM).",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "cryptococcal meningitis",
+      "cerebrospinal fluid",
+      "strain comparison",
+      "clinical isolates",
+      "ex vivo conditions"
+    ],
+    "notes": "The substantial strain-specific difference in expression (G0 vs HC1) suggests potential relevance to virulence or pathogenicity differences between clinical isolates, with both strains showing relatively high percentile rankings (96.87% and 90.55% respectively).",
+    "dataset_id": "DS_3e2cfef9d4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The Cryptococcus neoformans transcriptome at the site of human meningitis (paired-end data)"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate downregulation in <i>Cryptococcus neoformans</i> titan-promoting conditions compared to standard medium, with expression decreasing from ~108-125 TPM to ~63-75 TPM in sense orientation across both time points.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "titan cells",
+      "morphological transition",
+      "Cryptococcus neoformans",
+      "time course",
+      "antisense transcription"
+    ],
+    "notes": "Notable antisense transcription is present in all conditions, with antisense expression also showing downregulation in titan-promoting medium; the consistent downregulation pattern across both 7h and 24h time points strengthens the reliability of this response.",
+    "dataset_id": "DS_eb589156b3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomic profiling of the Cryptococcus neoformans transition to titan-like cells"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate sense-strand expression that peaks at 24 hours (771-852 TPM) during unisexual development in <i>Cryptococcus neoformans</i>, with a notable ~1.8-fold increase when PUM1 is overexpressed (1408-1475 TPM), while antisense expression remains minimal throughout.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "unisexual development",
+      "time course",
+      "PUM1 overexpression",
+      "sexual differentiation",
+      "Cryptococcus neoformans"
+    ],
+    "notes": "Expression shows temporal dynamics with 24h peak and clear PUM1-dependent enhancement; antisense expression is negligible except for slight increase at 48h, suggesting primarily sense-strand transcription",
+    "dataset_id": "DS_dc0fde1cf3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Time course transcriptomics during unisexual development of Cryptococcus"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all growth phases and oxygen conditions in <i>Cryptococcus neoformans</i>, with the highest expression in stationary phase (1038 TPM) and moderate upregulation under hypoxia compared to normoxia (771 vs 605 TPM).",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "hypoxia",
+      "normoxia",
+      "stationary phase",
+      "logarithmic phase",
+      "oxygen stress",
+      "growth phase"
+    ],
+    "notes": "Gene shows robust sense-strand expression (600-1000+ TPM) with minimal antisense transcription, suggesting it may play a housekeeping or stress-responsive role; the hypoxia upregulation and high stationary phase expression indicate potential involvement in stress adaptation or metabolic regulation.",
+    "dataset_id": "DS_93a50639b6",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Cryptococcus transcriptomes in hypoxia and normoxia conditions"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderately high expression across most <i>Cryptococcus neoformans</i> genotypes with sense strand expression ranging from 10-638 TPM, with notably higher expression in CM18 strains (especially the liv3 deletion mutant) compared to KN99 strains, and minimal antisense expression across all conditions.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "genotype comparison",
+      "deletion mutants",
+      "gat201",
+      "gat204",
+      "liv3",
+      "qsp1",
+      "strain differences"
+    ],
+    "notes": "Expression shows clear strain-dependent differences with CM18 background generally having higher expression than KN99 background; the liv3 deletion mutant shows the highest expression levels, suggesting potential regulatory effects of this gene deletion on the target gene's expression.",
+    "dataset_id": "DS_2a4a095021",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq to compare multiple Cryptococcus neoformans genotypes"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all conditions in <i>Cryptococcus neoformans</i>, with the highest expression during stationary phase at 30°C (~480 TPM) and moderate temperature-dependent reduction at 37°C, particularly in stationary phase.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "temperature response",
+      "growth phase",
+      "stationary phase",
+      "exponential phase",
+      "TSS-Seq",
+      "Cryptococcus neoformans"
+    ],
+    "notes": "Gene shows strong sense-strand expression (276-480 TPM) with minimal antisense expression (<10 TPM). The temperature effect is more pronounced in stationary phase, suggesting potential thermoregulation during growth transitions.",
+    "dataset_id": "DS_09d688636a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mapping TSS with TSS-Seq"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderately elevated expression in <i>Cryptococcus neoformans</i> with sense-strand TPM values ranging from ~87-194 across wild-type conditions, and exhibits temperature sensitivity with highest expression at 37°C during exponential growth, while the upf1Δ mutant shows intermediate expression levels.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "temperature response",
+      "growth phase",
+      "upf1 mutant",
+      "sense antisense",
+      "TSS mapping"
+    ],
+    "notes": "Strong sense-antisense bias (~40-80x higher sense expression) suggests proper transcriptional orientation; temperature upregulation (37°C vs 30°C) may indicate stress response involvement; upf1Δ mutant shows intermediate expression suggesting potential nonsense-mediated decay pathway involvement.",
+    "dataset_id": "DS_5c98701c8c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mapping TSS with TSS-Seq"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation at 37°C compared to 30°C in <i>Cryptococcus neoformans</i> JEC21, with expression increasing from ~610-757 TPM to ~867-973 TPM across exponential and stationary growth phases.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "temperature stress",
+      "heat shock",
+      "growth phase",
+      "exponential",
+      "stationary",
+      "upf1 deletion"
+    ],
+    "notes": "Expression is consistently high (96-98th percentile) across all sense strand conditions, with very low antisense expression suggesting proper strand specificity. The upf1 deletion mutant shows intermediate expression levels at 30°C.",
+    "dataset_id": "DS_2d477b2338",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Stranded mRNA-Seq for delineation of transcript ends in C. neoformans JEC21"
+  },
+  {
+    "one_sentence_summary": "This gene shows high expression levels (734-1502 TPM) in both wild-type and pdr802 mutant <i>Cryptococcus neoformans</i> cells, with a notable increase in the pdr802 mutant after 24 hours of growth in host-like conditions (from 734 to 1502 TPM), while wild-type expression remains relatively stable.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "pdr802 mutant",
+      "transcription factor",
+      "host-like conditions",
+      "DMEM culture",
+      "24 hour time course",
+      "pathogenicity"
+    ],
+    "notes": "Gene shows consistently high expression (97-99th percentile) across conditions with ~2-fold upregulation in pdr802 mutant at 24h; antisense expression is minimal suggesting genuine sense strand transcription; standard errors indicate biological replicates were performed.",
+    "dataset_id": "DS_5cb78d3a97",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The transcription factor Pdr802 regulates Titan cell production and Cryptococcus neoformans pathogenicity"
+  },
+  {
+    "one_sentence_summary": "This gene shows high expression levels (430-568 TPM) in all sense-strand conditions in <i>Cryptococcus neoformans</i>, with minimal differences between wild-type and cqs1Δ mutant strains, and no meaningful rescue effect from synthetic Qsp1 supplementation.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "sexual development",
+      "quorum sensing",
+      "cqs1 mutant",
+      "Qsp1 supplementation",
+      "V8 media"
+    ],
+    "notes": "Gene is highly expressed overall (95th+ percentile) but shows limited differential expression between conditions; antisense expression is negligible, confirming strand specificity of the signal.",
+    "dataset_id": "DS_e20baa3a59",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq of WT and cqs1delta strains during sexual development stage"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest upregulation in the rim101 mutant compared to wild-type <i>Cryptococcus neoformans</i> under capsule-inducing conditions, with expression levels of ~1190 TPM versus ~1102 TPM respectively.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Cryptococcus neoformans",
+      "rim101 mutant",
+      "capsule induction",
+      "virulence",
+      "cell wall",
+      "RNA-seq"
+    ],
+    "notes": "The gene is highly expressed in both conditions (>98th percentile), suggesting it may be constitutively important; the ~8% increase in the mutant is relatively modest but could be biologically relevant given the virulence phenotype context.",
+    "dataset_id": "DS_dcb0db2051",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Virulence of WT vs rim101 Mutant Cells"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal upregulation in <i>Cryptococcus neoformans</i> following eltrombopag treatment, with transcript abundance increasing slightly from 503.7 to 542.0 TPM (sense strand) while maintaining very high expression levels (>96th percentile) in both conditions.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antifungal",
+      "eltrombopag",
+      "Cryptococcus",
+      "drug treatment",
+      "thrombopoietin receptor agonist"
+    ],
+    "notes": "The gene is highly expressed in both conditions (>96th percentile) with only modest fold-change (~1.08x), suggesting it may be a constitutively expressed gene with limited response to eltrombopag treatment.",
+    "dataset_id": "DS_de50aeac08",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "RNA-Seq of cells treated with eltrombopag"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal differential expression across wild-type and mutant strains of <i>Cryptococcus neoformans</i> with or without flucytosine treatment, with log2 fold changes remaining close to zero (ranging from -0.09 to 0.16) and no clear pattern of response to drug treatment or genetic background.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "flucytosine",
+      "antifungal",
+      "sensor kinase",
+      "mutant strains",
+      "drug resistance",
+      "two-channel microarray"
+    ],
+    "notes": "All expression values are very close to zero with overlapping standard errors, suggesting this gene is not significantly responsive to flucytosine treatment or the genetic perturbations tested. The percentile values are generally low to moderate, confirming modest expression levels.",
+    "dataset_id": "DS_e78b6908c3",
+    "assay_type": "array",
+    "experiment_name": "Flucytosine Susceptiblity"
+  }
+]

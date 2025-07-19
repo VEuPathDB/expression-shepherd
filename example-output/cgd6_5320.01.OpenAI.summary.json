@@ -1,0 +1,23 @@
+{
+  "headline": "Expression dynamics of a gene in Cryptosporidium parvum during various stages of infection and treatment conditions",
+  "one_paragraph_summary": "<strong>Gene Expression Overview:</strong> The gene exhibits variable expression levels across experimental datasets, with notable upregulation during specific conditions. <ul> <li>Minimal expression is observed in <i>Cryptosporidium parvum</i> sporozoites, but a significant increase occurs post-infection in calf intestine and intracellular stages, peaking at 24-48 hours post-infection.</li> <li>GalNAc treatment also induces elevated expression levels under certain time points compared to controls.</li> <li>Lesser variations or steady expression profiles are noted in other datasets, such as PBS conditions or UV treatment, indicating context-specific gene regulation.</li> </ul> Although the exact function remains uncertain, the upregulation consistency in infection and developmental contexts suggests roles in parasite growth, infection establishment, or host interaction.",
+  "topics": [
+    {
+      "headline": "Elevated gene expression during infection stages and developmental progression",
+      "one_sentence_summary": "Experiments indicate strong upregulation of this gene in intracellular and developmental stages of <i>Cryptosporidium parvum</i>, suggesting significant involvement in infection progression and possible biological importance.",
+      "dataset_ids": [
+        "DS_865efa49f4",
+        "DS_eb01624959",
+        "DS_db22744127",
+        "DS_b14c36920f"
+      ]
+    },
+    {
+      "headline": "Impact of GalNAc on sporozoite gene expression",
+      "one_sentence_summary": "Gene expression increases at the 2-hour mark in GalNAc-treated sporozoites, suggesting a specific response to environmental stimuli.",
+      "dataset_ids": [
+        "DS_b786df5901"
+      ]
+    }
+  ]
+}

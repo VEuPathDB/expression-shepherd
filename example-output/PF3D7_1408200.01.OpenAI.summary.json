@@ -1,0 +1,26 @@
+{
+  "headline": "Dynamic Stage-Specific Expression of a Gene in <i>Plasmodium falciparum</i>",
+  "one_paragraph_summary": "<strong>Summary of Gene Expression:</strong> <ul> <li>The gene shows a dynamic expression profile through the intraerythrocytic developmental stages, peaking prominently in the early ring stage and declining thereafter, supporting its significant role in the parasite's life cycle.</li> <li>It also exhibits differential expression in other life cycle stages, such as sporozoites, where its expression varies between stages produced in mosquitos versus in vitro conditions.</li> <li>In stress and experimental setups, such as drug treatment or sexual differentiation, expression differences are generally low, suggesting specific rather than global regulatory roles.</li> </ul> These findings point to strong stage-specific transcriptional and post-transcriptional regulation aligning the gene's role with critical cellular and developmental processes in the malaria parasite.",
+  "topics": [
+    {
+      "headline": "Expression Dynamics in the Intraerythrocytic Developmental Cycle",
+      "one_sentence_summary": "The gene exhibits prominent cyclic expression during the intraerythrocytic cycle, peaking in early ring stages and dynamically decreasing as the cycle progresses.",
+      "dataset_ids": [
+        "DS_29940f3f82",
+        "DS_9c91e450ac",
+        "DS_a239464cb4",
+        "DS_74bf6512eb",
+        "DS_4582562a4b"
+      ]
+    },
+    {
+      "headline": "Stage-Specific Expression Patterns Across Other Life Stages",
+      "one_sentence_summary": "Differential expression is observed in the gene between sporozoite and asexual stages, particularly with higher expression during early blood stages and mosquito-produced sporozoites.",
+      "dataset_ids": [
+        "DS_cf291e2adb",
+        "DS_b6cdce990b",
+        "DS_6573eba8f8"
+      ]
+    }
+  ]
+}

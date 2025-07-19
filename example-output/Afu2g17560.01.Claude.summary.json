@@ -1,0 +1,55 @@
+{
+  "headline": "Iron-dependent gene dramatically downregulated by ACE1 deletion and responsive to metal homeostasis stress",
+  "one_paragraph_summary": "This <i>Aspergillus fumigatus</i> gene exhibits <strong>iron-dependent expression patterns</strong> and appears to be regulated by zinc homeostasis pathways. <ul><li>Shows dramatic 93-fold downregulation in ACE1 deletion mutants and 25-fold reduction under iron starvation</li><li>Displays high expression in dormant conidia but low expression during germination</li><li>Responds to hypoxic conditions with progressive upregulation</li><li>Shows sensitivity to cell wall stress agents like Congo Red</li></ul> The gene's strong dependence on iron availability, regulation by the ACE1 transcription factor involved in zinc homeostasis, and developmental stage-specific expression in conidia suggest it may function in <strong>metal homeostasis or stress response pathways</strong> critical for fungal survival and pathogenesis.",
+  "topics": [
+    {
+      "headline": "ACE1 transcription factor critically regulates gene expression in zinc homeostasis pathway",
+      "one_sentence_summary": "The gene shows dramatic 93-fold downregulation in ACE1 deletion mutants, suggesting direct regulation by this zinc homeostasis transcription factor.",
+      "dataset_ids": [
+        "DS_2b76656bb1"
+      ]
+    },
+    {
+      "headline": "Iron availability controls gene expression with dramatic reduction under starvation conditions",
+      "one_sentence_summary": "Iron starvation causes 25-fold reduction in gene expression regardless of oxidative stress, indicating iron-dependent regulation.",
+      "dataset_ids": [
+        "DS_dd0139d2b0"
+      ]
+    },
+    {
+      "headline": "Conidial dormancy maintains high expression while germination dramatically reduces transcript levels",
+      "one_sentence_summary": "The gene shows 83-fold higher expression in dormant versus germinated conidia, suggesting a key role in maintaining dormancy state.",
+      "dataset_ids": [
+        "DS_62ebc12b94"
+      ]
+    },
+    {
+      "headline": "Hypoxic conditions trigger progressive upregulation over time",
+      "one_sentence_summary": "Gene expression increases 11-fold during 36 hours of hypoxia exposure, indicating adaptive response to oxygen limitation.",
+      "dataset_ids": [
+        "DS_93c159b846"
+      ]
+    },
+    {
+      "headline": "Temporal regulation varies by strain and is modulated by host cell interaction",
+      "one_sentence_summary": "Strain AF293 shows 50-fold temporal upregulation that is suppressed during interaction with human epithelial cells, while strain CEA10 maintains stable expression.",
+      "dataset_ids": [
+        "DS_47a1a2ad67"
+      ]
+    },
+    {
+      "headline": "Growth medium composition significantly influences expression during germination",
+      "one_sentence_summary": "Gene expression is 13-fold higher in rich GPA medium compared to minimal medium during conidium germination.",
+      "dataset_ids": [
+        "DS_faa5674b55"
+      ]
+    },
+    {
+      "headline": "Cell wall stress agent Congo Red causes dramatic expression reduction across multiple strains",
+      "one_sentence_summary": "Congo Red treatment reduces gene expression from 75-98 TPM to 2-6 TPM across different <i>Aspergillus fumigatus</i> strains, indicating sensitivity to cell wall stress.",
+      "dataset_ids": [
+        "DS_d360a3549c"
+      ]
+    }
+  ]
+}

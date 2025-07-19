@@ -1,0 +1,35 @@
+{
+  "headline": "Gene expression associated with Toxoplasma gondii lifecycle and stage differentiation",
+  "one_paragraph_summary": "<strong>Expression of this <i>Toxoplasma gondii</i> gene varies notably across developmental and stress conditions:</strong><ul><li>It shows stark upregulation during bradyzoite development, both in vitro and in vivo, as seen across various experiments, suggesting a role in parasite differentiation.</li><li>Transcript levels are substantially higher in tissue cysts compared to tachyzoite stages, indicative of stage-specific regulation.</li><li>Expression modulation is also evident in stress-induced bradyzoite differentiation and specific strain-based profiles, pointing to potential functional significance.</li><li>Temporal patterns mark its involvement in dynamic processes post-infection. These observations might imply the gene's role in regulating critical lifecycle transitions in the parasite.</li></ul>",
+  "topics": [
+    {
+      "headline": "Expression linked to bradyzoite differentiation and stress conditions",
+      "one_sentence_summary": "This gene exhibits upregulation during bradyzoite development, both in standard transitions and stress-induced differentiation in <i>Toxoplasma gondii</i>.",
+      "dataset_ids": [
+        "DS_e7467c0306",
+        "DS_749cb10dcf",
+        "DS_2daab8c933",
+        "DS_386bac2860",
+        "DS_2750122e82",
+        "DS_50943f57a2"
+      ]
+    },
+    {
+      "headline": "Stage-specific and strain-specific expression patterns",
+      "one_sentence_summary": "The gene shows stage-specific modulation, elevated in tissue cysts compared to tachyzoites, and significant variation depending on <i>Toxoplasma gondii</i> strain.",
+      "dataset_ids": [
+        "DS_73d06a9e7b",
+        "DS_173528b522"
+      ]
+    },
+    {
+      "headline": "Dynamic expression during host infection and cell cycle processing",
+      "one_sentence_summary": "Temporal and cell cycle data suggest this gene might be dynamically regulated during host infection or cellular processes in <i>Toxoplasma gondii</i>.",
+      "dataset_ids": [
+        "DS_c1a3dbb014",
+        "DS_78959dea55",
+        "DS_4362334059"
+      ]
+    }
+  ]
+}

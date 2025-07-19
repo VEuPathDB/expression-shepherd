@@ -1,0 +1,22 @@
+{
+  "headline": "Stage-specific upregulation during intracellular development and natural intestinal infection",
+  "one_paragraph_summary": "This gene shows <strong>dramatic stage-specific expression patterns</strong> in <i>Cryptosporidium parvum</i>, with particularly high levels during intracellular development and natural intestinal infection. <ul><li>Expression peaks at 6-24 hours post-infection (251-323 TPM) compared to sporozoites (3.7-7.3 TPM)</li><li>Natural calf intestinal infection shows much higher expression than in vitro cell culture</li><li>Intracellular stages express 44-fold higher levels than oocysts</li><li>Strong antisense expression (up to 159 TPM) suggests potential regulatory function</li></ul> The consistent upregulation during early-to-mid infection stages and dramatically higher expression in natural versus artificial infection conditions suggest this gene may be critical for establishing infection in the intestinal environment and responding to host-specific factors.",
+  "topics": [
+    {
+      "headline": "Peak expression during early intracellular development phases",
+      "one_sentence_summary": "The gene shows consistent upregulation at 6-24 hours post-infection across multiple experiments, with 44-fold higher expression in intracellular stages compared to dormant oocysts.",
+      "dataset_ids": [
+        "DS_eb01624959",
+        "DS_b14c36920f",
+        "DS_2bf995383e"
+      ]
+    },
+    {
+      "headline": "Dramatically higher expression in natural intestinal infection versus cell culture",
+      "one_sentence_summary": "Expression levels in calf small intestine samples (115-323 TPM) are substantially higher than in vitro HCT-8 cell infections (18-40 TPM), indicating strong responsiveness to the natural host intestinal environment.",
+      "dataset_ids": [
+        "DS_865efa49f4"
+      ]
+    }
+  ]
+}

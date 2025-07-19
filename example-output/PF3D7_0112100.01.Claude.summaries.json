@@ -1,0 +1,681 @@
+[
+  {
+    "one_sentence_summary": "This gene shows dramatic upregulation specifically in the ookinete stage (2375.92 TPM, 99.16th percentile) compared to very low expression across all other <i>P. falciparum</i> life cycle stages tested.",
+    "biological_importance": 5,
+    "confidence": 5,
+    "experiment_keywords": [
+      "life cycle",
+      "ookinete",
+      "gametocyte",
+      "asexual stages",
+      "stage-specific",
+      "mosquito",
+      "sexual development"
+    ],
+    "notes": "The >500-fold increase in ookinete expression compared to other stages suggests this gene has a highly specialized function in mosquito midgut development or early sporogonic stages.",
+    "dataset_id": "DS_66f9e70b8a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of 7 sexual and asexual life stages"
+  },
+  {
+    "one_sentence_summary": "This gene shows peak expression in purified merozoites (66.2 TPM, 67th percentile) with moderately high expression in young rings (30.6 TPM, 57th percentile), but is substantially downregulated during trophozoite and schizont stages (3-9 TPM, 13-22nd percentiles) throughout the <i>Plasmodium falciparum</i> intraerythrocytic development cycle.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "intraerythrocytic cycle",
+      "blood stage",
+      "merozoites",
+      "ring stage",
+      "trophozoite",
+      "schizont",
+      "developmental regulation"
+    ],
+    "notes": "Expression pattern suggests this gene may be important for merozoite function and early ring stage development, with clear stage-specific regulation across the parasite life cycle.",
+    "dataset_id": "DS_fe2b5a278f",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Intraerythrocytic development cycle transcriptome (2019)"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits a biphasic expression pattern during the <i>Plasmodium falciparum</i> intraerythrocytic cycle, with peak expression occurring early in the ring stage (6-8 hours post invasion, ~19 TPM) and a secondary peak during late schizont/early ring transition (46 hours, ~15 TPM), separated by a pronounced trough with minimal expression during trophozoite and early schizont stages (34-42 hours, <4 TPM).",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "intraerythrocytic cycle",
+      "biphasic expression",
+      "ring stage",
+      "schizont stage",
+      "cell cycle regulation",
+      "periodic expression"
+    ],
+    "notes": "The expression pattern shows clear periodicity consistent with cell cycle regulation, with approximately 10-fold dynamic range between peak and trough expression levels, suggesting important functional roles during specific developmental stages.",
+    "dataset_id": "DS_29940f3f82",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "High resolution intraerythrocytic time course transcriptome by RNA-Seq"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits complex cyclical expression during the asexual development cycle of <i>P. falciparum</i>, with peak total mRNA abundance occurring around 0-6 hours post-infection and again at 42-47 hours, while showing distinct patterns between newly transcribed (labeled) and stable (unlabeled) mRNA pools throughout the 48-hour timecourse.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "cyclical",
+      "transcription",
+      "mRNA_stability",
+      "asexual_development",
+      "P_falciparum",
+      "thiol_labeling",
+      "48_hour_timecourse"
+    ],
+    "notes": "The gene shows interesting dynamics with total mRNA peaking early (0-6h) and late (42-47h) in the cycle, while newly transcribed mRNA shows different timing, suggesting complex regulation of both transcription and mRNA stability. The unlabeled fraction shows a complementary pattern, indicating differential contributions of transcription versus mRNA decay throughout the parasite lifecycle.",
+    "dataset_id": "DS_0fa4237b4b",
+    "assay_type": "array",
+    "experiment_name": "Pfal3D7 real-time transcription and decay"
+  },
+  {
+    "one_sentence_summary": "This gene shows male-specific expression in <i>Plasmodium falciparum</i> gametocytes, with detectable expression only in male gametocytes (3.22 FPKM) and no expression in female gametocytes.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "gametocyte",
+      "sexual differentiation",
+      "male-specific",
+      "strand-specific RNA-seq",
+      "Plasmodium falciparum"
+    ],
+    "notes": "Strong sex-specific expression pattern with male gametocytes showing 16.82nd percentile expression while female gametocytes show minimal expression (0.02nd percentile), suggesting potential role in male gametocyte biology or sexual differentiation.",
+    "dataset_id": "DS_a518f45975",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gametocyte Transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene shows peak expression during the early ring stage (0-8 hours) with ~25-29 TPM, followed by a dramatic decline to minimum levels during trophozoite and early schizont stages (16-40 hours) with ~4-6 TPM, and partial recovery in late schizonts (48 hours) with ~11-12 TPM.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intraerythrocytic development",
+      "blood stage",
+      "ring stage",
+      "trophozoite",
+      "schizont",
+      "cell cycle",
+      "temporal expression"
+    ],
+    "notes": "Strong biphasic expression pattern with >7-fold change between peak and trough suggests important role in early parasite development; percentile rankings confirm this temporal regulation relative to other genes.",
+    "dataset_id": "DS_8ecf65d1b7",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Blood stage transcriptome (3D7)"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression during the ring stage (0h) in both steady-state (2.61 TPM) and polysomal RNA (23.07 TPM), with expression virtually absent during trophozoite (18h) and schizont (36h) stages, indicating strong ring-stage-specific transcription and translation in <i>P. falciparum</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "asexual cell cycle",
+      "ring stage",
+      "stage-specific expression",
+      "polysomal RNA",
+      "steady-state mRNA",
+      "temporal regulation"
+    ],
+    "notes": "The ~9-fold higher polysomal vs steady-state expression at ring stage suggests active translation, while the complete absence at later stages indicates tight temporal control typical of cell-cycle regulated genes in malaria parasites.",
+    "dataset_id": "DS_090793ccdd",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Polysomal and steady-state asexual stage transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in the ring stage (23.99 TPM, 50th percentile) with dramatically lower expression in trophozoite and schizont stages (both <2.5 TPM, ~17th percentile) in <i>Plasmodium falciparum</i>, indicating strong stage-specific upregulation during the ring stage of the asexual life cycle.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "asexual life cycle",
+      "ring stage",
+      "trophozoite",
+      "schizont",
+      "stage-specific expression",
+      "Plasmodium falciparum"
+    ],
+    "notes": "The gene shows a clear ~12-fold difference between ring stage and the other two stages, with antisense reads present only in ring stage, suggesting tight developmental regulation during the asexual cycle.",
+    "dataset_id": "DS_b95a38be5e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of the asexual life stages"
+  },
+  {
+    "one_sentence_summary": "This gene exhibits clear cell cycle-regulated expression in <i>Plasmodium falciparum</i> with peak transcript abundance early in the intraerythrocytic development cycle (2 hours, 28.85 TPM) followed by a gradual decline to minimal levels mid-cycle, and a secondary rise toward the end of the 48-hour period.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "cell cycle",
+      "intraerythrocytic development",
+      "temporal expression",
+      "circadian",
+      "periodic expression"
+    ],
+    "notes": "The expression pattern shows strong periodicity with ~24-hour cycling, suggesting cell cycle regulation. Antisense expression is negligible throughout most timepoints with only trace detection at 30 and 48 hours. The percentile rankings confirm this is among the more highly expressed genes during peak timepoints.",
+    "dataset_id": "DS_74bf6512eb",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "IDC in constant temperature and darkness (2020)"
+  },
+  {
+    "one_sentence_summary": "This gene shows strain-specific expression patterns during the intraerythrocytic development cycle, with HB3 showing highest expression in early stages (0-16 hours, ~30-40 TPM), IT displaying a biphasic pattern with peaks at 0 and 48 hours (~19 TPM), while 3D7 maintains consistently low expression throughout the cycle (1-7 TPM).",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intraerythrocytic development cycle",
+      "strain variation",
+      "temporal expression",
+      "DAFT-seq",
+      "Plasmodium falciparum"
+    ],
+    "notes": "Strong strain-specific differences suggest potential regulatory divergence; antisense transcription is minimal across all strains and timepoints; HB3 shows the most dramatic temporal regulation with >10-fold changes",
+    "dataset_id": "DS_416070059c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Intraerythrocytic development cycle transcriptome by DAFT-Seq (3D7, HB3, IT, 2020)"
+  },
+  {
+    "one_sentence_summary": "This gene shows peak expression at 10 hours post-invasion (32.46 TPM) in the <i>P. falciparum</i> intraerythrocytic development cycle, followed by a gradual decline through 35 hours, with minimal antisense transcription except at 40 hours.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intraerythrocytic development cycle",
+      "Plasmodium falciparum",
+      "time-series",
+      "parasite lifecycle",
+      "early trophozoite"
+    ],
+    "notes": "Expression pattern suggests early trophozoite-specific function with ~11-fold peak over baseline; unexpected antisense signal at T40 may indicate overlapping transcription or alternative processing.",
+    "dataset_id": "DS_ee861a9187",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Intraerythrocytic development cycle transcriptome (2018)"
+  },
+  {
+    "one_sentence_summary": "This gene shows cyclic expression across the intraerythrocytic development cycle in <i>P. falciparum</i>, with peak upregulation during early ring stage (hours 4-13) in HB3 strain (reaching ~2-fold increase), moderate upregulation in 3D7 strain, and minimal expression changes in Dd2 strain.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "microarray",
+      "time-series",
+      "erythrocytic",
+      "development",
+      "strain-specific",
+      "cyclic"
+    ],
+    "notes": "Expression pattern shows clear strain-specific differences, with HB3 displaying the most robust cyclic pattern and Dd2 showing attenuated expression changes, suggesting potential strain-dependent regulation of this gene during parasite development.",
+    "dataset_id": "DS_28ef9b0494",
+    "assay_type": "array",
+    "experiment_name": "Erythrocytic expression time series (3D7, DD2, HB3)"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in <i>Plasmodium falciparum</i> EBA140 knockout parasites (2.81 log2) and EBA175 knockout parasites in the W2mef strain (2.63 log2) compared to wild-type controls, suggesting potential compensatory expression when sialic acid-dependent invasion ligands are disrupted.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "invasion pathways",
+      "knockout mutants",
+      "sialic acid-dependent",
+      "EBA140",
+      "EBA175",
+      "microarray",
+      "erythrocyte invasion"
+    ],
+    "notes": "The upregulation is most pronounced in EBA140 and EBA175 knockouts (percentiles 39.74-39.85%), while other knockouts and time points show minimal changes, suggesting this gene may play a role in invasion pathway switching or compensation.",
+    "dataset_id": "DS_3ef554e244",
+    "assay_type": "array",
+    "experiment_name": "Invasion pathway knockouts"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest stage-specific expression in wild type <i>P. falciparum</i> with highest levels at ring stage, and exhibits altered expression patterns in both sir2a and sir2b knockout lines, particularly reduced expression in sir2b KO trophozoites.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Sir2 knockout",
+      "intraerythrocytic cycle",
+      "stage-specific expression",
+      "chromatin regulation",
+      "microarray"
+    ],
+    "notes": "The wild type shows a declining expression trend from ring to schizont stages, while both knockout lines display disrupted stage-specific patterns, suggesting Sir2 proteins may regulate this gene's temporal expression during the parasite lifecycle.",
+    "dataset_id": "DS_7349a4c6a5",
+    "assay_type": "array",
+    "experiment_name": "Two Sir2 KO lines expression profiling"
+  },
+  {
+    "one_sentence_summary": "This gene shows cyclical expression during the <i>Plasmodium falciparum</i> asexual blood stage cycle, with peak upregulation in early stages (hours 11-12, ~1.7-1.9 fold increase) followed by consistent downregulation through mid-cycle stages (hours 29-36, ~1.5-1.8 fold decrease) before returning to baseline levels.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "cyclical",
+      "asexual blood stage",
+      "time-series",
+      "clonal variation",
+      "microarray"
+    ],
+    "notes": "Clear cyclical pattern consistent across multiple clonal strains suggests cell cycle-regulated expression; moderate fold changes but consistent timing indicates functional relevance to parasite development",
+    "dataset_id": "DS_84d52f99c7",
+    "assay_type": "array",
+    "experiment_name": "Asexual blood stage transcriptomes of clonal strains"
+  },
+  {
+    "one_sentence_summary": "This gene shows a notable spike in expression at 1-day post-induction during <i>Plasmodium falciparum</i> gametocyte development, reaching the 93rd percentile, followed by generally suppressed expression throughout the remainder of the time course.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "gametocyte",
+      "development",
+      "sexual",
+      "commitment",
+      "time-course",
+      "microarray"
+    ],
+    "notes": "The transient peak at day 1 post-induction suggests potential involvement in early gametocyte commitment processes, with subsequent downregulation during maturation phases.",
+    "dataset_id": "DS_57b027468b",
+    "assay_type": "array",
+    "experiment_name": "Gametocyte time course from commitment to maturity"
+  },
+  {
+    "one_sentence_summary": "This gene shows peak expression during the early-to-mid trophozoite stage (around 15-20 hours post-infection) in the <i>Plasmodium falciparum</i> intraerythrocytic developmental cycle, with expression levels declining sharply in later schizont stages.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intraerythrocytic development",
+      "trophozoite stage",
+      "temporal expression",
+      "malaria parasite lifecycle"
+    ],
+    "notes": "Expression pattern shows clear temporal regulation with ~6-fold difference between peak (hour 15) and baseline levels; scaled data suggests even stronger stage-specific regulation when accounting for overall transcriptional activity changes during the cycle.",
+    "dataset_id": "DS_a239464cb4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome during intraerythrocytic development"
+  },
+  {
+    "one_sentence_summary": "This gene shows low expression in field isolates from pregnant women (0.61 TPM, 11th percentile) and moderate expression in isolates from children (3.62 TPM, 24th percentile), while being essentially absent in the laboratory <i>P. falciparum</i> 3D7 reference strain.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "field isolates",
+      "pregnant women",
+      "children",
+      "laboratory strain",
+      "3D7",
+      "clinical parasites",
+      "NSR-seq"
+    ],
+    "notes": "The gene appears to be preferentially expressed in field isolates compared to laboratory strain, with highest expression in pediatric isolates, suggesting potential adaptation to clinical conditions or host-specific factors.",
+    "dataset_id": "DS_198bfa8376",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "NSR-seq Transcript Profiling of malaria-infected pregnant women and children"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong early-stage expression in the <i>Plasmodium falciparum</i> intraerythrocytic developmental cycle, with highest transcript abundance at 10 hours post-invasion (3.42 TPM, 32nd percentile) followed by progressive downregulation through 40 hours (0.27 TPM, 13th percentile), with no detectable antisense transcription.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intraerythrocytic cycle",
+      "developmental regulation",
+      "early-stage expression",
+      "time-course",
+      "strand-specific"
+    ],
+    "notes": "Clear temporal regulation pattern with 12-fold decrease from peak to trough expression; percentile rankings confirm moderate expression levels relative to other genes in the experiment.",
+    "dataset_id": "DS_0cabe39833",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Strand specific transcriptome of the intraerythrocytic developmental cycle"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in cultured sporozoites (5.23 TPM) compared to minimal expression in fresh sporozoites from mosquito salivary glands (0 TPM) and moderate expression in asexual blood stages (1.32 TPM) of <i>Plasmodium falciparum</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "sporozoite",
+      "blood stage",
+      "development",
+      "axenic culture",
+      "mosquito salivary glands",
+      "Plasmodium falciparum"
+    ],
+    "notes": "The dramatic difference between fresh sporozoites (0 TPM) and cultured sporozoites (5.23 TPM) suggests this gene may be induced during in vitro cultivation or may represent a stress response to axenic conditions.",
+    "dataset_id": "DS_cf291e2adb",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mosquito or cultured sporozoites and blood stage transcriptome (NF54)"
+  },
+  {
+    "one_sentence_summary": "This gene shows early-to-mid cycle expression in <i>P. falciparum</i> with peak transcript levels at 7-15 hours post-invasion (8.99 TPM, 50th percentile) followed by gradual decline, while antisense transcripts remain undetectable throughout the intraerythrocytic cycle.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intraerythrocytic cycle",
+      "time series",
+      "early expression",
+      "trophozoite stage",
+      "P. falciparum",
+      "RNA-Seq"
+    ],
+    "notes": "Expression pattern suggests early trophozoite stage function with moderate expression levels; the presence of both sense and antisense measurements provides confidence in the observed pattern",
+    "dataset_id": "DS_715bf2deda",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Intraerythrocytic cycle transcriptome (3D7)"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate expression levels (12-24 TPM) across all conditions in <i>Plasmodium falciparum</i>, with wild-type parasites displaying reduced expression under heat shock (41°C vs 37°C), while heat shock-sensitive mutants (Δ-LRR5 and Δ-DHC) maintain relatively stable expression levels during temperature stress.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "heat shock response",
+      "temperature stress",
+      "mutant analysis",
+      "febrile conditions",
+      "thermal adaptation"
+    ],
+    "notes": "The wild-type strain shows clear downregulation during heat shock (18.44 to 2.65 TPM), while the mutants show less dramatic changes, suggesting this gene may be part of the normal heat shock response that is disrupted in the sensitive mutants. Antisense expression is negligible except for one condition.",
+    "dataset_id": "DS_e973eadd57",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Heat shock response in sensitive mutants (LRR5, DHC)"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate expression levels across all <i>Plasmodium falciparum</i> strains with different sequestration phenotypes, with the highest expression in the HB3-CD36 binding strain (8.47 TPM) and lowest in the 3D7-Hbec-5i binding strain (1.19 TPM), suggesting potential involvement in cytoadherence mechanisms.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "cytoadherence",
+      "sequestration",
+      "ICAM-1",
+      "CD36",
+      "brain endothelial cells",
+      "strain comparison"
+    ],
+    "notes": "Expression shows clear strain-specific differences with CD36-binding strain having highest expression, antisense reads are negligible across all samples indicating proper strand-specific sequencing",
+    "dataset_id": "DS_26bc402eec",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of sequestration phenotypes"
+  },
+  {
+    "one_sentence_summary": "This gene shows highly variable expression across both severe and uncomplicated malaria samples in <i>Plasmodium falciparum</i> clinical isolates, with no clear differential expression pattern between disease severity groups, as expression ranges from 0 to over 100 TPM in both conditions with substantial inter-sample heterogeneity.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "malaria",
+      "clinical isolates",
+      "disease severity",
+      "Papua Indonesia",
+      "patient samples",
+      "severe malaria",
+      "uncomplicated malaria"
+    ],
+    "notes": "High inter-sample variability likely reflects the clinical isolate nature of samples and possible differences in parasite life cycle stages, genetic backgrounds, or host factors rather than disease severity-associated expression differences.",
+    "dataset_id": "DS_aae60e6bf7",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome in severe vs uncomplicated malaria"
+  },
+  {
+    "one_sentence_summary": "This gene shows relatively stable expression across most <i>P. falciparum</i> developmental stages with a modest peak in sporozoites compared to other life cycle stages.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "life cycle",
+      "developmental stages",
+      "sporozoites",
+      "asexual stages",
+      "gametocytes",
+      "microarray"
+    ],
+    "notes": "Expression values are consistently in the 3.3-4.0 range with sporozoites showing the highest expression (4.04) and highest percentile ranking (4.84), while trophozoite stages show the lowest expression levels and percentile rankings.",
+    "dataset_id": "DS_4582562a4b",
+    "assay_type": "array",
+    "experiment_name": "Life cycle expression data (3D7)"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate expression levels throughout <i>Plasmodium falciparum</i> gametocyte development with peak expression on day 9 (4.87 log2) and relatively stable expression across other time points (ranging 3.93-4.87 log2), indicating constitutive expression with a minor mid-stage upregulation.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "gametocyte",
+      "development",
+      "sexual",
+      "stage",
+      "microarray",
+      "time-series"
+    ],
+    "notes": "Expression values show limited dynamic range (0.94 log2 units) suggesting this gene maintains relatively constant expression throughout gametocytogenesis, with the day 9 peak representing only modest upregulation above baseline levels.",
+    "dataset_id": "DS_6d6cf09eae",
+    "assay_type": "array",
+    "experiment_name": "Gametocyte stages I-V transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene shows a cyclic expression pattern across the asexual blood stage cycle in <i>Plasmodium falciparum</i>, with higher expression early in the cycle (4-12 hpi) and lower expression in later stages (28-44 hpi), but no substantial differential response to PfBDP1 knockdown conditions.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "microarray",
+      "asexual",
+      "blood",
+      "stage",
+      "cycle",
+      "PfBDP1",
+      "knockdown",
+      "time",
+      "series",
+      "cyclic"
+    ],
+    "notes": "The expression pattern appears to be primarily driven by cell cycle timing rather than the experimental manipulation (Shld1 presence/absence), suggesting this gene may not be strongly regulated by PfBDP1 function.",
+    "dataset_id": "DS_fef2fd0098",
+    "assay_type": "array",
+    "experiment_name": "Transcriptome of Bromodomain protein conditional knockouts over the IDC"
+  },
+  {
+    "one_sentence_summary": "This gene shows low but detectable expression across most <i>P. falciparum</i> life cycle stages with virtually no expression in the schizont stage, and notably exhibits antisense transcription specifically in stage V gametocytes.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Plasmodium falciparum",
+      "life cycle stages",
+      "gametocytes",
+      "trophozoite",
+      "schizont",
+      "strand-specific",
+      "antisense transcription"
+    ],
+    "notes": "The detection of antisense transcription in stage V gametocytes (0.2 TPM, 46.66th percentile) is particularly interesting and may suggest regulatory mechanisms active during late gametocyte development. Overall expression levels are quite low across all stages.",
+    "dataset_id": "DS_d18037ecc4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Strand specific transcriptomes of 4 life cycle stages"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest expression levels across all three <i>Plasmodium falciparum</i> life cycle stages with slightly higher expression in ring stage parasites (3.18 TPM) compared to oocysts (2.85 TPM) and sporozoites (1.29 TPM), indicating constitutive but low-level expression without dramatic stage-specific regulation.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Plasmodium falciparum",
+      "life cycle stages",
+      "sporozoite",
+      "oocyst",
+      "ring stage",
+      "constitutive expression",
+      "developmental stages"
+    ],
+    "notes": "Expression levels are consistently low across all stages (1.29-3.18 TPM) with high standard errors relative to mean values, suggesting modest biological significance. Antisense expression is minimal or absent, indicating proper sense-strand transcription. The gene ranks in lower percentiles (19-40th) compared to other genes in the experiment.",
+    "dataset_id": "DS_b6cdce990b",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Ring, Oocyst and Sporozoite Transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest upregulation during early stages of the <i>Plasmodium falciparum</i> intraerythrocytic cycle, peaking at 8 hours post-infection (8.83 TPM) before declining to lower levels in later stages (2.48-2.79 TPM).",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intraerythrocytic cycle",
+      "Plasmodium falciparum",
+      "time course",
+      "early expression",
+      "ring stage"
+    ],
+    "notes": "Expression pattern suggests potential involvement in early parasite development processes, with a clear temporal regulation showing highest activity during ring stage transition.",
+    "dataset_id": "DS_87e4fcafff",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Intraerythrocytic development cycle transcriptome by UTR-Seq (2020)"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in sexually committed schizonts compared to asexually committed schizonts in <i>Plasmodium falciparum</i>, with expression increasing from 3.71 to 4.24 (log2 scale).",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "sexual commitment",
+      "gametocyte",
+      "schizont",
+      "microarray",
+      "FACS sorting",
+      "fluorescent reporter"
+    ],
+    "notes": "The fold-change is modest (~1.4x) and standard errors overlap, suggesting limited biological significance despite the directional increase in sexually committed parasites.",
+    "dataset_id": "DS_4f365680c8",
+    "assay_type": "array",
+    "experiment_name": "Sexually vs asexually committed schizont transcriptional profiles"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate expression levels across malaria-infected Gambian children with substantial inter-individual variability (ranging from ~2-112 TPM in sense direction), but no clear pattern distinguishing between uncomplicated and severe malaria cases based on sample naming conventions.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "malaria",
+      "Plasmodium falciparum",
+      "clinical samples",
+      "host-pathogen",
+      "dual RNA-seq",
+      "pediatric"
+    ],
+    "notes": "Expression shows high variability between individuals but lacks clear experimental grouping information to assess disease severity associations; antisense expression is generally very low, suggesting primarily sense-strand transcription",
+    "dataset_id": "DS_b1ac1e329c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Dual transcriptomes of malaria-infected Gambian children (RNA-Seq)"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal expression in asexual blood stages but is upregulated in mosquito-stage parasites, with highest expression in salivary gland sporozoites (0.98 TPM, 19.65th percentile) and moderate expression in midgut oocysts (0.55 TPM, 17.34th percentile).",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Plasmodium falciparum",
+      "life cycle stages",
+      "mosquito vector",
+      "sporozoites",
+      "oocysts",
+      "asexual blood stages",
+      "stage-specific expression"
+    ],
+    "notes": "Expression values are relatively low overall (< 1 TPM), and antisense expression is detected in sporozoites, suggesting possible regulatory complexity; standard errors equal the mean values indicating high variability in the mosquito stages",
+    "dataset_id": "DS_2aa311d6a0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Asexual blood stages, salivary gland sporozoite and midgut oocyst transcriptomes"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently low expression across both trophozoite and schizont stages of <i>Plasmodium falciparum</i>, with minimal stage-specific variation and expression levels below the 20th percentile in most conditions.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "trophozoite",
+      "schizont",
+      "developmental stages",
+      "PfBDP1",
+      "low expression"
+    ],
+    "notes": "The antisense expression is notably variable between stages, dropping to zero in schizonts, but overall expression levels are consistently low with poor percentile rankings, suggesting this gene may have minimal activity during these particular developmental stages.",
+    "dataset_id": "DS_9c91e450ac",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Trophozoite and Schizont transcriptomes of PfBDP1HA"
+  },
+  {
+    "one_sentence_summary": "This gene shows relatively stable expression across patient isolates with modest variation, displaying RMA normalized values ranging from 2.46 to 2.71 (log2 scale) and percentile rankings from 1.21% to 63.28%, indicating no substantial differential expression among <i>Plasmodium falciparum</i> samples from different malaria patients.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "patient isolates",
+      "ex vivo culture",
+      "malaria",
+      "microarray",
+      "clinical samples",
+      "mature-stage parasites"
+    ],
+    "notes": "The narrow range of RMA values (0.25 log2 units) contrasts with the wide percentile range, suggesting this gene has consistently low-to-moderate expression relative to the transcriptome across different patient backgrounds.",
+    "dataset_id": "DS_1556ad1e1e",
+    "assay_type": "array",
+    "experiment_name": "Microarray Expression from Patient Samples"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal response to chloroquine treatment across the three isogenic <i>Plasmodium falciparum</i> lines, with expression values remaining relatively stable between 3.9-4.2 log2 units and showing only subtle strain-specific differences.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "chloroquine",
+      "drug resistance",
+      "pfcrt",
+      "isogenic lines",
+      "microarray",
+      "Plasmodium falciparum"
+    ],
+    "notes": "Expression values are consistently low across all conditions (below 20th percentile in most samples), suggesting this gene may not be highly relevant to chloroquine response mechanisms in these particular strains.",
+    "dataset_id": "DS_3f06ca816e",
+    "assay_type": "array",
+    "experiment_name": "Three Isogenic Lines w/ CQ Treatment: expression profiles"
+  },
+  {
+    "one_sentence_summary": "No expression data is available for this gene in the ribosome profiling experiment examining translational efficiency across five asexual blood stage developmental stages of <i>P. falciparum</i>.",
+    "biological_importance": 0,
+    "confidence": 5,
+    "experiment_keywords": [
+      "ribosome profiling",
+      "translational efficiency",
+      "asexual blood stages",
+      "developmental cycle",
+      "P. falciparum"
+    ],
+    "notes": "The data array is empty, indicating no expression values were recorded for this gene across any of the five developmental stages (ring, early trophozoite, late trophozoite, schizont, merozoite).",
+    "dataset_id": "DS_406e180ec4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Ribosome and steady state mRNA-Seq of asexual cell cycle stages"
+  },
+  {
+    "one_sentence_summary": "This gene shows no detectable expression in either oocyst sporozoites or salivary gland sporozoites of <i>Plasmodium falciparum</i>, with transcript abundance at zero TPM across all conditions.",
+    "biological_importance": 0,
+    "confidence": 5,
+    "experiment_keywords": [
+      "sporozoite",
+      "oocyst",
+      "salivary gland",
+      "malaria",
+      "infectivity",
+      "life cycle"
+    ],
+    "notes": "All expression values are zero with 0.02 percentile ranking, indicating this gene is among the lowest expressed genes in the transcriptome. The antisense measurements also show zero expression, confirming lack of transcriptional activity.",
+    "dataset_id": "DS_c28828ce84",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Oocyst and salivary gland sporozoite transcriptome comparison in P. falciparum"
+  },
+  {
+    "one_sentence_summary": "This gene shows no detectable expression (0 TPM) in both <i>in vitro</i> and mosquito-produced <i>Plasmodium falciparum</i> sporozoites, indicating it is not transcriptionally active in the sporozoite stage regardless of production method.",
+    "biological_importance": 0,
+    "confidence": 5,
+    "experiment_keywords": [
+      "sporozoite",
+      "in vitro production",
+      "mosquito production",
+      "vaccine development",
+      "stage-specific expression"
+    ],
+    "notes": "Gene shows complete absence of expression across all conditions and replicates with 0.02 percentile ranking, suggesting it may be inactive during the sporozoite stage or require different experimental conditions for detection.",
+    "dataset_id": "DS_6573eba8f8",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Comparison of in vitro versus aseptic mosquito produced sporozoites by RNA-seq"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal differential expression between the two isogenic <i>P. falciparum</i> clones across all intraerythrocytic cycle stages, with fold changes near zero and consistently low expression percentiles.",
+    "biological_importance": 0,
+    "confidence": 4,
+    "experiment_keywords": [
+      "microarray",
+      "isogenic clones",
+      "intraerythrocytic cycle",
+      "antigenic variation",
+      "Plasmodium falciparum"
+    ],
+    "notes": "All fold change values are very close to zero (-0.01 to -0.05) with small standard errors, and percentile rankings are consistently low (3-13%), indicating this gene is not among the differentially expressed transcripts identified in this comparative study.",
+    "dataset_id": "DS_ee181c11b8",
+    "assay_type": "array",
+    "experiment_name": "3D7AH1S2 vs. 3D7S8.4 (ring, trophozite, schizont)"
+  }
+]

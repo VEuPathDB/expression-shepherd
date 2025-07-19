@@ -1,0 +1,139 @@
+[
+  {
+    "one_sentence_summary": "This gene shows substantial upregulation in intracellular stages at 24 hours post-infection (15.7 TPM) compared to oocysts (0.37 TPM) in <i>Cryptosporidium parvum</i>, indicating stage-specific expression during the parasitic life cycle.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intracellular",
+      "oocysts",
+      "life cycle",
+      "stage-specific",
+      "parasitic development"
+    ],
+    "notes": "Expression shows ~42-fold higher levels in intracellular stages versus oocysts, with good statistical support from biological replicates (standard error available). Antisense reads are minimal, confirming genuine sense-strand expression.",
+    "dataset_id": "DS_eb01624959",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of oocyst and intracellular stages"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression at 24 hours post-infection (66.63 TPM) followed by moderate expression in asexual stages (30 TPM), with substantially lower expression in female stages and sporozoites, indicating stage-specific upregulation during early infection.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "lifecycle",
+      "development",
+      "sexual_stages",
+      "asexual_reproduction",
+      "sporozoites",
+      "infection_timing",
+      "stage_specific"
+    ],
+    "notes": "Expression pattern suggests this gene may play an important role in early infection establishment, with ~3-fold higher expression at 24hr compared to other stages except asexual parasites",
+    "dataset_id": "DS_b14c36920f",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Lifecycle progression and sexual development"
+  },
+  {
+    "one_sentence_summary": "This gene shows peak expression at 12 hours post-infection in <i>Cryptosporidium parvum</i>, followed by a sharp decline to very low levels by 24-72 hours, indicating early-stage specific upregulation during the parasite life cycle.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "time course",
+      "post-infection",
+      "life cycle",
+      "RT-PCR",
+      "HCT8 cells"
+    ],
+    "notes": "Expression pattern suggests this gene may play a role in early developmental processes during the first 12-24 hours of infection, with the standardized value of 1.0 at 12 hours representing the maximum expression across all time points.",
+    "dataset_id": "DS_2bf995383e",
+    "assay_type": "RT-PCR",
+    "experiment_name": "Expression profiling of life cycle stages post-infection"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in calf small intestine at 47 hours post-infection and moderate expression in HCT-8 cells, with notably higher antisense than sense transcript levels in the <i>in vitro</i> infection model, while remaining nearly undetectable in sporozoites.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "infection",
+      "time-course",
+      "sporozoites",
+      "HCT-8",
+      "calf",
+      "intestine",
+      "antisense"
+    ],
+    "notes": "The prominent antisense expression in HCT-8 cells (27-30 TPM) compared to sense expression suggests potential regulatory mechanisms; the strand-specific nature of this dataset provides valuable insight into transcriptional complexity.",
+    "dataset_id": "DS_865efa49f4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of sporozoites and HTC-8 infection time course"
+  },
+  {
+    "one_sentence_summary": "This gene shows temporal upregulation during <i>Cryptosporidium parvum</i> intracellular development, with no expression at 2 hours post-infection but moderate expression at 24 hours (27.24 TPM) and 48 hours (37.85 TPM) in the sense orientation only.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "intracellular stages",
+      "temporal expression",
+      "parasite development",
+      "host-pathogen interaction",
+      "time course"
+    ],
+    "notes": "Expression is strictly sense-strand specific with no antisense expression detected. The high standard error at 24h (equal to the mean) suggests high variability between replicates at this time point, while 48h expression appears more consistent.",
+    "dataset_id": "DS_db22744127",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of C. parvum intracellular stages"
+  },
+  {
+    "one_sentence_summary": "This <i>Cryptosporidium parvum</i> gene shows modest upregulation in STAg-treated infected tissue compared to PBS controls, with sense strand expression increasing from ~40-52 TPM to ~42-57 TPM in cecum and ileum respectively.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "STAg treatment",
+      "intestinal infection",
+      "IFN-gamma independent",
+      "ileum",
+      "cecum",
+      "therapeutic intervention"
+    ],
+    "notes": "The fold-change is relatively modest (1.1-1.2x) and antisense expression is very low across all conditions, suggesting this may not be a major player in the STAg therapeutic response; standard errors indicate reasonable experimental precision.",
+    "dataset_id": "DS_4207fdd0fa",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Infected ileum and cecum of IFN-gamma negative, STAg treated mice"
+  },
+  {
+    "one_sentence_summary": "This gene shows very low expression (1.05 TPM) during <i>Cryptosporidium parvum</i> in vitro infection of HCT-8 cells, ranking in only the 6th percentile compared to other genes.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "in vitro infection",
+      "HCT-8 cells",
+      "host-pathogen interaction",
+      "parasite transcriptome"
+    ],
+    "notes": "This is a pooled sample experiment without biological replicates, limiting statistical assessment, but the very low percentile ranking (6.14%) clearly indicates minimal expression relative to other genes in the parasite transcriptome during infection.",
+    "dataset_id": "DS_63b0de882c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of 48 hours in vitro infection"
+  },
+  {
+    "one_sentence_summary": "This gene shows extremely low expression (≤0.19 TPM) across all <i>Cryptosporidium parvum</i> life stages and conditions, with minimal detectable transcript levels in oocysts and sporozoites regardless of GalNAc treatment or time point.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptosporidium",
+      "sporozoite",
+      "oocyst",
+      "GalNAc",
+      "differentiation",
+      "life cycle"
+    ],
+    "notes": "Expression is consistently near the detection threshold across all samples, with only sporadic low-level detection in a few individual replicates, suggesting this gene may be pseudogenized, stage-specific to conditions not tested, or have very specialized expression timing.",
+    "dataset_id": "DS_b786df5901",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of C. parvum sporozoites treated with GalNAc"
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "headline": "Stage-specific expression with glucose-dependent regulation during Trypanosoma brucei life cycle transitions",
+  "one_paragraph_summary": "This gene exhibits <strong>stage-specific expression patterns</strong> across <i>Trypanosoma brucei</i> life cycle stages, with consistently higher expression in procyclic forms compared to bloodstream forms. <ul><li>Shows <strong>glucose-dependent downregulation</strong> in short stumpy cells, with ~2.5-fold reduction upon glucose supplementation</li><li>Demonstrates <strong>transient upregulation</strong> during early differentiation from stumpy to procyclic forms, peaking at 6 hours post-induction</li><li>Exhibits <strong>cell cycle-dependent expression</strong> with highest levels in early G1 phase</li></ul> The gene's expression pattern suggests involvement in metabolic adaptation and developmental transitions, potentially functioning as a regulatory component during glucose sensing and life cycle stage differentiation in the parasite's complex developmental program.",
+  "topics": [
+    {
+      "headline": "Glucose-dependent expression regulation in Trypanosoma brucei life cycle stages",
+      "one_sentence_summary": "The gene shows highest expression in glucose-deprived short stumpy cells with progressive downregulation through glucose-supplemented conditions and different life cycle stages, indicating glucose-dependent metabolic regulation.",
+      "dataset_ids": [
+        "DS_f18da9c611"
+      ]
+    },
+    {
+      "headline": "Upregulation during early stumpy-to-procyclic differentiation with peak at 6 hours",
+      "one_sentence_summary": "Expression increases moderately during early differentiation from stumpy to procyclic forms, reaching peak levels at 6 hours post-induction before declining, suggesting involvement in early differentiation processes.",
+      "dataset_ids": [
+        "DS_b7dc54ebad"
+      ]
+    },
+    {
+      "headline": "Higher expression in procyclic forms compared to bloodstream forms",
+      "one_sentence_summary": "The gene shows consistent upregulation in procyclic forms relative to bloodstream forms with approximately 4-fold higher expression in the insect vector stage.",
+      "dataset_ids": [
+        "DS_66fdbd45d7"
+      ]
+    },
+    {
+      "headline": "Cell cycle-regulated expression peaking in early G1 phase",
+      "one_sentence_summary": "Expression is cell cycle-regulated with highest levels in early G1 phase that progressively decrease through late G1, S phase, and reach lowest levels in G2 phase.",
+      "dataset_ids": [
+        "DS_0de2f64330"
+      ]
+    }
+  ]
+}

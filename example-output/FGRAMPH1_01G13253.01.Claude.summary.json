@@ -1,0 +1,29 @@
+{
+  "headline": "Pathogenicity-associated gene shows dramatic upregulation during wheat infection",
+  "one_paragraph_summary": "This gene exhibits <strong>extraordinary upregulation during pathogenic processes</strong> in <i>Fusarium graminearum</i>, with expression levels reaching >1,900-fold increases during wheat infection compared to vegetative growth. <ul><li>Shows highest expression during active infection and disease progression in wheat</li><li>Demonstrates preferential upregulation on dead plant tissue compared to live tissue (>150-fold difference)</li><li>Expression correlates with symptom development and pathogenicity</li><li>Remains silent or minimally expressed during vegetative growth, conidiation, and stress conditions</li></ul> The dramatic infection-specific expression pattern and consistent ranking in the >99th percentile during pathogenic conditions strongly suggests this gene encodes a <strong>critical pathogenicity factor</strong> essential for <i>F. graminearum</i>'s ability to colonize and cause disease in cereal hosts.",
+  "topics": [
+    {
+      "headline": "Massive upregulation during wheat infection with progressive increase over time",
+      "one_sentence_summary": "Expression increases dramatically during wheat infection, reaching >1,900-fold upregulation at 6 days post-inoculation and showing progressive increases from 24-192 hours, consistently ranking in the >99th percentile.",
+      "dataset_ids": [
+        "DS_d0e311bf25",
+        "DS_4a1d8e1905"
+      ]
+    },
+    {
+      "headline": "Strong preference for dead plant tissue and correlation with disease symptoms",
+      "one_sentence_summary": "Gene shows >150-fold higher expression on dead wheat tissue compared to live tissue and demonstrates a clear gradient of expression that correlates with disease progression from symptomless to fully symptomatic infection.",
+      "dataset_ids": [
+        "DS_bfb38f3551",
+        "DS_f5b8d4ff37"
+      ]
+    },
+    {
+      "headline": "Progressive upregulation during maize stalk infection over extended timeframe",
+      "one_sentence_summary": "Expression doubles from early (12-18 hours) to late timepoints (144 hours) during maize stalk infection, reaching the 91st percentile and suggesting importance in later stages of pathogenesis.",
+      "dataset_ids": [
+        "DS_4d16290906"
+      ]
+    }
+  ]
+}

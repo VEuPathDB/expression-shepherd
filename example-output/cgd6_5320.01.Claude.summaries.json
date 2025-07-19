@@ -1,0 +1,152 @@
+[
+  {
+    "one_sentence_summary": "This gene shows peak expression at 24 hours post-infection in <i>Cryptosporidium parvum</i>, with secondary elevated expression at 6 hours, suggesting important roles during early-to-mid stages of the parasite life cycle.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "time course",
+      "post-infection",
+      "life cycle",
+      "RT-PCR",
+      "in vitro development"
+    ],
+    "notes": "The expression pattern shows a clear biphasic response with maximum at 24h (1.0) and secondary peak at 6h (0.94), while remaining low at other time points, indicating stage-specific regulation during parasite development.",
+    "dataset_id": "DS_2bf995383e",
+    "assay_type": "RT-PCR",
+    "experiment_name": "Expression profiling of life cycle stages post-infection"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong upregulation in intracellular stages (103.78 TPM) compared to oocysts (3.35 TPM) in <i>Cryptosporidium parvum</i>, with expression levels ranking in the 71st percentile during the intracellular phase.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "intracellular",
+      "oocyst",
+      "life cycle",
+      "stage-specific",
+      "parasitic development"
+    ],
+    "notes": "Strong stage-specific expression pattern with ~31-fold higher expression in intracellular stages; antisense transcription also detected but at much lower levels; standard error available for intracellular samples indicates biological replicates were used.",
+    "dataset_id": "DS_eb01624959",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of oocyst and intracellular stages"
+  },
+  {
+    "one_sentence_summary": "This gene shows time-dependent upregulation in <i>Cryptosporidium parvum</i> intracellular stages, with no expression at 2 hours, moderate expression at 24 hours (37.13 TPM), and highest expression at 48 hours (75.21 TPM), suggesting involvement in later stages of intracellular development.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "intracellular stages",
+      "time-course",
+      "host-parasite interaction",
+      "developmental regulation"
+    ],
+    "notes": "Clear temporal expression pattern with substantial fold-changes across timepoints. Antisense expression detected at later timepoints may indicate regulatory complexity. Different isolates used at 48h (TU114) vs earlier timepoints (MD) but expression pattern remains consistent.",
+    "dataset_id": "DS_db22744127",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of C. parvum intracellular stages"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in calf small intestine samples (42-61 TPM) compared to lower expression in HCT-8 infected cells (15-27 TPM) and minimal expression in sporozoites (0.5-3.8 TPM), indicating upregulation during <i>C. parvum</i> infection in the natural host environment.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "infection time course",
+      "sporozoites",
+      "calf intestine",
+      "HCT-8 cells",
+      "host-pathogen interaction"
+    ],
+    "notes": "Expression shows clear host environment preference (calf intestine > cell culture > sporozoites). Antisense expression detected in some samples suggests potential regulatory complexity. Standard errors indicate biological variability, particularly in calf samples.",
+    "dataset_id": "DS_865efa49f4",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of sporozoites and HTC-8 infection time course"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression at 24 hours post-infection (103.65 TPM) and in asexual stages (62.2 TPM), with lower expression in female stages and sporozoites, suggesting a role in early infection and asexual replication in <i>Cryptosporidium parvum</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "lifecycle",
+      "sexual_development",
+      "asexual_stages",
+      "female_stages",
+      "sporozoites",
+      "infection_timecourse",
+      "cell_sorting"
+    ],
+    "notes": "Expression pattern suggests the gene may be important for early infection establishment and asexual reproduction, with relatively consistent moderate-to-high percentile rankings (46-69th percentile) across most conditions.",
+    "dataset_id": "DS_b14c36920f",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Lifecycle progression and sexual development"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate expression levels (26.87 TPM) in <i>Cryptosporidium parvum</i> during in vitro infection of HCT-8 cells, ranking in the 40th percentile compared to all genes in the experiment.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "in vitro infection",
+      "HCT-8 cells",
+      "host-pathogen interaction",
+      "parasite transcriptome"
+    ],
+    "notes": "This is a pooled sample experiment without biological replicates, limiting statistical assessment. The 40th percentile ranking suggests moderate expression relative to other genes, but without comparative conditions or time points, differential expression cannot be determined.",
+    "dataset_id": "DS_63b0de882c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of 48 hours in vitro infection"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in <i>Cryptosporidium parvum</i> sporozoites after 2 hours of incubation, with higher expression levels observed in GalNAc-treated samples (mean ~7.6 TPM) compared to PBS controls (mean ~4.8 TPM) and earlier timepoints.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Cryptosporidium",
+      "sporozoites",
+      "GalNAc",
+      "differentiation",
+      "time-course",
+      "parasite development"
+    ],
+    "notes": "Expression shows considerable variability between biological replicates, particularly in the 2h samples. The gene appears to be primarily expressed from the sense strand with minimal antisense expression. The upregulation pattern suggests potential involvement in sporozoite differentiation processes.",
+    "dataset_id": "DS_b786df5901",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of C. parvum sporozoites treated with GalNAc"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest upregulation in STAg-treated samples compared to PBS controls, with expression levels consistently higher in ileum than cecum across both treatment conditions, though the differences appear relatively small given the standard errors.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Cryptosporidium parvum",
+      "STAg treatment",
+      "IFN-gamma knockout",
+      "ileum",
+      "cecum",
+      "intestinal infection"
+    ],
+    "notes": "The antisense expression values are much lower than sense values, suggesting the sense strand measurements are more reliable. The percentile rankings (59-65% for sense, 70-77% for antisense) indicate moderate expression levels relative to other genes in this experiment.",
+    "dataset_id": "DS_4207fdd0fa",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Infected ileum and cecum of IFN-gamma negative, STAg treated mice"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal upregulation in <i>Cryptosporidium parvum</i> oocysts following UV treatment, with slight increases at both 0.5 hour (0.05 log2 fold change) and 5 hour (0.1 log2 fold change) recovery timepoints.",
+    "biological_importance": 1,
+    "confidence": 3,
+    "experiment_keywords": [
+      "UV treatment",
+      "oocysts",
+      "environmental stage",
+      "stress response",
+      "microarray",
+      "time course"
+    ],
+    "notes": "Very modest expression changes suggest this gene may have a minor role in UV stress response, though the lack of statistical significance data limits interpretation of biological relevance.",
+    "dataset_id": "DS_f7a8040723",
+    "assay_type": "array",
+    "experiment_name": "Oocyst Transcriptome: Control vs. UV treatment"
+  }
+]

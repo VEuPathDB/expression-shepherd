@@ -1,0 +1,32 @@
+{
+  "headline": "Strong expression levels across diverse conditions with specific regulation in response to environmental and genetic factors",
+  "one_paragraph_summary": "<strong>Expression Summary:</strong> This <i>Neurospora crassa</i> gene demonstrates robust and versatile transcriptional behavior across numerous transcriptomics studies. <ul><li>The gene is consistently highly expressed under a variety of strains, carbon sources, and media, including during conidia germination stages and specific developmental transitions.</li><li>Regulatory influences include carbon source availability, light exposure, and strain-specific genetic modifications. For example, light-responsive peaks and carbon-specific upregulations are apparent in several experiments.</li><li>Observations suggest the gene could be involved in core cellular pathways, possibly linked to metabolic processes or stress responses, given its expression dynamics. Further functional studies may clarify its biological implications.</li></ul>",
+  "topics": [
+    {
+      "headline": "Carbon source-dependent regulation of expression",
+      "one_sentence_summary": "This gene's expression changes in response to different carbon sources, indicating involvement in related metabolic processes.",
+      "dataset_ids": [
+        "DS_33fc617b03",
+        "DS_d5cb6ab9a2",
+        "DS_bb6e5ae0e5"
+      ]
+    },
+    {
+      "headline": "Light-dependent gene expression patterns",
+      "one_sentence_summary": "The gene shows light-dependent upregulation patterns, with peaks following light induction.",
+      "dataset_ids": [
+        "DS_f95c45420d",
+        "DS_e454d418a8"
+      ]
+    },
+    {
+      "headline": "Dynamic expression during developmental processes",
+      "one_sentence_summary": "The gene exhibits significant changes in expression during conidia germination and developmental stages.",
+      "dataset_ids": [
+        "DS_1a51a536a0",
+        "DS_7b3238ce05",
+        "DS_f2913d9eb1"
+      ]
+    }
+  ]
+}

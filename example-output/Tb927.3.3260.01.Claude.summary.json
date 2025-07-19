@@ -1,0 +1,28 @@
+{
+  "headline": "Constitutively expressed gene shows stage-specific regulation and mRNA degradation sensitivity",
+  "one_paragraph_summary": "This <i>Trypanosoma brucei</i> gene exhibits <strong>constitutive moderate-to-high expression</strong> across most life cycle stages and experimental conditions, typically ranging from 20-80 TPM. The gene shows <strong>consistent downregulation patterns</strong> in mRNA degradation experiments and <strong>stage-specific differences</strong> with higher expression in procyclic forms compared to bloodstream forms in most datasets. <ul><li>Robust response to mRNA degradation pathways regardless of specific conditions</li><li>Preferential expression in insect-stage parasites</li><li>Sensitivity to RNA helicase DHH1 mutations</li><li>Stable expression during vector development</li></ul> The gene's consistent expression levels and degradation sensitivity suggest it may encode a constitutively required protein with post-transcriptional regulation mechanisms.",
+  "topics": [
+    {
+      "headline": "Gene shows robust downregulation during mRNA degradation across multiple pathways",
+      "one_sentence_summary": "The gene consistently decreases 3-8 fold during mRNA degradation experiments regardless of tetracycline treatment, XRNA knockout status, or RNA sample preparation method.",
+      "dataset_ids": [
+        "DS_378ed5098b"
+      ]
+    },
+    {
+      "headline": "DHH1 RNA helicase mutant specifically downregulates gene expression",
+      "one_sentence_summary": "Expression decreases 2.6-fold when DHH1 DEAD:DQAD mutant is expressed compared to minimal change with wild-type DHH1 overexpression.",
+      "dataset_ids": [
+        "DS_a4dae129e9"
+      ]
+    },
+    {
+      "headline": "Higher expression in procyclic forms indicates life cycle stage-specific regulation",
+      "one_sentence_summary": "The gene shows consistently higher expression in insect-stage procyclic forms compared to mammalian bloodstream forms across multiple experimental conditions.",
+      "dataset_ids": [
+        "DS_66fdbd45d7",
+        "DS_77b994d105"
+      ]
+    }
+  ]
+}

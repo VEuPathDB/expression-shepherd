@@ -1,0 +1,37 @@
+{
+  "headline": "Life-stage-specific expression patterns of the examined Trypanosoma brucei gene",
+  "one_paragraph_summary": "<strong>The expression of the analyzed gene in <i>Trypanosoma brucei</i> shows significant variation across the parasite's life cycle.</strong> <ul> <li>It is significantly upregulated in procyclic stages compared to bloodstream forms, as evidenced by multiple experiments.</li> <li>In procyclic forms, expression peaks in stationary phases and late stages, reflecting potential regulation linked to differentiation or stress conditions.</li> <li>Differential expression is also observed in location-specific studies, with higher expression in midgut than salivary glands of the tsetse fly. </li> <li>Marked expression variations under glucose and temperature conditions suggest metabolic sensitivity. Overall, this expression pattern may imply a functional role during tsetse stage survival and development.</ul>",
+  "topics": [
+    {
+      "headline": "Upregulation in Trypanosome Procyclic Forms",
+      "one_sentence_summary": "The gene exhibits prominently elevated expression in procyclic lifecycle stages of <i>Trypanosoma brucei</i> compared to bloodstream forms.",
+      "dataset_ids": [
+        "DS_66fdbd45d7",
+        "DS_da32747f09",
+        "DS_a72b4c8650",
+        "DS_f8e525f9b0",
+        "DS_f01ace4781",
+        "DS_9df2112fd9",
+        "DS_3e90742f0a",
+        "DS_f18da9c611"
+      ]
+    },
+    {
+      "headline": "Expression Specific to Nutritional or Environmental Conditions",
+      "one_sentence_summary": "Variations indicate higher expression in contexts of glucose abundance and in specific tissue locations of vector forms.",
+      "dataset_ids": [
+        "DS_f18da9c611",
+        "DS_f01ace4781"
+      ]
+    },
+    {
+      "headline": "Early Stage and Developmental Expression Dynamics",
+      "one_sentence_summary": "Expression increases in early stages during differentiation and specific phases of the Trypanosoma life cycle.",
+      "dataset_ids": [
+        "DS_9df2112fd9",
+        "DS_0de2f64330",
+        "DS_820537ffae"
+      ]
+    }
+  ]
+}

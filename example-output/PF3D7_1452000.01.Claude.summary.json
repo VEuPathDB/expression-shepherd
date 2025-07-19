@@ -1,0 +1,50 @@
+{
+  "headline": "Dramatic schizont-specific upregulation with >400-fold cyclical expression changes during intraerythrocytic development",
+  "one_paragraph_summary": "This gene exhibits one of the most dramatic expression patterns in <i>Plasmodium falciparum</i>, showing <strong>consistent schizont-specific upregulation</strong> with expression levels reaching 400-850 TPM during late asexual blood stages compared to <5 TPM during ring and trophozoite stages. The gene displays <strong>highly cyclical expression</strong> with >400-1000-fold dynamic range throughout the 48-hour intraerythrocytic development cycle, peaking at 38-44 hours post-invasion across multiple independent studies. This expression pattern is <strong>conserved across different parasite strains</strong> and shows <strong>biphasic peaks</strong> during early invasion and late schizont stages in some experiments. The dramatic late-stage upregulation and consistent high percentile rankings (>95th percentile) during schizont stages strongly suggest this gene plays a critical role in merozoite formation, egress preparation, or DNA replication processes essential for parasite multiplication.",
+  "topics": [
+    {
+      "headline": "Consistent schizont-specific upregulation across multiple independent time course studies",
+      "one_sentence_summary": "Multiple high-resolution transcriptomic studies consistently demonstrate dramatic upregulation of this gene during schizont stages (38-44 hours post-invasion) with >400-fold increases from baseline expression levels.",
+      "dataset_ids": [
+        "DS_d18037ecc4",
+        "DS_74bf6512eb",
+        "DS_29940f3f82",
+        "DS_ee861a9187",
+        "DS_fe2b5a278f",
+        "DS_715bf2deda",
+        "DS_b95a38be5e",
+        "DS_87e4fcafff",
+        "DS_416070059c"
+      ]
+    },
+    {
+      "headline": "Strong stage-specific expression maintained across parasite strains and genetic backgrounds",
+      "one_sentence_summary": "The gene shows consistent schizont-stage upregulation across different <i>P. falciparum</i> strains (3D7, HB3, IT, Dd2) and is maintained in genetic knockout backgrounds, indicating robust developmental regulation independent of strain-specific factors.",
+      "dataset_ids": [
+        "DS_28ef9b0494",
+        "DS_4582562a4b",
+        "DS_0fa4237b4b",
+        "DS_84d52f99c7",
+        "DS_7349a4c6a5"
+      ]
+    },
+    {
+      "headline": "Biphasic expression pattern with peaks during invasion and late schizont development",
+      "one_sentence_summary": "Several studies reveal a biphasic expression pattern with high expression during early invasion (0-8 hours) and dramatic upregulation during late schizont stages (32-48 hours), suggesting dual roles in parasite invasion and egress processes.",
+      "dataset_ids": [
+        "DS_8ecf65d1b7",
+        "DS_a239464cb4",
+        "DS_090793ccdd"
+      ]
+    },
+    {
+      "headline": "Elevated expression in sexual commitment and specialized parasite stages",
+      "one_sentence_summary": "The gene shows upregulation in sexually committed schizonts compared to asexually committed schizonts and exhibits high expression in ookinetes, suggesting additional roles beyond asexual blood stage development.",
+      "dataset_ids": [
+        "DS_4f365680c8",
+        "DS_66f9e70b8a",
+        "DS_a518f45975"
+      ]
+    }
+  ]
+}

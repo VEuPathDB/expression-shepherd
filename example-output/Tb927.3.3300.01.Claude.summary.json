@@ -1,0 +1,39 @@
+{
+  "headline": "Bloodstream form-preferential expression with S-phase cell cycle regulation",
+  "one_paragraph_summary": "This gene demonstrates <strong>strong life cycle stage-specific expression</strong> in <i>Trypanosoma brucei</i>, showing consistently higher expression in bloodstream forms compared to procyclic forms across multiple experimental conditions. <ul><li>Expression levels are approximately 2-fold higher in bloodstream forms (~175-225 TPM) than procyclic forms (~95-112 TPM)</li><li>Peak expression occurs during S-phase of the cell cycle (~1.7-fold increase over G1 phase)</li><li>Expression is dramatically elevated in adipose tissue-derived parasites (~5-fold higher than standard bloodstream forms)</li><li>Enhanced expression in human cerebrospinal fluid samples suggests potential role in CNS invasion</li></ul> The combination of bloodstream form preference, S-phase timing, and tissue-specific upregulation suggests this gene may play important roles in <strong>DNA replication and host tissue adaptation</strong> during the mammalian infection stage.",
+  "topics": [
+    {
+      "headline": "Consistent bloodstream form upregulation across experimental conditions",
+      "one_sentence_summary": "The gene shows 2-fold higher expression in bloodstream forms compared to procyclic forms across multiple independent experiments, indicating robust life cycle stage-specific regulation.",
+      "dataset_ids": [
+        "DS_77b994d105",
+        "DS_f8e525f9b0",
+        "DS_66fdbd45d7",
+        "DS_da32747f09"
+      ]
+    },
+    {
+      "headline": "S-phase cell cycle peak expression pattern",
+      "one_sentence_summary": "Expression peaks during S-phase of the cell cycle with 1.7-fold higher levels than early G1 phase, suggesting involvement in DNA replication processes.",
+      "dataset_ids": [
+        "DS_0de2f64330"
+      ]
+    },
+    {
+      "headline": "Enhanced expression in host tissue environments",
+      "one_sentence_summary": "The gene shows dramatic upregulation in adipose tissue-derived parasites (5-fold) and human cerebrospinal fluid samples (3.5-fold), indicating important roles in tissue-specific host adaptation.",
+      "dataset_ids": [
+        "DS_820537ffae",
+        "DS_8293b78640"
+      ]
+    },
+    {
+      "headline": "Highly polyadenylated transcript with spliced leader processing",
+      "one_sentence_summary": "The gene produces highly polyadenylated transcripts with efficient spliced leader processing, showing 20-fold enrichment in polyA fractions and preferential capture by spliced leader-targeting methods.",
+      "dataset_ids": [
+        "DS_378ed5098b",
+        "DS_1ede7b449f"
+      ]
+    }
+  ]
+}

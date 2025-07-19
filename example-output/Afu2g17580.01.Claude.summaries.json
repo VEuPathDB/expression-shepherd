@@ -1,0 +1,263 @@
+[
+  {
+    "one_sentence_summary": "This gene is dramatically downregulated (approximately 77-fold reduction) in the ACE1 deletion mutant compared to wild-type <i>Aspergillus fumigatus</i> grown under zinc and nitrate limitation.",
+    "biological_importance": 5,
+    "confidence": 5,
+    "experiment_keywords": [
+      "transcription factor",
+      "ACE1 deletion",
+      "zinc limitation",
+      "nitrate limitation",
+      "gene regulation"
+    ],
+    "notes": "The gene shows extremely high expression in wild-type (>99th percentile) but drops to moderate levels (62nd percentile) in the deletion mutant, suggesting it may be directly or indirectly regulated by the ACE1 transcription factor under these nutrient limitation conditions.",
+    "dataset_id": "DS_2b76656bb1",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Determining Aspergillus fumigatus transcription factor expression and function during invasion of the mammalian lung"
+  },
+  {
+    "one_sentence_summary": "This gene is highly upregulated in dormant conidia (97.77 TPM, 84.7th percentile) and further increased in delta-atfA conidia (139.44 TPM, 89.4th percentile), while being strongly downregulated in hyphae and germinated conidia (5.5 and 1.36 TPM respectively, ~22nd percentile).",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "conidia",
+      "dormancy",
+      "germination",
+      "hyphae",
+      "atfA transcription factor",
+      "conidial development"
+    ],
+    "notes": "The dramatic expression difference between dormant and germinating conidia (72-fold) suggests this gene plays a key role in maintaining dormancy or preventing premature germination. The elevated expression in delta-atfA mutant conidia indicates negative regulation by the AtfA transcription factor.",
+    "dataset_id": "DS_62ebc12b94",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Comparative transcriptomics of dormant and germinating conidia"
+  },
+  {
+    "one_sentence_summary": "This gene is strongly upregulated by hydrogen peroxide treatment (approximately 2-fold increase) in <i>Aspergillus fumigatus</i>, while iron starvation causes dramatic downregulation (14-fold decrease), with the repressive effect of iron limitation overriding oxidative stress induction in combined treatments.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "oxidative stress",
+      "iron starvation",
+      "hydrogen peroxide",
+      "stress response",
+      "metal homeostasis"
+    ],
+    "notes": "The gene shows opposing responses to the two stresses tested, suggesting it may be involved in iron-dependent oxidative stress response pathways. High percentile rankings (93-96th) under control and H2O2 conditions indicate this is a relatively highly expressed gene.",
+    "dataset_id": "DS_dd0139d2b0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression under oxidative and iron stresses"
+  },
+  {
+    "one_sentence_summary": "This gene shows markedly higher expression in the HapB mutant strain compared to the parent A1160 strain and the 29.9 mutant, with itraconazole treatment causing substantial downregulation in A1160 (3.4-fold decrease) but only modest reduction in HapB (1.2-fold decrease), while having minimal effect in the 29.9 strain.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antifungal resistance",
+      "itraconazole",
+      "drug response",
+      "mutant strains",
+      "Aspergillus fumigatus",
+      "differential expression"
+    ],
+    "notes": "The differential response to itraconazole across strains suggests this gene may be involved in drug resistance mechanisms, with the HapB mutant showing both higher baseline expression and reduced sensitivity to drug-induced downregulation.",
+    "dataset_id": "DS_9afe38853e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of itraconazole-resistant strains"
+  },
+  {
+    "one_sentence_summary": "This gene shows progressive upregulation in <i>Aspergillus fumigatus</i> under hypoxic conditions, with expression increasing approximately 7-fold from normoxia (T0) to 36 hours of hypoxia exposure.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "hypoxia",
+      "oxygen stress",
+      "time course",
+      "fungal adaptation",
+      "environmental stress response"
+    ],
+    "notes": "Strong progressive increase over time suggests this gene may play an important role in hypoxic adaptation. The consistent upward trend across all time points with substantial fold-change indicates robust response to low oxygen conditions.",
+    "dataset_id": "DS_93c159b846",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome under normoxia and hypoxia conditions"
+  },
+  {
+    "one_sentence_summary": "This gene is progressively upregulated in <i>Aspergillus fumigatus</i> during hypoxic conditions, showing a steady increase from 1.4-fold at 2 hours to 3.4-fold at 24 hours after oxygen limitation.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "hypoxia",
+      "oxygen limitation",
+      "time course",
+      "microarray",
+      "fungal stress response"
+    ],
+    "notes": "Strong progressive upregulation with consistent standard errors suggests robust hypoxic response; percentile values confirm substantial differential expression relative to other genes in the dataset.",
+    "dataset_id": "DS_1ca49919f6",
+    "assay_type": "array",
+    "experiment_name": "Response to hypoxia"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatically higher antisense transcript expression (3-9 TPM, 87-94th percentile) compared to very low sense transcript expression (0-2.6 TPM, 0-33rd percentile) across all <i>Aspergillus fumigatus</i> genotypes and oxygen conditions, with the hrmA deletion strain showing the highest antisense expression under hypoxia.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antisense transcription",
+      "hypoxia response",
+      "hrmA regulation",
+      "oxygen sensing",
+      "fungal pathogen"
+    ],
+    "notes": "The striking pattern of high antisense vs. low sense expression suggests this may be a regulatory antisense transcript or indicates complex transcriptional regulation at this locus. The consistent pattern across all conditions and genotypes strengthens the biological significance.",
+    "dataset_id": "DS_f6dd8e44a3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Gene expression in WT, hrmA deletion, hrmA OE, hrmA_REV, EVOL under hypoxia and normoxia conditions"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in response to caspofungin treatment in wild-type <i>Aspergillus fumigatus</i> (4.8 vs 0.73 TPM) but exhibits the opposite pattern in the ΔfhdA mutant where it is dramatically downregulated by caspofungin (0.16 vs 14.65 TPM).",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "caspofungin",
+      "antifungal",
+      "drug resistance",
+      "fhdA transcription factor",
+      "paradoxical effect"
+    ],
+    "notes": "The gene shows contrasting responses to caspofungin between wild-type and ΔfhdA mutant strains, suggesting fhdA-dependent regulation; antisense transcript levels are consistently higher than sense levels across all conditions, indicating potential regulatory complexity.",
+    "dataset_id": "DS_64e126f34e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Response to caspofungin"
+  },
+  {
+    "one_sentence_summary": "This gene shows time-dependent upregulation in <i>Aspergillus fumigatus</i>, with highest expression at 16 hours in strain Af293 alone (50.2 TPM), but is consistently downregulated when co-cultured with human A549 cells across both strains and time points.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "host-pathogen interaction",
+      "time course",
+      "co-culture",
+      "fungal pathogenesis",
+      "epithelial cells"
+    ],
+    "notes": "Strong strain-specific differences observed, with Af293 showing much higher baseline expression than CEA10; the dramatic reduction in expression upon host cell contact suggests potential role in pathogen recognition or immune evasion.",
+    "dataset_id": "DS_47a1a2ad67",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomics of Aspergillus fumigatus upon exposure to human airway epithelial cells"
+  },
+  {
+    "one_sentence_summary": "This gene shows highly elevated antisense transcript expression in GPA medium (5.16 TPM, 85th percentile) compared to minimal medium (0.25 TPM, 68th percentile), while sense transcript levels remain consistently low (~0.15 TPM) across both conditions in <i>Aspergillus fumigatus</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antisense transcription",
+      "conidial germination",
+      "growth medium",
+      "GPA medium",
+      "minimal medium",
+      "fungal development"
+    ],
+    "notes": "The striking antisense expression pattern (>20-fold higher in GPA vs minimal medium) suggests potential regulatory importance, though sense transcript levels show no differential expression between conditions.",
+    "dataset_id": "DS_faa5674b55",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome analysis of conidium germination of Aspergillus fumigatus in different growth conditions"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatic downregulation in response to Congo Red treatment across multiple <i>Aspergillus fumigatus</i> transcription factor mutants, with sense strand expression dropping from ~100-145 TPM in untreated conditions to ~0.15-3 TPM at higher Congo Red concentrations, while antisense expression remains relatively stable at ~4-9 TPM.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Congo Red",
+      "transcription factor mutants",
+      "cell wall stress",
+      "antifungal response",
+      "dose-dependent downregulation"
+    ],
+    "notes": "The gene shows consistent strong downregulation across different mutant backgrounds, suggesting it may be directly involved in cell wall biosynthesis or stress response pathways that are disrupted by Congo Red. The antisense strand expression remains relatively stable, indicating specific regulation of the sense transcript.",
+    "dataset_id": "DS_d360a3549c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Sensitivity of transcription factor mutants of Aspergillus fumigatus to Congo Red"
+  },
+  {
+    "one_sentence_summary": "This gene is downregulated in both <i>A. fumigatus</i> deletion mutants, showing approximately 1.4-fold reduction in the ΔmtfA strain and 2.1-fold reduction in the ΔveA strain compared to their respective wild-type controls.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "secondary metabolite regulation",
+      "VeA deletion",
+      "MtfA deletion",
+      "transcriptional regulation",
+      "Aspergillus fumigatus"
+    ],
+    "notes": "High expression levels (200-1100 TPM) and high percentiles (92-98th) suggest this is a highly expressed gene that is moderately but consistently downregulated by deletion of both master regulators of secondary metabolism.",
+    "dataset_id": "DS_118e6fa430",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptome of wild-type vs veA and mtfA deletion mutants"
+  },
+  {
+    "one_sentence_summary": "This gene shows upregulation in response to 5,8-diHODE treatment compared to ethanol control at 30 minutes (59.3 vs 43.4 TPM), but expression levels converge at 120 minutes, suggesting an early transient response to the oxylipin metabolite in <i>Aspergillus fumigatus</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "oxylipin",
+      "5,8-diHODE",
+      "fungal signaling",
+      "metabolite response",
+      "time course",
+      "Aspergillus fumigatus"
+    ],
+    "notes": "The upregulation is modest (1.4-fold at 30 min) and transient, with both treatment and control showing decreased expression over time. Percentile rankings support the differential expression pattern.",
+    "dataset_id": "DS_0e1ec2bd61",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mycelial gene expression in response to treatment with 5,8-diHODE"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderately reduced expression in the ΔnctA mutant compared to wild-type and ΔnctB mutant strains, with minimal response to itraconazole treatment across all genetic backgrounds in <i>Aspergillus fumigatus</i>.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antifungal resistance",
+      "itraconazole",
+      "gene knockout",
+      "nct transporters",
+      "drug response"
+    ],
+    "notes": "Expression levels are consistently lower in the nctA knockout (~3.8-4.3 TPM) compared to wild-type (~6.4-6.7 TPM) and nctB knockout (~7.0-7.8 TPM), suggesting nctA may have a role in maintaining normal expression of this gene, though the effect is modest.",
+    "dataset_id": "DS_f65ede9fbd",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomes of WT, nctA, and nctB mutants in response to itraconazole."
+  },
+  {
+    "one_sentence_summary": "This gene shows a consistent time-dependent increase in expression across all conditions (fungus alone, co-cultivation with <i>Pseudomonas aeruginosa</i>, and heat-inactivated bacteria), with expression levels rising from ~2-4 TPM at 45 minutes to ~14-21 TPM at 180 minutes, but no substantial differential response specifically attributable to bacterial co-cultivation.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Aspergillus fumigatus",
+      "Pseudomonas aeruginosa",
+      "co-cultivation",
+      "time-course",
+      "fungal-bacterial interaction",
+      "pathogen"
+    ],
+    "notes": "The gene appears to be time-responsive rather than specifically responding to bacterial presence, as all three conditions show similar temporal expression patterns with overlapping standard errors.",
+    "dataset_id": "DS_c339242e7e",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Transcriptomics analysis of Aspergillus fumigatus co-cultivated with Pseudomonas aeruginosa"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal expression changes in response to oxygen limitation in <i>Aspergillus fumigatus</i>, with expression levels remaining relatively stable around 0.79-1.38 TPM across all time points and oxygen conditions tested.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "oxygen limitation",
+      "hypoxia",
+      "time course",
+      "fungal pathogen",
+      "environmental stress"
+    ],
+    "notes": "Expression values are consistently low (all below 1.4 TPM) with overlapping standard errors, suggesting this gene is not significantly responsive to oxygen limitation conditions. The slight increase at 75 min recovery may not be biologically meaningful given the large standard error.",
+    "dataset_id": "DS_29e8541153",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Adaptation to oxygen limitation"
+  }
+]

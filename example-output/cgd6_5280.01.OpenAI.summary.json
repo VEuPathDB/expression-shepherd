@@ -1,0 +1,22 @@
+{
+  "headline": "Transcriptomic patterns suggest stage specificity and functional dynamics",
+  "one_paragraph_summary": "<strong>Expression of the analyzed gene in <i>Cryptosporidium parvum</i> is highly dynamic and stage-specific:</strong><ul><li>It is markedly upregulated in intracellular stages, particularly during 24-48 hours post-infection, compared to the oocyst stage (DS_eb01624959, DS_db22744127).</li><li>Another transcriptional peak is detected at early infection stages, around 12 hours post-infection, reflecting transient activation (DS_2bf995383e).</li><li>Expression is also prominent during sexual development, especially in female developmental stages cultured in vitro (DS_b14c36920f).</li><li>These transcriptional dynamics imply a role in lifecycle progression, sexual differentiation, and early infection mechanisms.</li></ul>Further research could explore specific molecular functions in these contexts.",
+  "topics": [
+    {
+      "headline": "Intracellular stage and early infection expression",
+      "one_sentence_summary": "Higher expression in intracellular stages, especially at 12-48 hours after infection, with potential role in early lifecycle stages.",
+      "dataset_ids": [
+        "DS_eb01624959",
+        "DS_db22744127",
+        "DS_2bf995383e"
+      ]
+    },
+    {
+      "headline": "Role during sexual development in <i>Cryptosporidium parvum</i>",
+      "one_sentence_summary": "Prominent gene expression is noted in the sexual developmental stages, especially within female stages of <i>C. parvum</i>.",
+      "dataset_ids": [
+        "DS_b14c36920f"
+      ]
+    }
+  ]
+}

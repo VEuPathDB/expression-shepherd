@@ -1,0 +1,54 @@
+{
+  "headline": "Sporozoite-Specific Expression with Strong Developmental Regulation Throughout Malaria Life Cycle",
+  "one_paragraph_summary": "This gene exhibits <strong>dramatic sporozoite-specific upregulation</strong> with expression levels reaching >2000 TPM (99th percentile) in sporozoites compared to minimal expression in asexual blood stages (<5 TPM). The gene shows <strong>strong cyclical expression</strong> during the intraerythrocytic developmental cycle, with biphasic patterns featuring peaks during early ring stages and late schizont stages, suggesting dual roles in invasion and egress processes. Expression is consistently elevated in <strong>sexual stages</strong>, particularly gametocyte stage V and ookinetes, indicating importance in transmission. The gene also demonstrates <strong>preferential expression in mosquito-derived versus cultured sporozoites</strong>, suggesting environmental or vector-dependent regulation. Given its sporozoite-specific expression pattern and transmission stage preference, this gene likely encodes a protein critical for sporozoite infectivity, host cell invasion, or early establishment of infection in mammalian hosts.",
+  "topics": [
+    {
+      "headline": "Dramatic Sporozoite-Specific Expression Across Multiple Studies",
+      "one_sentence_summary": "This gene consistently shows extremely high expression in sporozoites (928-2352 TPM, 99th percentile) with >400-fold increases compared to asexual blood stages and oocysts across multiple independent studies.",
+      "dataset_ids": [
+        "DS_b6cdce990b",
+        "DS_2aa311d6a0",
+        "DS_4582562a4b",
+        "DS_c28828ce84",
+        "DS_6573eba8f8"
+      ]
+    },
+    {
+      "headline": "Biphasic Cyclical Expression During Intraerythrocytic Development",
+      "one_sentence_summary": "The gene exhibits strong cyclical expression patterns during the 48-hour blood stage cycle with peaks at invasion (0h) and schizont stages (40-48h), showing 4-15 fold dynamic changes and strain-specific variations.",
+      "dataset_ids": [
+        "DS_74bf6512eb",
+        "DS_fe2b5a278f",
+        "DS_87e4fcafff",
+        "DS_416070059c",
+        "DS_28ef9b0494",
+        "DS_84d52f99c7",
+        "DS_29940f3f82"
+      ]
+    },
+    {
+      "headline": "Sexual Stage-Specific Expression During Gametocyte Development",
+      "one_sentence_summary": "Expression is elevated in sexual stages, particularly gametocyte stage V (42-43 TPM) and ookinetes (27 TPM), with >10-fold higher levels than asexual stages and female-biased expression patterns.",
+      "dataset_ids": [
+        "DS_66f9e70b8a",
+        "DS_a518f45975"
+      ]
+    },
+    {
+      "headline": "Enhanced Expression in Mosquito-Derived Versus Laboratory-Cultured Parasites",
+      "one_sentence_summary": "The gene shows significantly higher expression in mosquito-produced sporozoites compared to in vitro cultured sporozoites (15-54 fold increases), indicating vector-dependent or environmental regulation.",
+      "dataset_ids": [
+        "DS_cf291e2adb"
+      ]
+    },
+    {
+      "headline": "Complex Transcriptional and Post-Transcriptional Regulation",
+      "one_sentence_summary": "The gene demonstrates sophisticated regulation including dramatically increased mRNA stability from ring to schizont stages (10 to 83 minutes half-life) and enhanced translational activity during ring stages.",
+      "dataset_ids": [
+        "DS_c6622915ff",
+        "DS_090793ccdd",
+        "DS_0fa4237b4b"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "headline": "Procyclic form-specific upregulation with midgut tissue preference in Trypanosoma brucei",
+  "one_paragraph_summary": "This gene shows <strong>dramatic stage-specific expression</strong> in <i>Trypanosoma brucei</i>, with consistent upregulation ranging from <strong>20 to 347-fold higher</strong> in procyclic forms compared to bloodstream forms across multiple independent studies. Expression levels reach <strong>exceptionally high percentile rankings (>99th percentile)</strong> in procyclic forms, indicating it is among the most abundant transcripts in the insect vector stage. <ul><li>Shows strong tissue specificity within the tsetse fly, with highest expression in the midgut</li><li>Maintains high expression throughout procyclic cell cycle phases</li><li>Exhibits modest circadian oscillations under temperature cycling conditions</li></ul> The consistent procyclic-specific upregulation and midgut preference strongly suggest this gene encodes a protein critical for parasite survival and metabolism during the insect vector stage of the life cycle.",
+  "topics": [
+    {
+      "headline": "Dramatic procyclic form upregulation across multiple life cycle studies",
+      "one_sentence_summary": "This gene consistently shows 20-347 fold higher expression in procyclic forms compared to bloodstream forms across seven independent transcriptomic studies, reaching >99th percentile expression rankings in the insect vector stage.",
+      "dataset_ids": [
+        "DS_66fdbd45d7",
+        "DS_da32747f09",
+        "DS_3e90742f0a",
+        "DS_f8e525f9b0",
+        "DS_2e9f1cbf33",
+        "DS_f18da9c611"
+      ]
+    },
+    {
+      "headline": "Midgut-specific tissue preference during tsetse fly transmission",
+      "one_sentence_summary": "The gene shows extremely high expression (>5000 TPM) specifically in tsetse fly midgut across all time points with 10-12 fold reduced expression in proventriculus and salivary glands, indicating critical midgut-specific function.",
+      "dataset_ids": [
+        "DS_f01ace4781"
+      ]
+    },
+    {
+      "headline": "Cell cycle and circadian regulation in procyclic forms",
+      "one_sentence_summary": "Expression decreases progressively through the cell cycle from G1 to G2 phase and shows modest circadian oscillations under temperature cycling conditions, while maintaining consistently high abundance.",
+      "dataset_ids": [
+        "DS_0de2f64330",
+        "DS_77b994d105"
+      ]
+    },
+    {
+      "headline": "Upregulation during mRNA decay conditions and differentiation",
+      "one_sentence_summary": "The gene shows 8-30 fold upregulation in ribosome-depleted conditions and transient upregulation during early differentiation stages, suggesting roles in RNA metabolism and developmental transitions.",
+      "dataset_ids": [
+        "DS_378ed5098b",
+        "DS_9df2112fd9"
+      ]
+    },
+    {
+      "headline": "Host and tissue adaptation in bloodstream forms",
+      "one_sentence_summary": "Expression varies significantly between different host environments, with higher levels in human blood compared to rat blood and adipose tissue, indicating potential host-specific regulation.",
+      "dataset_ids": [
+        "DS_820537ffae",
+        "DS_8293b78640"
+      ]
+    }
+  ]
+}

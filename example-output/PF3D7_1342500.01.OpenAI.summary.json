@@ -1,0 +1,36 @@
+{
+  "headline": "Dynamics of Expression in <i>Plasmodium falciparum</i> Stages",
+  "one_paragraph_summary": "<strong>Gene expression patterns for <i>Plasmodium falciparum</i> were observed across multiple stages of its lifecycle.</strong> <ul> <li>The gene demonstrates a major peak of expression in some mosquito stages, particularly in salivary gland sporozoites, significantly higher compared to asexual blood stages and midgut oocysts.</li> <li>This peak suggests a critical role for this gene in stages relevant to mosquito infection or host transmission.</li> <li>Additionally, the gene shows both cyclic and stage-specific behavior during the intraerythrocytic development cycle, with various expression patterns peaking in the schizont or ring stages.</li> <li>In gametocyte and sexual stage studies, the gene exhibited stage and sex-specific activity, indicating functional roles within these stages.</li> </ul> These findings highlight the gene's developmental relevance during the parasite lifecycle, potentially impacting its infectivity and survival strategies.",
+  "topics": [
+    {
+      "headline": "Expression Patterns in Mosquito and Sporozoite Stages",
+      "one_sentence_summary": "Gene expression peaks prominently in mosquito-related stages, predominantly salivary gland sporozoites.",
+      "dataset_ids": [
+        "DS_b6cdce990b",
+        "DS_2aa311d6a0",
+        "DS_cf291e2adb",
+        "DS_c28828ce84"
+      ]
+    },
+    {
+      "headline": "Cyclic Expression Across the Erythrocytic Development Cycle",
+      "one_sentence_summary": "The gene displays cyclic and stage-specific expression during the intraerythrocytic development cycle, with expression peaking in schizont or other stages.",
+      "dataset_ids": [
+        "DS_fe2b5a278f",
+        "DS_715bf2deda",
+        "DS_87e4fcafff",
+        "DS_29940f3f82",
+        "DS_74bf6512eb",
+        "DS_416070059c"
+      ]
+    },
+    {
+      "headline": "Gametocyte and Sexual Stage Specific Expression",
+      "one_sentence_summary": "Specific expression trends were noted in gametocyte stages indicating potential involvement in sexual stage development.",
+      "dataset_ids": [
+        "DS_66f9e70b8a",
+        "DS_a518f45975"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "headline": "Starch-responsive gene with DNA repair and developmental regulation",
+  "one_paragraph_summary": "This gene exhibits <strong>substrate-specific expression patterns</strong> with highest levels on starch-based carbon sources (amylose, amylopectin) reaching 290-430 TPM, suggesting involvement in starch metabolism. <ul><li>Shows marked upregulation in DNA repair mutants (delta mus-52, stc-1) indicating potential roles in DNA damage responses</li><li>Displays developmental regulation with peak expression at 48 hours during sexual development</li><li>Responds to iron starvation and shows light-responsive downregulation</li><li>Expression is positively regulated by transcription factors including XLR-1 for xylan utilization and COL-26 for starch responses</li></ul> The consistent upregulation across multiple stress conditions (DNA repair defects, nutrient limitations) combined with substrate-specific induction suggests this gene may encode a stress-responsive enzyme involved in carbohydrate metabolism or cellular maintenance pathways.",
+  "topics": [
+    {
+      "headline": "Strong upregulation on starch substrates with transcriptional control by COL-26",
+      "one_sentence_summary": "Gene shows preferential expression on complex starch substrates (amylose, amylopectin) that is dependent on the COL-26 transcription factor for proper starch-responsive induction.",
+      "dataset_ids": [
+        "DS_33fc617b03",
+        "DS_d5cb6ab9a2",
+        "DS_a0004d905e"
+      ]
+    },
+    {
+      "headline": "Upregulation in DNA repair mutants suggests stress response functions",
+      "one_sentence_summary": "Gene is consistently upregulated in DNA repair-deficient mutants (delta mus-52, stc-1) indicating potential involvement in compensatory stress responses to genomic instability.",
+      "dataset_ids": [
+        "DS_a03298576e",
+        "DS_f2913d9eb1"
+      ]
+    },
+    {
+      "headline": "Developmental regulation during sexual reproduction and conidial germination",
+      "one_sentence_summary": "Expression peaks at 48 hours during sexual development and shows highest levels in fresh conidia, suggesting roles in specific developmental transitions.",
+      "dataset_ids": [
+        "DS_14cdcc2c58",
+        "DS_1a51a536a0",
+        "DS_7b3238ce05"
+      ]
+    },
+    {
+      "headline": "Carbon source-dependent regulation by multiple transcription factors",
+      "one_sentence_summary": "Gene responds to various carbon sources with regulation by XLR-1 (xylan), deletion mutants (ADV-1, PP-1), and shows substrate-specific expression patterns across polysaccharides and plant biomass.",
+      "dataset_ids": [
+        "DS_5781e07160",
+        "DS_ae93d6cae4",
+        "DS_bb6e5ae0e5",
+        "DS_a4188c2dd4"
+      ]
+    },
+    {
+      "headline": "Iron starvation response with enhanced sensitivity in ve-1 mutant",
+      "one_sentence_summary": "Expression increases under iron limitation with a more pronounced response in the ve-1 mutant strain, suggesting involvement in metal homeostasis pathways.",
+      "dataset_ids": [
+        "DS_c764829c69"
+      ]
+    },
+    {
+      "headline": "SREBP pathway regulation affects expression in sterol biosynthesis context",
+      "one_sentence_summary": "Gene shows reduced expression in delta sah-2 mutant with partial rescue in double mutants, indicating regulation by SREBP-dependent pathways involved in ergosterol biosynthesis.",
+      "dataset_ids": [
+        "DS_16bc228c8e"
+      ]
+    }
+  ]
+}

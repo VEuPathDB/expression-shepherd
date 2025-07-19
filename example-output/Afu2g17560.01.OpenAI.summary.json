@@ -1,0 +1,39 @@
+{
+  "headline": "Differential expression in diverse stress and developmental conditions",
+  "one_paragraph_summary": "<strong>This gene in <i>Aspergillus fumigatus</i> exhibits diverse expression patterns under various experimental conditions, suggesting a multifaceted biological role.</strong> <ul> <li>It is highly expressed in conidia compared to hyphae, indicating potential involvement in spore biology.</li> <li>Expression increases under hypoxia and is modulated under zinc and nitrate limitation in an ACE1-dependent manner.</li> <li>It responds variably to stresses like Congo Red, iron deprivation, and itraconazole, suggesting potential stress response functions.</li> <li>Expression levels also vary across developmental stages, growth media, and in response to other chemical treatments or co-culture conditions.</li> These expression patterns hint at this gene playing roles in development, stress response, and resource adaptation in <i>A. fumigatus</i>.",
+  "topics": [
+    {
+      "headline": "Expression during aspergillosis-relevant environmental conditions",
+      "one_sentence_summary": "This gene shows expression changes in hypoxia, oxidative stress, and specific medium limitations relevant to its functionality in the environment.",
+      "dataset_ids": [
+        "DS_93c159b846",
+        "DS_dd0139d2b0",
+        "DS_2b76656bb1"
+      ]
+    },
+    {
+      "headline": "Expression related to fungal developmental stages",
+      "one_sentence_summary": "The gene is expressed differentially during various stages of fungal development, such as conidial and hyphal forms.",
+      "dataset_ids": [
+        "DS_62ebc12b94",
+        "DS_faa5674b55"
+      ]
+    },
+    {
+      "headline": "Expression perturbations under antifungal treatments",
+      "one_sentence_summary": "This gene's expression is influenced by itraconazole and caspofungin exposure, showing its potential role in antifungal responses.",
+      "dataset_ids": [
+        "DS_64e126f34e",
+        "DS_f65ede9fbd"
+      ]
+    },
+    {
+      "headline": "Responses to stress-inducing agents",
+      "one_sentence_summary": "Differential expression occurs under Congo Red and heat-inactivated <i>Pseudomonas</i> challenge.",
+      "dataset_ids": [
+        "DS_d360a3549c",
+        "DS_c339242e7e"
+      ]
+    }
+  ]
+}
