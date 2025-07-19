@@ -8,46 +8,125 @@ import { FullIndividualResponseType, individualResponseSchema, summaryResponseSc
 import { zodResponseFormat } from "openai/helpers/zod";
 import { consolidateSummary, summaryJSONtoHTML, writeToFile } from "./utils";
 
+// Project ID to server URL mapping
+const PROJECT_URLS: Record<string, { serverUrl: string; geneBaseUrl: string; serviceBaseUrl: string }> = {
+  'PlasmoDB': {
+    serverUrl: 'https://plasmodb.org',
+    geneBaseUrl: 'https://plasmodb.org/plasmo/app/record/gene',
+    serviceBaseUrl: 'https://plasmodb.org/plasmo/service'
+  },
+  'VectorBase': {
+    serverUrl: 'https://vectorbase.org',
+    geneBaseUrl: 'https://vectorbase.org/vectorbase/app/record/gene',
+    serviceBaseUrl: 'https://vectorbase.org/vectorbase/service'
+  },
+  'ToxoDB': {
+    serverUrl: 'https://toxodb.org',
+    geneBaseUrl: 'https://toxodb.org/toxo/app/record/gene',
+    serviceBaseUrl: 'https://toxodb.org/toxo/service'
+  },
+  'CryptoDB': {
+    serverUrl: 'https://cryptodb.org',
+    geneBaseUrl: 'https://cryptodb.org/cryptodb/app/record/gene',
+    serviceBaseUrl: 'https://cryptodb.org/cryptodb/service'
+  },
+  'FungiDB': {
+    serverUrl: 'https://fungidb.org',
+    geneBaseUrl: 'https://fungidb.org/fungidb/app/record/gene',
+    serviceBaseUrl: 'https://fungidb.org/fungidb/service'
+  },
+  'GiardiaDB': {
+    serverUrl: 'https://giardiadb.org',
+    geneBaseUrl: 'https://giardiadb.org/giardiadb/app/record/gene',
+    serviceBaseUrl: 'https://giardiadb.org/giardiadb/service'
+  },
+  'TrichDB': {
+    serverUrl: 'https://trichdb.org',
+    geneBaseUrl: 'https://trichdb.org/trichdb/app/record/gene',
+    serviceBaseUrl: 'https://trichdb.org/trichdb/service'
+  },
+  'AmoebaDB': {
+    serverUrl: 'https://amoebadb.org',
+    geneBaseUrl: 'https://amoebadb.org/amoeba/app/record/gene',
+    serviceBaseUrl: 'https://amoebadb.org/amoeba/service'
+  },
+  'MicrosporidiaDB': {
+    serverUrl: 'https://microsporidiadb.org',
+    geneBaseUrl: 'https://microsporidiadb.org/micro/app/record/gene',
+    serviceBaseUrl: 'https://microsporidiadb.org/micro/service'
+  },
+  'PiroplasmaDB': {
+    serverUrl: 'https://piroplasmadb.org',
+    geneBaseUrl: 'https://piroplasmadb.org/piro/app/record/gene',
+    serviceBaseUrl: 'https://piroplasmadb.org/piro/service'
+  },
+  'TriTrypDB': {
+    serverUrl: 'https://tritrypdb.org',
+    geneBaseUrl: 'https://tritrypdb.org/tritrypdb/app/record/gene',
+    serviceBaseUrl: 'https://tritrypdb.org/tritrypdb/service'
+  }
+};
+
 //
-// yarn build && node dist/main.js PF3D7_0616000
+// yarn build && node dist/main.js PlasmoDB PF3D7_0616000
 //
 // or
 //
-// node dist/main.js PF3D7_0716300 DS_e973eadd57 10 0
+// node dist/main.js PlasmoDB PF3D7_0716300 DS_e973eadd57 10 0
 //
 // or with Claude 4 Sonnet:
 //
-// node dist/main.js PF3D7_0616000 --claude
+// node dist/main.js PlasmoDB PF3D7_0616000 --claude
 //
 // Note: Use 'node dist/main.js' directly instead of 'yarn start' to pass the --claude flag
 // Set ANTHROPIC_API_KEY environment variable for Claude, OPENAI_API_KEY for OpenAI
 // Output files will include model name: e.g., GENE.01.Claude.summary.html
 //
-// Arguments: [geneId] [datasetId] [numReps] [prettyPrint] [--claude]
-// * numReps: number of replicates (default: 1)
-// * prettyPrint: boolean for JSON formatting (default: true)  
+// Arguments: <ProjectID> <GeneID> [DatasetID] [NumReps] [PrettyPrint] [--claude]
+// * ProjectID: database project ID (PlasmoDB, VectorBase, ToxoDB, etc.)
+// * GeneID: gene identifier 
+// * DatasetID: optional specific dataset to process
+// * NumReps: number of replicates (default: 1)
+// * PrettyPrint: boolean for JSON formatting (default: true)  
 // * --claude: use Claude 4 Sonnet instead of OpenAI GPT-4
-// * if datasetId specified, only that dataset will be processed (no summary-of-summaries)
+// * if DatasetID specified, only that dataset will be processed (no summary-of-summaries)
 // * these run in parallel asynchronously - not sure if client retries if hitting the rate-limit
 //
 
 const args = process.argv.slice(2); // Skip the first two entries
 
 // Parse command line arguments
-let geneId = args[0];
+// Parse arguments, handling --claude flag
+const filteredArgs = args.filter(arg => arg !== '--claude');
+const useAnthropic = args.includes('--claude');
+
+// Validate minimum arguments
+if (filteredArgs.length < 2) {
+  console.error('Usage: node dist/main.js <ProjectID> <GeneID> [DatasetID] [NumReps] [PrettyPrint] [--claude]');
+  console.error('ProjectID must be one of:', Object.keys(PROJECT_URLS).join(', '));
+  process.exit(1);
+}
+
+const projectId = filteredArgs[0];
+const geneId = filteredArgs[1];
 let datasetId: string | undefined;
 let numReps = 1;
 let prettyPrint = true;
-let useAnthropic = false;
 
-// Parse arguments, handling --claude flag
-const filteredArgs = args.filter(arg => arg !== '--claude');
-useAnthropic = args.includes('--claude');
+// Validate project ID
+if (!PROJECT_URLS[projectId]) {
+  console.error(`Invalid ProjectID: ${projectId}`);
+  console.error('Valid ProjectIDs are:', Object.keys(PROJECT_URLS).join(', '));
+  process.exit(1);
+}
 
-geneId = filteredArgs[0];
-if (filteredArgs.length > 1) datasetId = filteredArgs[1];
-if (filteredArgs.length > 2) numReps = Number(filteredArgs[2]);
-if (filteredArgs.length > 3) prettyPrint = Boolean(filteredArgs[3]);
+// Parse remaining optional arguments
+if (filteredArgs.length > 2) datasetId = filteredArgs[2];
+if (filteredArgs.length > 3) numReps = Number(filteredArgs[3]);
+if (filteredArgs.length > 4) prettyPrint = Boolean(filteredArgs[4]);
+
+// Get URLs for the specified project
+const { serverUrl, geneBaseUrl, serviceBaseUrl } = PROJECT_URLS[projectId];
 
 console.log(`Using ${useAnthropic ? 'Claude' : 'OpenAI'} API`);
 
@@ -56,12 +135,6 @@ const openaiModelId = "gpt-4o-2024-11-20";
 // "gpt-4o-2024-08-06"
 
 const anthropicModelId = "claude-sonnet-4-20250514";
-
-// these could be ENV vars or commandline args in future
-const projectId = 'PlasmoDB';
-const serverUrl = 'https://plasmodb.org';
-const geneBaseUrl = 'https://plasmodb.org/plasmo/app/record/gene';
-const serviceBaseUrl = 'https://plasmodb.org/plasmo/service';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Ensure this is set in your environment
@@ -80,6 +153,8 @@ interface SummariseExpressionArgs {
   geneId: string;
   projectId: string;
   serviceBaseUrl: string;
+  serverUrl: string;
+  geneBaseUrl: string;
   datasetId?: string;
   rep?: number;
   prettyPrint?: boolean;
@@ -155,7 +230,7 @@ export function getFinalSummaryMessage(experiments: any[], prettyPrint = false):
 
 
 async function summariseExpression(
-  { geneId, projectId, serviceBaseUrl, datasetId, rep = 1, prettyPrint = false, useAnthropic = false } : SummariseExpressionArgs
+  { geneId, projectId, serviceBaseUrl, serverUrl, geneBaseUrl, datasetId, rep = 1, prettyPrint = false, useAnthropic = false } : SummariseExpressionArgs
 ) : SummariseExpressionReturnType {
   
   const modelSuffix = useAnthropic ? 'Claude' : 'OpenAI'; 
@@ -428,5 +503,5 @@ async function summariseExpression(
 }
 
 for (let rep = 1; rep <= numReps; rep++) {
-  summariseExpression({ geneId, projectId, serviceBaseUrl, datasetId, rep, prettyPrint, useAnthropic });
+  summariseExpression({ geneId, projectId, serviceBaseUrl, serverUrl, geneBaseUrl, datasetId, rep, prettyPrint, useAnthropic });
 }

@@ -1,0 +1,51 @@
+{
+  "headline": "Bloodstream form-specific expression with dramatic stage-dependent regulation",
+  "one_paragraph_summary": "This gene shows <strong>dramatically higher expression in bloodstream forms compared to procyclic forms</strong> of <i>Trypanosoma brucei</i>, with expression levels consistently <strong>5-15 fold higher in mammalian host stages</strong>. The gene exhibits <strong>peak expression in long slender bloodstream forms</strong> and shows <strong>rapid downregulation during differentiation to procyclic forms</strong>. Expression is <strong>enhanced in specialized tissues</strong> including adipose tissue and cerebrospinal fluid compared to blood. <strong>Ribosome profiling data indicates active translation in bloodstream forms</strong>, with translation efficiency markedly higher than transcription levels. The consistent bloodstream-specific upregulation across multiple experimental conditions suggests this gene plays a <strong>critical role in mammalian host adaptation</strong>, potentially involved in metabolic processes or virulence factors required for survival in the mammalian bloodstream environment.",
+  "topics": [
+    {
+      "headline": "Dramatic bloodstream versus procyclic form expression differences",
+      "one_sentence_summary": "The gene shows consistently 5-15 fold higher expression in bloodstream forms compared to procyclic forms across multiple independent studies, with particularly elevated ribosome profiling signals indicating enhanced translation in the mammalian host stage.",
+      "dataset_ids": [
+        "DS_f8e525f9b0",
+        "DS_f18da9c611",
+        "DS_2e9f1cbf33",
+        "DS_da32747f09",
+        "DS_77b994d105",
+        "DS_66fdbd45d7"
+      ]
+    },
+    {
+      "headline": "Rapid downregulation during bloodstream to procyclic differentiation",
+      "one_sentence_summary": "Expression decreases dramatically during the transition from bloodstream to procyclic forms, with sustained downregulation observed throughout differentiation time courses induced by various stimuli.",
+      "dataset_ids": [
+        "DS_0c4be69d67",
+        "DS_9df2112fd9",
+        "DS_b7dc54ebad"
+      ]
+    },
+    {
+      "headline": "Tissue-specific upregulation in specialized host environments",
+      "one_sentence_summary": "The gene shows enhanced expression in adipose tissue compared to blood and dramatically higher levels in human cerebrospinal fluid, suggesting adaptation to specific tissue microenvironments during infection.",
+      "dataset_ids": [
+        "DS_820537ffae",
+        "DS_8293b78640"
+      ]
+    },
+    {
+      "headline": "Vector stage expression patterns and tissue tropism",
+      "one_sentence_summary": "Expression varies significantly across tsetse fly tissues with high levels in midgut and salivary glands but low expression in proventriculus, and shows upregulation in metacyclic forms compared to procyclic forms.",
+      "dataset_ids": [
+        "DS_f01ace4781",
+        "DS_a72b4c8650"
+      ]
+    },
+    {
+      "headline": "Stage-specific mRNA stability and post-transcriptional regulation",
+      "one_sentence_summary": "The gene exhibits substantially greater mRNA stability in procyclic forms compared to bloodstream forms, indicating developmental stage-specific post-transcriptional regulatory mechanisms.",
+      "dataset_ids": [
+        "DS_23cf1041d8",
+        "DS_378ed5098b"
+      ]
+    }
+  ]
+}

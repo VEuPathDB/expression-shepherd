@@ -1,6 +1,6 @@
 # Expression Shepherd
 
-This is a lightweight proof-of-concept tool for summarising the expression data on a gene page using OpenAI's GPT-4o model or Anthropic's Claude 4 Sonnet.
+This is a lightweight proof-of-concept tool for summarising the expression data on a gene page from VEuPathDB databases using OpenAI's GPT-4o model or Anthropic's Claude 4 Sonnet.
 
 ## Non-Docker usage
 
@@ -32,17 +32,19 @@ This compiles `src/main.ts` into `dist/main.js`
 
 ### 3. Run the code
 
-You can run the script with any PlasmoDB gene ID:
+You can run the script with any gene ID from supported VEuPathDB databases:
 
 **With OpenAI GPT-4o (default):**
 ```bash
-node dist/main.js PF3D7_1016300
+node dist/main.js PlasmoDB PF3D7_1016300
 ```
 
 **With Claude 4 Sonnet:**
 ```bash
-node dist/main.js PF3D7_1016300 --claude
+node dist/main.js PlasmoDB PF3D7_1016300 --claude
 ```
+
+**Supported databases:** PlasmoDB, VectorBase, ToxoDB, CryptoDB, FungiDB, GiardiaDB, TrichDB, AmoebaDB, MicrosporidiaDB, PiroplasmaDB, TriTrypDB
 
 **Note:** Use `node dist/main.js` directly instead of `yarn start` when using the `--claude` flag, as npm/yarn scripts don't pass through additional arguments.
 
@@ -97,19 +99,19 @@ docker exec -it --env-file .env <CONTAINER_ID> sh
 You can then manually run the script (see step 3. in the non-Docker section above):
 
 ```bash
-yarn start PF3D7_0818900
+node dist/main.js PlasmoDB PF3D7_0818900
 ```
 
 Or you can just run the script at container launch time: 
 
 ```bash
-docker run -d --rm --env-file .env -v $(pwd)/example-output:/app/example-output expression-shepherd yarn start PF3D7_0818900
+docker run -d --rm --env-file .env -v $(pwd)/example-output:/app/example-output expression-shepherd node dist/main.js PlasmoDB PF3D7_0818900
 ```
 
 Or like this in an already running container:
 
 ```bash
-docker exec -it --env-file .env <CONTAINER_ID> yarn start PF3D7_0818900
+docker exec -it --env-file .env <CONTAINER_ID> node dist/main.js PlasmoDB PF3D7_0818900
 ```
 
 Note that volta is not available in the node container but it does have suitable versions of node and yarn installed anyway.
