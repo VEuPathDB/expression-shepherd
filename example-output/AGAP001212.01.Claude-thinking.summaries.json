@@ -1,0 +1,800 @@
+[
+  {
+    "one_sentence_summary": "This gene exhibits strong circadian rhythmicity in <i>Anopheles gambiae</i> with peak expression occurring during subjective night (CT12-16 and ZT32-36) and lowest expression during subjective day (CT4-8 and ZT28), showing approximately 3-4 fold expression changes across the 24-hour cycle in both heads and bodies.",
+    "biological_importance": 4,
+    "confidence": 5,
+    "experiment_keywords": [
+      "circadian",
+      "diel",
+      "rhythm",
+      "mosquito",
+      "heads",
+      "bodies",
+      "light-dark",
+      "constant-dark"
+    ],
+    "notes": "Clear 24-hour periodicity observed in both light:dark and constant dark conditions across 48 hours, indicating true circadian regulation. Expression levels are consistently high (>90th percentile) during peak times and moderate-low (60-80th percentile) during troughs.",
+    "dataset_id": "DS_f6d53b7d28",
+    "assay_type": "array",
+    "experiment_name": "Genome-wide profiling of diel and circadian gene expression of the malaria vector Anopheles gambiae"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in digestive tissues (midgut and salivary glands) with >98th percentile expression levels, moderate expression in carcass and head tissues, and lowest expression in reproductive tissues, particularly ovaries in <i>Anopheles gambiae</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "tissue-specific",
+      "digestive system",
+      "salivary glands",
+      "midgut",
+      "sexual dimorphism",
+      "adult mosquito"
+    ],
+    "notes": "The gene displays clear tissue-specific expression with a 7-fold difference between highest (midgut) and lowest (ovaries) expressing tissues, suggesting important digestive or secretory functions.",
+    "dataset_id": "DS_46d69d95d1",
+    "assay_type": "array",
+    "experiment_name": "A comprehensive gene expression atlas of sex- and tissue-specificity in the malaria vector, Anopheles gambiae"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in the midgut tissue (98th percentile) and exhibits a complex temporal pattern following blood feeding in <i>Anopheles gambiae</i>, with peak expression at 24 hours post-blood meal (90th percentile) followed by decreased expression at 48-72 hours, then recovery by 96 hours and continued elevation at 15 days.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "blood meal response",
+      "temporal expression",
+      "tissue-specific",
+      "midgut",
+      "mosquito physiology",
+      "reproductive cycle"
+    ],
+    "notes": "Strong tissue-specific expression in midgut suggests digestive or metabolic function; temporal pattern aligns with known blood meal digestion and egg development cycle in mosquitoes",
+    "dataset_id": "DS_1b7a4b6253",
+    "assay_type": "array",
+    "experiment_name": "Anopheles gambiae genome-wide gene expression in response to bloodmeal"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in the gastric caeca (8.8, 92nd percentile) of <i>Anopheles gambiae</i> larval alimentary canal, with progressively lower expression in other gut compartments and moderate expression in whole organism samples.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "larval",
+      "alimentary canal",
+      "gut compartmentalization",
+      "microarray",
+      "Anopheles gambiae",
+      "digestive system"
+    ],
+    "notes": "Strong compartment-specific expression pattern with gastric caeca showing nearly 2-fold higher expression than other gut regions, suggesting specialized function in this digestive compartment.",
+    "dataset_id": "DS_5bedb81fb1",
+    "assay_type": "array",
+    "experiment_name": "A microarray-based analysis of transcriptional compartmentalization in the alimentary canal of Anopheles gambiae (Diptera: Culicidae) larvae"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong upregulation in wild-type versus CTRP knockout <i>Anopheles gambiae</i> midguts before and during <i>Plasmodium berghei</i> invasion (1.63 and 1.06 log2 fold change respectively), but becomes downregulated after invasion (-0.35 log2 fold change).",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Plasmodium",
+      "invasion",
+      "midgut",
+      "malaria",
+      "parasite",
+      "time-course",
+      "microarray"
+    ],
+    "notes": "The temporal expression pattern suggests this gene may be involved in early parasite invasion processes, with expression reversing after successful invasion is complete. High percentile values (>95th) across most conditions indicate this is among the most highly expressed genes in the dataset.",
+    "dataset_id": "DS_4b292e2c66",
+    "assay_type": "array",
+    "experiment_name": "Transcription profiling of mosquitos fed blood infected with two alternative P. berghei strains"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistent upregulation in bendiocarb-resistant <i>Anopheles gambiae</i> mosquitoes compared to unexposed mosquitoes from both Kihihi and Nagongera populations (0.22 and 0.34 log2 fold change, respectively), with high percentile rankings (92.64% and 96.47%) indicating strong differential expression.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "insecticide resistance",
+      "bendiocarb",
+      "microarray",
+      "Anopheles gambiae",
+      "malaria vector",
+      "Uganda",
+      "WHO bioassay"
+    ],
+    "notes": "The consistent upregulation pattern across two geographically distinct populations and high percentile rankings suggest this gene may play an important role in bendiocarb resistance mechanisms, though the relatively modest fold changes (1.16-1.27x) indicate moderate rather than extreme differential expression.",
+    "dataset_id": "DS_dd5f2829b0",
+    "assay_type": "array",
+    "experiment_name": "Genome-wide Transcriptional Analyses in Anopheles Mosquitoes Reveal an Unexpected Association Between Salivary Gland Gene Expression and Insecticide Resistance"
+  },
+  {
+    "one_sentence_summary": "This gene shows highly tissue-specific expression in <i>Anopheles gambiae</i> with strongest expression in whole body samples (253-254 TPM in males, 135 TPM in females), moderate expression in male maxillary palps (66 TPM), and low expression in antennae and female maxillary palps (5-16 TPM).",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "chemosensory",
+      "tissue-specific",
+      "sex-differential",
+      "antenna",
+      "maxillary palps",
+      "whole body",
+      "mosquito"
+    ],
+    "notes": "Strong sex-specific differences particularly evident in maxillary palps (4-fold higher in males) and whole body (1.9-fold higher in males). High paralog number (3) suggests potential cross-mapping issues, though unique and total counts are nearly identical indicating good specificity.",
+    "dataset_id": "DS_54a53ed35a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Chemosensory appendages, male and female"
+  },
+  {
+    "one_sentence_summary": "This gene shows strong sexual dimorphism in adult <i>Anopheles gambiae</i> with ~4-fold higher expression in females (177.5 TPM) compared to males (46.1 TPM), while maintaining moderate expression levels across all larval stages and showing relatively low expression in reproductive tissues compared to carcass.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "sexual dimorphism",
+      "adult mosquito",
+      "larval development",
+      "reproductive tissues",
+      "carcass",
+      "sex-specific expression"
+    ],
+    "notes": "The gene shows consistent moderate expression across larval stages (~12-17 TPM) but dramatic upregulation in adult females. The post-egg laying time series shows generally low expression with some variability between wild-type and PPO conditions, particularly at 48 hours post-laying.",
+    "dataset_id": "DS_cb6310bab8",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Male and female sex-tissues vs carcass in adults and larvae"
+  },
+  {
+    "one_sentence_summary": "This gene shows highly abundant expression in both midgut and salivary gland tissues of adult female <i>Anopheles gambiae</i>, with slightly higher levels in midgut (115.8 TPM) compared to salivary glands (93.6 TPM), and both tissues ranking in the 97th percentile for expression.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "tissue-specific",
+      "midgut",
+      "salivary gland",
+      "adult female",
+      "Anopheles gambiae",
+      "high expression"
+    ],
+    "notes": "Gene shows consistently high expression across both tissues with minimal antisense transcription, suggesting strong tissue-general function; paralog number of 3 indicates potential gene family complexity that may affect interpretation.",
+    "dataset_id": "DS_378aa4dc66",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Midgut and salivary glands transcription"
+  },
+  {
+    "one_sentence_summary": "This gene shows markedly higher expression in testes (63.93-64.56 TPM, 83rd percentile) compared to male accessory glands (4.79-4.84 TPM, 51st percentile) in <i>Anopheles gambiae</i>.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "male reproductive organs",
+      "testes",
+      "accessory glands",
+      "Anopheles gambiae",
+      "reproductive biology",
+      "tissue-specific expression"
+    ],
+    "notes": "The gene shows approximately 13-fold higher expression in testes versus male accessory glands, with consistent values between unique and total counts suggesting minimal paralog interference despite paralog_number of 3.",
+    "dataset_id": "DS_0eac688af3",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Male reproductive organs"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatically higher expression in salivary glands compared to midguts in <i>Anopheles gambiae</i> infected with <i>P. falciparum</i>, with salivary gland expression levels (130-324 TPM) being 1.4-3.5 times higher than midgut levels (92-222 TPM) and ranking in the 98th percentile versus 97th percentile respectively.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Anopheles gambiae",
+      "Plasmodium falciparum",
+      "malaria infection",
+      "salivary glands",
+      "midguts",
+      "tissue-specific expression",
+      "vector biology"
+    ],
+    "notes": "Expression shows consistent tissue-specific pattern across both single-end and paired-end sequencing approaches, with very low antisense expression indicating proper strand specificity; paralog number is 3 which may complicate interpretation but unique mapping results are available.",
+    "dataset_id": "DS_047c56768c",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mosquito midguts (MGs) and salivary glands (SGs) infected with P. falciparum"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in the anterior midgut (951 TPM) compared to other gut regions in sugar-fed <i>Anopheles gambiae</i> females, with consistently high expression across all gut compartments (300-951 TPM) and minimal antisense transcription.",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "gut",
+      "midgut",
+      "proventriculus",
+      "sugar-fed",
+      "female",
+      "digestive",
+      "regional"
+    ],
+    "notes": "High paralog number (3) suggests potential cross-hybridization, but the consistent pattern across gut regions and high percentile rankings (98-99th percentile) support genuine differential expression between gut compartments.",
+    "dataset_id": "DS_30f22178ef",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Different gut regions in sugar-fed adult females"
+  },
+  {
+    "one_sentence_summary": "This gene shows dramatically reduced expression in <i>Anopheles gambiae</i> Sua5B cells infected with Wolbachia strains wMel and wAlB compared to uninfected control cells (95th percentile in controls vs 49th-92nd percentiles in infected conditions).",
+    "biological_importance": 4,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Wolbachia infection",
+      "mosquito cell line",
+      "bacterial symbiont",
+      "host-pathogen interaction",
+      "Anopheles gambiae"
+    ],
+    "notes": "The gene has 3 paralogs which may complicate interpretation; the wAlB condition shows high variability (standard error equals the mean value) suggesting potential technical issues or biological heterogeneity in this treatment.",
+    "dataset_id": "DS_5d6ca2547f",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mosquito cell line Sua5B"
+  },
+  {
+    "one_sentence_summary": "This gene shows substantial downregulation in <i>Anopheles gambiae</i> hemocytes when infected with invasion-deficient CTRP knockout <i>Plasmodium berghei</i> parasites compared to infectious control parasites (7.08 vs 9.75 log2 expression).",
+    "biological_importance": 4,
+    "confidence": 3,
+    "experiment_keywords": [
+      "hemocytes",
+      "malaria",
+      "Plasmodium berghei",
+      "CTRP knockout",
+      "invasion-deficient",
+      "immune cells",
+      "parasite infection"
+    ],
+    "notes": "The ~2.7-fold difference in expression (2^(9.75-7.08)) suggests this gene may be involved in parasite invasion processes, as it is less expressed when parasites cannot invade. High percentile rankings (97.76% vs 91.68%) confirm substantial expression levels in both conditions.",
+    "dataset_id": "DS_37a38e9c07",
+    "assay_type": "array",
+    "experiment_name": "Expression profiling of hemocytes from Anopheles gambiae after malaria parasite infection"
+  },
+  {
+    "one_sentence_summary": "This gene shows a developmental shift from slight male-bias in early larval stages to moderate female-bias in pupae and adults in <i>Anopheles gambiae</i>.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "sex-biased expression",
+      "developmental stages",
+      "larval development",
+      "sexual dimorphism",
+      "ontogeny",
+      "malaria vector"
+    ],
+    "notes": "The expression pattern suggests this gene may play a role in sex-specific developmental processes, with the transition from male-bias to female-bias occurring during metamorphosis. High percentile values across all stages indicate robust expression throughout development.",
+    "dataset_id": "DS_34bdb01640",
+    "assay_type": "array",
+    "experiment_name": "Transcription regulation of sex-biased genes during ontogeny in the malaria vector Anopheles gambiae"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in adult <i>Anopheles gambiae</i> (both males and females) compared to earlier developmental stages, with consistently lower expression throughout embryonic, larval, and pupal stages.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "developmental stages",
+      "lifecycle",
+      "embryo",
+      "larva",
+      "pupa",
+      "adult",
+      "male",
+      "female",
+      "time course"
+    ],
+    "notes": "Expression values are log ratios relative to reference, so negative values indicate lower expression relative to reference rather than absolute downregulation. The developmental pattern suggests this gene may have important functions in adult mosquitoes.",
+    "dataset_id": "DS_dece397274",
+    "assay_type": "array",
+    "experiment_name": "Transcription profiling of eight different time periods of the Anopheles gambiae lifecycle"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate tissue-specific expression in <i>Anopheles gambiae</i> adult females, with highest expression in head and midgut tissues (positive log ratios of 0.49 and 0.39) and lower expression in ovaries and carcass (negative log ratios of -0.59 and -0.48).",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "tissue-specific",
+      "adult female",
+      "microarray",
+      "Anopheles gambiae",
+      "head",
+      "midgut",
+      "ovary",
+      "carcass"
+    ],
+    "notes": "Expression ratios are relative to a reference sample and cannot be interpreted as absolute up/down-regulation; the ~1.5-fold differences between tissues suggest moderate tissue-specificity with potential roles in head/midgut-specific functions.",
+    "dataset_id": "DS_23bfbb5021",
+    "assay_type": "array",
+    "experiment_name": "Life Cycle Transcriptome of the Malaria Mosquito Anopheles Gambiae and Comparison With the Fruitfly Drosophila Melanogaster"
+  },
+  {
+    "one_sentence_summary": "This gene shows highest expression in hemolymph (hemocytes) compared to carcass and head tissues in adult female <i>Anopheles gambiae</i>, with hemolymph expression being moderately higher than carcass but substantially higher than head.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "hemocytes",
+      "tissue-specific",
+      "immune cells",
+      "Anopheles gambiae",
+      "adult female",
+      "microarray"
+    ],
+    "notes": "The gene shows tissue-preferential expression in immune-related hemocytes with high percentile rankings (93rd percentile in hemolymph vs 64th in head), suggesting potential immune function relevance.",
+    "dataset_id": "DS_3788705685",
+    "assay_type": "array",
+    "experiment_name": "Expression profiling of different adult female tissues isolated from Anopheles gambiae females"
+  },
+  {
+    "one_sentence_summary": "This gene shows relatively stable, low-to-moderate expression throughout most of <i>Anopheles gambiae</i> embryonic development (2-37h), followed by a notable upregulation beginning around 40h and peaking at 43h post-fertilization, suggesting involvement in late embryonic processes preceding hatching.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "embryonic development",
+      "developmental time course",
+      "Anopheles gambiae",
+      "microarray",
+      "late embryogenesis",
+      "pre-hatching"
+    ],
+    "notes": "The expression pattern shows a clear biphasic profile with stable baseline expression (RMA ~4.3-4.5) for the first 37 hours, then substantial upregulation (peak RMA 6.15 at 43h). The 49h and 52h timepoints lack replicates as noted in the summary, which limits confidence in the final timepoints, though the trend suggests continued elevated expression approaching hatching.",
+    "dataset_id": "DS_d4fcd31fd0",
+    "assay_type": "array",
+    "experiment_name": "Developmental and evolutionary basis for drought tolerance of the Anopheles gambiae embryo (Embryonic development)"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all ages in both male and female <i>Anopheles gambiae</i> mosquitoes, with a notable increase in females from 20-30 days post-eclosion, suggesting potential age-related upregulation in older females.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "mosquito",
+      "aging",
+      "adult",
+      "temporal",
+      "sex-specific",
+      "vectorial capacity"
+    ],
+    "notes": "High percentile values (>90%) indicate this is among the most highly expressed genes in the transcriptome. The female-specific increase at older ages may be biologically relevant for age estimation purposes as described in the study design.",
+    "dataset_id": "DS_54e6673e59",
+    "assay_type": "array",
+    "experiment_name": "Transcriptional profiling of Anopheles gambiae mosquitoes for adult age estimation"
+  },
+  {
+    "one_sentence_summary": "This gene is moderately upregulated in response to 20-hydroxyecdysone treatment in both the atrium (1.16-fold increase) and spermatheca (2.21-fold increase) of <i>Anopheles gambiae</i> females, with stronger induction observed in the spermatheca.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "20-hydroxyecdysone",
+      "steroid hormone",
+      "female reproductive tract",
+      "atrium",
+      "spermatheca",
+      "mating response",
+      "microarray"
+    ],
+    "notes": "The gene shows consistent upregulation in both reproductive tissues with log2 values of 0.21 and 1.14, corresponding to modest but potentially biologically relevant fold changes. High percentile rankings (81.7% and 97.71%) suggest this response is among the stronger transcriptional changes in the experiment.",
+    "dataset_id": "DS_85efda4833",
+    "assay_type": "array",
+    "experiment_name": "Female lower reproductive tract 20E injection in Anopheles gambiae"
+  },
+  {
+    "one_sentence_summary": "This gene shows elevated expression in <i>Anopheles gambiae</i> females fed HMBPP-supplemented blood compared to control blood, with the strongest upregulation occurring at 1 and 24 hours post-ingestion.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "HMBPP",
+      "blood feeding",
+      "malaria",
+      "Plasmodium falciparum",
+      "vector behavior",
+      "time course"
+    ],
+    "notes": "The gene has 3 paralogs which may complicate interpretation. Expression is consistently high (90th+ percentile) across all conditions, but shows clear temporal dynamics with HMBPP treatment.",
+    "dataset_id": "DS_eace91fffe",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "HMBPP-supplemented blood meal"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all experimental conditions in <i>Anopheles gambiae</i> females, with sense transcript levels ranging from ~170-1030 TPM and consistently ranking in the 95th-99th percentiles, indicating it is among the most highly expressed genes regardless of mating status, blood feeding, or ecdysone treatment.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "mating",
+      "blood feeding",
+      "ecdysone",
+      "midgut",
+      "female mosquito",
+      "malaria susceptibility"
+    ],
+    "notes": "High paralog number (3) suggests this may represent a gene family with potentially confounded expression measurements; antisense expression is very low (~1-8 TPM) compared to sense, indicating genuine transcriptional activity rather than technical artifacts.",
+    "dataset_id": "DS_df981c3f82",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "The male mosquito contribution towards malaria transmission mating influences the Anopheles female midgut transcriptome and increases female susceptibility to human malaria parasites"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in mated versus unmated <i>Anopheles gambiae</i> testes, with expression increasing approximately 1.7-fold from 12.2-12.5 TPM in naive males to 21.0-21.2 TPM in mated males.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "testes",
+      "mating",
+      "reproduction",
+      "mosquito",
+      "sexual maturity",
+      "male fertility"
+    ],
+    "notes": "The gene has 3 paralogs which may complicate interpretation, though both unique and total counts show consistent upregulation. Percentile rankings (55th to 64th percentile) indicate moderate expression levels relative to the transcriptome.",
+    "dataset_id": "DS_403f4d112a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Testes transcriptome unmated vs mated"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderately higher expression in deltamethrin-resistant <i>Anopheles gambiae</i> mosquitoes compared to susceptible mosquitoes, with TPM values of approximately 152 versus 115.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "deltamethrin resistance",
+      "insecticide resistance",
+      "Anopheles gambiae",
+      "mosquito",
+      "pesticide susceptibility"
+    ],
+    "notes": "The gene has 3 paralogs which may complicate interpretation; both unique and total counts show consistent upregulation in resistant mosquitoes with high percentile rankings (>95th percentile in both conditions).",
+    "dataset_id": "DS_455af12573",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Deltamethrin resistant and susceptible mosquitoes"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate upregulation in <i>Anopheles gambiae</i> antennae specifically at 36 and 48 hours post-blood feeding, with expression levels increasing approximately 3-fold compared to non-blood fed controls and earlier time points.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antennal transcriptome",
+      "blood feeding",
+      "time course",
+      "chemosensory",
+      "post-blood meal response"
+    ],
+    "notes": "The gene shows a delayed response pattern with peak expression at 36-48h post-blood feeding, suggesting involvement in late-phase physiological changes rather than immediate blood meal detection. Paralog number is 3, indicating potential complexity in interpretation.",
+    "dataset_id": "DS_89c1f6f48a",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Antennal expression following a blood meal"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression (98th percentile range) across all conditions in <i>Anopheles gambiae</i> midgut, with modest increases in polysomal fractions during <i>Plasmodium falciparum</i> infection compared to uninfected controls, suggesting enhanced translational activity upon parasite infection.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Anopheles gambiae",
+      "Plasmodium falciparum",
+      "midgut",
+      "polysome",
+      "translation",
+      "malaria",
+      "vector-parasite interaction"
+    ],
+    "notes": "Gene shows very high baseline expression (consistently >98th percentile). The increase in polysomal vs non-polysomal fractions during infection (545 vs 386 TPM) suggests translational upregulation rather than transcriptional changes, which is biologically relevant for understanding protein synthesis dynamics during parasite infection.",
+    "dataset_id": "DS_7f62901422",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Midgut transcriptomes of Plasmodium falciparum-infected and non-infected mosquitoes"
+  },
+  {
+    "one_sentence_summary": "This gene shows tissue-specific expression in <i>Anopheles gambiae</i> with highest abundance in head and thorax tissues (6.24 TPM, 95th percentile), moderate expression in midgut and fat body, and no detectable expression in ovaries, with expression detected only on the sense strand.",
+    "biological_importance": 3,
+    "confidence": 4,
+    "experiment_keywords": [
+      "tissue-specific",
+      "ncRNA",
+      "Anopheles gambiae",
+      "female mosquito",
+      "sense strand",
+      "head thorax enriched"
+    ],
+    "notes": "Expression is exclusively from the sense strand across all tissues. High standard errors in some samples suggest variability between biological replicates. The paralog number of 3 indicates this may represent a gene family, though unique mapping was specified.",
+    "dataset_id": "DS_6ecf1af578",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Small non-coding RNAs by tissue"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all conditions in <i>Anopheles gambiae</i>, with notably elevated levels in non-blood-fed mosquitoes and ivermectin-treated samples compared to control blood-fed samples, suggesting potential upregulation in response to ivermectin exposure.",
+    "biological_importance": 3,
+    "confidence": 3,
+    "experiment_keywords": [
+      "ivermectin",
+      "mosquito",
+      "blood feeding",
+      "drug response",
+      "vector control"
+    ],
+    "notes": "High paralog number (3) may complicate interpretation; antisense expression is minimal compared to sense strand; large standard errors in some samples suggest biological variability",
+    "dataset_id": "DS_bc4e00210d",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mosquito gene expression after ivermectin ingestion"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistently high expression across all conditions in <i>Anopheles gambiae</i> larvae, with a notable increase at the 8-hour timepoint in both inversion types regardless of heat shock treatment, but no substantial differential response to thermal stress between the 2La standard and inverted chromosome arrangements.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "thermal stress",
+      "heat shock",
+      "chromosomal inversion",
+      "2La polymorphism",
+      "time course",
+      "Anopheles gambiae",
+      "microarray"
+    ],
+    "notes": "The gene maintains very high percentile rankings (94-98th percentile) across all conditions, suggesting it may be a highly expressed housekeeping gene or stress-response gene. The primary response appears to be temporal (8h upregulation) rather than treatment-specific.",
+    "dataset_id": "DS_f51b6797d0",
+    "assay_type": "array",
+    "experiment_name": "Divergent transcriptional response to thermal stress by Anopheles gambiae larvae carrying alternative arrangements of inversion 2La"
+  },
+  {
+    "one_sentence_summary": "This gene shows relatively stable, high expression across all mating conditions in <i>Anopheles gambiae</i> females, with a modest decrease at 6 hours post-mating followed by recovery to peak levels at 24 hours post-mating.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "mating",
+      "reproductive_behavior",
+      "temporal_response",
+      "female_physiology",
+      "Anopheles_gambiae"
+    ],
+    "notes": "Expression values are consistently high (8.37-8.86 log2) with percentiles above 82nd percentile, suggesting this gene is constitutively expressed at high levels regardless of mating status, with only minor temporal fluctuation.",
+    "dataset_id": "DS_a2e7221138",
+    "assay_type": "array",
+    "experiment_name": "Molecular and cellular components of the mating machinery in Anopheles gambiae females"
+  },
+  {
+    "one_sentence_summary": "This gene shows higher expression in whole <i>Anopheles gambiae</i> larvae (6.61 log2) compared to isolated salivary glands (5.3 log2), indicating it is not specifically enriched in salivary gland tissue.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "salivary gland",
+      "larval",
+      "tissue-specific",
+      "Anopheles gambiae",
+      "microarray",
+      "whole organism"
+    ],
+    "notes": "The difference is moderate (~1.3 log2 fold) with the gene being more highly expressed in whole larvae, suggesting it may have broader physiological roles beyond salivary gland function.",
+    "dataset_id": "DS_d9f7e62d2e",
+    "assay_type": "array",
+    "experiment_name": "The salivary transcriptome of Anopheles gambiae (Diptera: Culicidae) larvae: A microarray-based analysis"
+  },
+  {
+    "one_sentence_summary": "This gene shows moderate expression levels in <i>Anopheles gambiae</i> female antennae with a TPM value of 9.9, ranking at approximately the 60th percentile compared to all genes in the antennal transcriptome.",
+    "biological_importance": 2,
+    "confidence": 4,
+    "experiment_keywords": [
+      "antenna",
+      "olfactory",
+      "sensory",
+      "female",
+      "mosquito",
+      "chemoreception"
+    ],
+    "notes": "This gene has 3 paralogs which may complicate interpretation; both unique and total read counts show identical TPM values of 9.9, suggesting the unique mapping captures most expression for this gene family.",
+    "dataset_id": "DS_1ace71ffa0",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Female antennal transcriptome"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest differential expression between M and S forms of <i>Anopheles gambiae</i>, with consistently higher expression in M form larvae (8.72-8.81) compared to S form larvae (8.00-8.07), while showing mixed patterns in adult females across developmental stages.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Anopheles gambiae",
+      "M form",
+      "S form",
+      "speciation",
+      "developmental stages",
+      "larvae",
+      "virgin females",
+      "gravid females",
+      "microarray"
+    ],
+    "notes": "Expression differences are relatively small (0.7-0.8 log2 units) but consistent between M and S forms in larvae; adult female patterns are less clear with overlapping expression ranges between forms",
+    "dataset_id": "DS_27ce39853f",
+    "assay_type": "array",
+    "experiment_name": "Differential gene expression in incipient species of Anopheles gambiae"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest downregulation under extreme desiccation stress (30% RH) in <i>Anopheles gambiae</i>, with expression levels decreasing from control conditions at both 18 and 36 hours, while moderate desiccation (70% RH) shows less consistent effects.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "desiccation",
+      "stress",
+      "humidity",
+      "microarray",
+      "Anopheles",
+      "malaria vector",
+      "aridity tolerance"
+    ],
+    "notes": "The gene shows a clear dose-response relationship with desiccation severity, with 30% RH causing more pronounced downregulation than 70% RH. Expression values remain relatively high (89-96th percentile) suggesting this is a moderately to highly expressed gene overall.",
+    "dataset_id": "DS_6b509d0f5d",
+    "assay_type": "array",
+    "experiment_name": "Genome-Wide Transcriptional Analysis of Genes Associated with Acute Desiccation Stress in Anopheles gambiae"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest upregulation in mated <i>Anopheles gambiae</i> females compared to virgins, with peak expression at 12 hours post-mating (7.71 vs 7.42 in virgins) and sustained elevation through 24 hours.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "post-mating",
+      "reproductive tract",
+      "time-series",
+      "spermatheca",
+      "atrium",
+      "microarray"
+    ],
+    "notes": "The expression changes are relatively modest (0.3-0.5 log2 units) but show a consistent pattern of mating-induced upregulation that peaks at 12 hours and remains elevated at 24 hours, suggesting potential involvement in post-mating physiological processes.",
+    "dataset_id": "DS_2110a8010e",
+    "assay_type": "array",
+    "experiment_name": "Female lower reproductive tract post-mating time-series in Anopheles gambiae"
+  },
+  {
+    "one_sentence_summary": "This gene shows consistent downregulation in both swarming and non-swarming <i>Anopheles coluzzii</i> male heads compared to laboratory-reared controls, with slightly stronger repression in non-swarming mosquitoes (log2 fold change of -0.82 vs -0.74).",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "swarming behavior",
+      "male mosquito",
+      "head transcriptome",
+      "Anopheles coluzzii",
+      "microarray",
+      "field-collected"
+    ],
+    "notes": "Both conditions show downregulation relative to lab controls with overlapping standard errors, suggesting the gene may be generally repressed in field-collected mosquitoes regardless of swarming status, though the difference between swarming states is minimal.",
+    "dataset_id": "DS_2e639b71f6",
+    "assay_type": "array",
+    "experiment_name": "Transcriptional profiling of male head comparing control non-swarming mosquito with swarming mosquito (Anopheles coluzzii, aligned to A. gambiae PEST strain)"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest upregulation in female maxillary palps compared to female antennae in <i>Anopheles gambiae</i>, with expression levels of 12.26 TPM versus 7.68 TPM respectively.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "olfactory",
+      "chemosensory",
+      "host-seeking",
+      "mosquito",
+      "tissue-specific",
+      "antennae",
+      "maxillary palps"
+    ],
+    "notes": "The 1.6-fold difference between tissues is moderate but consistent, and the higher expression in maxillary palps versus antennae could be functionally relevant for olfactory-mediated host preference behaviors. Standard errors suggest some variability, particularly in maxillary palp samples.",
+    "dataset_id": "DS_fc444060da",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Antennae vs maxillary palps"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest upregulation in <i>Anopheles gambiae</i> females at 3 hours post-blood meal compared to non-blood-fed controls, with expression increasing from approximately 60 TPM to 77 TPM.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "blood meal",
+      "feeding response",
+      "Anopheles gambiae",
+      "female mosquito",
+      "post-feeding"
+    ],
+    "notes": "The gene has 3 paralogs which may complicate interpretation; the fold-change is modest (~1.3x) but consistent across unique and total read counts, with high percentile rankings (86-89th) indicating this is among the more highly expressed genes in the experiment.",
+    "dataset_id": "DS_edddcda9df",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Effect of bloodmeal on mosquito whole body transcriptome"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest differential expression in <i>Anopheles gambiae</i> MOS55 cells, with highest expression in wMel Wolbachia-infected conditions (6.16-6.41 TPM) and lowest expression in uninfected controls (2.62-2.78 TPM), representing approximately 2.3-fold upregulation with Wolbachia infection.",
+    "biological_importance": 2,
+    "confidence": 3,
+    "experiment_keywords": [
+      "Wolbachia",
+      "cell_line",
+      "mosquito",
+      "infection",
+      "DNV",
+      "symbiont"
+    ],
+    "notes": "Expression levels are relatively low overall (2-6 TPM range) with moderate fold-changes; the paralog number of 3 suggests potential cross-mapping issues that may affect interpretation of unique vs non-unique read counts.",
+    "dataset_id": "DS_819b6b9a4d",
+    "assay_type": "RNA-Seq",
+    "experiment_name": "Mosquito cell line MOS55"
+  },
+  {
+    "one_sentence_summary": "This gene shows similar expression levels between whole <i>Anopheles gambiae</i> embryos and isolated embryonic serosa at 10.5 hours, with no substantial differential expression observed.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "embryonic development",
+      "serosa",
+      "cuticle formation",
+      "desiccation resistance",
+      "Anopheles gambiae"
+    ],
+    "notes": "Very small sample size (n=2) limits statistical power, but the nearly identical expression values (4.44 vs 4.5) and percentiles (39.94% vs 40.13%) suggest minimal differential expression between tissue types at this developmental timepoint.",
+    "dataset_id": "DS_38a3c29f33",
+    "assay_type": "array",
+    "experiment_name": "Developmental and evolutionary basis for drought tolerance of the Anopheles gambiae embryo (Embryonic serosa)"
+  },
+  {
+    "one_sentence_summary": "This gene shows modest downregulation in the multi-insecticide resistant field population compared to the susceptible laboratory strain, with a log2 fold change of -0.24 (approximately 0.85-fold decrease) in <i>Anopheles gambiae</i>.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "insecticide resistance",
+      "microarray",
+      "Anopheles gambiae",
+      "field population",
+      "laboratory strain",
+      "Burkina Faso"
+    ],
+    "notes": "The downregulation is small in magnitude and may not be biologically significant; the low percentile value (10.92) suggests this gene has relatively low expression overall in this comparison.",
+    "dataset_id": "DS_6d0b4784d4",
+    "assay_type": "array",
+    "experiment_name": "Dissecting the Mechanisms Responsible for the Multiple Insecticide Resistance Phenotype in Anopheles Gambiae s.s., M Form, From Vallée Du Kou, Burkina Faso"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal differential expression in DDT-resistant field populations of <i>Anopheles gambiae</i> compared to susceptible laboratory strains, with very small log2 fold changes (0.05, 0.04, -0.03) that are not biologically meaningful.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "DDT resistance",
+      "insecticide resistance",
+      "field populations",
+      "microarray",
+      "Anopheles gambiae",
+      "molecular forms"
+    ],
+    "notes": "The expression values are very close to zero with relatively large standard errors, indicating no substantial differential expression. Percentile values suggest modest variation but not consistent directional changes across populations.",
+    "dataset_id": "DS_7b99c67a42",
+    "assay_type": "array",
+    "experiment_name": "Resistance to DDT in an Urban Setting: Common Mechanisms Implicated in Both M and S Forms of Anopheles Gambiae in the City of Yaoundé Cameroon"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal downregulation in the spermatheca of mated versus virgin <i>Anopheles gambiae</i> females, with a log2 fold change of -0.12 indicating very slight decreased expression after mating.",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "spermatheca",
+      "mating",
+      "fertility",
+      "vector",
+      "malaria",
+      "reproductive",
+      "microarray"
+    ],
+    "notes": "The small magnitude of change (-0.12 log2 ratio) with relatively high standard error (0.06) suggests this gene is not substantially affected by mating in sperm storage organs, despite the experiment's focus on reproduction-related processes.",
+    "dataset_id": "DS_aeb2aea774",
+    "assay_type": "array",
+    "experiment_name": "Mating activates the heme peroxidase HPX15 in the sperm storage organ to ensure fertility in Anopheles gambiae"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal differential expression in <i>Plasmodium berghei</i>-infected versus uninfected <i>Anopheles gambiae</i> mosquitoes, with slight upregulation at 10 days post-infection (log2 fold change = 0.02) and slight downregulation at 17 days post-infection (log2 fold change = -0.17).",
+    "biological_importance": 1,
+    "confidence": 4,
+    "experiment_keywords": [
+      "Plasmodium berghei",
+      "Anopheles gambiae",
+      "infection",
+      "mosquito",
+      "time course",
+      "microarray",
+      "vector-pathogen interaction"
+    ],
+    "notes": "The fold changes are very small (less than 1.2-fold in either direction) and the standard errors are relatively large compared to the effect sizes, suggesting minimal biological significance despite the percentile differences between timepoints.",
+    "dataset_id": "DS_78969378cc",
+    "assay_type": "array",
+    "experiment_name": "Enhanced survival of Plasmodium-infected mosquitoes during starvation"
+  },
+  {
+    "one_sentence_summary": "This gene shows minimal upregulation (log2 fold change of 0.04) in <i>Anopheles gambiae</i> isofemale families resistant to lambda-cyhalothrin compared to susceptible families, indicating virtually no differential expression between resistant and susceptible mosquitoes.",
+    "biological_importance": 0,
+    "confidence": 4,
+    "experiment_keywords": [
+      "insecticide resistance",
+      "lambda-cyhalothrin",
+      "pyrethroid",
+      "microarray",
+      "isofemale families",
+      "Uganda"
+    ],
+    "notes": "The log2 fold change of 0.04 represents only a 1.03-fold difference, which is negligible and within typical experimental noise. The 77.72 percentile value suggests moderate expression levels but the differential expression is minimal.",
+    "dataset_id": "DS_9cd45394d8",
+    "assay_type": "array",
+    "experiment_name": "Parallel Evolution or Purifying Selection, Not Introgression, Explains Similarity in the Pyrethroid Detoxification Linked GSTE4 of Anopheles Gambiae and An. Arabiensis"
+  }
+]

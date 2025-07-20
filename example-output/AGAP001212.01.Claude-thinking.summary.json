@@ -1,0 +1,49 @@
+{
+  "headline": "Digestive system-enriched expression with strong circadian rhythmicity in Anopheles gambiae",
+  "one_paragraph_summary": "This gene exhibits <strong>highly tissue-specific expression</strong> in <i>Anopheles gambiae</i> digestive tissues, with strongest expression in <strong>midgut, salivary glands, and gastric caeca</strong> across multiple developmental stages. The gene displays <strong>robust circadian rhythmicity</strong> with peak expression during subjective night and shows <strong>temporal responsiveness to blood feeding</strong> with maximum expression at 24 hours post-meal. <strong>Sexual dimorphism</strong> is evident, with generally higher expression in females, particularly in whole-body samples. The gene also responds to <strong>parasite infections</strong> and shows upregulation in <strong>insecticide-resistant mosquitoes</strong>. Given its consistent enrichment in secretory and digestive tissues, this gene likely functions in <strong>digestive or secretory processes</strong> critical for mosquito physiology and potentially vector competence.",
+  "topics": [
+    {
+      "headline": "Strong enrichment in digestive system tissues across life stages",
+      "one_sentence_summary": "The gene shows consistently high expression in midgut, salivary glands, and gastric caeca tissues, with peak expression in digestive compartments during both larval and adult stages and temporal upregulation following blood meal ingestion.",
+      "dataset_ids": [
+        "DS_46d69d95d1",
+        "DS_1b7a4b6253",
+        "DS_5bedb81fb1",
+        "DS_378aa4dc66",
+        "DS_30f22178ef"
+      ]
+    },
+    {
+      "headline": "Robust circadian regulation with nighttime expression peaks",
+      "one_sentence_summary": "The gene exhibits strong 24-hour circadian rhythmicity with 3-4 fold expression changes, peaking during subjective night (CT12-16) and reaching lowest levels during subjective day (CT4-8) in both light-dark and constant dark conditions.",
+      "dataset_ids": [
+        "DS_f6d53b7d28"
+      ]
+    },
+    {
+      "headline": "Dynamic responses to pathogen and symbiont infections",
+      "one_sentence_summary": "The gene shows complex temporal expression patterns during Plasmodium berghei invasion, elevated expression in P. falciparum-infected tissues, and dramatic downregulation in Wolbachia-infected mosquito cells compared to uninfected controls.",
+      "dataset_ids": [
+        "DS_4b292e2c66",
+        "DS_047c56768c",
+        "DS_5d6ca2547f"
+      ]
+    },
+    {
+      "headline": "Sex-specific expression patterns with female-biased expression",
+      "one_sentence_summary": "The gene displays strong sexual dimorphism with higher expression in females versus males in whole-body samples, male-biased expression in chemosensory appendages, and preferential expression in testes compared to male accessory glands.",
+      "dataset_ids": [
+        "DS_54a53ed35a",
+        "DS_cb6310bab8",
+        "DS_0eac688af3"
+      ]
+    },
+    {
+      "headline": "Upregulation associated with insecticide resistance",
+      "one_sentence_summary": "The gene shows consistent upregulation in bendiocarb-resistant Anopheles gambiae mosquitoes from two distinct Ugandan populations compared to unexposed controls, suggesting potential involvement in resistance mechanisms.",
+      "dataset_ids": [
+        "DS_dd5f2829b0"
+      ]
+    }
+  ]
+}

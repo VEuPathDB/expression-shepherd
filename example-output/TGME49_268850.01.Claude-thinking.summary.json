@@ -1,0 +1,62 @@
+{
+  "headline": "Dramatically elevated expression during sexual development with sustained high levels in tachyzoites",
+  "one_paragraph_summary": "This gene exhibits <strong>dramatically elevated expression during sexual development</strong> in <i>Toxoplasma gondii</i>, with 20-25 fold increases in enteroepithelial stages (EES1-5) compared to asexual stages, reaching 2,500-2,800 TPM in the feline intestinal environment. Expression remains <strong>consistently high in tachyzoites</strong> (600-1,100 TPM) across multiple strains and time points, while being <strong>substantially lower in bradyzoites and oocyst stages</strong>. The gene shows <strong>cell cycle-dependent regulation</strong> with periodic expression patterns and varies by <strong>host cell type and infection context</strong>. <ul><li>Peak expression occurs during sexual reproduction in feline hosts</li><li>Maintains high levels during rapid tachyzoite replication</li><li>Reduced during chronic infection and cyst formation</li></ul> This expression pattern suggests critical roles in both sexual reproduction and acute infection processes.",
+  "topics": [
+    {
+      "headline": "Peak expression during sexual development with stage-specific regulation across parasite life cycle",
+      "one_sentence_summary": "Expression reaches maximum levels (2,500-2,800 TPM) in enteroepithelial stages during sexual development, remains high in tachyzoites and merozoites, but dramatically decreases in oocysts and bradyzoites, indicating critical roles in sexual reproduction and acute infection phases.",
+      "dataset_ids": [
+        "DS_e7467c0306",
+        "DS_173528b522",
+        "DS_2750122e82",
+        "DS_45b4123102",
+        "DS_59fb8debdb",
+        "DS_749cb10dcf",
+        "DS_75742b9a0a"
+      ]
+    },
+    {
+      "headline": "Sustained high expression throughout tachyzoite development with temporal variation",
+      "one_sentence_summary": "Gene maintains consistently high expression (600-1,100 TPM, >96th percentile) across multiple tachyzoite time courses and strains, with some temporal peaks and strain-specific variation, but overall constitutive high-level transcription during the acute infection stage.",
+      "dataset_ids": [
+        "DS_78959dea55",
+        "DS_d5645bc639",
+        "DS_6529b4f68d",
+        "DS_ef984802b1",
+        "DS_94e899930e",
+        "DS_386bac2860"
+      ]
+    },
+    {
+      "headline": "Host cell type and infection context influence expression levels",
+      "one_sentence_summary": "Expression varies significantly by host cell type (7-11 fold lower in fibroblasts versus other cell types), infection location (higher intracellular versus extracellular), and infection stage (5-fold decrease from acute to chronic brain infection), indicating host-dependent regulation.",
+      "dataset_ids": [
+        "DS_a48cc7c61e",
+        "DS_930295d0b5",
+        "DS_b0427cd47b",
+        "DS_4362334059"
+      ]
+    },
+    {
+      "headline": "Cell cycle-regulated expression with periodic peaks during parasite division",
+      "one_sentence_summary": "Gene exhibits clear biphasic expression pattern with ~6-hour periodicity, peaking at hours 0-1 and 7-8 post-thymidine synchronization, indicating tight cell cycle regulation during tachyzoite replication.",
+      "dataset_ids": [
+        "DS_c1a3dbb014"
+      ]
+    },
+    {
+      "headline": "Moderate expression in bradyzoites with temporal changes during chronic infection",
+      "one_sentence_summary": "Gene shows intermediate expression levels in bradyzoites (337 TPM, 94th percentile) that vary over time during chronic infection, with notable differences between in vitro and in vivo conditions.",
+      "dataset_ids": [
+        "DS_408f2c4cda"
+      ]
+    },
+    {
+      "headline": "Increased expression during oocyst maturation over extended time periods",
+      "one_sentence_summary": "Expression increases dramatically (>70-fold) from 0.88 to 63.04 TPM during 10-day oocyst sporulation, indicating important roles in oocyst development and maturation processes.",
+      "dataset_ids": [
+        "DS_72dce52949"
+      ]
+    }
+  ]
+}
