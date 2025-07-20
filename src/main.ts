@@ -242,7 +242,7 @@ async function summariseExpression(
   { geneId, projectId, serviceBaseUrl, serverUrl, geneBaseUrl, datasetId, rep = 1, prettyPrint = false, useAnthropic = false, useExtendedThinking = false } : SummariseExpressionArgs
 ) : SummariseExpressionReturnType {
   
-  const modelSuffix = useAnthropic ? 'Claude' : 'OpenAI'; 
+  const modelSuffix = useAnthropic ? (useExtendedThinking ? 'Claude-thinking' : 'Claude') : 'OpenAI'; 
   
   const postData = {
     ...expressionDataRequestPostData,
