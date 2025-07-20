@@ -448,7 +448,9 @@ async function summariseExpression(
         }
         
         const anthropicCompletion = await anthropic.messages.create(anthropicParams);
-        let claudeResponse = anthropicCompletion.content[0].type === 'text' ? anthropicCompletion.content[0].text : null;
+        // Find the text content block (might be after thinking blocks with extended thinking)
+        const textBlock = anthropicCompletion.content.find(block => block.type === 'text');
+        let claudeResponse = textBlock ? textBlock.text : null;
         // Strip markdown code blocks if present
         if (claudeResponse?.startsWith('```json')) {
           claudeResponse = claudeResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
