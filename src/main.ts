@@ -89,6 +89,7 @@ const PROJECT_URLS: Record<string, { serverUrl: string; geneBaseUrl: string; ser
 // * NumReps: number of replicates (default: 1)
 // * PrettyPrint: boolean for JSON formatting (default: true)  
 // * --claude: use Claude 4 Sonnet instead of OpenAI GPT-4
+// * --thinking: use extended thinking for final summarization (Claude only)
 // * if DatasetID specified, only that dataset will be processed (no summary-of-summaries)
 // * these run in parallel asynchronously - not sure if client retries if hitting the rate-limit
 //
@@ -96,14 +97,21 @@ const PROJECT_URLS: Record<string, { serverUrl: string; geneBaseUrl: string; ser
 const args = process.argv.slice(2); // Skip the first two entries
 
 // Parse command line arguments
-// Parse arguments, handling --claude flag
-const filteredArgs = args.filter(arg => arg !== '--claude');
+// Parse arguments, handling --claude and --thinking flags
+const filteredArgs = args.filter(arg => arg !== '--claude' && arg !== '--thinking');
 const useAnthropic = args.includes('--claude');
+const useExtendedThinking = args.includes('--thinking');
 
 // Validate minimum arguments
 if (filteredArgs.length < 2) {
-  console.error('Usage: node dist/main.js <ProjectID> <GeneID> [DatasetID] [NumReps] [PrettyPrint] [--claude]');
+  console.error('Usage: node dist/main.js <ProjectID> <GeneID> [DatasetID] [NumReps] [PrettyPrint] [--claude] [--thinking]');
   console.error('ProjectID must be one of:', Object.keys(PROJECT_URLS).join(', '));
+  process.exit(1);
+}
+
+// Validate that --thinking is only used with --claude
+if (useExtendedThinking && !useAnthropic) {
+  console.error('Error: --thinking flag can only be used with --claude flag');
   process.exit(1);
 }
 
@@ -128,7 +136,7 @@ if (filteredArgs.length > 4) prettyPrint = Boolean(filteredArgs[4]);
 // Get URLs for the specified project
 const { serverUrl, geneBaseUrl, serviceBaseUrl } = PROJECT_URLS[projectId];
 
-console.log(`Using ${useAnthropic ? 'Claude' : 'OpenAI'} API`);
+console.log(`Using ${useAnthropic ? 'Claude' : 'OpenAI'} API${useExtendedThinking ? ' with extended thinking' : ''}`);
 
 const openaiModelId = "gpt-4o-2024-11-20";
 // "gpt-4o-2024-11-20";
@@ -159,6 +167,7 @@ interface SummariseExpressionArgs {
   rep?: number;
   prettyPrint?: boolean;
   useAnthropic?: boolean;
+  useExtendedThinking?: boolean;
 }
 
 const SYSTEM_MESSAGE = "You are a bioinformatician working for VEuPathDB.org. You are an expert at providing biologist-friendly summaries of transcriptomic data.";
@@ -230,7 +239,7 @@ export function getFinalSummaryMessage(experiments: any[], prettyPrint = false):
 
 
 async function summariseExpression(
-  { geneId, projectId, serviceBaseUrl, serverUrl, geneBaseUrl, datasetId, rep = 1, prettyPrint = false, useAnthropic = false } : SummariseExpressionArgs
+  { geneId, projectId, serviceBaseUrl, serverUrl, geneBaseUrl, datasetId, rep = 1, prettyPrint = false, useAnthropic = false, useExtendedThinking = false } : SummariseExpressionArgs
 ) : SummariseExpressionReturnType {
   
   const modelSuffix = useAnthropic ? 'Claude' : 'OpenAI'; 
@@ -419,9 +428,9 @@ async function summariseExpression(
       let usage: any = null;
 
       if (useAnthropic) {
-        const anthropicCompletion = await anthropic.messages.create({
+        const anthropicParams: any = {
           model: anthropicModelId,
-          max_tokens: 2000,
+          max_tokens: useExtendedThinking ? 16000 : 2000,
           system: SYSTEM_MESSAGE,
           messages: [
             {
@@ -429,7 +438,16 @@ async function summariseExpression(
               content: getFinalSummaryMessage(sortedIndividualResults, prettyPrint) + getSummaryResponseSchemaDescription() + "\n\nPlease respond with valid JSON matching the required schema exactly.",
             },
           ],
-        });
+        };
+        
+        if (useExtendedThinking) {
+          anthropicParams.thinking = {
+            type: "enabled",
+            budget_tokens: 12000
+          };
+        }
+        
+        const anthropicCompletion = await anthropic.messages.create(anthropicParams);
         let claudeResponse = anthropicCompletion.content[0].type === 'text' ? anthropicCompletion.content[0].text : null;
         // Strip markdown code blocks if present
         if (claudeResponse?.startsWith('```json')) {
@@ -504,5 +522,5 @@ async function summariseExpression(
 }
 
 for (let rep = 1; rep <= numReps; rep++) {
-  summariseExpression({ geneId, projectId, serviceBaseUrl, serverUrl, geneBaseUrl, datasetId, rep, prettyPrint, useAnthropic });
+  summariseExpression({ geneId, projectId, serviceBaseUrl, serverUrl, geneBaseUrl, datasetId, rep, prettyPrint, useAnthropic, useExtendedThinking });
 }
