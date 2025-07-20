@@ -1,0 +1,33 @@
+{
+  "headline": "Expression peaks in S-phase and bloodstream forms with tissue-specific upregulation",
+  "one_paragraph_summary": "This gene shows <strong>complex stage-specific expression patterns</strong> in <i>Trypanosoma brucei</i>, with generally higher levels in bloodstream forms compared to procyclic forms, though interpretation is complicated by the presence of 3 paralogs. Key regulatory features include: <ul><li><strong>Cell cycle-dependent expression</strong> with peak levels during S-phase suggesting involvement in DNA replication processes</li><li><strong>Enhanced expression in host tissues</strong> including adipose tissue and cerebrospinal fluid compared to circulating blood</li><li><strong>Post-transcriptional regulation</strong> through XRNA-mediated mRNA degradation and evidence of reduced translational efficiency in bloodstream forms</li></ul> The combination of S-phase expression timing and tissue-specific upregulation suggests this gene may play a role in cell division processes that are adapted to specific host microenvironments.",
+  "topics": [
+    {
+      "headline": "Life cycle stage expression shows predominant bloodstream form upregulation",
+      "one_sentence_summary": "Multiple experiments demonstrate higher expression in bloodstream forms compared to procyclic forms, with long slender bloodstream forms showing the strongest expression despite some paralog-related interpretation challenges.",
+      "dataset_ids": [
+        "DS_f18da9c611",
+        "DS_66fdbd45d7",
+        "DS_da32747f09",
+        "DS_77b994d105"
+      ]
+    },
+    {
+      "headline": "Cell cycle regulation and RNA processing control expression dynamics",
+      "one_sentence_summary": "The gene exhibits S-phase-specific expression peaks, is subject to XRNA-mediated mRNA degradation, and shows characteristics of a processed transcript with spliced leader addition.",
+      "dataset_ids": [
+        "DS_0de2f64330",
+        "DS_378ed5098b",
+        "DS_1ede7b449f"
+      ]
+    },
+    {
+      "headline": "Host tissue microenvironments drive expression upregulation",
+      "one_sentence_summary": "Expression is significantly elevated in specific host tissues including adipose tissue and cerebrospinal fluid compared to circulating blood, suggesting adaptation to distinct host microenvironments.",
+      "dataset_ids": [
+        "DS_820537ffae",
+        "DS_8293b78640"
+      ]
+    }
+  ]
+}

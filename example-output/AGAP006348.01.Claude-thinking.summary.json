@@ -1,0 +1,67 @@
+{
+  "headline": "Salivary Gland-Enriched Expression with Circadian Regulation and Developmental Upregulation",
+  "one_paragraph_summary": "This gene exhibits <strong>highly tissue-specific expression</strong> in <i>Anopheles gambiae</i>, with over 50-fold enrichment in salivary glands compared to midgut and substantial expression in chemosensory organs (maxillary palps >> antennae) and immune cells (hemocytes). The gene shows <strong>clear circadian rhythmicity</strong> with peak expression at subjective midnight and <strong>developmental upregulation</strong> during late larval stages and embryogenesis. Expression responds dynamically to <ul><li>environmental stresses (heat shock, ivermectin treatment)</li><li>pathogen infections (differential patterns with <i>Plasmodium</i> and <i>Wolbachia</i>)</li><li>reproductive processes (blood feeding, hormonal stimulation)</li></ul>. The pronounced salivary gland enrichment combined with stress responsiveness suggests potential roles in vector biology, possibly related to blood feeding, pathogen transmission, or host-seeking behaviors.",
+  "topics": [
+    {
+      "headline": "Strong Tissue-Specific Expression Patterns with Salivary Gland and Chemosensory Enrichment",
+      "one_sentence_summary": "The gene shows highly tissue-specific expression with over 50-fold enrichment in salivary glands versus midgut, 8-fold higher expression in maxillary palps versus antennae, and preferential expression in hemocytes and fat body tissues.",
+      "dataset_ids": [
+        "DS_378aa4dc66",
+        "DS_46d69d95d1",
+        "DS_3788705685",
+        "DS_54a53ed35a",
+        "DS_fc444060da",
+        "DS_6ecf1af578"
+      ]
+    },
+    {
+      "headline": "Developmental Upregulation During Larval Stages and Embryogenesis",
+      "one_sentence_summary": "Expression increases progressively during larval development with peak levels at 192 hours, shows upregulation during late embryogenesis (43-49h), and maintains high expression in adults while being minimal in pupae.",
+      "dataset_ids": [
+        "DS_dece397274",
+        "DS_d4fcd31fd0",
+        "DS_cb6310bab8"
+      ]
+    },
+    {
+      "headline": "Circadian Rhythmicity with Nighttime Expression Peak",
+      "one_sentence_summary": "The gene exhibits robust circadian oscillations with peak expression around CT12 (subjective midnight) in both heads and bodies, maintaining rhythmicity under constant darkness conditions.",
+      "dataset_ids": [
+        "DS_f6d53b7d28"
+      ]
+    },
+    {
+      "headline": "Dynamic Response to Environmental Stresses and Drug Treatments",
+      "one_sentence_summary": "Expression responds strongly to heat shock (with chromosomal inversion-dependent differences) and shows 3-6 fold upregulation following ivermectin treatment at multiple time points.",
+      "dataset_ids": [
+        "DS_f51b6797d0",
+        "DS_bc4e00210d"
+      ]
+    },
+    {
+      "headline": "Pathogen and Symbiont Infection-Dependent Expression Changes",
+      "one_sentence_summary": "The gene shows dramatically higher expression in salivary glands versus midguts during <i>Plasmodium falciparum</i> infection and exhibits strain-specific responses to different <i>Wolbachia</i> infections in mosquito cell lines.",
+      "dataset_ids": [
+        "DS_047c56768c",
+        "DS_5d6ca2547f",
+        "DS_819b6b9a4d"
+      ]
+    },
+    {
+      "headline": "Blood Feeding and Reproductive Hormone Responses",
+      "one_sentence_summary": "Expression peaks at 3 hours post-blood feeding followed by progressive decline, and shows significant upregulation in female reproductive tract tissues following 20-hydroxyecdysone injection.",
+      "dataset_ids": [
+        "DS_1b7a4b6253",
+        "DS_85efda4833"
+      ]
+    },
+    {
+      "headline": "Association with Insecticide Resistance Phenotypes",
+      "one_sentence_summary": "The gene is upregulated in bendiocarb-resistant mosquitoes but shows higher expression in deltamethrin-susceptible individuals, indicating complex relationships with different insecticide resistance mechanisms.",
+      "dataset_ids": [
+        "DS_dd5f2829b0",
+        "DS_455af12573"
+      ]
+    }
+  ]
+}
