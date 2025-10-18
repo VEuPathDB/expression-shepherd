@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Note**: When working on the `comparison` branch or AI model comparison tasks, see `CLAUDE-ai-provider-comparison.md` for specific guidance.
+
 ## Build and Development Commands
 
 - **Install dependencies**: `yarn`
