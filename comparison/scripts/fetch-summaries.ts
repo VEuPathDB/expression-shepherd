@@ -10,6 +10,7 @@ interface SiteConfig {
   appPath: string;
   model: string;
   useProxy: boolean;
+  skipFetch?: boolean;
 }
 
 interface Config {
@@ -189,7 +190,24 @@ async function main() {
   console.log("Loading configuration...");
   const config = await loadConfig();
 
-  console.log("Loading gene list...");
+  // Filter out sites with skipFetch: true
+  const activeSites = config.sites.filter((site) => !site.skipFetch);
+  const skippedSites = config.sites.filter((site) => site.skipFetch);
+
+  if (skippedSites.length > 0) {
+    console.log(`Skipping ${skippedSites.length} site(s) with skipFetch=true:`);
+    skippedSites.forEach((site) => console.log(`  - ${site.name}`));
+  }
+
+  if (activeSites.length === 0) {
+    console.error("No active sites to process (all sites have skipFetch=true)");
+    process.exit(1);
+  }
+
+  console.log(`Processing ${activeSites.length} active site(s):`);
+  activeSites.forEach((site) => console.log(`  - ${site.name} (${site.model})`));
+
+  console.log("\nLoading gene list...");
   const geneIds = await loadGeneList();
   console.log(`Found ${geneIds.length} genes to process`);
 
@@ -219,9 +237,9 @@ async function main() {
     console.log(`Processing gene: ${geneId}`);
     console.log("=".repeat(60));
 
-    // Process all sites for this gene in parallel
+    // Process all active sites for this gene in parallel
     const siteResults = await Promise.all(
-      config.sites.map((site) => fetchWithRetry(geneId, site, config, authCookie))
+      activeSites.map((site) => fetchWithRetry(geneId, site, config, authCookie))
     );
 
     results.push(...siteResults);

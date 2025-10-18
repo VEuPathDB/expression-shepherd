@@ -1,10 +1,10 @@
 {
   "sites": [
     {
-      "name": "claude",
+      "name": "claude4",
       "hostname": "bmaccallum.vectorbase.org",
       "appPath": "vectorbase.bmaccallum",
-      "model": "Claude",
+      "model": "Claude Sonnet 4",
       "useProxy": true
     },
     {
