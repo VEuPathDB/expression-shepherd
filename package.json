@@ -31,6 +31,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/main.js",
-    "node-check": "node -v"
+    "node-check": "node -v",
+    "comparison:fetch": "yarn build && node dist/comparison/scripts/fetch-summaries.js",
+    "comparison:compare": "yarn build && node dist/comparison/scripts/compare-summaries.js",
+    "comparison:aggregate": "yarn build && node dist/comparison/scripts/aggregate-analysis.js"
   }
 }

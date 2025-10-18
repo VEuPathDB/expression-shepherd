@@ -15,8 +15,7 @@ This work will be done within the existing `expression-shepherd` repository, lev
 
 ### Access Details:
 - API endpoint: `/wdk-service/record-types/gene/searches/single_record_question_GeneRecordClasses_GeneRecordClass/reports/aiExpression`
-- Proxy setup: Available for bmaccallum* sites (details TBD from user)
-- Local development: Proxy endpoint is `http://localhost:8080/wdk-service/...` when using webpack local server
+- Authentication: Cookie-based authentication using `auth_tkt` cookie (see Appendix for details)
 
 ## Gene Set
 - Format: VectorBase IDs (e.g., AGAP001234)
@@ -33,6 +32,14 @@ This work will be done within the existing `expression-shepherd` repository, lev
    - See `useAiExpressionSummary` in [AiExpressionSummary.tsx](https://raw.githubusercontent.com/VEuPathDB/web-monorepo/refs/heads/main/packages/sites/genomics-site/webapp/wdkCustomization/js/client/components/records/AiExpressionSummary.tsx) for orchestration details
 3. Save JSON responses locally, organized by gene ID and model
 4. Track progress and any errors
+
+**Runtime Expectations:**
+- Polling timeout: 10 minutes per gene per site (MAX_POLL_ATTEMPTS = 120 × 5 seconds)
+- For 20 genes × 3 sites: expect 60+ minutes total runtime due to:
+  - AI generation time (varies by model and gene complexity)
+  - Backend rate limiting (especially for Anthropic/Claude)
+  - Sequential processing per gene, parallel across sites
+- **Important for Claude Code**: When using Bash tool to run `yarn comparison:fetch`, set timeout to at least 3600000ms (1 hour) for full gene lists
 
 ### Phase 2: AI-Powered Comparison
 1. Create TypeScript scripts that use Anthropic API to compare summaries
@@ -62,11 +69,11 @@ expression-shepherd/
 ├── (existing files: src/main.ts, package.json, etc.)
 ├── comparison/
 │   ├── config/
-│   │   ├── sites.json (site configurations and endpoints)
-│   │   └── proxy.json (proxy configuration for bmaccallum* sites)
+│   │   └── sites.json (site configurations and endpoints)
 │   ├── input/
 │   │   └── gene-list.txt (VectorBase gene IDs, one per line)
 │   ├── scripts/
+│   │   ├── shared-utils.ts (shared utilities including authentication)
 │   │   ├── fetch-summaries.ts (Phase 1: API calls and JSON storage)
 │   │   ├── compare-summaries.ts (Phase 2: AI-powered comparison)
 │   │   └── aggregate-analysis.ts (Phase 3: theme identification)
@@ -123,10 +130,10 @@ expression-shepherd/
 - Response includes progress information when not yet complete
 - See `useAiExpressionSummary` hook for reference implementation
 
-### Proxy Configuration
-- User will provide webpack dev server proxy config
-- Needed for bmaccallum* sites (firewall/proxy hurdles)
-- Will be adapted for fetch calls in TypeScript
+### Authentication
+- VEuPathDB dev sites use cookie-based authentication
+- Requires `auth_tkt` cookie obtained from login endpoint
+- Credentials stored in `.env` file (see Appendix for implementation details)
 
 ### AI Comparison Scripts
 - Must be deterministic (TypeScript scripts calling Anthropic API)
@@ -138,11 +145,11 @@ expression-shepherd/
 
 1. **Initial Setup**
    - Create `comparison/` directory structure
-   - Set up config files (will need user input for proxy details)
+   - Set up config files for site configurations
 
 2. **Phase 1 Implementation**
    - Create `comparison/scripts/fetch-summaries.ts` with API client
-   - Implement proxy-aware fetch for all three sites
+   - Implement cookie-based authentication for all three sites
    - Implement progress monitoring and polling logic
    - Save JSON responses to `comparison/data/summaries/{model}/{geneId}.json`
    - Add retry logic for failed requests
@@ -157,14 +164,22 @@ expression-shepherd/
    - Collect and structure all comparison data
    - Generate final thematic summary
 
+## Running the Scripts
+
+NPM scripts are available in `package.json`:
+- `yarn comparison:fetch` - Phase 1: Fetch summaries from all three sites
+- `yarn comparison:compare` - Phase 2: Generate pairwise comparisons
+- `yarn comparison:aggregate` - Phase 3: Generate aggregate analysis report
+
+All scripts automatically run `yarn build` before execution.
+
 ## Next Steps
 
 User needs to provide:
 - Gene list (`comparison/input/gene-list.txt`)
-- Proxy configuration details for bmaccallum* sites
-- Confirm VectorBase project ID (e.g., "VectorBase") for gene primary keys
 
 Already available in repository:
+- VEuPathDB authentication credentials (in `.env` as `VEUPATHDB_LOGIN_USER` and `VEUPATHDB_LOGIN_PASS`)
 - Anthropic API key (in `.env` as `ANTHROPIC_API_KEY`)
 - TypeScript build setup
 - Node.js environment
@@ -176,3 +191,98 @@ Already available in repository:
 - Pairwise comparisons generated for each gene (3 comparisons × 20 genes = 60 files)
 - Final aggregated report identifying systematic differences between models
 - Reproducible process that can be re-run with new gene sets
+
+
+# Appendices
+
+
+
+## VEuPathDB Dev Site Authentication
+
+The VEuPathDB dev sites use cookie-based authentication. You need to obtain an `auth_tkt` cookie and include it with all requests.
+
+### Prep.
+
+Username and password have been added to `.env`:
+
+```
+VEUPATHDB_LOGIN_USER=apidb
+VEUPATHDB_LOGIN_PASS=XXXXXXXXXXXXX
+```
+
+### Step 1: Obtain the auth_tkt Cookie
+
+Make a POST request to the VEuPathDB login endpoint:
+
+```typescript
+import https from 'https';
+import querystring from 'querystring';
+
+async function getAuthCookie(username: string, password: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const postData = querystring.stringify({ username, password });
+
+    const req = https.request(
+      'https://veupathdb.org/auth/bin/login',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(postData),
+          'Cookie': 'auth_probe=1',  // Required!
+        },
+      },
+      (res) => {
+        // Extract auth_tkt cookie from Set-Cookie headers
+        const setCookieHeader = res.headers['set-cookie'];
+        if (setCookieHeader) {
+          const authCookie = setCookieHeader.find(cookie =>
+            cookie.startsWith('auth_tkt=')
+          );
+          if (authCookie) {
+            // Extract just the cookie value (between = and ;)
+            const match = authCookie.match(/auth_tkt=([^;]+)/);
+            if (match) {
+              resolve(match[1]);
+              return;
+            }
+          }
+        }
+        reject(new Error('Could not get auth_tkt cookie'));
+      }
+    );
+
+    req.on('error', reject);
+    req.write(postData);
+    req.end();
+  });
+}
+```
+
+### Step 2: Include the Cookie in All Requests
+
+Once you have the `auth_tkt` value, include it as a cookie in all requests to the dev site:
+
+```typescript
+const authTkt = await getAuthCookie(username, password);
+
+// For fetch API:
+fetch('https://vectorbase.org/your-endpoint', {
+  headers: {
+    'Cookie': `auth_tkt=${authTkt}`
+  }
+});
+
+// For axios:
+axios.get('https://vectorbase.org/your-endpoint', {
+  headers: {
+    'Cookie': `auth_tkt=${authTkt}`
+  }
+});
+```
+
+### Key Points:
+- The login endpoint requires `Cookie: auth_probe=1` in the request headers
+- The credentials should be the VEuPathDB BRC Pre-Release username/password
+- The `auth_tkt` cookie must be included in **all** subsequent requests to the dev sites
+- The cookie is valid for a session - you may need to re-authenticate if it expires (expiry is days not hours, so no worries here)

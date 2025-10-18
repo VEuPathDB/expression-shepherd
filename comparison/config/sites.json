@@ -1,0 +1,27 @@
+{
+  "sites": [
+    {
+      "name": "claude",
+      "hostname": "bmaccallum.vectorbase.org",
+      "appPath": "vectorbase.bmaccallum",
+      "model": "Claude",
+      "useProxy": true
+    },
+    {
+      "name": "gpt5",
+      "hostname": "bmaccallum-b.vectorbase.org",
+      "appPath": "vectorbase.bmaccallum-b",
+      "model": "GPT-5",
+      "useProxy": true
+    },
+    {
+      "name": "gpt4o",
+      "hostname": "qa.vectorbase.org",
+      "appPath": "vectorbase.b69",
+      "model": "GPT-4o",
+      "useProxy": false
+    }
+  ],
+  "endpoint": "/service/record-types/gene/searches/single_record_question_GeneRecordClasses_GeneRecordClass/reports/aiExpression",
+  "projectId": "VectorBase"
+}
