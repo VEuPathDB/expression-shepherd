@@ -9,7 +9,6 @@ interface SiteConfig {
   hostname: string;
   appPath: string;
   model: string;
-  useProxy: boolean;
   skipFetch?: boolean;
 }
 
