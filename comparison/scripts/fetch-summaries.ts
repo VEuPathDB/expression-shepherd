@@ -7,6 +7,7 @@ import { writeToFile, getAuthCookie, sleep } from "./shared-utils";
 interface SiteConfig {
   name: string;
   hostname: string;
+  appPath: string;
   model: string;
   useProxy: boolean;
 }
@@ -32,7 +33,8 @@ const MAX_POLL_ATTEMPTS = 120; // 10 minutes max (120 * 5 seconds)
  * Load site configuration
  */
 async function loadConfig(): Promise<Config> {
-  const configPath = path.join(__dirname, "../config/sites.json");
+  // Use paths relative to project root, not dist directory
+  const configPath = path.join(process.cwd(), "comparison/config/sites.json");
   const configContent = await readFile(configPath, "utf-8");
   return JSON.parse(configContent);
 }
@@ -42,7 +44,8 @@ async function loadConfig(): Promise<Config> {
  * Filters out comments and empty lines
  */
 async function loadGeneList(): Promise<string[]> {
-  const geneListPath = path.join(__dirname, "../input/gene-list.txt");
+  // Use paths relative to project root, not dist directory
+  const geneListPath = path.join(process.cwd(), "comparison/input/gene-list.txt");
   const content = await readFile(geneListPath, "utf-8");
   return content
     .split("\n")
@@ -60,7 +63,7 @@ async function fetchSummary(
   authCookie: string,
   populateIfNotPresent: boolean
 ): Promise<any> {
-  const url = `https://${site.hostname}${config.endpoint}`;
+  const url = `https://${site.hostname}/${site.appPath}${config.endpoint}`;
 
   const requestBody = {
     reportConfig: {
@@ -146,8 +149,8 @@ async function fetchWithRetry(
 
       // Save to file
       const outputPath = path.join(
-        __dirname,
-        `../data/summaries/${site.name}/${geneId}.json`
+        process.cwd(),
+        `comparison/data/summaries/${site.name}/${geneId}.json`
       );
       await writeToFile(outputPath, JSON.stringify(summary, null, 2));
 
@@ -206,6 +209,7 @@ async function main() {
 
   const authCookie = await getAuthCookie(username, password);
   console.log("Authentication successful!");
+  console.log(`Auth cookie (for curl debugging): auth_tkt=${authCookie}`);
 
   const results: FetchResult[] = [];
 
@@ -243,7 +247,7 @@ async function main() {
   }
 
   // Save summary report
-  const reportPath = path.join(__dirname, "../data/fetch-summary.json");
+  const reportPath = path.join(process.cwd(), "comparison/data/fetch-summary.json");
   await writeToFile(
     reportPath,
     JSON.stringify(

@@ -33,6 +33,14 @@ This work will be done within the existing `expression-shepherd` repository, lev
 3. Save JSON responses locally, organized by gene ID and model
 4. Track progress and any errors
 
+**Runtime Expectations:**
+- Polling timeout: 10 minutes per gene per site (MAX_POLL_ATTEMPTS = 120 × 5 seconds)
+- For 20 genes × 3 sites: expect 60+ minutes total runtime due to:
+  - AI generation time (varies by model and gene complexity)
+  - Backend rate limiting (especially for Anthropic/Claude)
+  - Sequential processing per gene, parallel across sites
+- **Important for Claude Code**: When using Bash tool to run `yarn comparison:fetch`, set timeout to at least 3600000ms (1 hour) for full gene lists
+
 ### Phase 2: AI-Powered Comparison
 1. Create TypeScript scripts that use Anthropic API to compare summaries
 2. Perform pairwise comparisons for each gene:
@@ -155,6 +163,15 @@ expression-shepherd/
    - Create `comparison/scripts/aggregate-analysis.ts`
    - Collect and structure all comparison data
    - Generate final thematic summary
+
+## Running the Scripts
+
+NPM scripts are available in `package.json`:
+- `yarn comparison:fetch` - Phase 1: Fetch summaries from all three sites
+- `yarn comparison:compare` - Phase 2: Generate pairwise comparisons
+- `yarn comparison:aggregate` - Phase 3: Generate aggregate analysis report
+
+All scripts automatically run `yarn build` before execution.
 
 ## Next Steps
 
