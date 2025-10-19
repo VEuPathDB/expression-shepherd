@@ -75,7 +75,7 @@ interface MergedQualitativeAssessment {
   tone_and_style: QualitativeCategory;
   technical_detail_level: QualitativeCategory;
   structure_and_organization: QualitativeCategory;
-  position_bias_detected: boolean;
+  contradiction_detected: boolean;
   merge_notes: string;
 }
 
@@ -157,6 +157,30 @@ function summarizeBiologicalContent(
 // ============================================================================
 
 /**
+ * Swap summary_A and summary_B labels in an assessment
+ * Used to normalize the second assessment so both use the same labels
+ */
+function swapAssessmentLabels(assessment: QualitativeAssessment): QualitativeAssessment {
+  return {
+    tone_and_style: {
+      summary_A: assessment.tone_and_style.summary_B,
+      summary_B: assessment.tone_and_style.summary_A,
+      comparison: assessment.tone_and_style.comparison,
+    },
+    technical_detail_level: {
+      summary_A: assessment.technical_detail_level.summary_B,
+      summary_B: assessment.technical_detail_level.summary_A,
+      comparison: assessment.technical_detail_level.comparison,
+    },
+    structure_and_organization: {
+      summary_A: assessment.structure_and_organization.summary_B,
+      summary_B: assessment.structure_and_organization.summary_A,
+      comparison: assessment.structure_and_organization.comparison,
+    },
+  };
+}
+
+/**
  * Use AI to merge qualitative assessments from both directions
  */
 async function mergeQualitativeAssessments(
@@ -165,27 +189,26 @@ async function mergeQualitativeAssessments(
   assessment2: QualitativeAssessment,
   anthropic: Anthropic
 ): Promise<MergedQualitativeAssessment> {
+  // Swap labels in assessment2 so both assessments use the same A/B labels
+  const assessment2_normalized = swapAssessmentLabels(assessment2);
+
   const prompt = `You are merging two qualitative assessments of gene expression summaries for gene ${geneId}.
 
-These assessments compared the same two summaries but in opposite presentation orders to detect position bias.
+Both assessments evaluated the same two summaries (Summary A and Summary B).
 
-Assessment 1 (Summary A presented first, Summary B presented second):
+Assessment 1:
 \`\`\`json
 ${JSON.stringify(assessment1, null, 2)}
 \`\`\`
 
-Assessment 2 (Summary B presented first, Summary A presented second):
+Assessment 2:
 \`\`\`json
-${JSON.stringify(assessment2, null, 2)}
+${JSON.stringify(assessment2_normalized, null, 2)}
 \`\`\`
 
-Note: In Assessment 2, the summary labels are reversed from Assessment 1 because the presentation order is swapped. When comparing:
-- Assessment 1's "summary_A" refers to Summary A
-- Assessment 2's "summary_A" refers to Summary B
+Your task: Synthesize these into a single consolidated assessment. If they largely agree, merge them into a coherent summary. If they contradict, note the contradictions.
 
-Your task: Synthesize these into a single merged assessment. If they largely agree, consolidate them. If they contradict significantly, note the contradiction and flag potential position bias.
-
-IMPORTANT: Do NOT refer to the summaries by any names other than "Summary A" and "Summary B". Do not use any identifying information about which AI model generated which summary.
+IMPORTANT: Use only "Summary A" and "Summary B" labels.
 
 Respond with JSON in this format:
 \`\`\`json
@@ -193,20 +216,20 @@ Respond with JSON in this format:
   "tone_and_style": {
     "summary_A": "consolidated description of Summary A's tone",
     "summary_B": "consolidated description of Summary B's tone",
-    "comparison": "merged comparison (use only 'Summary A' and 'Summary B' labels)"
+    "comparison": "merged comparison"
   },
   "technical_detail_level": {
     "summary_A": "consolidated assessment of Summary A's detail level",
     "summary_B": "consolidated assessment of Summary B's detail level",
-    "comparison": "merged comparison (use only 'Summary A' and 'Summary B' labels)"
+    "comparison": "merged comparison"
   },
   "structure_and_organization": {
     "summary_A": "consolidated assessment of Summary A's structure",
     "summary_B": "consolidated assessment of Summary B's structure",
-    "comparison": "merged comparison (use only 'Summary A' and 'Summary B' labels)"
+    "comparison": "merged comparison"
   },
-  "position_bias_detected": false,
-  "merge_notes": "Brief notes on consistency or any contradictions found"
+  "contradiction_detected": true or false (set to true if assessments contradict significantly),
+  "merge_notes": "Brief notes on consistency or contradictions"
 }
 \`\`\`
 

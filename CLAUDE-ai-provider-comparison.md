@@ -73,7 +73,7 @@ This work will be done within the existing `expression-shepherd` repository, lev
      - Average unique observations/insights per model across all genes
      - Average quantitative mentions per model
      - Average deterministic metrics (word count, topic count, etc.)
-     - Position bias frequency (% of genes with detected bias)
+     - Position bias frequency (% of genes with AB/BA merge contradictions)
    - Feed all qualitative assessments into AI for pattern identification:
      - Consistent tone/style differences
      - Consistent technical detail level differences
