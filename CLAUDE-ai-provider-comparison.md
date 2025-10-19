@@ -43,22 +43,46 @@ This work will be done within the existing `expression-shepherd` repository, lev
 
 ### Phase 2: AI-Powered Comparison
 1. Create TypeScript scripts that use Anthropic API to compare summaries
-2. Perform pairwise comparisons for each gene:
-   - Claude vs GPT-5
-   - Claude vs GPT-4o
-   - GPT-5 vs GPT-4o
+2. Perform bidirectional pairwise comparisons for each gene (to detect position bias):
+   - Claude vs GPT-5 (both directions)
+   - Claude vs GPT-4o (both directions)
+   - GPT-5 vs GPT-4o (both directions)
 3. Comparison dimensions:
-   - Specific biological insights mentioned
+   - Specific biological observations and insights (with only_in_A, only_in_B, in_both categorization)
    - Tone and style
    - Level of technical detail
-   - Length and structure
-4. Output: JSON format for each comparison
+   - Structure and organization
+   - Deterministic metrics (word count, topic count, etc.)
+   - Quantitative expression mentions (fold changes, TPM, percentiles)
+4. Output: JSON format for each bidirectional comparison (6 files per gene)
+
+### Phase 2.5: Condensation
+1. Merge bidirectional comparison pairs into condensed summaries
+2. For each model pair:
+   - Calculate biological content averages (observations/insights counts only, not full text)
+   - Calculate quantitative mention averages
+   - Use AI to merge qualitative assessments and detect position bias
+   - Preserve deterministic metrics from both models
+3. Output: Condensed JSON files (3 files per gene: claude4-gpt4o, claude4-gpt5, gpt4o-gpt5)
+4. Result: ~95% reduction in data volume by replacing detailed observation lists with summary counts
 
 ### Phase 3: Aggregate Analysis
-1. Collect all pairwise comparison JSONs
-2. Feed into second-pass AI summarization
-3. Identify themes and patterns across the gene set
-4. Generate final report on systematic differences
+1. For each model pair (claude4-gpt4o, claude4-gpt5, gpt4o-gpt5):
+   - Collect all 20 condensed comparison files for that pair
+   - Calculate aggregate statistics:
+     - Average unique observations/insights per model across all genes
+     - Average quantitative mentions per model
+     - Average deterministic metrics (word count, topic count, etc.)
+     - Position bias frequency (% of genes with detected bias)
+   - Feed all qualitative assessments into AI for pattern identification:
+     - Consistent tone/style differences
+     - Consistent technical detail level differences
+     - Consistent organizational approach differences
+     - Any systematic contradictions or themes
+   - Generate model pair report with both quantitative stats and qualitative themes
+2. Output: One aggregate report per model pair (3 reports total)
+3. Model identities remain anonymous through aggregation; only revealed when saving final reports
+4. Optional future step: Super-aggregation comparing all 3 pairwise reports
 
 ## Project Structure
 
@@ -71,23 +95,35 @@ expression-shepherd/
 │   ├── config/
 │   │   └── sites.json (site configurations and endpoints)
 │   ├── input/
-│   │   └── gene-list.txt (VectorBase gene IDs, one per line)
+│   │   └── gene-list.txt (VectorBase gene IDs, one per line, supports # comments)
 │   ├── scripts/
 │   │   ├── shared-utils.ts (shared utilities including authentication)
 │   │   ├── fetch-summaries.ts (Phase 1: API calls and JSON storage)
-│   │   ├── compare-summaries.ts (Phase 2: AI-powered comparison)
+│   │   ├── compare-summaries.ts (Phase 2: AI-powered bidirectional comparison)
+│   │   ├── condense-comparisons.ts (Phase 2.5: merge bidirectional pairs)
 │   │   └── aggregate-analysis.ts (Phase 3: theme identification)
 │   └── data/
 │       ├── summaries/
-│       │   ├── claude/ (JSON response files)
+│       │   ├── claude4/ (JSON response files)
 │       │   ├── gpt5/
 │       │   └── gpt4o/
 │       ├── comparisons/
 │       │   └── {geneId}/
-│       │       ├── claude-vs-gpt5.json
-│       │       ├── claude-vs-gpt4o.json
-│       │       └── gpt5-vs-gpt4o.json
-│       └── final-report.json (aggregated themes and patterns)
+│       │       ├── claude4-vs-gpt5.json
+│       │       ├── gpt5-vs-claude4.json
+│       │       ├── claude4-vs-gpt4o.json
+│       │       ├── gpt4o-vs-claude4.json
+│       │       ├── gpt5-vs-gpt4o.json
+│       │       └── gpt4o-vs-gpt5.json
+│       ├── condensed/
+│       │   └── {geneId}/
+│       │       ├── claude4-gpt4o.json
+│       │       ├── claude4-gpt5.json
+│       │       └── gpt4o-gpt5.json
+│       └── aggregate-reports/
+│           ├── claude4-gpt4o-report.json
+│           ├── claude4-gpt5-report.json
+│           └── gpt4o-gpt5-report.json
 ```
 
 ## Technical Notes
@@ -156,22 +192,33 @@ expression-shepherd/
 
 3. **Phase 2 Implementation**
    - Create `comparison/scripts/compare-summaries.ts` with Anthropic API integration
-   - Design comparison prompt for consistent results
-   - Generate pairwise comparison JSONs for all genes
+   - Design comparison prompt for consistent, blind results (no model names revealed)
+   - Generate bidirectional pairwise comparison JSONs for all genes (6 per gene)
 
-4. **Phase 3 Implementation**
+4. **Phase 2.5 Implementation**
+   - Create `comparison/scripts/condense-comparisons.ts`
+   - Merge bidirectional pairs with AI-powered qualitative assessment synthesis
+   - Calculate biological content statistics and detect position bias
+   - Maintain model anonymity throughout condensation process
+
+5. **Phase 3 Implementation**
    - Create `comparison/scripts/aggregate-analysis.ts`
-   - Collect and structure all comparison data
-   - Generate final thematic summary
+   - Process one model pair at a time (3 separate aggregation runs)
+   - Calculate aggregate statistics across all genes for each pair
+   - Use AI to identify qualitative patterns and themes
+   - Reveal model identities only when writing final reports
 
 ## Running the Scripts
 
 NPM scripts are available in `package.json`:
 - `yarn comparison:fetch` - Phase 1: Fetch summaries from all three sites
-- `yarn comparison:compare` - Phase 2: Generate pairwise comparisons
+- `yarn comparison:compare` - Phase 2: Generate bidirectional pairwise comparisons
+- `yarn comparison:condense` - Phase 2.5: Condense bidirectional pairs into merged summaries
 - `yarn comparison:aggregate` - Phase 3: Generate aggregate analysis report
 
 All scripts automatically run `yarn build` before execution.
+
+**Note**: Use `#` comments in `gene-list.txt` to temporarily exclude genes during development/testing.
 
 ## Next Steps
 
@@ -188,8 +235,13 @@ Already available in repository:
 
 - All 20 genes successfully processed through all three sites
 - Complete set of JSON summaries saved locally (3 models × 20 genes = 60 files)
-- Pairwise comparisons generated for each gene (3 comparisons × 20 genes = 60 files)
-- Final aggregated report identifying systematic differences between models
+- Bidirectional pairwise comparisons generated for each gene (6 comparisons × 20 genes = 120 files)
+- Condensed comparison summaries for each gene (3 model pairs × 20 genes = 60 files)
+- Three aggregate reports (one per model pair) identifying systematic differences:
+  - Quantitative metrics (avg observations, insights, quantitative mentions, word counts, etc.)
+  - Qualitative patterns (tone, technical detail, structure themes)
+  - Position bias statistics
+- Model anonymity maintained through all analysis phases until final report generation
 - Reproducible process that can be re-run with new gene sets
 
 

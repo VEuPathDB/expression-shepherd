@@ -34,6 +34,7 @@
     "node-check": "node -v",
     "comparison:fetch": "yarn build && node dist/comparison/scripts/fetch-summaries.js",
     "comparison:compare": "yarn build && node dist/comparison/scripts/compare-summaries.js",
+    "comparison:condense": "yarn build && node dist/comparison/scripts/condense-comparisons.js",
     "comparison:aggregate": "yarn build && node dist/comparison/scripts/aggregate-analysis.js"
   }
 }

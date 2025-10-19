@@ -1,12 +1,17 @@
-import { writeFile } from "fs/promises";
+import { writeFile, mkdir } from "fs/promises";
 import https from 'https';
 import querystring from 'querystring';
+import path from 'path';
 
 /**
- * Writes content to a file
+ * Writes content to a file, creating parent directories if needed
  */
 export async function writeToFile(filename: string, content: string): Promise<void> {
   try {
+    // Create parent directory if it doesn't exist
+    const dir = path.dirname(filename);
+    await mkdir(dir, { recursive: true });
+
     await writeFile(filename, content, "utf-8");
     console.log(`File written successfully to ${filename}`);
   } catch (error) {
@@ -76,3 +81,17 @@ export async function getAuthCookie(username: string, password: string): Promise
  * Sleep utility for rate limiting or polling delays
  */
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Load gene list from input file
+ * Filters out comments (lines starting with #) and empty lines
+ */
+export async function loadGeneList(): Promise<string[]> {
+  const { readFile } = await import("fs/promises");
+  const geneListPath = path.join(process.cwd(), "comparison/input/gene-list.txt");
+  const content = await readFile(geneListPath, "utf-8");
+  return content
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#"));
+}

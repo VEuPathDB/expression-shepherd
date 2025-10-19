@@ -1,0 +1,419 @@
+import "dotenv/config";
+import Anthropic from "@anthropic-ai/sdk";
+import { readFile } from "fs/promises";
+import path from "path";
+import { writeToFile, stripMarkdownCodeBlocks, loadGeneList } from "./shared-utils";
+
+// ============================================================================
+// Type Definitions
+// ============================================================================
+
+interface BiologicalContentCounts {
+  only_in_A: string[];
+  only_in_B: string[];
+  in_both: string[];
+}
+
+interface BiologicalContent {
+  observations: BiologicalContentCounts;
+  insights: BiologicalContentCounts;
+}
+
+interface QualitativeCategory {
+  summary_A: string;
+  summary_B: string;
+  comparison: string;
+}
+
+interface QualitativeAssessment {
+  tone_and_style: QualitativeCategory;
+  technical_detail_level: QualitativeCategory;
+  structure_and_organization: QualitativeCategory;
+}
+
+interface DeterministicMetrics {
+  character_count: number;
+  word_count: number;
+  sentence_count: number;
+  paragraph_count: number;
+  topic_count: number;
+  has_bullets: boolean;
+  average_sentence_length: number;
+}
+
+interface QuantitativeMentions {
+  summary_A: number;
+  summary_B: number;
+}
+
+interface ComparisonResult {
+  model_A: string;
+  model_B: string;
+  gene_id: string;
+  biological_content: BiologicalContent;
+  qualitative_assessment: QualitativeAssessment;
+  deterministic_metrics: {
+    summary_A: DeterministicMetrics;
+    summary_B: DeterministicMetrics;
+  };
+  quantitative_expression_mentions: QuantitativeMentions;
+  token_usage: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+  };
+}
+
+interface BiologicalContentSummary {
+  avg_unique_to_model_A: number;
+  avg_unique_to_model_B: number;
+  avg_shared: number;
+  position_variance: number;
+}
+
+interface MergedQualitativeAssessment {
+  tone_and_style: QualitativeCategory;
+  technical_detail_level: QualitativeCategory;
+  structure_and_organization: QualitativeCategory;
+  position_bias_detected: boolean;
+  merge_notes: string;
+}
+
+interface CondensedComparison {
+  gene_id: string;
+  model_A: string;
+  model_B: string;
+  biological_content_summary: {
+    observations: BiologicalContentSummary;
+    insights: BiologicalContentSummary;
+  };
+  qualitative_assessment: MergedQualitativeAssessment;
+  deterministic_metrics: {
+    model_A: DeterministicMetrics;
+    model_B: DeterministicMetrics;
+  };
+  quantitative_mentions: {
+    avg_model_A: number;
+    avg_model_B: number;
+  };
+}
+
+interface SiteConfig {
+  name: string;
+  hostname: string;
+  appPath: string;
+  model: string;
+}
+
+interface Config {
+  sites: SiteConfig[];
+  endpoint: string;
+  projectId: string;
+}
+
+// ============================================================================
+// Calculation Functions
+// ============================================================================
+
+/**
+ * Calculate summary statistics for biological content from both directions
+ */
+function summarizeBiologicalContent(
+  comparison1: ComparisonResult,
+  comparison2: ComparisonResult,
+  category: "observations" | "insights"
+): BiologicalContentSummary {
+  // In comparison1: model_A vs model_B (A first)
+  // In comparison2: model_B vs model_A (B first)
+  // So comparison1.only_in_A and comparison2.only_in_B both refer to the same model
+
+  const uniqueToA_dir1 = comparison1.biological_content[category].only_in_A.length;
+  const uniqueToA_dir2 = comparison2.biological_content[category].only_in_B.length;
+  const avg_unique_to_model_A = (uniqueToA_dir1 + uniqueToA_dir2) / 2;
+
+  const uniqueToB_dir1 = comparison1.biological_content[category].only_in_B.length;
+  const uniqueToB_dir2 = comparison2.biological_content[category].only_in_A.length;
+  const avg_unique_to_model_B = (uniqueToB_dir1 + uniqueToB_dir2) / 2;
+
+  const shared_dir1 = comparison1.biological_content[category].in_both.length;
+  const shared_dir2 = comparison2.biological_content[category].in_both.length;
+  const avg_shared = (shared_dir1 + shared_dir2) / 2;
+
+  // Calculate variance as a simple measure of consistency between directions
+  const variance_A = Math.abs(uniqueToA_dir1 - uniqueToA_dir2);
+  const variance_B = Math.abs(uniqueToB_dir1 - uniqueToB_dir2);
+  const position_variance = (variance_A + variance_B) / 2;
+
+  return {
+    avg_unique_to_model_A,
+    avg_unique_to_model_B,
+    avg_shared,
+    position_variance,
+  };
+}
+
+// ============================================================================
+// AI-Powered Merging
+// ============================================================================
+
+/**
+ * Use AI to merge qualitative assessments from both directions
+ */
+async function mergeQualitativeAssessments(
+  geneId: string,
+  assessment1: QualitativeAssessment,
+  assessment2: QualitativeAssessment,
+  anthropic: Anthropic
+): Promise<MergedQualitativeAssessment> {
+  const prompt = `You are merging two qualitative assessments of gene expression summaries for gene ${geneId}.
+
+These assessments compared the same two summaries but in opposite presentation orders to detect position bias.
+
+Assessment 1 (Summary A presented first, Summary B presented second):
+\`\`\`json
+${JSON.stringify(assessment1, null, 2)}
+\`\`\`
+
+Assessment 2 (Summary B presented first, Summary A presented second):
+\`\`\`json
+${JSON.stringify(assessment2, null, 2)}
+\`\`\`
+
+Note: In Assessment 2, the summary labels are reversed from Assessment 1 because the presentation order is swapped. When comparing:
+- Assessment 1's "summary_A" refers to Summary A
+- Assessment 2's "summary_A" refers to Summary B
+
+Your task: Synthesize these into a single merged assessment. If they largely agree, consolidate them. If they contradict significantly, note the contradiction and flag potential position bias.
+
+IMPORTANT: Do NOT refer to the summaries by any names other than "Summary A" and "Summary B". Do not use any identifying information about which AI model generated which summary.
+
+Respond with JSON in this format:
+\`\`\`json
+{
+  "tone_and_style": {
+    "summary_A": "consolidated description of Summary A's tone",
+    "summary_B": "consolidated description of Summary B's tone",
+    "comparison": "merged comparison (use only 'Summary A' and 'Summary B' labels)"
+  },
+  "technical_detail_level": {
+    "summary_A": "consolidated assessment of Summary A's detail level",
+    "summary_B": "consolidated assessment of Summary B's detail level",
+    "comparison": "merged comparison (use only 'Summary A' and 'Summary B' labels)"
+  },
+  "structure_and_organization": {
+    "summary_A": "consolidated assessment of Summary A's structure",
+    "summary_B": "consolidated assessment of Summary B's structure",
+    "comparison": "merged comparison (use only 'Summary A' and 'Summary B' labels)"
+  },
+  "position_bias_detected": false,
+  "merge_notes": "Brief notes on consistency or any contradictions found"
+}
+\`\`\`
+
+Respond ONLY with valid JSON, no other text.`;
+
+  const message = await anthropic.messages.create({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 2000,
+    messages: [
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+  });
+
+  const responseText =
+    message.content[0].type === "text" ? message.content[0].text : JSON.stringify(message.content[0]);
+
+  const cleanedResponse = stripMarkdownCodeBlocks(responseText);
+
+  try {
+    const parsed = JSON.parse(cleanedResponse);
+    return parsed;
+  } catch (error) {
+    console.error("Failed to parse AI response:", cleanedResponse);
+    throw new Error(`Failed to parse AI response: ${error}`);
+  }
+}
+
+// ============================================================================
+// File Operations
+// ============================================================================
+
+/**
+ * Load site configuration
+ */
+async function loadConfig(): Promise<Config> {
+  const configPath = path.join(process.cwd(), "comparison/config/sites.json");
+  const configContent = await readFile(configPath, "utf-8");
+  return JSON.parse(configContent);
+}
+
+/**
+ * Load comparison result for a specific gene and model pair
+ */
+async function loadComparison(geneId: string, modelA: string, modelB: string): Promise<ComparisonResult> {
+  const comparisonPath = path.join(
+    process.cwd(),
+    `comparison/data/comparisons/${geneId}/${modelA}-vs-${modelB}.json`
+  );
+  const content = await readFile(comparisonPath, "utf-8");
+  return JSON.parse(content);
+}
+
+/**
+ * Get sorted model pair name (alphabetically)
+ */
+function getSortedPair(modelA: string, modelB: string): [string, string] {
+  return modelA < modelB ? [modelA, modelB] : [modelB, modelA];
+}
+
+// ============================================================================
+// Main Condensation Logic
+// ============================================================================
+
+/**
+ * Condense a pair of bidirectional comparisons
+ */
+async function condensePair(
+  geneId: string,
+  modelA: string,
+  modelB: string,
+  anthropic: Anthropic
+): Promise<CondensedComparison> {
+  console.log(`  Condensing ${modelA} <-> ${modelB}...`);
+
+  // Load both directions
+  const comparison_AvsB = await loadComparison(geneId, modelA, modelB);
+  const comparison_BvsA = await loadComparison(geneId, modelB, modelA);
+
+  // Summarize biological content
+  const observations_summary = summarizeBiologicalContent(comparison_AvsB, comparison_BvsA, "observations");
+  const insights_summary = summarizeBiologicalContent(comparison_AvsB, comparison_BvsA, "insights");
+
+  // Merge qualitative assessments with AI
+  const merged_qualitative = await mergeQualitativeAssessments(
+    geneId,
+    comparison_AvsB.qualitative_assessment,
+    comparison_BvsA.qualitative_assessment,
+    anthropic
+  );
+
+  // Average quantitative mentions
+  const avg_model_A =
+    (comparison_AvsB.quantitative_expression_mentions.summary_A +
+      comparison_BvsA.quantitative_expression_mentions.summary_B) /
+    2;
+  const avg_model_B =
+    (comparison_AvsB.quantitative_expression_mentions.summary_B +
+      comparison_BvsA.quantitative_expression_mentions.summary_A) /
+    2;
+
+  return {
+    gene_id: geneId,
+    model_A: modelA,
+    model_B: modelB,
+    biological_content_summary: {
+      observations: observations_summary,
+      insights: insights_summary,
+    },
+    qualitative_assessment: merged_qualitative,
+    deterministic_metrics: {
+      model_A: comparison_AvsB.deterministic_metrics.summary_A,
+      model_B: comparison_AvsB.deterministic_metrics.summary_B,
+    },
+    quantitative_mentions: {
+      avg_model_A,
+      avg_model_B,
+    },
+  };
+}
+
+/**
+ * Main execution
+ */
+async function main() {
+  console.log("Loading configuration...");
+  const config = await loadConfig();
+
+  const modelNames = config.sites.map((s) => s.name);
+  console.log(`Found ${modelNames.length} models: ${modelNames.join(", ")}`);
+
+  console.log("\nLoading gene list...");
+  const geneIds = await loadGeneList();
+  console.log(`Found ${geneIds.length} genes to condense`);
+
+  if (geneIds.length === 0) {
+    console.error("No genes found in gene-list.txt. Please add gene IDs (one per line).");
+    process.exit(1);
+  }
+
+  // Initialize Anthropic client
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    console.error("Missing ANTHROPIC_API_KEY in .env file");
+    process.exit(1);
+  }
+  const anthropic = new Anthropic({ apiKey });
+
+  // Generate all unique model pairs (alphabetically sorted)
+  const pairs: Array<[string, string]> = [];
+  for (let i = 0; i < modelNames.length; i++) {
+    for (let j = i + 1; j < modelNames.length; j++) {
+      const [sortedA, sortedB] = getSortedPair(modelNames[i], modelNames[j]);
+      pairs.push([sortedA, sortedB]);
+    }
+  }
+
+  console.log(`\nWill condense ${pairs.length} model pairs`);
+  console.log("Model pairs:");
+  pairs.forEach(([a, b]) => console.log(`  - ${a} <-> ${b}`));
+
+  let successCount = 0;
+  let errorCount = 0;
+
+  // Process each gene
+  for (const geneId of geneIds) {
+    console.log(`\n${"=".repeat(60)}`);
+    console.log(`Processing gene: ${geneId}`);
+    console.log("=".repeat(60));
+
+    // Process each model pair
+    for (const [modelA, modelB] of pairs) {
+      try {
+        const result = await condensePair(geneId, modelA, modelB, anthropic);
+
+        // Save result
+        const outputPath = path.join(
+          process.cwd(),
+          `comparison/data/condensed/${geneId}/${modelA}-${modelB}.json`
+        );
+        await writeToFile(outputPath, JSON.stringify(result, null, 2));
+
+        successCount++;
+      } catch (error) {
+        console.error(`  ERROR condensing ${modelA} <-> ${modelB}:`, error instanceof Error ? error.message : error);
+        errorCount++;
+      }
+    }
+  }
+
+  // Summary
+  console.log("\n" + "=".repeat(60));
+  console.log("SUMMARY");
+  console.log("=".repeat(60));
+  console.log(`Total condensations: ${successCount + errorCount}`);
+  console.log(`Successful: ${successCount}`);
+  console.log(`Failed: ${errorCount}`);
+
+  if (errorCount > 0) {
+    process.exit(1);
+  }
+}
+
+// Run the script
+main().catch((error) => {
+  console.error("Fatal error:", error);
+  process.exit(1);
+});

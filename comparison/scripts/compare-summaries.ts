@@ -1,0 +1,501 @@
+import "dotenv/config";
+import Anthropic from "@anthropic-ai/sdk";
+import { readFile } from "fs/promises";
+import path from "path";
+import { writeToFile, stripMarkdownCodeBlocks, loadGeneList } from "./shared-utils";
+
+// ============================================================================
+// Type Definitions
+// ============================================================================
+
+interface ExperimentSummary {
+  assay_type: string;
+  experiment_name: string;
+  notes: string;
+  one_sentence_summary: string;
+  confidence: string | number;
+  dataset_id: string;
+  experiment_keywords: string[];
+  biological_importance: string | number;
+}
+
+interface Topic {
+  one_sentence_summary: string;
+  headline: string;
+  summaries: ExperimentSummary[];
+}
+
+interface ExpressionSummary {
+  one_paragraph_summary: string;
+  headline: string;
+  topics: Topic[];
+}
+
+interface SimplifiedTopic {
+  one_sentence_summary: string;
+  headline: string;
+  experiment_names: string[];
+}
+
+interface SimplifiedSummary {
+  one_paragraph_summary: string;
+  headline: string;
+  topics: SimplifiedTopic[];
+}
+
+interface DeterministicMetrics {
+  character_count: number;
+  word_count: number;
+  sentence_count: number;
+  paragraph_count: number;
+  topic_count: number;
+  has_bullets: boolean;
+  average_sentence_length: number;
+}
+
+interface BiologicalContent {
+  observations: {
+    only_in_A: string[];
+    only_in_B: string[];
+    in_both: string[];
+  };
+  insights: {
+    only_in_A: string[];
+    only_in_B: string[];
+    in_both: string[];
+  };
+}
+
+interface QualitativeAssessment {
+  tone_and_style: {
+    summary_A: string;
+    summary_B: string;
+    comparison: string;
+  };
+  technical_detail_level: {
+    summary_A: string;
+    summary_B: string;
+    comparison: string;
+  };
+  structure_and_organization: {
+    summary_A: string;
+    summary_B: string;
+    comparison: string;
+  };
+}
+
+interface QuantitativeMentions {
+  summary_A: number;
+  summary_B: number;
+}  
+
+interface ComparisonResult {
+  model_A: string;
+  model_B: string;
+  gene_id: string;
+  biological_content: BiologicalContent;
+  qualitative_assessment: QualitativeAssessment;
+  deterministic_metrics: {
+    summary_A: DeterministicMetrics;
+    summary_B: DeterministicMetrics;
+  };
+  quantitative_expression_mentions: QuantitativeMentions;
+  token_usage: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+  };
+}
+
+interface SiteConfig {
+  name: string;
+  hostname: string;
+  appPath: string;
+  model: string;
+}
+
+interface Config {
+  sites: SiteConfig[];
+  endpoint: string;
+  projectId: string;
+}
+
+// ============================================================================
+// Deterministic Metrics Calculation
+// ============================================================================
+
+/**
+ * Calculate deterministic metrics from a summary
+ */
+function calculateMetrics(summary: ExpressionSummary): DeterministicMetrics {
+  const fullText = `${summary.headline} ${summary.one_paragraph_summary} ${summary.topics
+    .map((t) => `${t.headline} ${t.one_sentence_summary}`)
+    .join(" ")}`;
+
+  // Character count (excluding whitespace)
+  const character_count = fullText.replace(/\s/g, "").length;
+
+  // Word count
+  const words = fullText.trim().split(/\s+/);
+  const word_count = words.length;
+
+  // Sentence count (approximate - count periods, exclamation marks, question marks)
+  const sentences = fullText.match(/[.!?]+/g) || [];
+  const sentence_count = sentences.length;
+
+  // Paragraph count (from one_paragraph_summary + topics)
+  const paragraph_count = 1 + summary.topics.length;
+
+  // Topic count
+  const topic_count = summary.topics.length;
+
+  // Has bullets (check for HTML list items)
+  const has_bullets = /<li>/i.test(fullText);
+
+  // Average sentence length
+  const average_sentence_length = sentence_count > 0 ? word_count / sentence_count : 0;
+
+  return {
+    character_count,
+    word_count,
+    sentence_count,
+    paragraph_count,
+    topic_count,
+    has_bullets,
+    average_sentence_length: Math.round(average_sentence_length * 10) / 10,
+  };
+}
+
+// ============================================================================
+// Summary Transformation
+// ============================================================================
+
+/**
+ * Simplify summary by replacing experiment summaries with just experiment names
+ * This reduces token usage and context clutter
+ */
+function simplifySummary(summary: ExpressionSummary): SimplifiedSummary {
+  return {
+    one_paragraph_summary: summary.one_paragraph_summary,
+    headline: summary.headline,
+    topics: summary.topics.map((topic) => ({
+      one_sentence_summary: topic.one_sentence_summary,
+      headline: topic.headline,
+      experiment_names: topic.summaries.map((s) => s.experiment_name),
+    })),
+  };
+}
+
+// ============================================================================
+// AI-Powered Comparison
+// ============================================================================
+
+/**
+ * Generate comparison using Anthropic API
+ */
+async function compareWithAI(
+  geneId: string,
+  modelAName: string,
+  modelBName: string,
+  summaryA: ExpressionSummary,
+  summaryB: ExpressionSummary,
+  anthropic: Anthropic
+): Promise<{
+  biological_content: BiologicalContent;
+  qualitative_assessment: QualitativeAssessment;
+  quantitative_expression_mentions: QuantitativeMentions; 
+  token_usage: { input_tokens: number; output_tokens: number; total_tokens: number };
+}> {
+  // Simplify summaries to reduce token usage
+  const simplifiedA = simplifySummary(summaryA);
+  const simplifiedB = simplifySummary(summaryB);
+
+  const prompt = `You are comparing two gene expression summaries for the same gene.
+
+Summary A:
+\`\`\`json
+${JSON.stringify(simplifiedA, null, 2)}
+\`\`\`
+
+Summary B:
+\`\`\`json
+${JSON.stringify(simplifiedB, null, 2)}
+\`\`\`
+
+---
+
+Please provide a detailed comparison in the following JSON format:
+
+{
+  "biological_content": {
+    "observations": {
+      "only_in_A": ["list of factual observations about expression patterns found ONLY in Summary A"],
+      "only_in_B": ["list of factual observations about expression patterns found ONLY in Summary B"],
+      "in_both": ["list of factual observations found in BOTH summaries"]
+    },
+    "insights": {
+      "only_in_A": ["list of biological insights/interpretations found ONLY in Summary A"],
+      "only_in_B": ["list of biological insights/interpretations found ONLY in Summary B"],
+      "in_both": ["list of biological insights/interpretations found in BOTH summaries"]
+    }
+  },
+  "qualitative_assessment": {
+    "tone_and_style": {
+      "summary_A": "description of tone and writing style in Summary A",
+      "summary_B": "description of tone and writing style in Summary B",
+      "comparison": "comparison of tones and styles"
+    },
+    "technical_detail_level": {
+      "summary_A": "assessment of technical detail in Summary A",
+      "summary_B": "assessment of technical detail in Summary B",
+      "comparison": "comparison of detail levels"
+    },
+    "structure_and_organization": {
+      "summary_A": "assessment of structure in Summary A",
+      "summary_B": "assessment of structure in Summary B",
+      "comparison": "comparison of organizational approaches"
+    }
+  },
+  "quantitative_expression_mentions": {
+    "summary_A": ${Math.floor(Math.random() * 9)},
+    "summary_B": ${Math.floor(Math.random() * 9)}
+  }
+}
+
+Important notes for quantitative_expression_mentions:
+- Count ONLY specific numerical mentions of gene expression levels or changes
+- Include: fold changes (e.g., "28-fold", "3.5x"), TPM values (e.g., "35,270 TPM"), percentile ranks (e.g., "99th percentile", "97.5%ile")
+- EXCLUDE: time points (e.g., "3h", "24 hours"), ages (e.g., "10 days old"), experimental conditions (e.g., "30% RH"), sample sizes, temperatures, or any other non-expression numerical values
+- Return ONLY the integer count, not explanatory text
+
+Important distinctions:
+- **Observations** are factual statements about expression patterns (e.g., "high expression after blood feeding", "increased in salivary glands")
+- **Insights** are interpretations or biological conclusions (e.g., "likely involved in digestion", "may play a role in immune response")
+
+Respond ONLY with valid JSON, no other text.`;
+
+  const message = await anthropic.messages.create({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 4000,
+    messages: [
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+  });
+
+  const responseText =
+    message.content[0].type === "text" ? message.content[0].text : JSON.stringify(message.content[0]);
+
+  // Strip markdown code blocks if present
+  const cleanedResponse = stripMarkdownCodeBlocks(responseText);
+
+  try {
+    const parsed = JSON.parse(cleanedResponse);
+
+    // Extract token usage from message
+    const input_tokens = message.usage.input_tokens;
+    const output_tokens = message.usage.output_tokens;
+    const total_tokens = input_tokens + output_tokens;
+
+    return {
+      ...parsed,
+      token_usage: {
+        input_tokens,
+        output_tokens,
+        total_tokens,
+      },
+    };
+  } catch (error) {
+    console.error("Failed to parse AI response:", cleanedResponse);
+    throw new Error(`Failed to parse AI response: ${error}`);
+  }
+}
+
+// ============================================================================
+// File Operations
+// ============================================================================
+
+/**
+ * Load site configuration
+ */
+async function loadConfig(): Promise<Config> {
+  const configPath = path.join(process.cwd(), "comparison/config/sites.json");
+  const configContent = await readFile(configPath, "utf-8");
+  return JSON.parse(configContent);
+}
+
+/**
+ * Load summary for a specific gene and model
+ */
+async function loadSummary(modelName: string, geneId: string): Promise<ExpressionSummary> {
+  const summaryPath = path.join(process.cwd(), `comparison/data/summaries/${modelName}/${geneId}.json`);
+  const content = await readFile(summaryPath, "utf-8");
+  return JSON.parse(content);
+}
+
+/**
+ * Check that all required summary files exist before starting comparisons
+ * Exits with error if any files are missing
+ */
+async function checkAvailableSummaries(geneIds: string[], modelNames: string[]): Promise<void> {
+  const missingFiles: Array<{ geneId: string; modelName: string }> = [];
+
+  for (const geneId of geneIds) {
+    for (const modelName of modelNames) {
+      const summaryPath = path.join(process.cwd(), `comparison/data/summaries/${modelName}/${geneId}.json`);
+      try {
+        await readFile(summaryPath, "utf-8");
+      } catch {
+        missingFiles.push({ geneId, modelName });
+      }
+    }
+  }
+
+  if (missingFiles.length > 0) {
+    console.error("\nERROR: Missing summary files:");
+    missingFiles.forEach(({ geneId, modelName }) => {
+      console.error(`  - ${geneId} (${modelName})`);
+    });
+    console.error(
+      `\nPlease run 'yarn comparison:fetch' to generate missing summaries, or update gene-list.txt to only include genes with complete summaries.`
+    );
+    process.exit(1);
+  }
+}
+
+// ============================================================================
+// Main Comparison Logic
+// ============================================================================
+
+/**
+ * Compare two models for a specific gene
+ */
+async function comparePair(
+  geneId: string,
+  modelAName: string,
+  modelBName: string,
+  anthropic: Anthropic
+): Promise<ComparisonResult> {
+  console.log(`  Comparing ${modelAName} vs ${modelBName}...`);
+
+  // Load summaries
+  const summaryA = await loadSummary(modelAName, geneId);
+  const summaryB = await loadSummary(modelBName, geneId);
+
+  // Calculate deterministic metrics
+  const metricsA = calculateMetrics(summaryA);
+  const metricsB = calculateMetrics(summaryB);
+
+  // Get AI comparison
+  const aiComparison = await compareWithAI(geneId, modelAName, modelBName, summaryA, summaryB, anthropic);
+
+  return {
+    model_A: modelAName,
+    model_B: modelBName,
+    gene_id: geneId,
+    biological_content: aiComparison.biological_content,
+    qualitative_assessment: aiComparison.qualitative_assessment,
+    deterministic_metrics: {
+      summary_A: metricsA,
+      summary_B: metricsB,
+    },
+    quantitative_expression_mentions: aiComparison.quantitative_expression_mentions,
+    token_usage: aiComparison.token_usage,
+  };
+}
+
+/**
+ * Main execution
+ */
+async function main() {
+  console.log("Loading configuration...");
+  const config = await loadConfig();
+
+  const modelNames = config.sites.map((s) => s.name);
+  console.log(`Found ${modelNames.length} models: ${modelNames.join(", ")}`);
+
+  console.log("\nLoading gene list...");
+  const geneIds = await loadGeneList();
+  console.log(`Found ${geneIds.length} genes to compare`);
+
+  if (geneIds.length === 0) {
+    console.error("No genes found in gene-list.txt. Please add gene IDs (one per line).");
+    process.exit(1);
+  }
+
+  // Validate that all required summary files exist
+  console.log("\nValidating summary files...");
+  await checkAvailableSummaries(geneIds, modelNames);
+  console.log("All required summary files are present!");
+
+  // Initialize Anthropic client
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    console.error("Missing ANTHROPIC_API_KEY in .env file");
+    process.exit(1);
+  }
+  const anthropic = new Anthropic({ apiKey });
+
+  // Generate all pairwise comparisons (bidirectional)
+  const pairs: Array<[string, string]> = [];
+  for (let i = 0; i < modelNames.length; i++) {
+    for (let j = i + 1; j < modelNames.length; j++) {
+      // Both directions
+      pairs.push([modelNames[i], modelNames[j]]);
+      pairs.push([modelNames[j], modelNames[i]]);
+    }
+  }
+
+  console.log(`\nWill generate ${pairs.length} comparisons per gene (${pairs.length / 2} pairs × 2 directions)`);
+  console.log("Comparison pairs:");
+  pairs.forEach(([a, b]) => console.log(`  - ${a} vs ${b}`));
+
+  let successCount = 0;
+  let errorCount = 0;
+
+  // Process each gene
+  for (const geneId of geneIds) {
+    console.log(`\n${"=".repeat(60)}`);
+    console.log(`Processing gene: ${geneId}`);
+    console.log("=".repeat(60));
+
+    // Process each comparison pair
+    for (const [modelA, modelB] of pairs) {
+      try {
+        const result = await comparePair(geneId, modelA, modelB, anthropic);
+
+        // Save result
+        const outputPath = path.join(
+          process.cwd(),
+          `comparison/data/comparisons/${geneId}/${modelA}-vs-${modelB}.json`
+        );
+        await writeToFile(outputPath, JSON.stringify(result, null, 2));
+
+        successCount++;
+      } catch (error) {
+        console.error(`  ERROR comparing ${modelA} vs ${modelB}:`, error instanceof Error ? error.message : error);
+        errorCount++;
+      }
+    }
+  }
+
+  // Summary
+  console.log("\n" + "=".repeat(60));
+  console.log("SUMMARY");
+  console.log("=".repeat(60));
+  console.log(`Total comparisons: ${successCount + errorCount}`);
+  console.log(`Successful: ${successCount}`);
+  console.log(`Failed: ${errorCount}`);
+
+  if (errorCount > 0) {
+    process.exit(1);
+  }
+}
+
+// Run the script
+main().catch((error) => {
+  console.error("Fatal error:", error);
+  process.exit(1);
+});

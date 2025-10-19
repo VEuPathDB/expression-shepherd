@@ -2,7 +2,7 @@ import "dotenv/config";
 import axios from "axios";
 import { readFile } from "fs/promises";
 import path from "path";
-import { writeToFile, getAuthCookie, sleep } from "./shared-utils";
+import { writeToFile, getAuthCookie, sleep, loadGeneList } from "./shared-utils";
 
 interface SiteConfig {
   name: string;
@@ -39,19 +39,6 @@ async function loadConfig(): Promise<Config> {
   return JSON.parse(configContent);
 }
 
-/**
- * Load gene list from input file
- * Filters out comments and empty lines
- */
-async function loadGeneList(): Promise<string[]> {
-  // Use paths relative to project root, not dist directory
-  const geneListPath = path.join(process.cwd(), "comparison/input/gene-list.txt");
-  const content = await readFile(geneListPath, "utf-8");
-  return content
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line && !line.startsWith("#"));
-}
 
 /**
  * Make API request to fetch AI expression summary
