@@ -7,7 +7,7 @@ export interface SiteConfig {
   hostname: string;
   appPath: string;
   model: string;
-  skipFetch?: boolean;
+  skip?: boolean;
 }
 
 export interface Config {

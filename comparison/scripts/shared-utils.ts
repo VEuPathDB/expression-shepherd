@@ -1,7 +1,8 @@
-import { writeFile, mkdir } from "fs/promises";
+import { writeFile, mkdir, readFile } from "fs/promises";
 import https from 'https';
 import querystring from 'querystring';
 import path from 'path';
+import { Config, SiteConfig } from './types';
 
 /**
  * Writes content to a file, creating parent directories if needed
@@ -87,11 +88,29 @@ export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve
  * Filters out comments (lines starting with #) and empty lines
  */
 export async function loadGeneList(): Promise<string[]> {
-  const { readFile } = await import("fs/promises");
   const geneListPath = path.join(process.cwd(), "comparison/input/gene-list.txt");
   const content = await readFile(geneListPath, "utf-8");
   return content
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line && !line.startsWith("#"));
+}
+
+/**
+ * Load site configuration from sites.json
+ * Returns full config, active sites (skip !== true), and skipped sites
+ */
+export async function loadSitesConfig(): Promise<{
+  config: Config;
+  activeSites: SiteConfig[];
+  skippedSites: SiteConfig[];
+}> {
+  const configPath = path.join(process.cwd(), "comparison/config/sites.json");
+  const configContent = await readFile(configPath, "utf-8");
+  const config: Config = JSON.parse(configContent);
+
+  const activeSites = config.sites.filter((site) => !site.skip);
+  const skippedSites = config.sites.filter((site) => site.skip);
+
+  return { config, activeSites, skippedSites };
 }

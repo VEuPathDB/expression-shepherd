@@ -1,24 +1,12 @@
 import "dotenv/config";
 import axios from "axios";
-import { readFile } from "fs/promises";
 import path from "path";
-import { writeToFile, getAuthCookie, sleep, loadGeneList } from "./shared-utils";
+import { writeToFile, getAuthCookie, sleep, loadGeneList, loadSitesConfig } from "./shared-utils";
 import type { SiteConfig, Config, FetchResult } from "./types";
 
 const POLL_INTERVAL_MS = 5000; // 5 seconds
 const MAX_RETRIES = 3;
 const MAX_POLL_ATTEMPTS = 120; // 10 minutes max (120 * 5 seconds)
-
-/**
- * Load site configuration
- */
-async function loadConfig(): Promise<Config> {
-  // Use paths relative to project root, not dist directory
-  const configPath = path.join(process.cwd(), "comparison/config/sites.json");
-  const configContent = await readFile(configPath, "utf-8");
-  return JSON.parse(configContent);
-}
-
 
 /**
  * Make API request to fetch AI expression summary
@@ -154,19 +142,15 @@ async function fetchWithRetry(
  */
 async function main() {
   console.log("Loading configuration...");
-  const config = await loadConfig();
-
-  // Filter out sites with skipFetch: true
-  const activeSites = config.sites.filter((site) => !site.skipFetch);
-  const skippedSites = config.sites.filter((site) => site.skipFetch);
+  const { config, activeSites, skippedSites } = await loadSitesConfig();
 
   if (skippedSites.length > 0) {
-    console.log(`Skipping ${skippedSites.length} site(s) with skipFetch=true:`);
+    console.log(`Skipping ${skippedSites.length} site(s) with skip=true:`);
     skippedSites.forEach((site) => console.log(`  - ${site.name}`));
   }
 
   if (activeSites.length === 0) {
-    console.error("No active sites to process (all sites have skipFetch=true)");
+    console.error("No active sites to process (all sites have skip=true)");
     process.exit(1);
   }
 

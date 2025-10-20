@@ -2,7 +2,7 @@ import "dotenv/config";
 import Anthropic from "@anthropic-ai/sdk";
 import { readFile } from "fs/promises";
 import path from "path";
-import { writeToFile, stripMarkdownCodeBlocks, loadGeneList } from "./shared-utils";
+import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig } from "./shared-utils";
 import type {
   Config,
   SiteConfig,
@@ -181,15 +181,6 @@ Respond ONLY with valid JSON, no other text.`;
 // ============================================================================
 
 /**
- * Load site configuration
- */
-async function loadConfig(): Promise<Config> {
-  const configPath = path.join(process.cwd(), "comparison/config/sites.json");
-  const configContent = await readFile(configPath, "utf-8");
-  return JSON.parse(configContent);
-}
-
-/**
  * Load comparison result for a specific gene and model pair
  */
 async function loadComparison(geneId: string, modelA: string, modelB: string): Promise<ComparisonResult> {
@@ -274,10 +265,20 @@ async function condensePair(
  */
 async function main() {
   console.log("Loading configuration...");
-  const config = await loadConfig();
+  const { activeSites, skippedSites } = await loadSitesConfig();
 
-  const modelNames = config.sites.map((s) => s.name);
-  console.log(`Found ${modelNames.length} models: ${modelNames.join(", ")}`);
+  if (skippedSites.length > 0) {
+    console.log(`Skipping ${skippedSites.length} site(s) with skip=true:`);
+    skippedSites.forEach((site) => console.log(`  - ${site.name}`));
+  }
+
+  if (activeSites.length === 0) {
+    console.error("No active sites to process (all sites have skip=true)");
+    process.exit(1);
+  }
+
+  const modelNames = activeSites.map((s) => s.name);
+  console.log(`Found ${modelNames.length} active model(s): ${modelNames.join(", ")}`);
 
   console.log("\nLoading gene list...");
   const geneIds = await loadGeneList();
