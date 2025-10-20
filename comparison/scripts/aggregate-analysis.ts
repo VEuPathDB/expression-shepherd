@@ -3,7 +3,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { readFile } from "fs/promises";
 import path from "path";
 import ttest2 from "@stdlib/stats-ttest2";
-import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig } from "./shared-utils";
+import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig, type GeneEntry } from "./shared-utils";
 import type {
   Config,
   CondensedComparison,
@@ -97,6 +97,68 @@ function computeStatisticalMetric(valuesA: number[], valuesB: number[]): Statist
     std_err_B: stdErrB,
     t_test_pval: pValue,
   };
+}
+
+// ============================================================================
+// Gene Name Formatting
+// ============================================================================
+
+/**
+ * Format gene ID with optional name
+ * Returns "AGAP001212 (Gene name)" if name exists, otherwise just "AGAP001212"
+ */
+function formatGeneWithName(geneId: string, geneNameMap: Map<string, string | undefined>): string {
+  const name = geneNameMap.get(geneId);
+  return name ? `${geneId} (${name})` : geneId;
+}
+
+/**
+ * Post-process aggregate report to interpolate gene names
+ * Replaces gene IDs with formatted strings in arrays and prose
+ */
+function interpolateGeneNames(report: AggregateReport, geneNameMap: Map<string, string | undefined>): AggregateReport {
+  // Deep clone the report to avoid mutations
+  const processedReport = JSON.parse(JSON.stringify(report)) as AggregateReport;
+
+  // Create regex pattern matching all gene IDs: \b(?:ID1|ID2|ID3)\b
+  const geneIds = Array.from(geneNameMap.keys());
+  const allGeneIdsRegex = new RegExp(`\\b(?:${geneIds.join('|')})\\b`, 'g');
+
+  // Process position bias gene list
+  if (processedReport.quantitative_aggregates.position_bias.genes_with_contradictions.length > 0) {
+    processedReport.quantitative_aggregates.position_bias.genes_with_contradictions =
+      processedReport.quantitative_aggregates.position_bias.genes_with_contradictions.map((geneId) =>
+        formatGeneWithName(geneId, geneNameMap)
+      );
+  }
+
+  // Process qualitative aggregates - all three dimensions
+  const dimensions = ["tone_and_style", "technical_detail_level", "structure_and_organization"] as const;
+
+  for (const dimension of dimensions) {
+    const dimAggregate = processedReport.qualitative_aggregates[dimension];
+
+    // Process each field (summary_A, summary_B, comparison)
+    for (const field of ["summary_A", "summary_B", "comparison"] as const) {
+      const fieldAggregate = dimAggregate[field];
+
+      // Replace gene IDs in agreement distribution arrays
+      const dist = fieldAggregate.agreement_distribution;
+      dist.strong_agreement = dist.strong_agreement.map((id) => formatGeneWithName(id, geneNameMap));
+      dist.mild_agreement = dist.mild_agreement.map((id) => formatGeneWithName(id, geneNameMap));
+      dist.neutral_mixed = dist.neutral_mixed.map((id) => formatGeneWithName(id, geneNameMap));
+      dist.mild_disagreement = dist.mild_disagreement.map((id) => formatGeneWithName(id, geneNameMap));
+      dist.strong_disagreement = dist.strong_disagreement.map((id) => formatGeneWithName(id, geneNameMap));
+
+      // Replace gene IDs in disagreement_analysis prose using single regex pass
+      fieldAggregate.disagreement_analysis = fieldAggregate.disagreement_analysis.replace(
+        allGeneIdsRegex,
+        (match) => formatGeneWithName(match, geneNameMap)
+      );
+    }
+  }
+
+  return processedReport;
 }
 
 // ============================================================================
@@ -434,11 +496,17 @@ function getSortedPair(modelA: string, modelB: string): [string, string] {
 async function processModelPair(
   modelA: string,
   modelB: string,
-  geneIds: string[],
+  genes: GeneEntry[],
   anthropic: Anthropic
 ): Promise<void> {
   console.log(`\nProcessing model pair: ${modelA} <-> ${modelB}`);
   console.log("=".repeat(60));
+
+  // Extract gene IDs for loading data files
+  const geneIds = genes.map((g) => g.id);
+
+  // Create gene name mapping for interpolation
+  const geneNameMap = new Map<string, string | undefined>(genes.map((g) => [g.id, g.name]));
 
   // Load all condensed comparisons
   console.log("Loading condensed comparisons...");
@@ -453,7 +521,7 @@ async function processModelPair(
   const qualitative_aggregates = await aggregateQualitativeData(comparisons, anthropic);
 
   // Build report
-  const report: AggregateReport = {
+  let report: AggregateReport = {
     model_pair: {
       model_A: modelA,
       model_B: modelB,
@@ -462,6 +530,10 @@ async function processModelPair(
     quantitative_aggregates,
     qualitative_aggregates,
   };
+
+  // Interpolate gene names into the report
+  console.log("\nInterpolating gene names into report...");
+  report = interpolateGeneNames(report, geneNameMap);
 
   // Save report
   const outputPath = path.join(
@@ -499,10 +571,10 @@ async function main() {
 
   // Load gene list
   console.log("\nLoading gene list...");
-  const geneIds = await loadGeneList();
-  console.log(`Found ${geneIds.length} genes to aggregate`);
+  const genes = await loadGeneList();
+  console.log(`Found ${genes.length} genes to aggregate`);
 
-  if (geneIds.length === 0) {
+  if (genes.length === 0) {
     console.error("No genes found in gene-list.txt. Please add gene IDs (one per line).");
     process.exit(1);
   }
@@ -533,7 +605,7 @@ async function main() {
   // Process each model pair
   for (const [modelA, modelB] of pairs) {
     try {
-      await processModelPair(modelA, modelB, geneIds, anthropic);
+      await processModelPair(modelA, modelB, genes, anthropic);
       successCount++;
     } catch (error) {
       console.error(`\nERROR processing ${modelA} <-> ${modelB}:`, error instanceof Error ? error.message : error);

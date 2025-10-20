@@ -316,13 +316,16 @@ async function main() {
   console.log(`Found ${modelNames.length} active model(s): ${modelNames.join(", ")}`);
 
   console.log("\nLoading gene list...");
-  const geneIds = await loadGeneList();
-  console.log(`Found ${geneIds.length} genes to compare`);
+  const genes = await loadGeneList();
+  console.log(`Found ${genes.length} genes to compare`);
 
-  if (geneIds.length === 0) {
+  if (genes.length === 0) {
     console.error("No genes found in gene-list.txt. Please add gene IDs (one per line).");
     process.exit(1);
   }
+
+  // Extract gene IDs for processing
+  const geneIds = genes.map(g => g.id);
 
   // Validate that all required summary files exist
   console.log("\nValidating summary files...");

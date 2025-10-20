@@ -84,16 +84,37 @@ export async function getAuthCookie(username: string, password: string): Promise
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
+ * Gene entry with optional name/description
+ */
+export interface GeneEntry {
+  id: string;
+  name?: string;
+}
+
+/**
  * Load gene list from input file
  * Filters out comments (lines starting with #) and empty lines
+ * Supports optional gene names after the gene ID (separated by space)
+ * Format: "AGAP001212 ABC1 transporter protein" or just "AGAP001212"
  */
-export async function loadGeneList(): Promise<string[]> {
+export async function loadGeneList(): Promise<GeneEntry[]> {
   const geneListPath = path.join(process.cwd(), "comparison/input/gene-list.txt");
   const content = await readFile(geneListPath, "utf-8");
   return content
     .split("\n")
     .map((line) => line.trim())
-    .filter((line) => line && !line.startsWith("#"));
+    .filter((line) => line && !line.startsWith("#"))
+    .map((line) => {
+      const spaceIndex = line.indexOf(" ");
+      if (spaceIndex === -1) {
+        // No space found, entire line is the gene ID
+        return { id: line };
+      }
+      // Split on first space: ID and optional name
+      const id = line.substring(0, spaceIndex);
+      const name = line.substring(spaceIndex + 1).trim();
+      return { id, name: name || undefined };
+    });
 }
 
 /**

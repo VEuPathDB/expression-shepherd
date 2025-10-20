@@ -158,10 +158,10 @@ async function main() {
   activeSites.forEach((site) => console.log(`  - ${site.name} (${site.model})`));
 
   console.log("\nLoading gene list...");
-  const geneIds = await loadGeneList();
-  console.log(`Found ${geneIds.length} genes to process`);
+  const genes = await loadGeneList();
+  console.log(`Found ${genes.length} genes to process`);
 
-  if (geneIds.length === 0) {
+  if (genes.length === 0) {
     console.error("No genes found in gene-list.txt. Please add gene IDs (one per line).");
     process.exit(1);
   }
@@ -182,7 +182,8 @@ async function main() {
   const results: FetchResult[] = [];
 
   // Process each gene across all sites
-  for (const geneId of geneIds) {
+  for (const gene of genes) {
+    const geneId = gene.id;
     console.log(`\n${"=".repeat(60)}`);
     console.log(`Processing gene: ${geneId}`);
     console.log("=".repeat(60));
