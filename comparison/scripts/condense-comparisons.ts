@@ -64,25 +64,34 @@ function summarizeBiologicalContent(
 // ============================================================================
 
 /**
+ * Swap "Summary A" and "Summary B" text references within a string
+ */
+function swapSummaryLabelsInText(text: string): string {
+  return text.replace(/Summary ([AB])/g, (match, letter) => {
+    return letter === 'A' ? 'Summary B' : 'Summary A';
+  });
+}
+
+/**
  * Swap summary_A and summary_B labels in an assessment
  * Used to normalize the second assessment so both use the same labels
  */
 function swapAssessmentLabels(assessment: QualitativeAssessment): QualitativeAssessment {
   return {
     tone_and_style: {
-      summary_A: assessment.tone_and_style.summary_B,
-      summary_B: assessment.tone_and_style.summary_A,
-      comparison: assessment.tone_and_style.comparison,
+      summary_A: swapSummaryLabelsInText(assessment.tone_and_style.summary_B),
+      summary_B: swapSummaryLabelsInText(assessment.tone_and_style.summary_A),
+      comparison: swapSummaryLabelsInText(assessment.tone_and_style.comparison),
     },
     technical_detail_level: {
-      summary_A: assessment.technical_detail_level.summary_B,
-      summary_B: assessment.technical_detail_level.summary_A,
-      comparison: assessment.technical_detail_level.comparison,
+      summary_A: swapSummaryLabelsInText(assessment.technical_detail_level.summary_B),
+      summary_B: swapSummaryLabelsInText(assessment.technical_detail_level.summary_A),
+      comparison: swapSummaryLabelsInText(assessment.technical_detail_level.comparison),
     },
     structure_and_organization: {
-      summary_A: assessment.structure_and_organization.summary_B,
-      summary_B: assessment.structure_and_organization.summary_A,
-      comparison: assessment.structure_and_organization.comparison,
+      summary_A: swapSummaryLabelsInText(assessment.structure_and_organization.summary_B),
+      summary_B: swapSummaryLabelsInText(assessment.structure_and_organization.summary_A),
+      comparison: swapSummaryLabelsInText(assessment.structure_and_organization.comparison),
     },
   };
 }

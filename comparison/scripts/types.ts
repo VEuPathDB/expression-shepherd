@@ -167,3 +167,98 @@ export interface FetchResult {
   status: "success" | "failed";
   error?: string;
 }
+
+// ============================================================================
+// Aggregate Analysis Types
+// ============================================================================
+
+export interface StatisticalMetric {
+  summary: string; // e.g., "Model A significantly higher (p=0.003)" or "No significant difference (p=0.342)"
+  mean_A: number;
+  std_err_A: number;
+  mean_B: number;
+  std_err_B: number;
+  t_test_pval: number;
+}
+
+export interface DescriptiveMetric {
+  mean: number;
+  std_err: number;
+}
+
+export interface BiologicalContentMetric {
+  avg_unique_to_model_A: DescriptiveMetric;
+  avg_unique_to_model_B: DescriptiveMetric;
+  avg_shared: DescriptiveMetric;
+  avg_position_variance: DescriptiveMetric;
+}
+
+export interface BiologicalContentAggregate {
+  observations: BiologicalContentMetric;
+  insights: BiologicalContentMetric;
+}
+
+export interface DeterministicMetricsAggregate {
+  word_count: StatisticalMetric;
+  topic_count: StatisticalMetric;
+  sentence_count: StatisticalMetric;
+  character_count: StatisticalMetric;
+  paragraph_count: StatisticalMetric;
+  average_sentence_length: StatisticalMetric;
+  has_bullets_percent: {
+    percent_A: number;
+    percent_B: number;
+    note: string;
+  };
+}
+
+export interface PositionBiasAggregate {
+  contradiction_rate_percent: number;
+  genes_with_contradictions: string[];
+}
+
+export interface AgreementDistribution {
+  strong_agreement: string[];
+  mild_agreement: string[];
+  neutral_mixed: string[];
+  mild_disagreement: string[];
+  strong_disagreement: string[];
+}
+
+export type ConsistencyScore = "High consistency" | "Moderate consistency" | "Low consistency";
+
+export interface QualitativeFieldAggregate {
+  consensus_summary: string;
+  consistency_score: ConsistencyScore;
+  agreement_distribution: AgreementDistribution;
+  disagreement_analysis: string;
+}
+
+export interface QualitativeDimensionAggregate {
+  summary_A: QualitativeFieldAggregate;
+  summary_B: QualitativeFieldAggregate;
+  comparison: QualitativeFieldAggregate;
+}
+
+export interface QualitativeAggregates {
+  tone_and_style: QualitativeDimensionAggregate;
+  technical_detail_level: QualitativeDimensionAggregate;
+  structure_and_organization: QualitativeDimensionAggregate;
+}
+
+export interface QuantitativeAggregates {
+  biological_content: BiologicalContentAggregate;
+  deterministic_metrics: DeterministicMetricsAggregate;
+  quantitative_mentions: StatisticalMetric;
+  position_bias: PositionBiasAggregate;
+}
+
+export interface AggregateReport {
+  model_pair: {
+    model_A: string;
+    model_B: string;
+  };
+  gene_count: number;
+  quantitative_aggregates: QuantitativeAggregates;
+  qualitative_aggregates: QualitativeAggregates;
+}
