@@ -3,27 +3,7 @@ import axios from "axios";
 import { readFile } from "fs/promises";
 import path from "path";
 import { writeToFile, getAuthCookie, sleep, loadGeneList } from "./shared-utils";
-
-interface SiteConfig {
-  name: string;
-  hostname: string;
-  appPath: string;
-  model: string;
-  skipFetch?: boolean;
-}
-
-interface Config {
-  sites: SiteConfig[];
-  endpoint: string;
-  projectId: string;
-}
-
-interface FetchResult {
-  geneId: string;
-  site: string;
-  status: "success" | "failed";
-  error?: string;
-}
+import type { SiteConfig, Config, FetchResult } from "./types";
 
 const POLL_INTERVAL_MS = 5000; // 5 seconds
 const MAX_RETRIES = 3;

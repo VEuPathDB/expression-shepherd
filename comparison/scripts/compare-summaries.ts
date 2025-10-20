@@ -3,122 +3,20 @@ import Anthropic from "@anthropic-ai/sdk";
 import { readFile } from "fs/promises";
 import path from "path";
 import { writeToFile, stripMarkdownCodeBlocks, loadGeneList } from "./shared-utils";
-
-// ============================================================================
-// Type Definitions
-// ============================================================================
-
-interface ExperimentSummary {
-  assay_type: string;
-  experiment_name: string;
-  notes: string;
-  one_sentence_summary: string;
-  confidence: string | number;
-  dataset_id: string;
-  experiment_keywords: string[];
-  biological_importance: string | number;
-}
-
-interface Topic {
-  one_sentence_summary: string;
-  headline: string;
-  summaries: ExperimentSummary[];
-}
-
-interface ExpressionSummary {
-  one_paragraph_summary: string;
-  headline: string;
-  topics: Topic[];
-}
-
-interface SimplifiedTopic {
-  one_sentence_summary: string;
-  headline: string;
-  experiment_names: string[];
-}
-
-interface SimplifiedSummary {
-  one_paragraph_summary: string;
-  headline: string;
-  topics: SimplifiedTopic[];
-}
-
-interface DeterministicMetrics {
-  character_count: number;
-  word_count: number;
-  sentence_count: number;
-  paragraph_count: number;
-  topic_count: number;
-  has_bullets: boolean;
-  average_sentence_length: number;
-}
-
-interface BiologicalContent {
-  observations: {
-    only_in_A: string[];
-    only_in_B: string[];
-    in_both: string[];
-  };
-  insights: {
-    only_in_A: string[];
-    only_in_B: string[];
-    in_both: string[];
-  };
-}
-
-interface QualitativeAssessment {
-  tone_and_style: {
-    summary_A: string;
-    summary_B: string;
-    comparison: string;
-  };
-  technical_detail_level: {
-    summary_A: string;
-    summary_B: string;
-    comparison: string;
-  };
-  structure_and_organization: {
-    summary_A: string;
-    summary_B: string;
-    comparison: string;
-  };
-}
-
-interface QuantitativeMentions {
-  summary_A: number;
-  summary_B: number;
-}  
-
-interface ComparisonResult {
-  model_A: string;
-  model_B: string;
-  gene_id: string;
-  biological_content: BiologicalContent;
-  qualitative_assessment: QualitativeAssessment;
-  deterministic_metrics: {
-    summary_A: DeterministicMetrics;
-    summary_B: DeterministicMetrics;
-  };
-  quantitative_expression_mentions: QuantitativeMentions;
-  token_usage: {
-    input_tokens: number;
-    output_tokens: number;
-    total_tokens: number;
-  };
-}
-
-interface SiteConfig {
-  name: string;
-  hostname: string;
-  appPath: string;
-  model: string;
-}
-
-interface Config {
-  sites: SiteConfig[];
-  endpoint: string;
-  projectId: string;
-}
+import type {
+  Config,
+  SiteConfig,
+  ExperimentSummary,
+  Topic,
+  ExpressionSummary,
+  SimplifiedTopic,
+  SimplifiedSummary,
+  DeterministicMetrics,
+  BiologicalContent,
+  QualitativeAssessment,
+  QuantitativeMentions,
+  ComparisonResult,
+} from "./types";
 
 // ============================================================================
 // Deterministic Metrics Calculation
