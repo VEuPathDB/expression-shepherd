@@ -6,6 +6,7 @@ import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig } f
 import type {
   Config,
   SiteConfig,
+  AnalysisModelConfig,
   ExperimentSummary,
   Topic,
   ExpressionSummary,
@@ -97,11 +98,12 @@ async function compareWithAI(
   modelBName: string,
   summaryA: ExpressionSummary,
   summaryB: ExpressionSummary,
-  anthropic: Anthropic
+  anthropic: Anthropic,
+  analysisModelString: string
 ): Promise<{
   biological_content: BiologicalContent;
   qualitative_assessment: QualitativeAssessment;
-  quantitative_expression_mentions: QuantitativeMentions; 
+  quantitative_expression_mentions: QuantitativeMentions;
   token_usage: { input_tokens: number; output_tokens: number; total_tokens: number };
 }> {
   // Simplify summaries to reduce token usage
@@ -173,7 +175,7 @@ Important distinctions:
 Respond ONLY with valid JSON, no other text.`;
 
   const message = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: analysisModelString,
     max_tokens: 4000,
     messages: [
       {
@@ -265,7 +267,8 @@ async function comparePair(
   geneId: string,
   modelAName: string,
   modelBName: string,
-  anthropic: Anthropic
+  anthropic: Anthropic,
+  analysisModelString: string
 ): Promise<ComparisonResult> {
   console.log(`  Comparing ${modelAName} vs ${modelBName}...`);
 
@@ -278,7 +281,7 @@ async function comparePair(
   const metricsB = calculateMetrics(summaryB);
 
   // Get AI comparison
-  const aiComparison = await compareWithAI(geneId, modelAName, modelBName, summaryA, summaryB, anthropic);
+  const aiComparison = await compareWithAI(geneId, modelAName, modelBName, summaryA, summaryB, anthropic, analysisModelString);
 
   return {
     model_A: modelAName,
@@ -300,7 +303,7 @@ async function comparePair(
  */
 async function main() {
   console.log("Loading configuration...");
-  const { activeSites, skippedSites } = await loadSitesConfig();
+  const { config, activeSites, skippedSites } = await loadSitesConfig();
 
   if (skippedSites.length > 0) {
     console.log(`Skipping ${skippedSites.length} site(s) with skip=true:`);
@@ -314,6 +317,7 @@ async function main() {
 
   const modelNames = activeSites.map((s) => s.name);
   console.log(`Found ${modelNames.length} active model(s): ${modelNames.join(", ")}`);
+  console.log(`Analysis model: ${config.analysis_model.name} (${config.analysis_model.model_string})`);
 
   console.log("\nLoading gene list...");
   const genes = await loadGeneList();
@@ -366,12 +370,12 @@ async function main() {
     // Process each comparison pair
     for (const [modelA, modelB] of pairs) {
       try {
-        const result = await comparePair(geneId, modelA, modelB, anthropic);
+        const result = await comparePair(geneId, modelA, modelB, anthropic, config.analysis_model.model_string);
 
         // Save result
         const outputPath = path.join(
           process.cwd(),
-          `comparison/data/comparisons/${geneId}/${modelA}-vs-${modelB}.json`
+          `comparison/data/comparisons/${config.analysis_model.name}/${geneId}/${modelA}-vs-${modelB}.json`
         );
         await writeToFile(outputPath, JSON.stringify(result, null, 2));
 

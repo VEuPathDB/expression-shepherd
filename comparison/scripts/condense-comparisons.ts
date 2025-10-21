@@ -6,6 +6,7 @@ import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig } f
 import type {
   Config,
   SiteConfig,
+  AnalysisModelConfig,
   BiologicalContentCounts,
   BiologicalContent,
   QualitativeCategory,
@@ -103,7 +104,8 @@ async function mergeQualitativeAssessments(
   geneId: string,
   assessment1: QualitativeAssessment,
   assessment2: QualitativeAssessment,
-  anthropic: Anthropic
+  anthropic: Anthropic,
+  analysisModelString: string
 ): Promise<MergedQualitativeAssessment> {
   // Swap labels in assessment2 so both assessments use the same A/B labels
   const assessment2_normalized = swapAssessmentLabels(assessment2);
@@ -152,7 +154,7 @@ Respond with JSON in this format:
 Respond ONLY with valid JSON, no other text.`;
 
   const message = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: analysisModelString,
     max_tokens: 2000,
     messages: [
       {
@@ -183,10 +185,10 @@ Respond ONLY with valid JSON, no other text.`;
 /**
  * Load comparison result for a specific gene and model pair
  */
-async function loadComparison(geneId: string, modelA: string, modelB: string): Promise<ComparisonResult> {
+async function loadComparison(geneId: string, modelA: string, modelB: string, analysisModelName: string): Promise<ComparisonResult> {
   const comparisonPath = path.join(
     process.cwd(),
-    `comparison/data/comparisons/${geneId}/${modelA}-vs-${modelB}.json`
+    `comparison/data/comparisons/${analysisModelName}/${geneId}/${modelA}-vs-${modelB}.json`
   );
   const content = await readFile(comparisonPath, "utf-8");
   return JSON.parse(content);
@@ -210,13 +212,15 @@ async function condensePair(
   geneId: string,
   modelA: string,
   modelB: string,
-  anthropic: Anthropic
+  anthropic: Anthropic,
+  analysisModelName: string,
+  analysisModelString: string
 ): Promise<CondensedComparison> {
   console.log(`  Condensing ${modelA} <-> ${modelB}...`);
 
   // Load both directions
-  const comparison_AvsB = await loadComparison(geneId, modelA, modelB);
-  const comparison_BvsA = await loadComparison(geneId, modelB, modelA);
+  const comparison_AvsB = await loadComparison(geneId, modelA, modelB, analysisModelName);
+  const comparison_BvsA = await loadComparison(geneId, modelB, modelA, analysisModelName);
 
   // Summarize biological content
   const observations_summary = summarizeBiologicalContent(comparison_AvsB, comparison_BvsA, "observations");
@@ -227,7 +231,8 @@ async function condensePair(
     geneId,
     comparison_AvsB.qualitative_assessment,
     comparison_BvsA.qualitative_assessment,
-    anthropic
+    anthropic,
+    analysisModelString
   );
 
   // Average quantitative mentions
@@ -265,7 +270,7 @@ async function condensePair(
  */
 async function main() {
   console.log("Loading configuration...");
-  const { activeSites, skippedSites } = await loadSitesConfig();
+  const { config, activeSites, skippedSites } = await loadSitesConfig();
 
   if (skippedSites.length > 0) {
     console.log(`Skipping ${skippedSites.length} site(s) with skip=true:`);
@@ -279,6 +284,7 @@ async function main() {
 
   const modelNames = activeSites.map((s) => s.name);
   console.log(`Found ${modelNames.length} active model(s): ${modelNames.join(", ")}`);
+  console.log(`Analysis model: ${config.analysis_model.name} (${config.analysis_model.model_string})`);
 
   console.log("\nLoading gene list...");
   const genes = await loadGeneList();
@@ -325,12 +331,12 @@ async function main() {
     // Process each model pair
     for (const [modelA, modelB] of pairs) {
       try {
-        const result = await condensePair(geneId, modelA, modelB, anthropic);
+        const result = await condensePair(geneId, modelA, modelB, anthropic, config.analysis_model.name, config.analysis_model.model_string);
 
         // Save result
         const outputPath = path.join(
           process.cwd(),
-          `comparison/data/condensed/${geneId}/${modelA}-${modelB}.json`
+          `comparison/data/condensed/${config.analysis_model.name}/${geneId}/${modelA}-${modelB}.json`
         );
         await writeToFile(outputPath, JSON.stringify(result, null, 2));
 

@@ -6,6 +6,7 @@ import ttest2 from "@stdlib/stats-ttest2";
 import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig, type GeneEntry } from "./shared-utils";
 import type {
   Config,
+  AnalysisModelConfig,
   CondensedComparison,
   StatisticalMetric,
   DescriptiveMetric,
@@ -171,14 +172,15 @@ function interpolateGeneNames(report: AggregateReport, geneNameMap: Map<string, 
 async function loadCondensedComparisons(
   geneIds: string[],
   modelA: string,
-  modelB: string
+  modelB: string,
+  analysisModelName: string
 ): Promise<CondensedComparison[]> {
   const comparisons: CondensedComparison[] = [];
 
   for (const geneId of geneIds) {
     const filePath = path.join(
       process.cwd(),
-      `comparison/data/condensed/${geneId}/${modelA}-${modelB}.json`
+      `comparison/data/condensed/${analysisModelName}/${geneId}/${modelA}-${modelB}.json`
     );
     const content = await readFile(filePath, "utf-8");
     comparisons.push(JSON.parse(content));
@@ -343,7 +345,8 @@ async function aggregateQualitativeField(
   dimension: string,
   fieldType: "summary_A" | "summary_B" | "comparison",
   statements: Map<string, string>,
-  anthropic: Anthropic
+  anthropic: Anthropic,
+  analysisModelString: string
 ): Promise<QualitativeFieldAggregate> {
   // Build statements list for prompt
   const statementsList = Array.from(statements.entries())
@@ -384,7 +387,7 @@ Respond with JSON in this format:
 Respond ONLY with valid JSON, no other text.`;
 
   const message = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: analysisModelString,
     max_tokens: 2000,
     messages: [
       {
@@ -421,7 +424,8 @@ Respond ONLY with valid JSON, no other text.`;
 async function aggregateQualitativeDimension(
   dimension: "tone_and_style" | "technical_detail_level" | "structure_and_organization",
   comparisons: CondensedComparison[],
-  anthropic: Anthropic
+  anthropic: Anthropic,
+  analysisModelString: string
 ): Promise<QualitativeDimensionAggregate> {
   console.log(`  Aggregating ${dimension}...`);
 
@@ -439,9 +443,9 @@ async function aggregateQualitativeDimension(
 
   // Aggregate each field with AI
   const [summary_A, summary_B, comparison] = await Promise.all([
-    aggregateQualitativeField(dimension, "summary_A", summaryA_statements, anthropic),
-    aggregateQualitativeField(dimension, "summary_B", summaryB_statements, anthropic),
-    aggregateQualitativeField(dimension, "comparison", comparison_statements, anthropic),
+    aggregateQualitativeField(dimension, "summary_A", summaryA_statements, anthropic, analysisModelString),
+    aggregateQualitativeField(dimension, "summary_B", summaryB_statements, anthropic, analysisModelString),
+    aggregateQualitativeField(dimension, "comparison", comparison_statements, anthropic, analysisModelString),
   ]);
 
   return {
@@ -456,20 +460,23 @@ async function aggregateQualitativeDimension(
  */
 async function aggregateQualitativeData(
   comparisons: CondensedComparison[],
-  anthropic: Anthropic
+  anthropic: Anthropic,
+  analysisModelString: string
 ): Promise<QualitativeAggregates> {
   console.log("\nAggregating qualitative assessments...");
 
-  const tone_and_style = await aggregateQualitativeDimension("tone_and_style", comparisons, anthropic);
+  const tone_and_style = await aggregateQualitativeDimension("tone_and_style", comparisons, anthropic, analysisModelString);
   const technical_detail_level = await aggregateQualitativeDimension(
     "technical_detail_level",
     comparisons,
-    anthropic
+    anthropic,
+    analysisModelString
   );
   const structure_and_organization = await aggregateQualitativeDimension(
     "structure_and_organization",
     comparisons,
-    anthropic
+    anthropic,
+    analysisModelString
   );
 
   return {
@@ -497,7 +504,9 @@ async function processModelPair(
   modelA: string,
   modelB: string,
   genes: GeneEntry[],
-  anthropic: Anthropic
+  anthropic: Anthropic,
+  analysisModelName: string,
+  analysisModelString: string
 ): Promise<void> {
   console.log(`\nProcessing model pair: ${modelA} <-> ${modelB}`);
   console.log("=".repeat(60));
@@ -510,7 +519,7 @@ async function processModelPair(
 
   // Load all condensed comparisons
   console.log("Loading condensed comparisons...");
-  const comparisons = await loadCondensedComparisons(geneIds, modelA, modelB);
+  const comparisons = await loadCondensedComparisons(geneIds, modelA, modelB, analysisModelName);
   console.log(`Loaded ${comparisons.length} comparisons`);
 
   // Aggregate quantitative data
@@ -518,7 +527,7 @@ async function processModelPair(
   const quantitative_aggregates = aggregateQuantitativeData(comparisons);
 
   // Aggregate qualitative data (with AI)
-  const qualitative_aggregates = await aggregateQualitativeData(comparisons, anthropic);
+  const qualitative_aggregates = await aggregateQualitativeData(comparisons, anthropic, analysisModelString);
 
   // Build report
   let report: AggregateReport = {
@@ -538,7 +547,7 @@ async function processModelPair(
   // Save report
   const outputPath = path.join(
     process.cwd(),
-    `comparison/data/aggregate-reports/${modelA}-${modelB}-report.json`
+    `comparison/data/aggregate-reports/${analysisModelName}/${modelA}-${modelB}-report.json`
   );
   await writeToFile(outputPath, JSON.stringify(report, null, 2));
   console.log(`\nReport saved to: ${outputPath}`);
@@ -554,7 +563,7 @@ async function main() {
 
   // Load configuration
   console.log("\nLoading configuration...");
-  const { activeSites, skippedSites } = await loadSitesConfig();
+  const { config, activeSites, skippedSites } = await loadSitesConfig();
 
   if (skippedSites.length > 0) {
     console.log(`Skipping ${skippedSites.length} site(s) with skip=true:`);
@@ -568,6 +577,7 @@ async function main() {
 
   const modelNames = activeSites.map((s) => s.name);
   console.log(`Found ${modelNames.length} active model(s): ${modelNames.join(", ")}`);
+  console.log(`Analysis model: ${config.analysis_model.name} (${config.analysis_model.model_string})`);
 
   // Load gene list
   console.log("\nLoading gene list...");
@@ -605,7 +615,7 @@ async function main() {
   // Process each model pair
   for (const [modelA, modelB] of pairs) {
     try {
-      await processModelPair(modelA, modelB, genes, anthropic);
+      await processModelPair(modelA, modelB, genes, anthropic, config.analysis_model.name, config.analysis_model.model_string);
       successCount++;
     } catch (error) {
       console.error(`\nERROR processing ${modelA} <-> ${modelB}:`, error instanceof Error ? error.message : error);

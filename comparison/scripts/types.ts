@@ -10,7 +10,14 @@ export interface SiteConfig {
   skip?: boolean;
 }
 
+export interface AnalysisModelConfig {
+  model_string: string;
+  name: string;
+  platform: 'anthropic' | 'openai';
+}
+
 export interface Config {
+  analysis_model: AnalysisModelConfig;
   sites: SiteConfig[];
   endpoint: string;
   projectId: string;
