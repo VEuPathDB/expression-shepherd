@@ -206,7 +206,13 @@ export class AIClient {
         model: this.modelString,
         messages: [{ role: "user", content: prompt }],
         max_completion_tokens: maxTokens,
+        reasoning_effort: 'minimal',  // Reduce reasoning tokens for faster, more efficient responses
       });
+
+      // Check for refusal or errors
+      if (completion.choices[0].message.refusal) {
+        throw new Error(`OpenAI refused the request: ${completion.choices[0].message.refusal}`);
+      }
 
       rawResponse = completion.choices[0].message.content || "";
       usage = completion.usage;

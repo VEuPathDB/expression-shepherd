@@ -141,17 +141,17 @@ Please provide a detailed comparison in the following JSON format:
     "tone_and_style": {
       "summary_A": "description of tone and writing style in Summary A",
       "summary_B": "description of tone and writing style in Summary B",
-      "comparison": "comparison of tones and styles"
+      "comparison": "comparison of tones and styles (always refer to 'Summary A' and 'Summary B', never just 'A' or 'B')"
     },
     "technical_detail_level": {
       "summary_A": "assessment of technical detail in Summary A",
       "summary_B": "assessment of technical detail in Summary B",
-      "comparison": "comparison of detail levels"
+      "comparison": "comparison of detail levels (always refer to 'Summary A' and 'Summary B', never just 'A' or 'B')"
     },
     "structure_and_organization": {
       "summary_A": "assessment of structure in Summary A",
       "summary_B": "assessment of structure in Summary B",
-      "comparison": "comparison of organizational approaches"
+      "comparison": "comparison of organizational approaches (always refer to 'Summary A' and 'Summary B', never just 'A' or 'B')"
     }
   },
   "quantitative_expression_mentions": {
@@ -172,17 +172,12 @@ Important distinctions:
 
 Respond ONLY with valid JSON, no other text.`;
 
-  try {
-    const { parsed, token_usage } = await aiClient.call(prompt, 4000);
+  const { parsed, token_usage } = await aiClient.call(prompt, 4000);
 
-    return {
-      ...parsed,
-      token_usage,
-    };
-  } catch (error) {
-    console.error("Failed to parse AI response");
-    throw new Error(`Failed to parse AI response: ${error}`);
-  }
+  return {
+    ...parsed,
+    token_usage,
+  };
 }
 
 // ============================================================================
