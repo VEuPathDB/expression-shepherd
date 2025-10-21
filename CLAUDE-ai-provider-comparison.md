@@ -43,22 +43,22 @@ This work will be done within the existing `expression-shepherd` repository, lev
 - **`endpoint`**: VEuPathDB API endpoint path
 - **`projectId`**: VEuPathDB project (e.g., `"VectorBase"`)
 
-### Phase 1: Trigger Summary Generation & Fetch Results
+### Phase 1: Fetch Summary Results
 1. Read gene list from input file
-2. For each gene, make API calls to all three sites:
-   - Initial request with `populateIfNotPresent: true` to trigger generation
-   - Poll with `populateIfNotPresent: false` until `resultStatus: "present"`
-   - See `useAiExpressionSummary` in [AiExpressionSummary.tsx](https://raw.githubusercontent.com/VEuPathDB/web-monorepo/refs/heads/main/packages/sites/genomics-site/webapp/wdkCustomization/js/client/components/records/AiExpressionSummary.tsx) for orchestration details
+2. For each gene, make API calls to all three sites with `populateIfNotPresent: true`
+   - Summaries are typically cached server-side from previous generations
+   - If fetch fails (summary not ready), script will report error at end
+   - Simply re-run `yarn comparison:fetch` to retry failed fetches
 3. Save JSON responses locally, organized by gene ID and model
 4. Track progress and any errors
 
 **Runtime Expectations:**
-- Polling timeout: 10 minutes per gene per site (MAX_POLL_ATTEMPTS = 120 × 5 seconds)
-- For 20 genes × 3 sites: expect 60+ minutes total runtime due to:
+- For 20 genes × 3 sites: typically completes quickly when summaries are cached
+- First-time generation may take longer due to:
   - AI generation time (varies by model and gene complexity)
   - Backend rate limiting (especially for Anthropic/Claude)
   - Sequential processing per gene, parallel across sites
-- **Important for Claude Code**: When using Bash tool to run `yarn comparison:fetch`, set timeout to at least 3600000ms (1 hour) for full gene lists
+- Failed fetches can be retried by re-running the script
 
 ### Phase 2: AI-Powered Comparison
 1. Create TypeScript scripts that use Anthropic API to compare summaries
@@ -183,10 +183,10 @@ expression-shepherd/
 ```
 
 **Orchestration**:
-- Initial request with `populateIfNotPresent: true` triggers AI generation
-- Subsequent polls with `populateIfNotPresent: false` check status
-- Response includes progress information when not yet complete
-- See `useAiExpressionSummary` hook for reference implementation
+- Request with `populateIfNotPresent: true` fetches or triggers AI generation
+- Summaries are typically cached server-side from previous generations
+- If not ready, script will fail and can be re-run to retry
+- See `useAiExpressionSummary` hook in the web UI for reference on progressive polling (not used in this script)
 
 ### Authentication
 - VEuPathDB dev sites use cookie-based authentication
@@ -208,7 +208,7 @@ expression-shepherd/
 2. **Phase 1 Implementation**
    - Create `comparison/scripts/fetch-summaries.ts` with API client
    - Implement cookie-based authentication for all three sites
-   - Implement progress monitoring and polling logic
+   - Implement progress monitoring and error tracking
    - Save JSON responses to `comparison/data/summaries/{model}/{geneId}.json`
    - Add retry logic for failed requests
 

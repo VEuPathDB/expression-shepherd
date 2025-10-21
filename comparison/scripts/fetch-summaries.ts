@@ -4,9 +4,7 @@ import path from "path";
 import { writeToFile, getAuthCookie, sleep, loadGeneList, loadSitesConfig } from "./shared-utils";
 import type { SiteConfig, Config, FetchResult } from "./types";
 
-const POLL_INTERVAL_MS = 5000; // 5 seconds
 const MAX_RETRIES = 3;
-const MAX_POLL_ATTEMPTS = 120; // 10 minutes max (120 * 5 seconds)
 
 /**
  * Make API request to fetch AI expression summary
@@ -42,49 +40,24 @@ async function fetchSummary(
 }
 
 /**
- * Fetch summary for a gene from a specific site with polling
+ * Fetch summary for a gene from a specific site
  */
-async function fetchSummaryWithPolling(
+async function fetchSummaryForGene(
   geneId: string,
   site: SiteConfig,
   config: Config,
   authCookie: string
 ): Promise<any> {
-  console.log(`[${site.name}] ${geneId}: Triggering summary generation...`);
+  console.log(`[${site.name}] ${geneId}: Fetching summary...`);
 
-  // Initial request to trigger generation
-  let response = await fetchSummary(geneId, site, config, authCookie, true);
+  const response = await fetchSummary(geneId, site, config, authCookie, true);
 
-  // Check if already present
   if (response[geneId]?.resultStatus === "present") {
-    console.log(`[${site.name}] ${geneId}: Summary already present`);
+    console.log(`[${site.name}] ${geneId}: Summary retrieved successfully`);
     return response[geneId].expressionSummary;
   }
 
-  // Poll until present or max attempts reached
-  let attempts = 0;
-  while (attempts < MAX_POLL_ATTEMPTS) {
-    console.log(
-      `[${site.name}] ${geneId}: Polling (attempt ${attempts + 1}/${MAX_POLL_ATTEMPTS})...`
-    );
-
-    await sleep(POLL_INTERVAL_MS);
-
-    response = await fetchSummary(geneId, site, config, authCookie, false);
-
-    if (response[geneId]?.resultStatus === "present") {
-      console.log(`[${site.name}] ${geneId}: Summary ready!`);
-      return response[geneId].expressionSummary;
-    }
-
-    if (response[geneId]?.resultStatus === "error") {
-      throw new Error(`Generation failed: ${JSON.stringify(response[geneId])}`);
-    }
-
-    attempts++;
-  }
-
-  throw new Error(`Polling timeout after ${MAX_POLL_ATTEMPTS} attempts`);
+  throw new Error(`Generation failed: ${JSON.stringify(response[geneId])}`);
 }
 
 /**
@@ -100,7 +73,7 @@ async function fetchWithRetry(
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const summary = await fetchSummaryWithPolling(geneId, site, config, authCookie);
+      const summary = await fetchSummaryForGene(geneId, site, config, authCookie);
 
       // Save to file
       const outputPath = path.join(
