@@ -53,6 +53,17 @@ function calculateMetrics(summary: ExpressionSummary): DeterministicMetrics {
   // Average sentence length
   const average_sentence_length = sentence_count > 0 ? word_count / sentence_count : 0;
 
+  // Mean AI topic size (excluding "Other" topic)
+  const nonOtherTopics = summary.topics.filter((t) => t.headline !== "Other");
+  const mean_ai_topic_size =
+    nonOtherTopics.length > 0
+      ? nonOtherTopics.reduce((sum, t) => sum + t.summaries.length, 0) / nonOtherTopics.length
+      : 0;
+
+  // Other topic size
+  const otherTopic = summary.topics.find((t) => t.headline === "Other");
+  const other_topic_size = otherTopic ? otherTopic.summaries.length : 0;
+
   return {
     character_count,
     word_count,
@@ -61,6 +72,8 @@ function calculateMetrics(summary: ExpressionSummary): DeterministicMetrics {
     topic_count,
     has_bullets,
     average_sentence_length: Math.round(average_sentence_length * 10) / 10,
+    mean_ai_topic_size: Math.round(mean_ai_topic_size * 10) / 10,
+    other_topic_size,
   };
 }
 

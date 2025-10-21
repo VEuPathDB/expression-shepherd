@@ -74,6 +74,8 @@ export interface DeterministicMetrics {
   topic_count: number;
   has_bullets: boolean;
   average_sentence_length: number;
+  mean_ai_topic_size: number;  // Mean of summaries.length for topics where headline !== "Other"
+  other_topic_size: number;     // summaries.length for the single topic where headline === "Other"
 }
 
 // ============================================================================
@@ -212,6 +214,8 @@ export interface DeterministicMetricsAggregate {
   character_count: StatisticalMetric;
   paragraph_count: StatisticalMetric;
   average_sentence_length: StatisticalMetric;
+  mean_ai_topic_size: StatisticalMetric;
+  other_topic_size: StatisticalMetric;
   has_bullets_percent: {
     percent_A: number;
     percent_B: number;

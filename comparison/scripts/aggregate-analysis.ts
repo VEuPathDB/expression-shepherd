@@ -251,6 +251,12 @@ function aggregateDeterministicMetrics(
   const avgSentLengthA = comparisons.map((c) => c.deterministic_metrics.model_A.average_sentence_length);
   const avgSentLengthB = comparisons.map((c) => c.deterministic_metrics.model_B.average_sentence_length);
 
+  const meanTopicSizeA = comparisons.map((c) => c.deterministic_metrics.model_A.mean_ai_topic_size);
+  const meanTopicSizeB = comparisons.map((c) => c.deterministic_metrics.model_B.mean_ai_topic_size);
+
+  const otherTopicSizeA = comparisons.map((c) => c.deterministic_metrics.model_A.other_topic_size);
+  const otherTopicSizeB = comparisons.map((c) => c.deterministic_metrics.model_B.other_topic_size);
+
   // Calculate bullets percentage
   const bulletsA = comparisons.filter((c) => c.deterministic_metrics.model_A.has_bullets).length;
   const bulletsB = comparisons.filter((c) => c.deterministic_metrics.model_B.has_bullets).length;
@@ -264,6 +270,8 @@ function aggregateDeterministicMetrics(
     character_count: computeStatisticalMetric(charCountA, charCountB),
     paragraph_count: computeStatisticalMetric(paraCountA, paraCountB),
     average_sentence_length: computeStatisticalMetric(avgSentLengthA, avgSentLengthB),
+    mean_ai_topic_size: computeStatisticalMetric(meanTopicSizeA, meanTopicSizeB),
+    other_topic_size: computeStatisticalMetric(otherTopicSizeA, otherTopicSizeB),
     has_bullets_percent: {
       percent_A: percentA,
       percent_B: percentB,
