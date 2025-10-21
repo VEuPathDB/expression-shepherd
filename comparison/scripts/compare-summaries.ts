@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { readFile } from "fs/promises";
+import { readFile, access } from "fs/promises";
 import path from "path";
 import { writeToFile, createAIClient, AIClient, loadGeneList, loadSitesConfig } from "./shared-utils";
 import type {
@@ -185,6 +185,18 @@ Respond ONLY with valid JSON, no other text.`;
 // ============================================================================
 
 /**
+ * Check if a file exists
+ */
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Load summary for a specific gene and model
  */
 async function loadSummary(modelName: string, geneId: string): Promise<ExpressionSummary> {
@@ -321,6 +333,7 @@ async function main() {
 
   let successCount = 0;
   let errorCount = 0;
+  let skippedCount = 0;
 
   // Process each gene
   for (const geneId of geneIds) {
@@ -330,14 +343,22 @@ async function main() {
 
     // Process each comparison pair
     for (const [modelA, modelB] of pairs) {
+      // Check if output file already exists
+      const outputPath = path.join(
+        process.cwd(),
+        `comparison/data/comparisons/${aiClient.name}/${geneId}/${modelA}-vs-${modelB}.json`
+      );
+
+      if (await fileExists(outputPath)) {
+        console.log(`  Skipping ${modelA} vs ${modelB} (already exists)...`);
+        skippedCount++;
+        continue;
+      }
+
       try {
         const result = await comparePair(geneId, modelA, modelB, aiClient);
 
         // Save result
-        const outputPath = path.join(
-          process.cwd(),
-          `comparison/data/comparisons/${aiClient.name}/${geneId}/${modelA}-vs-${modelB}.json`
-        );
         await writeToFile(outputPath, JSON.stringify(result, null, 2));
 
         successCount++;
@@ -352,8 +373,9 @@ async function main() {
   console.log("\n" + "=".repeat(60));
   console.log("SUMMARY");
   console.log("=".repeat(60));
-  console.log(`Total comparisons: ${successCount + errorCount}`);
+  console.log(`Total comparisons: ${successCount + errorCount + skippedCount}`);
   console.log(`Successful: ${successCount}`);
+  console.log(`Skipped (already exist): ${skippedCount}`);
   console.log(`Failed: ${errorCount}`);
 
   if (errorCount > 0) {
