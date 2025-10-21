@@ -139,20 +139,98 @@ export async function loadSitesConfig(): Promise<{
 }
 
 /**
- * AI Client factory - creates either Anthropic or OpenAI client based on platform
+ * AI Client class - encapsulates AI client with its configuration
+ * Knows its own platform, model string, and name
  */
-export function createAIClient(analysisModel: AnalysisModelConfig): Anthropic | OpenAI {
-  if (analysisModel.platform === "anthropic") {
-    const apiKey = process.env.ANTHROPIC_API_KEY;
-    if (!apiKey) throw new Error("Missing ANTHROPIC_API_KEY in .env");
-    return new Anthropic({ apiKey });
-  } else if (analysisModel.platform === "openai") {
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) throw new Error("Missing OPENAI_API_KEY in .env");
-    return new OpenAI({ apiKey });
-  } else {
-    throw new Error(`Unsupported platform: ${analysisModel.platform}`);
+export class AIClient {
+  public readonly name: string;
+  public readonly platform: 'anthropic' | 'openai';
+  public readonly modelString: string;
+  private readonly client: Anthropic | OpenAI;
+
+  constructor(analysisModel: AnalysisModelConfig) {
+    this.name = analysisModel.name;
+    this.platform = analysisModel.platform;
+    this.modelString = analysisModel.model_string;
+
+    if (this.platform === "anthropic") {
+      const apiKey = process.env.ANTHROPIC_API_KEY;
+      if (!apiKey) throw new Error("Missing ANTHROPIC_API_KEY in .env");
+      this.client = new Anthropic({ apiKey });
+    } else if (this.platform === "openai") {
+      const apiKey = process.env.OPENAI_API_KEY;
+      if (!apiKey) throw new Error("Missing OPENAI_API_KEY in .env");
+      this.client = new OpenAI({ apiKey });
+    } else {
+      throw new Error(`Unsupported platform: ${this.platform}`);
+    }
   }
+
+  /**
+   * Call the AI model with a prompt
+   * Handles platform-specific logic internally
+   */
+  async call(prompt: string, maxTokens: number): Promise<AICallResult> {
+    let rawResponse: string;
+    let usage: any;
+
+    if (this.platform === "anthropic") {
+      const anthropic = this.client as Anthropic;
+      const message = await anthropic.messages.create({
+        model: this.modelString,
+        max_tokens: maxTokens,
+        messages: [{ role: "user", content: prompt }],
+      });
+
+      rawResponse = message.content[0].type === "text"
+        ? message.content[0].text
+        : JSON.stringify(message.content[0]);
+      usage = message.usage;
+
+      // Strip markdown for Anthropic
+      rawResponse = stripMarkdownCodeBlocks(rawResponse);
+
+      return {
+        parsed: JSON.parse(rawResponse),
+        token_usage: {
+          input_tokens: usage.input_tokens,
+          output_tokens: usage.output_tokens,
+          total_tokens: usage.input_tokens + usage.output_tokens,
+        },
+      };
+    } else {
+      const openai = this.client as OpenAI;
+
+      // Ad-hoc JSON instructions (no response_format)
+      const completion = await openai.chat.completions.create({
+        model: this.modelString,
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: maxTokens,
+      });
+
+      rawResponse = completion.choices[0].message.content || "";
+      usage = completion.usage;
+
+      // Apply markdown stripping to OpenAI too (just in case)
+      rawResponse = stripMarkdownCodeBlocks(rawResponse);
+
+      return {
+        parsed: JSON.parse(rawResponse),
+        token_usage: {
+          input_tokens: usage?.prompt_tokens || 0,
+          output_tokens: usage?.completion_tokens || 0,
+          total_tokens: usage?.total_tokens || 0,
+        },
+      };
+    }
+  }
+}
+
+/**
+ * AI Client factory - creates AIClient instance with encapsulated configuration
+ */
+export function createAIClient(analysisModel: AnalysisModelConfig): AIClient {
+  return new AIClient(analysisModel);
 }
 
 /**
@@ -168,6 +246,8 @@ export interface AICallResult {
 }
 
 /**
+ * @deprecated Use AIClient.call() instead. This function is kept for backwards compatibility.
+ *
  * Unified AI call function - supports both Anthropic and OpenAI platforms
  * Uses ad-hoc JSON prompting for both (no response_format for OpenAI)
  */

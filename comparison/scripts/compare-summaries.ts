@@ -1,9 +1,7 @@
 import "dotenv/config";
-import Anthropic from "@anthropic-ai/sdk";
-import OpenAI from "openai";
 import { readFile } from "fs/promises";
 import path from "path";
-import { writeToFile, createAIClient, callAI, loadGeneList, loadSitesConfig, type AICallResult } from "./shared-utils";
+import { writeToFile, createAIClient, AIClient, loadGeneList, loadSitesConfig } from "./shared-utils";
 import type {
   Config,
   SiteConfig,
@@ -99,9 +97,7 @@ async function compareWithAI(
   modelBName: string,
   summaryA: ExpressionSummary,
   summaryB: ExpressionSummary,
-  aiClient: Anthropic | OpenAI,
-  platform: 'anthropic' | 'openai',
-  analysisModelString: string
+  aiClient: AIClient
 ): Promise<{
   biological_content: BiologicalContent;
   qualitative_assessment: QualitativeAssessment;
@@ -177,13 +173,7 @@ Important distinctions:
 Respond ONLY with valid JSON, no other text.`;
 
   try {
-    const { parsed, token_usage } = await callAI(
-      aiClient,
-      platform,
-      analysisModelString,
-      prompt,
-      4000
-    );
+    const { parsed, token_usage } = await aiClient.call(prompt, 4000);
 
     return {
       ...parsed,
@@ -249,9 +239,7 @@ async function comparePair(
   geneId: string,
   modelAName: string,
   modelBName: string,
-  aiClient: Anthropic | OpenAI,
-  platform: 'anthropic' | 'openai',
-  analysisModelString: string
+  aiClient: AIClient
 ): Promise<ComparisonResult> {
   console.log(`  Comparing ${modelAName} vs ${modelBName}...`);
 
@@ -264,7 +252,7 @@ async function comparePair(
   const metricsB = calculateMetrics(summaryB);
 
   // Get AI comparison
-  const aiComparison = await compareWithAI(geneId, modelAName, modelBName, summaryA, summaryB, aiClient, platform, analysisModelString);
+  const aiComparison = await compareWithAI(geneId, modelAName, modelBName, summaryA, summaryB, aiClient);
 
   return {
     model_A: modelAName,
@@ -348,19 +336,12 @@ async function main() {
     // Process each comparison pair
     for (const [modelA, modelB] of pairs) {
       try {
-        const result = await comparePair(
-          geneId,
-          modelA,
-          modelB,
-          aiClient,
-          config.analysis_model.platform,
-          config.analysis_model.model_string
-        );
+        const result = await comparePair(geneId, modelA, modelB, aiClient);
 
         // Save result
         const outputPath = path.join(
           process.cwd(),
-          `comparison/data/comparisons/${config.analysis_model.name}/${geneId}/${modelA}-vs-${modelB}.json`
+          `comparison/data/comparisons/${aiClient.name}/${geneId}/${modelA}-vs-${modelB}.json`
         );
         await writeToFile(outputPath, JSON.stringify(result, null, 2));
 

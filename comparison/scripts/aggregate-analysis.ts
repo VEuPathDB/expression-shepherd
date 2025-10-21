@@ -1,10 +1,8 @@
 import "dotenv/config";
-import Anthropic from "@anthropic-ai/sdk";
-import OpenAI from "openai";
 import { readFile } from "fs/promises";
 import path from "path";
 import ttest2 from "@stdlib/stats-ttest2";
-import { writeToFile, createAIClient, callAI, loadGeneList, loadSitesConfig, type GeneEntry, type AICallResult } from "./shared-utils";
+import { writeToFile, createAIClient, AIClient, loadGeneList, loadSitesConfig, type GeneEntry } from "./shared-utils";
 import type {
   Config,
   AnalysisModelConfig,
@@ -346,9 +344,7 @@ async function aggregateQualitativeField(
   dimension: string,
   fieldType: "summary_A" | "summary_B" | "comparison",
   statements: Map<string, string>,
-  aiClient: Anthropic | OpenAI,
-  platform: 'anthropic' | 'openai',
-  analysisModelString: string
+  aiClient: AIClient
 ): Promise<QualitativeFieldAggregate> {
   // Build statements list for prompt
   const statementsList = Array.from(statements.entries())
@@ -389,13 +385,7 @@ Respond with JSON in this format:
 Respond ONLY with valid JSON, no other text.`;
 
   try {
-    const { parsed } = await callAI(
-      aiClient,
-      platform,
-      analysisModelString,
-      prompt,
-      2000
-    );
+    const { parsed } = await aiClient.call(prompt, 2000);
     const consistency_score = calculateConsistencyScore(parsed.agreement_distribution);
 
     return {
@@ -416,9 +406,7 @@ Respond ONLY with valid JSON, no other text.`;
 async function aggregateQualitativeDimension(
   dimension: "tone_and_style" | "technical_detail_level" | "structure_and_organization",
   comparisons: CondensedComparison[],
-  aiClient: Anthropic | OpenAI,
-  platform: 'anthropic' | 'openai',
-  analysisModelString: string
+  aiClient: AIClient
 ): Promise<QualitativeDimensionAggregate> {
   console.log(`  Aggregating ${dimension}...`);
 
@@ -436,9 +424,9 @@ async function aggregateQualitativeDimension(
 
   // Aggregate each field with AI
   const [summary_A, summary_B, comparison] = await Promise.all([
-    aggregateQualitativeField(dimension, "summary_A", summaryA_statements, aiClient, platform, analysisModelString),
-    aggregateQualitativeField(dimension, "summary_B", summaryB_statements, aiClient, platform, analysisModelString),
-    aggregateQualitativeField(dimension, "comparison", comparison_statements, aiClient, platform, analysisModelString),
+    aggregateQualitativeField(dimension, "summary_A", summaryA_statements, aiClient),
+    aggregateQualitativeField(dimension, "summary_B", summaryB_statements, aiClient),
+    aggregateQualitativeField(dimension, "comparison", comparison_statements, aiClient),
   ]);
 
   return {
@@ -453,27 +441,13 @@ async function aggregateQualitativeDimension(
  */
 async function aggregateQualitativeData(
   comparisons: CondensedComparison[],
-  aiClient: Anthropic | OpenAI,
-  platform: 'anthropic' | 'openai',
-  analysisModelString: string
+  aiClient: AIClient
 ): Promise<QualitativeAggregates> {
   console.log("\nAggregating qualitative assessments...");
 
-  const tone_and_style = await aggregateQualitativeDimension("tone_and_style", comparisons, aiClient, platform, analysisModelString);
-  const technical_detail_level = await aggregateQualitativeDimension(
-    "technical_detail_level",
-    comparisons,
-    aiClient,
-    platform,
-    analysisModelString
-  );
-  const structure_and_organization = await aggregateQualitativeDimension(
-    "structure_and_organization",
-    comparisons,
-    aiClient,
-    platform,
-    analysisModelString
-  );
+  const tone_and_style = await aggregateQualitativeDimension("tone_and_style", comparisons, aiClient);
+  const technical_detail_level = await aggregateQualitativeDimension("technical_detail_level", comparisons, aiClient);
+  const structure_and_organization = await aggregateQualitativeDimension("structure_and_organization", comparisons, aiClient);
 
   return {
     tone_and_style,
@@ -500,10 +474,7 @@ async function processModelPair(
   modelA: string,
   modelB: string,
   genes: GeneEntry[],
-  aiClient: Anthropic | OpenAI,
-  platform: 'anthropic' | 'openai',
-  analysisModelName: string,
-  analysisModelString: string
+  aiClient: AIClient
 ): Promise<void> {
   console.log(`\nProcessing model pair: ${modelA} <-> ${modelB}`);
   console.log("=".repeat(60));
@@ -516,7 +487,7 @@ async function processModelPair(
 
   // Load all condensed comparisons
   console.log("Loading condensed comparisons...");
-  const comparisons = await loadCondensedComparisons(geneIds, modelA, modelB, analysisModelName);
+  const comparisons = await loadCondensedComparisons(geneIds, modelA, modelB, aiClient.name);
   console.log(`Loaded ${comparisons.length} comparisons`);
 
   // Aggregate quantitative data
@@ -524,7 +495,7 @@ async function processModelPair(
   const quantitative_aggregates = aggregateQuantitativeData(comparisons);
 
   // Aggregate qualitative data (with AI)
-  const qualitative_aggregates = await aggregateQualitativeData(comparisons, aiClient, platform, analysisModelString);
+  const qualitative_aggregates = await aggregateQualitativeData(comparisons, aiClient);
 
   // Build report
   let report: AggregateReport = {
@@ -544,7 +515,7 @@ async function processModelPair(
   // Save report
   const outputPath = path.join(
     process.cwd(),
-    `comparison/data/aggregate-reports/${analysisModelName}/${modelA}-${modelB}-report.json`
+    `comparison/data/aggregate-reports/${aiClient.name}/${modelA}-${modelB}-report.json`
   );
   await writeToFile(outputPath, JSON.stringify(report, null, 2));
   console.log(`\nReport saved to: ${outputPath}`);
@@ -607,15 +578,7 @@ async function main() {
   // Process each model pair
   for (const [modelA, modelB] of pairs) {
     try {
-      await processModelPair(
-        modelA,
-        modelB,
-        genes,
-        aiClient,
-        config.analysis_model.platform,
-        config.analysis_model.name,
-        config.analysis_model.model_string
-      );
+      await processModelPair(modelA, modelB, genes, aiClient);
       successCount++;
     } catch (error) {
       console.error(`\nERROR processing ${modelA} <-> ${modelB}:`, error instanceof Error ? error.message : error);

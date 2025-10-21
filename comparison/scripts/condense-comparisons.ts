@@ -1,9 +1,7 @@
 import "dotenv/config";
-import Anthropic from "@anthropic-ai/sdk";
-import OpenAI from "openai";
 import { readFile } from "fs/promises";
 import path from "path";
-import { writeToFile, createAIClient, callAI, loadGeneList, loadSitesConfig, type AICallResult } from "./shared-utils";
+import { writeToFile, createAIClient, AIClient, loadGeneList, loadSitesConfig } from "./shared-utils";
 import type {
   Config,
   SiteConfig,
@@ -105,9 +103,7 @@ async function mergeQualitativeAssessments(
   geneId: string,
   assessment1: QualitativeAssessment,
   assessment2: QualitativeAssessment,
-  aiClient: Anthropic | OpenAI,
-  platform: 'anthropic' | 'openai',
-  analysisModelString: string
+  aiClient: AIClient
 ): Promise<MergedQualitativeAssessment> {
   // Swap labels in assessment2 so both assessments use the same A/B labels
   const assessment2_normalized = swapAssessmentLabels(assessment2);
@@ -156,13 +152,7 @@ Respond with JSON in this format:
 Respond ONLY with valid JSON, no other text.`;
 
   try {
-    const { parsed } = await callAI(
-      aiClient,
-      platform,
-      analysisModelString,
-      prompt,
-      2000
-    );
+    const { parsed } = await aiClient.call(prompt, 2000);
     return parsed;
   } catch (error) {
     console.error("Failed to parse AI response");
@@ -204,16 +194,13 @@ async function condensePair(
   geneId: string,
   modelA: string,
   modelB: string,
-  aiClient: Anthropic | OpenAI,
-  platform: 'anthropic' | 'openai',
-  analysisModelName: string,
-  analysisModelString: string
+  aiClient: AIClient
 ): Promise<CondensedComparison> {
   console.log(`  Condensing ${modelA} <-> ${modelB}...`);
 
   // Load both directions
-  const comparison_AvsB = await loadComparison(geneId, modelA, modelB, analysisModelName);
-  const comparison_BvsA = await loadComparison(geneId, modelB, modelA, analysisModelName);
+  const comparison_AvsB = await loadComparison(geneId, modelA, modelB, aiClient.name);
+  const comparison_BvsA = await loadComparison(geneId, modelB, modelA, aiClient.name);
 
   // Summarize biological content
   const observations_summary = summarizeBiologicalContent(comparison_AvsB, comparison_BvsA, "observations");
@@ -224,9 +211,7 @@ async function condensePair(
     geneId,
     comparison_AvsB.qualitative_assessment,
     comparison_BvsA.qualitative_assessment,
-    aiClient,
-    platform,
-    analysisModelString
+    aiClient
   );
 
   // Average quantitative mentions
@@ -320,20 +305,12 @@ async function main() {
     // Process each model pair
     for (const [modelA, modelB] of pairs) {
       try {
-        const result = await condensePair(
-          geneId,
-          modelA,
-          modelB,
-          aiClient,
-          config.analysis_model.platform,
-          config.analysis_model.name,
-          config.analysis_model.model_string
-        );
+        const result = await condensePair(geneId, modelA, modelB, aiClient);
 
         // Save result
         const outputPath = path.join(
           process.cwd(),
-          `comparison/data/condensed/${config.analysis_model.name}/${geneId}/${modelA}-${modelB}.json`
+          `comparison/data/condensed/${aiClient.name}/${geneId}/${modelA}-${modelB}.json`
         );
         await writeToFile(outputPath, JSON.stringify(result, null, 2));
 
