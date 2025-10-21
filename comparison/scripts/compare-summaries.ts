@@ -1,8 +1,9 @@
 import "dotenv/config";
 import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 import { readFile } from "fs/promises";
 import path from "path";
-import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig } from "./shared-utils";
+import { writeToFile, createAIClient, callAI, loadGeneList, loadSitesConfig, type AICallResult } from "./shared-utils";
 import type {
   Config,
   SiteConfig,
@@ -90,7 +91,7 @@ function simplifySummary(summary: ExpressionSummary): SimplifiedSummary {
 // ============================================================================
 
 /**
- * Generate comparison using Anthropic API
+ * Generate comparison using AI (Anthropic or OpenAI)
  */
 async function compareWithAI(
   geneId: string,
@@ -98,7 +99,8 @@ async function compareWithAI(
   modelBName: string,
   summaryA: ExpressionSummary,
   summaryB: ExpressionSummary,
-  anthropic: Anthropic,
+  aiClient: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
   analysisModelString: string
 ): Promise<{
   biological_content: BiologicalContent;
@@ -174,41 +176,21 @@ Important distinctions:
 
 Respond ONLY with valid JSON, no other text.`;
 
-  const message = await anthropic.messages.create({
-    model: analysisModelString,
-    max_tokens: 4000,
-    messages: [
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
-  });
-
-  const responseText =
-    message.content[0].type === "text" ? message.content[0].text : JSON.stringify(message.content[0]);
-
-  // Strip markdown code blocks if present
-  const cleanedResponse = stripMarkdownCodeBlocks(responseText);
-
   try {
-    const parsed = JSON.parse(cleanedResponse);
-
-    // Extract token usage from message
-    const input_tokens = message.usage.input_tokens;
-    const output_tokens = message.usage.output_tokens;
-    const total_tokens = input_tokens + output_tokens;
+    const { parsed, token_usage } = await callAI(
+      aiClient,
+      platform,
+      analysisModelString,
+      prompt,
+      4000
+    );
 
     return {
       ...parsed,
-      token_usage: {
-        input_tokens,
-        output_tokens,
-        total_tokens,
-      },
+      token_usage,
     };
   } catch (error) {
-    console.error("Failed to parse AI response:", cleanedResponse);
+    console.error("Failed to parse AI response");
     throw new Error(`Failed to parse AI response: ${error}`);
   }
 }
@@ -267,7 +249,8 @@ async function comparePair(
   geneId: string,
   modelAName: string,
   modelBName: string,
-  anthropic: Anthropic,
+  aiClient: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
   analysisModelString: string
 ): Promise<ComparisonResult> {
   console.log(`  Comparing ${modelAName} vs ${modelBName}...`);
@@ -281,7 +264,7 @@ async function comparePair(
   const metricsB = calculateMetrics(summaryB);
 
   // Get AI comparison
-  const aiComparison = await compareWithAI(geneId, modelAName, modelBName, summaryA, summaryB, anthropic, analysisModelString);
+  const aiComparison = await compareWithAI(geneId, modelAName, modelBName, summaryA, summaryB, aiClient, platform, analysisModelString);
 
   return {
     model_A: modelAName,
@@ -336,13 +319,8 @@ async function main() {
   await checkAvailableSummaries(geneIds, modelNames);
   console.log("All required summary files are present!");
 
-  // Initialize Anthropic client
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    console.error("Missing ANTHROPIC_API_KEY in .env file");
-    process.exit(1);
-  }
-  const anthropic = new Anthropic({ apiKey });
+  // Initialize AI client (Anthropic or OpenAI based on config)
+  const aiClient = createAIClient(config.analysis_model);
 
   // Generate all pairwise comparisons (bidirectional)
   const pairs: Array<[string, string]> = [];
@@ -370,7 +348,14 @@ async function main() {
     // Process each comparison pair
     for (const [modelA, modelB] of pairs) {
       try {
-        const result = await comparePair(geneId, modelA, modelB, anthropic, config.analysis_model.model_string);
+        const result = await comparePair(
+          geneId,
+          modelA,
+          modelB,
+          aiClient,
+          config.analysis_model.platform,
+          config.analysis_model.model_string
+        );
 
         // Save result
         const outputPath = path.join(

@@ -1,9 +1,10 @@
 import "dotenv/config";
 import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 import { readFile } from "fs/promises";
 import path from "path";
 import ttest2 from "@stdlib/stats-ttest2";
-import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig, type GeneEntry } from "./shared-utils";
+import { writeToFile, createAIClient, callAI, loadGeneList, loadSitesConfig, type GeneEntry, type AICallResult } from "./shared-utils";
 import type {
   Config,
   AnalysisModelConfig,
@@ -345,7 +346,8 @@ async function aggregateQualitativeField(
   dimension: string,
   fieldType: "summary_A" | "summary_B" | "comparison",
   statements: Map<string, string>,
-  anthropic: Anthropic,
+  aiClient: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
   analysisModelString: string
 ): Promise<QualitativeFieldAggregate> {
   // Build statements list for prompt
@@ -386,24 +388,14 @@ Respond with JSON in this format:
 
 Respond ONLY with valid JSON, no other text.`;
 
-  const message = await anthropic.messages.create({
-    model: analysisModelString,
-    max_tokens: 2000,
-    messages: [
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
-  });
-
-  const responseText =
-    message.content[0].type === "text" ? message.content[0].text : JSON.stringify(message.content[0]);
-
-  const cleanedResponse = stripMarkdownCodeBlocks(responseText);
-
   try {
-    const parsed = JSON.parse(cleanedResponse);
+    const { parsed } = await callAI(
+      aiClient,
+      platform,
+      analysisModelString,
+      prompt,
+      2000
+    );
     const consistency_score = calculateConsistencyScore(parsed.agreement_distribution);
 
     return {
@@ -413,7 +405,7 @@ Respond ONLY with valid JSON, no other text.`;
       disagreement_analysis: parsed.disagreement_analysis,
     };
   } catch (error) {
-    console.error("Failed to parse AI response:", cleanedResponse);
+    console.error("Failed to parse AI response");
     throw new Error(`Failed to parse AI response: ${error}`);
   }
 }
@@ -424,7 +416,8 @@ Respond ONLY with valid JSON, no other text.`;
 async function aggregateQualitativeDimension(
   dimension: "tone_and_style" | "technical_detail_level" | "structure_and_organization",
   comparisons: CondensedComparison[],
-  anthropic: Anthropic,
+  aiClient: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
   analysisModelString: string
 ): Promise<QualitativeDimensionAggregate> {
   console.log(`  Aggregating ${dimension}...`);
@@ -443,9 +436,9 @@ async function aggregateQualitativeDimension(
 
   // Aggregate each field with AI
   const [summary_A, summary_B, comparison] = await Promise.all([
-    aggregateQualitativeField(dimension, "summary_A", summaryA_statements, anthropic, analysisModelString),
-    aggregateQualitativeField(dimension, "summary_B", summaryB_statements, anthropic, analysisModelString),
-    aggregateQualitativeField(dimension, "comparison", comparison_statements, anthropic, analysisModelString),
+    aggregateQualitativeField(dimension, "summary_A", summaryA_statements, aiClient, platform, analysisModelString),
+    aggregateQualitativeField(dimension, "summary_B", summaryB_statements, aiClient, platform, analysisModelString),
+    aggregateQualitativeField(dimension, "comparison", comparison_statements, aiClient, platform, analysisModelString),
   ]);
 
   return {
@@ -460,22 +453,25 @@ async function aggregateQualitativeDimension(
  */
 async function aggregateQualitativeData(
   comparisons: CondensedComparison[],
-  anthropic: Anthropic,
+  aiClient: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
   analysisModelString: string
 ): Promise<QualitativeAggregates> {
   console.log("\nAggregating qualitative assessments...");
 
-  const tone_and_style = await aggregateQualitativeDimension("tone_and_style", comparisons, anthropic, analysisModelString);
+  const tone_and_style = await aggregateQualitativeDimension("tone_and_style", comparisons, aiClient, platform, analysisModelString);
   const technical_detail_level = await aggregateQualitativeDimension(
     "technical_detail_level",
     comparisons,
-    anthropic,
+    aiClient,
+    platform,
     analysisModelString
   );
   const structure_and_organization = await aggregateQualitativeDimension(
     "structure_and_organization",
     comparisons,
-    anthropic,
+    aiClient,
+    platform,
     analysisModelString
   );
 
@@ -504,7 +500,8 @@ async function processModelPair(
   modelA: string,
   modelB: string,
   genes: GeneEntry[],
-  anthropic: Anthropic,
+  aiClient: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
   analysisModelName: string,
   analysisModelString: string
 ): Promise<void> {
@@ -527,7 +524,7 @@ async function processModelPair(
   const quantitative_aggregates = aggregateQuantitativeData(comparisons);
 
   // Aggregate qualitative data (with AI)
-  const qualitative_aggregates = await aggregateQualitativeData(comparisons, anthropic, analysisModelString);
+  const qualitative_aggregates = await aggregateQualitativeData(comparisons, aiClient, platform, analysisModelString);
 
   // Build report
   let report: AggregateReport = {
@@ -589,13 +586,8 @@ async function main() {
     process.exit(1);
   }
 
-  // Initialize Anthropic client
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    console.error("Missing ANTHROPIC_API_KEY in .env file");
-    process.exit(1);
-  }
-  const anthropic = new Anthropic({ apiKey });
+  // Initialize AI client (Anthropic or OpenAI based on config)
+  const aiClient = createAIClient(config.analysis_model);
 
   // Generate all unique model pairs (alphabetically sorted)
   const pairs: Array<[string, string]> = [];
@@ -615,7 +607,15 @@ async function main() {
   // Process each model pair
   for (const [modelA, modelB] of pairs) {
     try {
-      await processModelPair(modelA, modelB, genes, anthropic, config.analysis_model.name, config.analysis_model.model_string);
+      await processModelPair(
+        modelA,
+        modelB,
+        genes,
+        aiClient,
+        config.analysis_model.platform,
+        config.analysis_model.name,
+        config.analysis_model.model_string
+      );
       successCount++;
     } catch (error) {
       console.error(`\nERROR processing ${modelA} <-> ${modelB}:`, error instanceof Error ? error.message : error);

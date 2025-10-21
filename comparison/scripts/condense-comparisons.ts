@@ -1,8 +1,9 @@
 import "dotenv/config";
 import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 import { readFile } from "fs/promises";
 import path from "path";
-import { writeToFile, stripMarkdownCodeBlocks, loadGeneList, loadSitesConfig } from "./shared-utils";
+import { writeToFile, createAIClient, callAI, loadGeneList, loadSitesConfig, type AICallResult } from "./shared-utils";
 import type {
   Config,
   SiteConfig,
@@ -104,7 +105,8 @@ async function mergeQualitativeAssessments(
   geneId: string,
   assessment1: QualitativeAssessment,
   assessment2: QualitativeAssessment,
-  anthropic: Anthropic,
+  aiClient: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
   analysisModelString: string
 ): Promise<MergedQualitativeAssessment> {
   // Swap labels in assessment2 so both assessments use the same A/B labels
@@ -153,27 +155,17 @@ Respond with JSON in this format:
 
 Respond ONLY with valid JSON, no other text.`;
 
-  const message = await anthropic.messages.create({
-    model: analysisModelString,
-    max_tokens: 2000,
-    messages: [
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
-  });
-
-  const responseText =
-    message.content[0].type === "text" ? message.content[0].text : JSON.stringify(message.content[0]);
-
-  const cleanedResponse = stripMarkdownCodeBlocks(responseText);
-
   try {
-    const parsed = JSON.parse(cleanedResponse);
+    const { parsed } = await callAI(
+      aiClient,
+      platform,
+      analysisModelString,
+      prompt,
+      2000
+    );
     return parsed;
   } catch (error) {
-    console.error("Failed to parse AI response:", cleanedResponse);
+    console.error("Failed to parse AI response");
     throw new Error(`Failed to parse AI response: ${error}`);
   }
 }
@@ -212,7 +204,8 @@ async function condensePair(
   geneId: string,
   modelA: string,
   modelB: string,
-  anthropic: Anthropic,
+  aiClient: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
   analysisModelName: string,
   analysisModelString: string
 ): Promise<CondensedComparison> {
@@ -231,7 +224,8 @@ async function condensePair(
     geneId,
     comparison_AvsB.qualitative_assessment,
     comparison_BvsA.qualitative_assessment,
-    anthropic,
+    aiClient,
+    platform,
     analysisModelString
   );
 
@@ -298,13 +292,8 @@ async function main() {
   // Extract gene IDs for processing
   const geneIds = genes.map(g => g.id);
 
-  // Initialize Anthropic client
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    console.error("Missing ANTHROPIC_API_KEY in .env file");
-    process.exit(1);
-  }
-  const anthropic = new Anthropic({ apiKey });
+  // Initialize AI client (Anthropic or OpenAI based on config)
+  const aiClient = createAIClient(config.analysis_model);
 
   // Generate all unique model pairs (alphabetically sorted)
   const pairs: Array<[string, string]> = [];
@@ -331,7 +320,15 @@ async function main() {
     // Process each model pair
     for (const [modelA, modelB] of pairs) {
       try {
-        const result = await condensePair(geneId, modelA, modelB, anthropic, config.analysis_model.name, config.analysis_model.model_string);
+        const result = await condensePair(
+          geneId,
+          modelA,
+          modelB,
+          aiClient,
+          config.analysis_model.platform,
+          config.analysis_model.name,
+          config.analysis_model.model_string
+        );
 
         // Save result
         const outputPath = path.join(

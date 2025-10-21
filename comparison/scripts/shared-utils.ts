@@ -2,7 +2,9 @@ import { writeFile, mkdir, readFile } from "fs/promises";
 import https from 'https';
 import querystring from 'querystring';
 import path from 'path';
-import { Config, SiteConfig } from './types';
+import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
+import { Config, SiteConfig, AnalysisModelConfig } from './types';
 
 /**
  * Writes content to a file, creating parent directories if needed
@@ -134,4 +136,98 @@ export async function loadSitesConfig(): Promise<{
   const skippedSites = config.sites.filter((site) => site.skip);
 
   return { config, activeSites, skippedSites };
+}
+
+/**
+ * AI Client factory - creates either Anthropic or OpenAI client based on platform
+ */
+export function createAIClient(analysisModel: AnalysisModelConfig): Anthropic | OpenAI {
+  if (analysisModel.platform === "anthropic") {
+    const apiKey = process.env.ANTHROPIC_API_KEY;
+    if (!apiKey) throw new Error("Missing ANTHROPIC_API_KEY in .env");
+    return new Anthropic({ apiKey });
+  } else if (analysisModel.platform === "openai") {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) throw new Error("Missing OPENAI_API_KEY in .env");
+    return new OpenAI({ apiKey });
+  } else {
+    throw new Error(`Unsupported platform: ${analysisModel.platform}`);
+  }
+}
+
+/**
+ * AI Call Result - unified return type for both platforms
+ */
+export interface AICallResult {
+  parsed: any;  // The parsed JSON response
+  token_usage: {
+    input_tokens: number;
+    output_tokens: number;
+    total_tokens: number;
+  };
+}
+
+/**
+ * Unified AI call function - supports both Anthropic and OpenAI platforms
+ * Uses ad-hoc JSON prompting for both (no response_format for OpenAI)
+ */
+export async function callAI(
+  client: Anthropic | OpenAI,
+  platform: 'anthropic' | 'openai',
+  modelString: string,
+  prompt: string,
+  maxTokens: number
+): Promise<AICallResult> {
+  let rawResponse: string;
+  let usage: any;
+
+  if (platform === "anthropic") {
+    const anthropic = client as Anthropic;
+    const message = await anthropic.messages.create({
+      model: modelString,
+      max_tokens: maxTokens,
+      messages: [{ role: "user", content: prompt }],
+    });
+
+    rawResponse = message.content[0].type === "text"
+      ? message.content[0].text
+      : JSON.stringify(message.content[0]);
+    usage = message.usage;
+
+    // Strip markdown for Anthropic
+    rawResponse = stripMarkdownCodeBlocks(rawResponse);
+
+    return {
+      parsed: JSON.parse(rawResponse),
+      token_usage: {
+        input_tokens: usage.input_tokens,
+        output_tokens: usage.output_tokens,
+        total_tokens: usage.input_tokens + usage.output_tokens,
+      },
+    };
+  } else {
+    const openai = client as OpenAI;
+
+    // Ad-hoc JSON instructions (no response_format)
+    const completion = await openai.chat.completions.create({
+      model: modelString,
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: maxTokens,
+    });
+
+    rawResponse = completion.choices[0].message.content || "";
+    usage = completion.usage;
+
+    // Apply markdown stripping to OpenAI too (just in case)
+    rawResponse = stripMarkdownCodeBlocks(rawResponse);
+
+    return {
+      parsed: JSON.parse(rawResponse),
+      token_usage: {
+        input_tokens: usage?.prompt_tokens || 0,
+        output_tokens: usage?.completion_tokens || 0,
+        total_tokens: usage?.total_tokens || 0,
+      },
+    };
+  }
 }
