@@ -205,7 +205,7 @@ export class AIClient {
       const completion = await openai.chat.completions.create({
         model: this.modelString,
         messages: [{ role: "user", content: prompt }],
-        max_tokens: maxTokens,
+        max_completion_tokens: maxTokens,
       });
 
       rawResponse = completion.choices[0].message.content || "";
