@@ -1,4 +1,8 @@
 {
+  "public_site": {
+    "name": "VectorBase",
+    "base_url": "https://vectorbase.org/vectorbase"
+  },
   "analysis_model": {
     "model_string": "claude-sonnet-4-5-20250929",
     "name": "claude4_5",
@@ -30,7 +34,8 @@
       "hostname": "bmaccallum.vectorbase.org",
       "appPath": "vectorbase.bmaccallum",
       "model": "Claude Sonnet 4",
-      "skip": false
+      "skip": false,
+      "disableGenePageLinks": true
     },
     {
       "name": "gpt5",

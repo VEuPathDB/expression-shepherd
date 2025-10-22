@@ -8,6 +8,7 @@ export interface SiteConfig {
   appPath: string;
   model: string;
   skip?: boolean;
+  disableGenePageLinks?: boolean;
 }
 
 export interface AnalysisModelConfig {
@@ -17,7 +18,13 @@ export interface AnalysisModelConfig {
   platform: 'anthropic' | 'openai';
 }
 
+export interface PublicSiteConfig {
+  name: string;
+  base_url: string;
+}
+
 export interface Config {
+  public_site: PublicSiteConfig;
   analysis_model: AnalysisModelConfig;
   sites: SiteConfig[];
   endpoint: string;

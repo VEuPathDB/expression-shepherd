@@ -2,7 +2,7 @@ import "dotenv/config";
 import { readFile } from "fs/promises";
 import path from "path";
 import { writeToFile, loadGeneList, loadSitesConfig, type GeneEntry } from "./shared-utils";
-import type { ExpressionSummary, Topic, ExperimentSummary } from "./types";
+import type { ExpressionSummary, Topic, ExperimentSummary, SiteConfig, PublicSiteConfig } from "./types";
 
 // ============================================================================
 // Helper Functions
@@ -65,11 +65,27 @@ function generateHeader(
   geneId: string,
   geneName: string | undefined,
   modelDisplayName: string,
-  headline: string
+  headline: string,
+  site: SiteConfig,
+  publicSite: PublicSiteConfig
 ): string {
   const geneDisplay = geneName
     ? `${escapeHtml(geneId)} (${escapeHtml(geneName)})`
     : escapeHtml(geneId);
+
+  // Generate gene page links
+  const publicUrl = `${publicSite.base_url}/app/record/gene/${geneId}#ExpressionGraphs`;
+  const internalUrl = `https://${site.hostname}/${site.appPath}/app/record/gene/${geneId}#ai_expression`;
+
+  // External link icon SVG
+  const externalIcon = `<svg class="inline-block w-3 h-3 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>`;
+
+  // Generate internal link item (conditionally disabled)
+  const internalLinkDisabled = site.disableGenePageLinks === true;
+  const internalLinkItem = internalLinkDisabled
+    ? `<span class="text-gray-500">Internal AI expression summary (not available)</span>`
+    : `<a href="${escapeHtml(internalUrl)}" class="text-blue-600 hover:text-blue-800 inline-flex items-center" target="_blank">Internal AI expression summary${externalIcon}</a>
+          <span class="text-gray-500"> (interactive co-visualisation of raw data)</span>`;
 
   return `
     <div class="bg-white shadow-md rounded-lg p-6 mb-6">
@@ -80,6 +96,15 @@ function generateHeader(
       <div class="text-sm text-gray-500">
         <span class="font-semibold">Model:</span> ${escapeHtml(modelDisplayName)}
       </div>
+      <ul class="text-sm text-gray-600 mt-3 ml-4 space-y-1">
+        <li class="list-disc">
+          <a href="${escapeHtml(publicUrl)}" class="text-blue-600 hover:text-blue-800 inline-flex items-center" target="_blank">Public gene page${externalIcon}</a>
+          <span class="text-gray-500"> (expression graphs table for manual perusal)</span>
+        </li>
+        <li class="list-disc">
+          ${internalLinkItem}
+        </li>
+      </ul>
     </div>
   `;
 }
@@ -185,7 +210,9 @@ function generateGeneHTML(
   geneId: string,
   geneName: string | undefined,
   modelDisplayName: string,
-  summary: ExpressionSummary
+  summary: ExpressionSummary,
+  site: SiteConfig,
+  publicSite: PublicSiteConfig
 ): string {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -210,7 +237,7 @@ function generateGeneHTML(
 </head>
 <body class="bg-gray-100 min-h-screen py-8">
   <div class="container mx-auto px-4 max-w-7xl">
-    ${generateHeader(geneId, geneName, modelDisplayName, summary.headline)}
+    ${generateHeader(geneId, geneName, modelDisplayName, summary.headline, site, publicSite)}
     ${generateSummarySection(summary.one_paragraph_summary)}
     ${generateTopicsSection(summary.topics)}
 
@@ -231,16 +258,16 @@ function generateGeneHTML(
  */
 async function processGeneModel(
   geneEntry: GeneEntry,
-  modelName: string,
-  modelDisplayName: string,
-  analysisModelName: string
+  site: SiteConfig,
+  analysisModelName: string,
+  publicSite: PublicSiteConfig
 ): Promise<void> {
   const geneId = geneEntry.id;
 
   // Load summary JSON
   const summaryPath = path.join(
     process.cwd(),
-    `comparison/data/summaries/${modelName}/${geneId}.json`
+    `comparison/data/summaries/${site.name}/${geneId}.json`
   );
 
   let summary: ExpressionSummary;
@@ -248,16 +275,16 @@ async function processGeneModel(
     const content = await readFile(summaryPath, "utf-8");
     summary = JSON.parse(content);
   } catch (error) {
-    throw new Error(`Failed to load summary for ${geneId} (${modelName}): ${error instanceof Error ? error.message : error}`);
+    throw new Error(`Failed to load summary for ${geneId} (${site.name}): ${error instanceof Error ? error.message : error}`);
   }
 
   // Generate HTML
-  const html = generateGeneHTML(geneId, geneEntry.name, modelDisplayName, summary);
+  const html = generateGeneHTML(geneId, geneEntry.name, site.model, summary, site, publicSite);
 
   // Write to file
   const outputPath = path.join(
     process.cwd(),
-    `comparison/data/aggregate-reports/${analysisModelName}/html-summaries/${geneId}-${modelName}.html`
+    `comparison/data/aggregate-reports/${analysisModelName}/html-summaries/${geneId}-${site.name}.html`
   );
 
   await writeToFile(outputPath, html);
@@ -307,7 +334,7 @@ async function main() {
     for (const site of activeSites) {
       try {
         console.log(`Processing ${gene.id} (${site.name})...`);
-        await processGeneModel(gene, site.name, site.model, config.analysis_model.name);
+        await processGeneModel(gene, site, config.analysis_model.name, config.public_site);
         successCount++;
       } catch (error) {
         const errorMsg = `${gene.id} (${site.name}): ${error instanceof Error ? error.message : error}`;
