@@ -357,7 +357,10 @@ function generateQualitativeSection(
           <div class="bg-gray-50 p-4 rounded-lg">
             <p class="text-gray-700">${replaceModelNames(qual.tone_and_style.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
-          <p class="text-sm text-gray-600 mt-2 italic">
+          <p class="text-sm text-gray-600 mt-2">
+            <span class="font-semibold">Modal representative:</span> ${qual.tone_and_style.comparison.modal_representative}
+          </p>
+          <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.tone_and_style.comparison.consistency_score}
           </p>
         </div>
@@ -367,7 +370,10 @@ function generateQualitativeSection(
           <div class="bg-gray-50 p-4 rounded-lg">
             <p class="text-gray-700">${replaceModelNames(qual.technical_detail_level.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
-          <p class="text-sm text-gray-600 mt-2 italic">
+          <p class="text-sm text-gray-600 mt-2">
+            <span class="font-semibold">Modal representative:</span> ${qual.technical_detail_level.comparison.modal_representative}
+          </p>
+          <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.technical_detail_level.comparison.consistency_score}
           </p>
         </div>
@@ -377,7 +383,10 @@ function generateQualitativeSection(
           <div class="bg-gray-50 p-4 rounded-lg">
             <p class="text-gray-700">${replaceModelNames(qual.structure_and_organization.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
-          <p class="text-sm text-gray-600 mt-2 italic">
+          <p class="text-sm text-gray-600 mt-2">
+            <span class="font-semibold">Modal representative:</span> ${qual.structure_and_organization.comparison.modal_representative}
+          </p>
+          <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.structure_and_organization.comparison.consistency_score}
           </p>
         </div>

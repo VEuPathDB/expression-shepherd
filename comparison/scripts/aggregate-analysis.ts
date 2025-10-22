@@ -150,6 +150,9 @@ function interpolateGeneNames(report: AggregateReport, geneNameMap: Map<string, 
       dist.mild_disagreement = dist.mild_disagreement.map((id) => formatGeneWithName(id, geneNameMap));
       dist.strong_disagreement = dist.strong_disagreement.map((id) => formatGeneWithName(id, geneNameMap));
 
+      // Replace modal_representative gene ID
+      fieldAggregate.modal_representative = formatGeneWithName(fieldAggregate.modal_representative, geneNameMap);
+
       // Replace gene IDs in disagreement_analysis prose using single regex pass
       fieldAggregate.disagreement_analysis = fieldAggregate.disagreement_analysis.replace(
         allGeneIdsRegex,
@@ -373,19 +376,21 @@ Your task:
    - Neutral/mixed: Neither clearly agrees nor disagrees
    - Mild disagreement: Some contradictions
    - Strong disagreement: Major contradictions
-3. Describe the main axes of disagreement (if any)
+3. Identify the modal representative: the single gene from the largest cluster that best exemplifies the consensus
+4. Describe the main axes of disagreement (if any)
 
 Respond with JSON in this format:
 \`\`\`json
 {
   "consensus_summary": "Your synthesized consensus statement here",
   "agreement_distribution": {
-    "strong_agreement": ["AGAP000693", "AGAP001212"],
-    "mild_agreement": ["AGAP000999"],
+    "strong_agreement": ["AGAP012345", "AGAP012346"],
+    "mild_agreement": ["AGAP012347"],
     "neutral_mixed": [],
     "mild_disagreement": [],
     "strong_disagreement": []
   },
+  "modal_representative": "AGAP012345",
   "disagreement_analysis": "Description of main disagreement axes, or 'No significant disagreement' if largely consistent"
 }
 \`\`\`
@@ -401,6 +406,7 @@ Respond ONLY with valid JSON, no other text.`;
       consistency_score,
       agreement_distribution: parsed.agreement_distribution,
       disagreement_analysis: parsed.disagreement_analysis,
+      modal_representative: parsed.modal_representative,
     };
   } catch (error) {
     console.error("Failed to parse AI response");

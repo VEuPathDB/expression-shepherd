@@ -244,6 +244,7 @@ export interface QualitativeFieldAggregate {
   consistency_score: ConsistencyScore;
   agreement_distribution: AgreementDistribution;
   disagreement_analysis: string;
+  modal_representative: string; // Gene ID that best represents the consensus (from largest cluster)
 }
 
 export interface QualitativeDimensionAggregate {
