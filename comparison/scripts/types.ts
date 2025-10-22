@@ -13,6 +13,7 @@ export interface SiteConfig {
 export interface AnalysisModelConfig {
   model_string: string;
   name: string;
+  model?: string;  // Display name for the analysis model (e.g., "GPT-5 (minimal reasoning)")
   platform: 'anthropic' | 'openai';
 }
 

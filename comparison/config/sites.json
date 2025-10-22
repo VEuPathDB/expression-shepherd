@@ -1,15 +1,30 @@
 {
-  "_not_this_analysis_model": {
-    "model_string": "claude-sonnet-4-20250514",
-    "name": "claude4",
+  "analysis_model": {
+    "model_string": "claude-sonnet-4-5-20250929",
+    "name": "claude4_5",
+    "model": "Claude Sonnet 4.5",
     "platform": "anthropic"
   },
-  "analysis_model": {
+  "_nor_this_analysis_model": {
+    "model_string": "claude-sonnet-4-20250514",
+    "name": "claude4",
+    "model": "Claude Sonnet 4",
+    "platform": "anthropic"
+  },
+  "_not_this_analysis_model": {
     "model_string": "gpt-5-2025-08-07",
     "name": "gpt5",
+    "model": "GPT-5 (minimal reasoning)",
     "platform": "openai"
   },
   "sites": [
+    {
+      "name": "claude4_5",
+      "hostname": "bmaccallum.vectorbase.org",
+      "appPath": "vectorbase.bmaccallum",
+      "model": "Claude Sonnet 4.5",
+      "skip": false
+    },
     {
       "name": "claude4",
       "hostname": "bmaccallum.vectorbase.org",
@@ -22,14 +37,14 @@
       "hostname": "bmaccallum-b.vectorbase.org",
       "appPath": "vectorbase.bmaccallum-b",
       "model": "GPT-5",
-      "skip": false
+      "skip": true
     },
     {
       "name": "gpt4o",
       "hostname": "qa.vectorbase.org",
       "appPath": "vectorbase.b69",
       "model": "GPT-4o",
-      "skip": false
+      "skip": true
     }
   ],
   "endpoint": "/service/record-types/gene/searches/single_record_question_GeneRecordClasses_GeneRecordClass/reports/aiExpression",
