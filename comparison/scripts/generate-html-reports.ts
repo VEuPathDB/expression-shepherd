@@ -83,6 +83,47 @@ function createGeneLinks(formattedGenes: string[], modelAShort: string, modelBSh
   return formattedGenes.map(g => createGeneLink(g, modelAShort, modelBShort, modelADisplay, modelBDisplay)).join(", ");
 }
 
+/**
+ * Generate HTML for dissenting genes from agreement distribution
+ * Shows genes in neutral_mixed, mild_disagreement, and strong_disagreement categories
+ */
+function generateDissentingGenesHTML(
+  agreementDistribution: { neutral_mixed: string[], mild_disagreement: string[], strong_disagreement: string[] },
+  modelAShort: string,
+  modelBShort: string,
+  modelADisplay: string,
+  modelBDisplay: string
+): string {
+  const categories = [
+    { key: 'neutral_mixed', label: 'Neutral/Mixed', genes: agreementDistribution.neutral_mixed },
+    { key: 'mild_disagreement', label: 'Mild Disagreement', genes: agreementDistribution.mild_disagreement },
+    { key: 'strong_disagreement', label: 'Strong Disagreement', genes: agreementDistribution.strong_disagreement }
+  ];
+
+  const categoriesWithGenes = categories.filter(cat => cat.genes.length > 0);
+
+  if (categoriesWithGenes.length === 0) {
+    return '';
+  }
+
+  const rows = categoriesWithGenes.map(cat => {
+    const geneLinks = createGeneLinks(cat.genes, modelAShort, modelBShort, modelADisplay, modelBDisplay);
+    return `
+      <div class="mt-2 text-sm">
+        <span class="font-semibold text-gray-700">${cat.label}:</span>
+        <span class="text-gray-600"> ${geneLinks}</span>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <div class="mt-3 pl-4 border-l-2 border-gray-300">
+      <p class="text-sm font-semibold text-gray-700 mb-1">Genes with potentially dissenting assessments:</p>
+      ${rows}
+    </div>
+  `;
+}
+
 // ============================================================================
 // HTML Generation Functions
 // ============================================================================
@@ -391,6 +432,7 @@ function generateQualitativeSection(
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.tone_and_style.comparison.consistency_score}
           </p>
+          ${generateDissentingGenesHTML(qual.tone_and_style.comparison.agreement_distribution, modelAShort, modelBShort, modelAName, modelBName)}
         </div>
 
         <div>
@@ -404,6 +446,7 @@ function generateQualitativeSection(
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.technical_detail_level.comparison.consistency_score}
           </p>
+          ${generateDissentingGenesHTML(qual.technical_detail_level.comparison.agreement_distribution, modelAShort, modelBShort, modelAName, modelBName)}
         </div>
 
         <div>
@@ -417,6 +460,7 @@ function generateQualitativeSection(
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.structure_and_organization.comparison.consistency_score}
           </p>
+          ${generateDissentingGenesHTML(qual.structure_and_organization.comparison.agreement_distribution, modelAShort, modelBShort, modelAName, modelBName)}
         </div>
       </div>
     </div>
