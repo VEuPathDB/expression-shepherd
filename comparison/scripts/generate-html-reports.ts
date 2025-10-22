@@ -69,18 +69,18 @@ function extractGeneId(formattedGene: string): string {
 }
 
 /**
- * Create HTML link for a gene to its summary pages
+ * Create HTML link for a gene with CSS-only popup showing both model options
  */
-function createGeneLink(formattedGene: string, modelAShort: string, modelBShort: string): string {
+function createGeneLink(formattedGene: string, modelAShort: string, modelBShort: string, modelADisplay: string, modelBDisplay: string): string {
   const geneId = extractGeneId(formattedGene);
-  return `<a href="html-summaries/${geneId}-${modelAShort}.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline" title="View ${modelAShort} summary">${formattedGene}</a> (<a href="html-summaries/${geneId}-${modelBShort}.html" target="_blank" class="text-green-600 hover:text-green-800 underline text-sm" title="View ${modelBShort} summary">alt</a>)`;
+  return `<span class="gene-link-wrapper">${formattedGene}<span class="gene-link-popup"><a href="html-summaries/${geneId}-${modelAShort}.html" target="_blank">${modelADisplay}</a><a href="html-summaries/${geneId}-${modelBShort}.html" target="_blank">${modelBDisplay}</a></span></span>`;
 }
 
 /**
  * Convert list of formatted gene strings into linked HTML
  */
-function createGeneLinks(formattedGenes: string[], modelAShort: string, modelBShort: string): string {
-  return formattedGenes.map(g => createGeneLink(g, modelAShort, modelBShort)).join(", ");
+function createGeneLinks(formattedGenes: string[], modelAShort: string, modelBShort: string, modelADisplay: string, modelBDisplay: string): string {
+  return formattedGenes.map(g => createGeneLink(g, modelAShort, modelBShort, modelADisplay, modelBDisplay)).join(", ");
 }
 
 // ============================================================================
@@ -94,12 +94,13 @@ function generateHeader(
   report: AggregateReport,
   modelAName: string,
   modelBName: string,
+  modelAShort: string,
+  modelBShort: string,
   analysisModelName: string,
   genes: GeneEntry[]
 ): string {
-  const genesList = genes
-    .map(g => g.name ? `${g.id} (${g.name})` : g.id)
-    .join(", ");
+  const formattedGenes = genes.map(g => g.name ? `${g.id} (${g.name})` : g.id);
+  const genesList = createGeneLinks(formattedGenes, modelAShort, modelBShort, modelAName, modelBName);
 
   return `
     <div class="bg-white shadow-md rounded-lg p-6 mb-6">
@@ -307,7 +308,7 @@ function generateQuantitativeMentionsSection(
   const bias = report.quantitative_aggregates.position_bias;
 
   const genesWithContradictions = bias.genes_with_contradictions.length > 0
-    ? createGeneLinks(bias.genes_with_contradictions, modelAShort, modelBShort)
+    ? createGeneLinks(bias.genes_with_contradictions, modelAShort, modelBShort, modelAName, modelBName)
     : "None";
 
   return `
@@ -385,7 +386,7 @@ function generateQualitativeSection(
             <p class="text-gray-700">${replaceModelNames(qual.tone_and_style.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
           <p class="text-sm text-gray-600 mt-2">
-            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.tone_and_style.comparison.modal_representative, modelAShort, modelBShort)}
+            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.tone_and_style.comparison.modal_representative, modelAShort, modelBShort, modelAName, modelBName)}
           </p>
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.tone_and_style.comparison.consistency_score}
@@ -398,7 +399,7 @@ function generateQualitativeSection(
             <p class="text-gray-700">${replaceModelNames(qual.technical_detail_level.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
           <p class="text-sm text-gray-600 mt-2">
-            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.technical_detail_level.comparison.modal_representative, modelAShort, modelBShort)}
+            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.technical_detail_level.comparison.modal_representative, modelAShort, modelBShort, modelAName, modelBName)}
           </p>
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.technical_detail_level.comparison.consistency_score}
@@ -411,7 +412,7 @@ function generateQualitativeSection(
             <p class="text-gray-700">${replaceModelNames(qual.structure_and_organization.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
           <p class="text-sm text-gray-600 mt-2">
-            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.structure_and_organization.comparison.modal_representative, modelAShort, modelBShort)}
+            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.structure_and_organization.comparison.modal_representative, modelAShort, modelBShort, modelAName, modelBName)}
           </p>
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.structure_and_organization.comparison.consistency_score}
@@ -441,10 +442,71 @@ function generateHTMLReport(
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${modelAName} vs ${modelBName} - Comparison Report</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Gene link popup styling */
+    .gene-link-wrapper {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      color: #2563eb;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .gene-link-popup {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 8px;
+      background: white;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      white-space: nowrap;
+      min-width: 200px;
+    }
+
+    .gene-link-popup::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: white;
+    }
+
+    .gene-link-wrapper:hover .gene-link-popup {
+      display: block;
+    }
+
+    .gene-link-popup a {
+      display: block;
+      padding: 6px 12px;
+      color: #1f2937;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    .gene-link-popup a:hover {
+      background-color: #f3f4f6;
+    }
+
+    .gene-link-popup a:first-child {
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 4px;
+      padding-bottom: 8px;
+    }
+  </style>
 </head>
 <body class="bg-gray-100 min-h-screen py-8">
   <div class="container mx-auto px-4 max-w-7xl">
-    ${generateHeader(report, modelAName, modelBName, analysisModelName, genes)}
+    ${generateHeader(report, modelAName, modelBName, modelAShort, modelBShort, analysisModelName, genes)}
     ${generateBiologicalContentSection(report, modelAName, modelBName)}
     ${generateDeterministicMetricsSection(report, modelAName, modelBName)}
     ${generateQuantitativeMentionsSection(report, modelAName, modelBName, modelAShort, modelBShort)}

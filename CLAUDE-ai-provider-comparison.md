@@ -104,8 +104,14 @@ This work will be done within the existing `expression-shepherd` repository, lev
 4. Optional future step: Super-aggregation comparing all 3 pairwise reports
 
 ### Phase 4: HTML Report Generation
-1. Generate user-friendly HTML reports from aggregate JSON files with Tailwind CSS styling
-2. Output: One HTML report per model pair (3 reports total), organized into sections for quantitative metrics, qualitative comparisons, and explanatory notes
+1. Generate individual gene summary HTML pages for each gene × model combination
+   - Display gene headline, one-paragraph summary, and topics with expandable experiment details
+   - Sanitize AI-generated HTML to allow only safe formatting tags (`<strong>`, `<i>`, `<ul>`, `<li>`)
+   - Output: `html-summaries/{geneId}-{modelName}.html` for each gene-model pair
+2. Generate aggregate comparison HTML reports with interactive gene links
+   - Gene IDs throughout the report display CSS-only hover popups offering links to both model summaries
+   - Linked locations: gene list header, modal representatives, position bias contradictions
+   - Output: One HTML report per model pair (3 reports total), organized into sections for quantitative metrics, qualitative comparisons, and explanatory notes
 
 ## Project Structure
 
@@ -125,7 +131,8 @@ expression-shepherd/
 │   │   ├── compare-summaries.ts (Phase 2: AI-powered bidirectional comparison)
 │   │   ├── condense-comparisons.ts (Phase 2.5: merge bidirectional pairs)
 │   │   ├── aggregate-analysis.ts (Phase 3: theme identification)
-│   │   └── generate-html-reports.ts (Phase 4: HTML report generation)
+│   │   ├── make-html-summaries.ts (Phase 4: per-gene HTML generation)
+│   │   └── generate-html-reports.ts (Phase 4: aggregate HTML report generation)
 │   └── data/
 │       ├── summaries/
 │       │   ├── claude4/ (JSON response files)
@@ -148,6 +155,10 @@ expression-shepherd/
 │       │           └── gpt4o-gpt5.json
 │       └── aggregate-reports/
 │           └── {analysisModel}/  (e.g., claude4)
+│               ├── html-summaries/
+│               │   ├── {geneId}-claude4.html (per-gene summary pages)
+│               │   ├── {geneId}-gpt5.html
+│               │   └── {geneId}-gpt4o.html
 │               ├── claude4-gpt4o-report.json
 │               ├── claude4-gpt4o-report.html
 │               ├── claude4-gpt5-report.json
@@ -245,7 +256,7 @@ NPM scripts are available in `package.json`:
 - `yarn comparison:compare` - Phase 2: Generate bidirectional pairwise comparisons
 - `yarn comparison:condense` - Phase 2.5: Condense bidirectional pairs into merged summaries
 - `yarn comparison:aggregate` - Phase 3: Generate aggregate analysis report
-- `yarn comparison:html` - Phase 4: Generate HTML reports from aggregate JSON files
+- `yarn comparison:html` - Phase 4: Generate per-gene HTML summaries and aggregate comparison reports with interactive links
 
 All scripts automatically run `yarn build` before execution.
 
@@ -272,7 +283,15 @@ Already available in repository:
   - Quantitative metrics (avg observations, insights, quantitative mentions, word counts, etc.)
   - Qualitative patterns (tone, technical detail, structure themes)
   - Position bias statistics
-- Three user-friendly HTML reports (one per model pair) with organized sections and explanatory notes
+  - Modal representative genes for each qualitative dimension
+- Per-gene HTML summary pages for each gene × model combination (3 models × 20 genes = 60 files):
+  - Display gene headline, one-paragraph summary with formatted lists
+  - Topics with expandable experiment details tables
+  - Sanitized HTML allowing only safe formatting tags
+- Three user-friendly HTML aggregate reports (one per model pair) with:
+  - Organized sections for quantitative metrics, qualitative comparisons, and explanatory notes
+  - Interactive gene links with CSS-only hover popups showing both model options
+  - Linked gene list, modal representatives, and position bias contradictions
 - Model anonymity maintained through all analysis phases until final report generation
 - Reproducible process that can be re-run with new gene sets
 
