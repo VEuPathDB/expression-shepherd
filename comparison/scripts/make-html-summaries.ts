@@ -83,9 +83,9 @@ function generateHeader(
   // Generate internal link item (conditionally disabled)
   const internalLinkDisabled = site.disableGenePageLinks === true;
   const internalLinkItem = internalLinkDisabled
-    ? `<span class="text-gray-500">Internal AI expression summary (not available)</span>`
-    : `<a href="${escapeHtml(internalUrl)}" class="text-blue-600 hover:text-blue-800 inline-flex items-center" target="_blank">Internal AI expression summary${externalIcon}</a>
-          <span class="text-gray-500"> (interactive co-visualisation of raw data)</span>`;
+    ? `<span class="text-gray-500">Internal gene page with interactive version of the AI summary below (not available)</span>`
+    : `<a href="${escapeHtml(internalUrl)}" class="text-blue-600 hover:text-blue-800 inline-flex items-center">Internal gene page</a>
+      <span class="text-gray-500"> (interactive version of the AI summary below, including co-visualisation of raw data to aid validation)</span>`;
 
   return `
     <div class="bg-white shadow-md rounded-lg p-6 mb-6">

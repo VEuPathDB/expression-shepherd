@@ -3,13 +3,13 @@
     "name": "VectorBase",
     "base_url": "https://vectorbase.org/vectorbase"
   },
-  "analysis_model": {
+  "_not_analysis_model": {
     "model_string": "claude-sonnet-4-5-20250929",
     "name": "claude4_5",
     "model": "Claude Sonnet 4.5",
     "platform": "anthropic"
   },
-  "_nor_this_analysis_model": {
+  "analysis_model": {
     "model_string": "claude-sonnet-4-20250514",
     "name": "claude4",
     "model": "Claude Sonnet 4",
@@ -27,7 +27,7 @@
       "hostname": "bmaccallum.vectorbase.org",
       "appPath": "vectorbase.bmaccallum",
       "model": "Claude Sonnet 4.5",
-      "skip": false
+      "skip": true
     },
     {
       "name": "claude4",
@@ -42,14 +42,14 @@
       "hostname": "bmaccallum-b.vectorbase.org",
       "appPath": "vectorbase.bmaccallum-b",
       "model": "GPT-5",
-      "skip": true
+      "skip": false
     },
     {
       "name": "gpt4o",
       "hostname": "qa.vectorbase.org",
       "appPath": "vectorbase.b69",
       "model": "GPT-4o",
-      "skip": true
+      "skip": false
     }
   ],
   "endpoint": "/service/record-types/gene/searches/single_record_question_GeneRecordClasses_GeneRecordClass/reports/aiExpression",
