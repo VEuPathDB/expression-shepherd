@@ -137,10 +137,23 @@ function generateExperimentRows(summaries: ExperimentSummary[]): string {
             </span>
           </td>
           <td class="px-4 py-3 text-sm text-gray-800">${escapeHtml(exp.experiment_name)}</td>
-          <td class="px-4 py-3 text-sm text-gray-700">${sanitizeHtml(exp.one_sentence_summary)}</td>
+          <td class="px-4 py-3 text-sm text-gray-700">
+            <div>${sanitizeHtml(exp.one_sentence_summary)}</div>
+            ${exp.notes ? `
+            <details class="mt-2">
+              <summary class="cursor-pointer text-blue-600 hover:text-blue-800 text-xs font-semibold">AI notes</summary>
+              <div class="mt-1 text-xs text-gray-600 ml-4">${sanitizeHtml(exp.notes)}</div>
+            </details>
+            ` : ''}
+          </td>
           <td class="px-4 py-3 text-sm text-center">
             <span class="inline-block bg-gray-100 px-2 py-1 rounded font-semibold">
               ${escapeHtml(String(exp.biological_importance))}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-sm text-center">
+            <span class="inline-block bg-gray-100 px-2 py-1 rounded font-semibold">
+              ${escapeHtml(String(exp.confidence))}
             </span>
           </td>
         </tr>
@@ -172,6 +185,7 @@ function generateTopicsSection(topics: Topic[]): string {
                       <th class="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase">Experiment</th>
                       <th class="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase">Summary</th>
                       <th class="px-4 py-2 text-center text-xs font-semibold text-gray-600 uppercase">Importance</th>
+                      <th class="px-4 py-2 text-center text-xs font-semibold text-gray-600 uppercase">Confidence</th>
                     </tr>
                   </thead>
                   <tbody>

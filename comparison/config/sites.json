@@ -27,15 +27,15 @@
       "hostname": "bmaccallum.vectorbase.org",
       "appPath": "vectorbase.bmaccallum",
       "model": "Claude Sonnet 4.5",
-      "skip": true
+      "skip": true,
+      "disableGenePageLinks": true
     },
     {
       "name": "claude4",
       "hostname": "bmaccallum.vectorbase.org",
       "appPath": "vectorbase.bmaccallum",
       "model": "Claude Sonnet 4",
-      "skip": false,
-      "disableGenePageLinks": true
+      "skip": false
     },
     {
       "name": "gpt5",
