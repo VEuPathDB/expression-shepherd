@@ -60,6 +60,29 @@ function replaceModelNames(text: string, modelAName: string, modelBName: string)
     .replace(/\bSummary B\b/g, modelBName);
 }
 
+/**
+ * Extract gene ID from formatted string like "AGAP001212 (Gene name)" or "AGAP001212"
+ * Returns the first non-whitespace word
+ */
+function extractGeneId(formattedGene: string): string {
+  return formattedGene.trim().split(/\s+/)[0];
+}
+
+/**
+ * Create HTML link for a gene to its summary pages
+ */
+function createGeneLink(formattedGene: string, modelAShort: string, modelBShort: string): string {
+  const geneId = extractGeneId(formattedGene);
+  return `<a href="html-summaries/${geneId}-${modelAShort}.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline" title="View ${modelAShort} summary">${formattedGene}</a> (<a href="html-summaries/${geneId}-${modelBShort}.html" target="_blank" class="text-green-600 hover:text-green-800 underline text-sm" title="View ${modelBShort} summary">alt</a>)`;
+}
+
+/**
+ * Convert list of formatted gene strings into linked HTML
+ */
+function createGeneLinks(formattedGenes: string[], modelAShort: string, modelBShort: string): string {
+  return formattedGenes.map(g => createGeneLink(g, modelAShort, modelBShort)).join(", ");
+}
+
 // ============================================================================
 // HTML Generation Functions
 // ============================================================================
@@ -276,13 +299,15 @@ function generateDeterministicMetricsSection(
 function generateQuantitativeMentionsSection(
   report: AggregateReport,
   modelAName: string,
-  modelBName: string
+  modelBName: string,
+  modelAShort: string,
+  modelBShort: string
 ): string {
   const quant = report.quantitative_aggregates.quantitative_mentions;
   const bias = report.quantitative_aggregates.position_bias;
 
   const genesWithContradictions = bias.genes_with_contradictions.length > 0
-    ? bias.genes_with_contradictions.join(", ")
+    ? createGeneLinks(bias.genes_with_contradictions, modelAShort, modelBShort)
     : "None";
 
   return `
@@ -343,7 +368,9 @@ function generateQuantitativeMentionsSection(
 function generateQualitativeSection(
   report: AggregateReport,
   modelAName: string,
-  modelBName: string
+  modelBName: string,
+  modelAShort: string,
+  modelBShort: string
 ): string {
   const qual = report.qualitative_aggregates;
 
@@ -358,7 +385,7 @@ function generateQualitativeSection(
             <p class="text-gray-700">${replaceModelNames(qual.tone_and_style.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
           <p class="text-sm text-gray-600 mt-2">
-            <span class="font-semibold">Modal representative:</span> ${qual.tone_and_style.comparison.modal_representative}
+            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.tone_and_style.comparison.modal_representative, modelAShort, modelBShort)}
           </p>
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.tone_and_style.comparison.consistency_score}
@@ -371,7 +398,7 @@ function generateQualitativeSection(
             <p class="text-gray-700">${replaceModelNames(qual.technical_detail_level.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
           <p class="text-sm text-gray-600 mt-2">
-            <span class="font-semibold">Modal representative:</span> ${qual.technical_detail_level.comparison.modal_representative}
+            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.technical_detail_level.comparison.modal_representative, modelAShort, modelBShort)}
           </p>
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.technical_detail_level.comparison.consistency_score}
@@ -384,7 +411,7 @@ function generateQualitativeSection(
             <p class="text-gray-700">${replaceModelNames(qual.structure_and_organization.comparison.consensus_summary, modelAName, modelBName)}</p>
           </div>
           <p class="text-sm text-gray-600 mt-2">
-            <span class="font-semibold">Modal representative:</span> ${qual.structure_and_organization.comparison.modal_representative}
+            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.structure_and_organization.comparison.modal_representative, modelAShort, modelBShort)}
           </p>
           <p class="text-sm text-gray-600 mt-1 italic">
             Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.structure_and_organization.comparison.consistency_score}
@@ -402,6 +429,8 @@ function generateHTMLReport(
   report: AggregateReport,
   modelAName: string,
   modelBName: string,
+  modelAShort: string,
+  modelBShort: string,
   analysisModelName: string,
   genes: GeneEntry[]
 ): string {
@@ -418,8 +447,8 @@ function generateHTMLReport(
     ${generateHeader(report, modelAName, modelBName, analysisModelName, genes)}
     ${generateBiologicalContentSection(report, modelAName, modelBName)}
     ${generateDeterministicMetricsSection(report, modelAName, modelBName)}
-    ${generateQuantitativeMentionsSection(report, modelAName, modelBName)}
-    ${generateQualitativeSection(report, modelAName, modelBName)}
+    ${generateQuantitativeMentionsSection(report, modelAName, modelBName, modelAShort, modelBShort)}
+    ${generateQualitativeSection(report, modelAName, modelBName, modelAShort, modelBShort)}
 
     <footer class="text-center text-gray-500 text-sm mt-8">
       Generated on ${new Date().toLocaleString()}
@@ -497,12 +526,14 @@ async function main() {
       // Get full model display names
       const modelAName = getModelDisplayName(report.model_pair.model_A, activeSites);
       const modelBName = getModelDisplayName(report.model_pair.model_B, activeSites);
+      const modelAShort = report.model_pair.model_A;
+      const modelBShort = report.model_pair.model_B;
       const analysisModelName = config.analysis_model.model || config.analysis_model.name;
 
       console.log(`  Models: ${modelAName} vs ${modelBName}`);
 
       // Generate HTML
-      const html = generateHTMLReport(report, modelAName, modelBName, analysisModelName, genes);
+      const html = generateHTMLReport(report, modelAName, modelBName, modelAShort, modelBShort, analysisModelName, genes);
 
       // Write HTML file
       const htmlFileName = reportFile.replace("-report.json", "-report.html");
