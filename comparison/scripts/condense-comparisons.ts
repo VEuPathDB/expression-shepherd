@@ -3,15 +3,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { writeToFile, createAIClient, AIClient, loadGeneList, loadSitesConfig } from "./shared-utils";
 import type {
-  Config,
-  SiteConfig,
-  AnalysisModelConfig,
-  BiologicalContentCounts,
-  BiologicalContent,
-  QualitativeCategory,
   QualitativeAssessment,
-  DeterministicMetrics,
-  QuantitativeMentions,
   ComparisonResult,
   BiologicalContentSummary,
   MergedQualitativeAssessment,

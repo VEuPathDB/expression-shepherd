@@ -4,13 +4,10 @@ import path from "path";
 import ttest2 from "@stdlib/stats-ttest2";
 import { writeToFile, createAIClient, AIClient, loadGeneList, loadSitesConfig, type GeneEntry } from "./shared-utils";
 import type {
-  Config,
-  AnalysisModelConfig,
   CondensedComparison,
   StatisticalMetric,
   DescriptiveMetric,
   BiologicalContentAggregate,
-  BiologicalContentMetric,
   DeterministicMetricsAggregate,
   PositionBiasAggregate,
   QuantitativeAggregates,

@@ -112,6 +112,12 @@ This work will be done within the existing `expression-shepherd` repository, lev
    - Gene IDs throughout the report display CSS-only hover popups offering links to both model summaries
    - Linked locations: gene list header, modal representatives, position bias contradictions
    - Output: One HTML report per model pair (3 reports total), organized into sections for quantitative metrics, qualitative comparisons, and explanatory notes
+3. Generate index page with comparison matrix
+   - Scans directory for all `*-report.html` and `*-report.json` files
+   - Creates matrix table with models on both axes (half-matrix showing upper triangle only)
+   - Provides HTML and JSON links for each model pair comparison
+   - Supports additional model pairs beyond initial all-vs-all configuration
+   - Output: `index.html` in the aggregate reports directory
 
 ## Project Structure
 
@@ -132,7 +138,8 @@ expression-shepherd/
 │   │   ├── condense-comparisons.ts (Phase 2.5: merge bidirectional pairs)
 │   │   ├── aggregate-analysis.ts (Phase 3: theme identification)
 │   │   ├── make-html-summaries.ts (Phase 4: per-gene HTML generation)
-│   │   └── generate-html-reports.ts (Phase 4: aggregate HTML report generation)
+│   │   ├── generate-html-reports.ts (Phase 4: aggregate HTML report generation)
+│   │   └── generate-index.ts (Phase 4: index page with comparison matrix)
 │   └── data/
 │       ├── summaries/
 │       │   ├── claude4/ (JSON response files)
@@ -164,7 +171,8 @@ expression-shepherd/
 │               ├── claude4-gpt5-report.json
 │               ├── claude4-gpt5-report.html
 │               ├── gpt4o-gpt5-report.json
-│               └── gpt4o-gpt5-report.html
+│               ├── gpt4o-gpt5-report.html
+│               └── index.html (comparison matrix with links to all reports)
 ```
 
 ## Technical Notes
@@ -256,7 +264,8 @@ NPM scripts are available in `package.json`:
 - `yarn comparison:compare` - Phase 2: Generate bidirectional pairwise comparisons
 - `yarn comparison:condense` - Phase 2.5: Condense bidirectional pairs into merged summaries
 - `yarn comparison:aggregate` - Phase 3: Generate aggregate analysis report
-- `yarn comparison:html` - Phase 4: Generate per-gene HTML summaries and aggregate comparison reports with interactive links
+- `yarn comparison:html` - Phase 4: Generate per-gene HTML summaries, aggregate comparison reports with interactive links, and index page
+- `yarn comparison:index` - Phase 4 (standalone): Generate only the index page with comparison matrix
 
 All scripts automatically run `yarn build` before execution.
 
@@ -292,6 +301,10 @@ Already available in repository:
   - Organized sections for quantitative metrics, qualitative comparisons, and explanatory notes
   - Interactive gene links with CSS-only hover popups showing both model options
   - Linked gene list, modal representatives, and position bias contradictions
+- Index page with comparison matrix:
+  - Half-matrix table showing all model pairs
+  - HTML and JSON links for each comparison report
+  - Supports additional model comparisons beyond initial all-vs-all
 - Model anonymity maintained through all analysis phases until final report generation
 - Reproducible process that can be re-run with new gene sets
 

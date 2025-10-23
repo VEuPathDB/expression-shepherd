@@ -37,6 +37,7 @@
     "comparison:compare": "yarn build && node dist/comparison/scripts/compare-summaries.js",
     "comparison:condense": "yarn build && node dist/comparison/scripts/condense-comparisons.js",
     "comparison:aggregate": "yarn build && node dist/comparison/scripts/aggregate-analysis.js",
-    "comparison:html": "yarn build && node dist/comparison/scripts/make-html-summaries.js && node dist/comparison/scripts/generate-html-reports.js"
+    "comparison:html": "yarn build && node dist/comparison/scripts/make-html-summaries.js && node dist/comparison/scripts/generate-html-reports.js && node dist/comparison/scripts/generate-index.js",
+    "comparison:index": "yarn build && node dist/comparison/scripts/generate-index.js"
   }
 }

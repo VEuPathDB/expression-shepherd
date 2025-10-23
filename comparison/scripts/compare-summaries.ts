@@ -3,13 +3,7 @@ import { readFile, access } from "fs/promises";
 import path from "path";
 import { writeToFile, createAIClient, AIClient, loadGeneList, loadSitesConfig } from "./shared-utils";
 import type {
-  Config,
-  SiteConfig,
-  AnalysisModelConfig,
-  ExperimentSummary,
-  Topic,
   ExpressionSummary,
-  SimplifiedTopic,
   SimplifiedSummary,
   DeterministicMetrics,
   BiologicalContent,
@@ -105,9 +99,6 @@ function simplifySummary(summary: ExpressionSummary): SimplifiedSummary {
  * Generate comparison using AI (Anthropic or OpenAI)
  */
 async function compareWithAI(
-  geneId: string,
-  modelAName: string,
-  modelBName: string,
   summaryA: ExpressionSummary,
   summaryB: ExpressionSummary,
   aiClient: AIClient
@@ -277,7 +268,7 @@ async function comparePair(
   const metricsB = calculateMetrics(summaryB);
 
   // Get AI comparison
-  const aiComparison = await compareWithAI(geneId, modelAName, modelBName, summaryA, summaryB, aiClient);
+  const aiComparison = await compareWithAI(summaryA, summaryB, aiClient);
 
   return {
     model_A: modelAName,
