@@ -462,6 +462,20 @@ function generateQualitativeSection(
           </p>
           ${generateDissentingGenesHTML(qual.structure_and_organization.comparison.agreement_distribution, modelAShort, modelBShort, modelAName, modelBName)}
         </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Headline</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <p class="text-gray-700">${replaceModelNames(qual.headline.comparison.consensus_summary, modelAName, modelBName)}</p>
+          </div>
+          <p class="text-sm text-gray-600 mt-2">
+            <span class="font-semibold">Modal representative:</span> ${createGeneLink(qual.headline.comparison.modal_representative, modelAShort, modelBShort, modelAName, modelBName)}
+          </p>
+          <p class="text-sm text-gray-600 mt-1 italic">
+            Consistency of this pattern across ${report.gene_count} independently assessed genes: ${qual.headline.comparison.consistency_score}
+          </p>
+          ${generateDissentingGenesHTML(qual.headline.comparison.agreement_distribution, modelAShort, modelBShort, modelAName, modelBName)}
+        </div>
       </div>
     </div>
   `;

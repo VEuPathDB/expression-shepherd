@@ -3,19 +3,19 @@
     "name": "VectorBase",
     "base_url": "https://vectorbase.org/vectorbase"
   },
-  "_not_analysis_model": {
+  "_analysis_model": {
     "model_string": "claude-sonnet-4-5-20250929",
     "name": "claude4_5",
     "model": "Claude Sonnet 4.5",
     "platform": "anthropic"
   },
-  "analysis_model": {
+  "__analysis_model": {
     "model_string": "claude-sonnet-4-20250514",
     "name": "claude4",
     "model": "Claude Sonnet 4",
     "platform": "anthropic"
   },
-  "_not_this_analysis_model": {
+  "analysis_model": {
     "model_string": "gpt-5-2025-08-07",
     "name": "gpt5",
     "model": "GPT-5 (minimal reasoning)",
@@ -27,7 +27,7 @@
       "hostname": "bmaccallum.vectorbase.org",
       "appPath": "vectorbase.bmaccallum",
       "model": "Claude Sonnet 4.5",
-      "skip": true,
+      "skip": false,
       "disableGenePageLinks": true
     },
     {

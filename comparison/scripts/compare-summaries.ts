@@ -165,6 +165,11 @@ Please provide a detailed comparison in the following JSON format:
       "summary_A": "assessment of structure in Summary A",
       "summary_B": "assessment of structure in Summary B",
       "comparison": "comparison of organizational approaches (always refer to 'Summary A' and 'Summary B', never just 'A' or 'B')"
+    },
+    "headline": {
+      "summary_A": "linguistic assessment of the top-level headline field in Summary A (clarity, specificity, informativeness, professional tone) - NOT the per-topic headlines",
+      "summary_B": "linguistic assessment of the top-level headline field in Summary B (clarity, specificity, informativeness, professional tone) - NOT the per-topic headlines",
+      "comparison": "comparison of the top-level headline styles and potential utility for biologists (always refer to 'Summary A' and 'Summary B', never just 'A' or 'B')"
     }
   },
   "quantitative_expression_mentions": {

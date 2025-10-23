@@ -111,6 +111,7 @@ export interface QualitativeAssessment {
   tone_and_style: QualitativeCategory;
   technical_detail_level: QualitativeCategory;
   structure_and_organization: QualitativeCategory;
+  headline: QualitativeCategory;
 }
 
 export interface QuantitativeMentions {
@@ -151,6 +152,7 @@ export interface MergedQualitativeAssessment {
   tone_and_style: QualitativeCategory;
   technical_detail_level: QualitativeCategory;
   structure_and_organization: QualitativeCategory;
+  headline: QualitativeCategory;
   contradiction_detected: boolean;
   merge_notes: string;
 }
@@ -264,6 +266,7 @@ export interface QualitativeAggregates {
   tone_and_style: QualitativeDimensionAggregate;
   technical_detail_level: QualitativeDimensionAggregate;
   structure_and_organization: QualitativeDimensionAggregate;
+  headline: QualitativeDimensionAggregate;
 }
 
 export interface QuantitativeAggregates {

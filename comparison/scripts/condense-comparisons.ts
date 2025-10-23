@@ -93,6 +93,11 @@ function swapAssessmentLabels(assessment: QualitativeAssessment): QualitativeAss
       summary_B: swapSummaryLabelsInText(assessment.structure_and_organization.summary_A),
       comparison: swapSummaryLabelsInText(assessment.structure_and_organization.comparison),
     },
+    headline: {
+      summary_A: swapSummaryLabelsInText(assessment.headline.summary_B),
+      summary_B: swapSummaryLabelsInText(assessment.headline.summary_A),
+      comparison: swapSummaryLabelsInText(assessment.headline.comparison),
+    },
   };
 }
 
@@ -142,6 +147,11 @@ Respond with JSON in this format:
   "structure_and_organization": {
     "summary_A": "consolidated assessment of Summary A's structure",
     "summary_B": "consolidated assessment of Summary B's structure",
+    "comparison": "merged comparison"
+  },
+  "headline": {
+    "summary_A": "consolidated assessment of Summary A's headline",
+    "summary_B": "consolidated assessment of Summary B's headline",
     "comparison": "merged comparison"
   },
   "contradiction_detected": true or false (set to true if assessments contradict significantly),

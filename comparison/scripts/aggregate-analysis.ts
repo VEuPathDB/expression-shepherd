@@ -132,8 +132,8 @@ function interpolateGeneNames(report: AggregateReport, geneNameMap: Map<string, 
       );
   }
 
-  // Process qualitative aggregates - all three dimensions
-  const dimensions = ["tone_and_style", "technical_detail_level", "structure_and_organization"] as const;
+  // Process qualitative aggregates - all four dimensions
+  const dimensions = ["tone_and_style", "technical_detail_level", "structure_and_organization", "headline"] as const;
 
   for (const dimension of dimensions) {
     const dimAggregate = processedReport.qualitative_aggregates[dimension];
@@ -418,7 +418,7 @@ Respond ONLY with valid JSON, no other text.`;
  * Aggregate qualitative assessments for one dimension
  */
 async function aggregateQualitativeDimension(
-  dimension: "tone_and_style" | "technical_detail_level" | "structure_and_organization",
+  dimension: "tone_and_style" | "technical_detail_level" | "structure_and_organization" | "headline",
   comparisons: CondensedComparison[],
   aiClient: AIClient
 ): Promise<QualitativeDimensionAggregate> {
@@ -462,11 +462,13 @@ async function aggregateQualitativeData(
   const tone_and_style = await aggregateQualitativeDimension("tone_and_style", comparisons, aiClient);
   const technical_detail_level = await aggregateQualitativeDimension("technical_detail_level", comparisons, aiClient);
   const structure_and_organization = await aggregateQualitativeDimension("structure_and_organization", comparisons, aiClient);
+  const headline = await aggregateQualitativeDimension("headline", comparisons, aiClient);
 
   return {
     tone_and_style,
     technical_detail_level,
     structure_and_organization,
+    headline,
   };
 }
 
