@@ -359,6 +359,11 @@ async function aggregateQualitativeField(
     .map(([geneId, statement]) => `${geneId}: ${statement}`)
     .join("\n\n");
 
+  // Build field-specific guidance
+  const comparisonGuidance = fieldType === 'comparison'
+    ? `**IMPORTANT**: These statements compare Summary A vs Summary B. When synthesizing the consensus, you MUST consistently refer to them as "Summary A" and "Summary B" (never use "one summary" or "the other"). Maintain this exact terminology throughout your consensus_summary.`
+    : '';
+
   const prompt = `You are aggregating assessments of the **${dimension}** dimension from ${statements.size} different genes.
 
 Here are the ${statements.size} statements:
@@ -366,7 +371,7 @@ Here are the ${statements.size} statements:
 ${statementsList}
 
 Your task:
-1. Generate a consensus summary that synthesizes these statements into a coherent assessment (similar length and style to the inputs)
+1. Generate a consensus summary that synthesizes these statements into a coherent assessment (similar length and style to the inputs) ${comparisonGuidance}
 2. Categorize each gene by how well it agrees with the consensus:
    - Strong agreement: Fully aligned with consensus
    - Mild agreement: Mostly aligned, minor variations
@@ -397,6 +402,15 @@ Respond ONLY with valid JSON, no other text.`;
   try {
     const { parsed } = await aiClient.call(prompt, 2000);
     const consistency_score = calculateConsistencyScore(parsed.agreement_distribution);
+
+    // Validate that comparison fields maintain "Summary A/B" terminology
+    if (fieldType === 'comparison') {
+      const summaryReferences = /\b(Summary [AB]|Model [AB])\b/;
+      if (!summaryReferences.test(parsed.consensus_summary)) {
+        console.warn(`⚠️  Warning: ${dimension} comparison consensus may lack "Summary A/B" references:`);
+        console.warn(`    "${parsed.consensus_summary.substring(0, 100)}..."`);
+      }
+    }
 
     return {
       consensus_summary: parsed.consensus_summary,
