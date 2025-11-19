@@ -17,6 +17,7 @@ async function createPresentation() {
     'slide-06-genes.html',
     'slide-07-pipeline.html',
     'slide-07a-phase1.html',
+    'slide-07a2-comparison-input.html',
     'slide-07b-phase2.html',
     'slide-07c-phase25.html',
     'slide-07d-phase34.html',
@@ -28,7 +29,7 @@ async function createPresentation() {
     'slide-13-meta.html'
   ];
 
-  console.log('Creating presentation with 17 slides...');
+  console.log('Creating presentation with 18 slides...');
 
   for (const file of slideFiles) {
     const filePath = path.join(__dirname, file);

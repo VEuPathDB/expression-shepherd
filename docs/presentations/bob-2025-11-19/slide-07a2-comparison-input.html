@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 12pt 40pt 20pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 22pt; margin: 0;
+  font-weight: bold;
+}
+.subtitle {
+  color: #F4F1DE; font-size: 13pt; margin: 3pt 0 0 0;
+}
+.content {
+  flex: 1; padding: 8pt 40pt 36pt 40pt; display: flex; gap: 15pt;
+}
+.column { flex: 1; }
+h2 {
+  color: #E07A5F; font-size: 14pt; margin: 0 0 5pt 0;
+  font-weight: bold;
+}
+p {
+  color: #2C2C2C; font-size: 11pt; margin: 3pt 0;
+  line-height: 1.15;
+}
+ul {
+  margin: 4pt 0; padding-left: 18pt;
+}
+li {
+  color: #2C2C2C; font-size: 11pt; margin: 2pt 0;
+  line-height: 1.15;
+}
+.code-box {
+  background: #F4F1DE; padding: 6pt; margin: 5pt 0;
+  border-left: 3pt solid #87A96B;
+  font-family: 'Courier New', monospace; font-size: 9pt;
+  color: #2C2C2C;
+}
+.code-box p {
+  margin: 1pt 0;
+}
+.highlight {
+  background: #E07A5F; color: #ffffff; padding: 5pt;
+  margin: 5pt 0; font-size: 10pt; font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Preparing Input for Comparison AI</h1>
+  <p class="subtitle">Technical Detail</p>
+</div>
+<div class="content">
+  <div class="column">
+    <h2>What Gets Sent</h2>
+    <p>Simplified summary (NOT the full 45 per-experiment summaries):</p>
+    <ul>
+      <li>Gene headline</li>
+      <li>One-paragraph summary</li>
+      <li>For each topic: headline, one-sentence summary, experiment names only</li>
+    </ul>
+
+    <div class="highlight">
+      <p>~90% token reduction while preserving all human-readable content</p>
+    </div>
+
+    <p><b>Models anonymized</b> as Summary A/B to prevent bias</p>
+  </div>
+
+  <div class="column">
+    <h2>Comparison Prompt (Excerpt)</h2>
+    <div class="code-box">
+      <p>Compare two gene expression summaries</p>
+      <p>for the same gene.</p>
+      <p></p>
+      <p>Summary A: { ... }</p>
+      <p>Summary B: { ... }</p>
+      <p></p>
+      <p>Provide comparison in JSON format:</p>
+      <p></p>
+      <p>biological_content:</p>
+      <p>  observations: only_in_A, only_in_B, in_both</p>
+      <p>  insights: only_in_A, only_in_B, in_both</p>
+      <p></p>
+      <p>qualitative_assessment:</p>
+      <p>  tone_and_style, technical_detail_level,</p>
+      <p>  structure_and_organization, headline</p>
+      <p></p>
+      <p>quantitative_expression_mentions:</p>
+      <p>  count fold changes, TPM, percentiles</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
