@@ -1,0 +1,10 @@
+# Ignore most intermediate data files
+summaries/
+comparisons/
+condensed/
+*.json
+*.zip
+
+# But DO check in the final aggregate reports (~20MB)
+# These are the final research outputs worth preserving
+!aggregate-reports/

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 12pt 40pt 36pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 16pt; margin: 0;
+  font-weight: bold;
+}
+.subtitle {
+  color: #F4F1DE; font-size: 13pt; margin: 4pt 0 0 0;
+}
+.content {
+  flex: 1; padding: 12pt 40pt 36pt 40pt;
+}
+h2 {
+  color: #E07A5F; font-size: 13pt; margin: 0 0 12pt 0;
+  font-weight: bold;
+}
+p {
+  color: #2C2C2C; font-size: 13pt; margin: 3pt 0;
+  line-height: 1.25;
+}
+ul {
+  margin: 3pt 0; padding-left: 25pt;
+}
+li {
+  color: #2C2C2C; font-size: 13pt; margin: 3pt 0;
+  line-height: 1.25;
+}
+.stats-box {
+  background: #87A96B; color: #ffffff; padding: 6pt; margin: 3pt 0;
+  text-align: center;
+}
+.stats-box p {
+  color: #ffffff; font-size: 13pt; font-weight: bold;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Phase 2.5: Condensation</h1>
+  <p class="subtitle">Technical Detail</p>
+</div>
+<div class="content">
+  <h2>Merging Bidirectional Pairs</h2>
+  <p>For each model pair, merge A-vs-B and B-vs-A comparisons:</p>
+
+  <ul>
+    <li>Calculate averages for biological content metrics</li>
+    <li>AI merges qualitative assessments from both directions</li>
+    <li>Detect contradictions indicating position bias</li>
+    <li>Preserve deterministic metrics from both models</li>
+  </ul>
+
+  <div class="stats-box">
+    <p>95% data reduction</p>
+  </div>
+
+  <p>Detailed observation/insight lists replaced with summary counts, maintaining statistical validity while dramatically reducing file size</p>
+
+  <p><b>Output:</b> 60 condensed files (3 model pairs × 20 genes)</p>
+</div>
+</body>
+</html>

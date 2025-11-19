@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 20pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 32pt; margin: 0;
+  font-weight: bold;
+}
+.content {
+  flex: 1; padding: 12pt 40pt 36pt 40pt;
+}
+.phase {
+  background: #F4F1DE; padding: 7pt; margin: 2pt 0;
+  border-left: 4pt solid #E07A5F;
+  display: flex; align-items: center; gap: 10pt;
+}
+.phase-num {
+  color: #E07A5F; font-size: 18pt; font-weight: bold;
+  min-width: 28pt;
+}
+.phase-num p {
+  margin: 0;
+}
+.phase-content { flex: 1; }
+h2 {
+  color: #2C2C2C; font-size: 13pt; margin: 0 0 2pt 0;
+  font-weight: bold;
+}
+p {
+  color: #2C2C2C; font-size: 11pt; margin: 0;
+  line-height: 1.2;
+}
+.commands {
+  background: #2C2C2C; color: #87A96B; padding: 8pt;
+  font-family: 'Courier New', monospace; font-size: 9pt;
+  margin-top: 8pt;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Comparison Pipeline Overview</h1>
+</div>
+<div class="content">
+  <div class="phase">
+    <div class="phase-num"><p>1</p></div>
+    <div class="phase-content">
+      <h2>Fetch Summaries</h2>
+      <p>60 JSON files (20 genes × 3 models) from dev sites</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-num"><p>2</p></div>
+    <div class="phase-content">
+      <h2>Bidirectional Pairwise Comparison</h2>
+      <p>120 comparisons (6 per gene) - AI-powered analysis with model anonymity</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-num"><p>2.5</p></div>
+    <div class="phase-content">
+      <h2>Condensation</h2>
+      <p>60 merged files - 95% data reduction, position bias detection</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-num"><p>3</p></div>
+    <div class="phase-content">
+      <h2>Aggregate Analysis</h2>
+      <p>3 reports - Statistical patterns, qualitative themes, modal representatives</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-num"><p>4</p></div>
+    <div class="phase-content">
+      <h2>HTML Generation</h2>
+      <p>60 gene summaries + 3 comparison reports + index page</p>
+    </div>
+  </div>
+
+  <div class="commands">
+    <p>yarn comparison:fetch → compare → condense → aggregate → html</p>
+  </div>
+</div>
+</body>
+</html>

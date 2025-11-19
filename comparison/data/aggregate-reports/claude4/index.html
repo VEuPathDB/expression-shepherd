@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Comparison Reports - Claude Sonnet 4</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen py-8">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">
+        VEuPathDB AI Gene Expression Summaries
+      </h1>
+      <p class="text-gray-600">
+        <span class="font-semibold">Analysis by:</span> Claude Sonnet 4
+      </p>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Model Comparison Matrix</h2>
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mb-4">
+        <p class="text-sm text-gray-700">
+          <span class="font-semibold">How to read this matrix:</span> Each cell shows links to comparison reports
+          for the corresponding model pair. The matrix shows only the upper triangle since comparisons are symmetric.
+          Click <strong>HTML</strong> for the formatted report or <strong>JSON</strong> for the raw data.
+        </p>
+      </div>
+      
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white shadow-md rounded-lg">
+        <thead>
+          <tr class="bg-gray-100 border-b border-gray-300">
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Model</th>
+            <th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">claude4</th><th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">claude4_5</th><th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">claude4_5thinking</th><th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">gpt4o</th><th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">gpt5</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr class="border-t border-gray-200">
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 bg-gray-50">claude4</th>
+        <td class="px-4 py-3 bg-gray-200 text-center text-gray-400">—</td><td class="px-4 py-3 text-center text-sm"><a href="claude4-claude4_5-report.html" class="text-blue-600 hover:text-blue-800 font-medium">HTML</a> / <a href="claude4-claude4_5-report.json" class="text-gray-600 hover:text-gray-800 font-medium">JSON</a></td><td class="px-4 py-3 text-center text-gray-400 text-sm">—</td><td class="px-4 py-3 text-center text-sm"><a href="claude4-gpt4o-report.html" class="text-blue-600 hover:text-blue-800 font-medium">HTML</a> / <a href="claude4-gpt4o-report.json" class="text-gray-600 hover:text-gray-800 font-medium">JSON</a></td><td class="px-4 py-3 text-center text-sm"><a href="claude4-gpt5-report.html" class="text-blue-600 hover:text-blue-800 font-medium">HTML</a> / <a href="claude4-gpt5-report.json" class="text-gray-600 hover:text-gray-800 font-medium">JSON</a></td>
+      </tr>
+    
+      <tr class="border-t border-gray-200">
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 bg-gray-50">claude4_5</th>
+        <td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-200 text-center text-gray-400">—</td><td class="px-4 py-3 text-center text-sm"><a href="claude4_5-claude4_5thinking-report.html" class="text-blue-600 hover:text-blue-800 font-medium">HTML</a> / <a href="claude4_5-claude4_5thinking-report.json" class="text-gray-600 hover:text-gray-800 font-medium">JSON</a></td><td class="px-4 py-3 text-center text-sm"><a href="claude4_5-gpt4o-report.html" class="text-blue-600 hover:text-blue-800 font-medium">HTML</a> / <a href="claude4_5-gpt4o-report.json" class="text-gray-600 hover:text-gray-800 font-medium">JSON</a></td><td class="px-4 py-3 text-center text-sm"><a href="claude4_5-gpt5-report.html" class="text-blue-600 hover:text-blue-800 font-medium">HTML</a> / <a href="claude4_5-gpt5-report.json" class="text-gray-600 hover:text-gray-800 font-medium">JSON</a></td>
+      </tr>
+    
+      <tr class="border-t border-gray-200">
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 bg-gray-50">claude4_5thinking</th>
+        <td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-200 text-center text-gray-400">—</td><td class="px-4 py-3 text-center text-gray-400 text-sm">—</td><td class="px-4 py-3 text-center text-sm"><a href="claude4_5thinking-gpt5-report.html" class="text-blue-600 hover:text-blue-800 font-medium">HTML</a> / <a href="claude4_5thinking-gpt5-report.json" class="text-gray-600 hover:text-gray-800 font-medium">JSON</a></td>
+      </tr>
+    
+      <tr class="border-t border-gray-200">
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 bg-gray-50">gpt4o</th>
+        <td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-200 text-center text-gray-400">—</td><td class="px-4 py-3 text-center text-sm"><a href="gpt4o-gpt5-report.html" class="text-blue-600 hover:text-blue-800 font-medium">HTML</a> / <a href="gpt4o-gpt5-report.json" class="text-gray-600 hover:text-gray-800 font-medium">JSON</a></td>
+      </tr>
+    
+      <tr class="border-t border-gray-200">
+        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 bg-gray-50">gpt5</th>
+        <td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-50"></td><td class="px-4 py-3 bg-gray-200 text-center text-gray-400">—</td>
+      </tr>
+    
+        </tbody>
+      </table>
+    </div>
+  
+    </div>
+
+    <footer class="text-center text-gray-500 text-sm mt-8">
+      Generated on 11/11/2025, 4:28:23 PM
+    </footer>
+  </div>
+</body>
+</html>

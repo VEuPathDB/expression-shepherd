@@ -9,13 +9,13 @@
     "model": "Claude Sonnet 4.5",
     "platform": "anthropic"
   },
-  "analysis_model": {
+  "__analysis_model": {
     "model_string": "claude-sonnet-4-20250514",
     "name": "claude4",
     "model": "Claude Sonnet 4",
     "platform": "anthropic"
   },
-  "__analysis_model": {
+  "analysis_model": {
     "model_string": "gpt-5-2025-08-07",
     "name": "gpt5",
     "model": "GPT-5 (minimal reasoning)",
@@ -27,15 +27,23 @@
       "hostname": "bmaccallum.vectorbase.org",
       "appPath": "vectorbase.bmaccallum",
       "model": "Claude Sonnet 4.5",
-      "skip": false,
+      "skip": true,
       "disableGenePageLinks": true
+    },
+    {
+      "name": "claude4_5thinking",
+      "hostname": "bmaccallum.vectorbase.org",
+      "appPath": "vectorbase.bmaccallum",
+      "model": "Claude Sonnet 4.5 Thinking",
+      "skip": false,
+      "disableGenePageLinks": false
     },
     {
       "name": "claude4",
       "hostname": "bmaccallum.vectorbase.org",
       "appPath": "vectorbase.bmaccallum",
       "model": "Claude Sonnet 4",
-      "skip": false
+      "skip": true
     },
     {
       "name": "gpt5",
@@ -49,7 +57,7 @@
       "hostname": "qa.vectorbase.org",
       "appPath": "vectorbase.b69",
       "model": "GPT-4o",
-      "skip": false
+      "skip": true
     }
   ],
   "endpoint": "/service/record-types/gene/searches/single_record_question_GeneRecordClasses_GeneRecordClass/reports/aiExpression",

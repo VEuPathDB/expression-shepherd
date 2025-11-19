@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 20pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 32pt; margin: 0;
+  font-weight: bold;
+}
+.content {
+  flex: 1; padding: 28pt 50pt 36pt 50pt;
+}
+h2 {
+  color: #E07A5F; font-size: 22pt; margin: 0 0 15pt 0;
+  font-weight: bold;
+}
+p {
+  color: #2C2C2C; font-size: 16pt; margin: 10pt 0;
+  line-height: 1.4;
+}
+.highlight-box {
+  background: #F4F1DE; padding: 18pt; margin: 18pt 0;
+  border-left: 6pt solid #E07A5F;
+}
+.question {
+  color: #87A96B; font-size: 19pt; margin: 20pt 0;
+  font-weight: bold; font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Port to Claude Sonnet 4</h1>
+</div>
+<div class="content">
+  <h2>Initial Implementation</h2>
+  <p>Ported the two-step prompting approach from GPT-4o to Claude Sonnet 4</p>
+
+  <div class="highlight-box">
+    <p><b>Qualitative observation:</b> Results looked much better than GPT-4o</p>
+    <p>More narrative, warmer tone, better biological interpretation</p>
+  </div>
+
+  <p class="question">But how do we measure this objectively?</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 12pt 40pt 36pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 16pt; margin: 0;
+  font-weight: bold;
+}
+.subtitle {
+  color: #F4F1DE; font-size: 13pt; margin: 4pt 0 0 0;
+}
+.content {
+  flex: 1; padding: 12pt 40pt 36pt 40pt; display: flex; gap: 25pt;
+}
+.column { flex: 1; }
+h2 {
+  color: #E07A5F; font-size: 13pt; margin: 0 0 10pt 0;
+  font-weight: bold;
+}
+p {
+  color: #2C2C2C; font-size: 14pt; margin: 3pt 0;
+  line-height: 1.2;
+}
+ul {
+  margin: 3pt 0; padding-left: 22pt;
+}
+li {
+  color: #2C2C2C; font-size: 14pt; margin: 3pt 0;
+  line-height: 1.2;
+}
+.highlight {
+  background: #F4F1DE; padding: 6pt; margin: 3pt 0;
+  border-left: 4pt solid #E07A5F;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Phase 2: AI-Powered Pairwise Comparison</h1>
+  <p class="subtitle">Technical Detail</p>
+</div>
+<div class="content">
+  <div class="column">
+    <h2>Bidirectional Analysis</h2>
+    <p>For each gene, 6 comparisons:</p>
+    <ul>
+      <li>A vs B (forward)</li>
+      <li>B vs A (reverse)</li>
+    </ul>
+    <p>Repeated for all 3 model pairs</p>
+
+    <div class="highlight">
+      <p><b>Why bidirectional?</b> Detects position bias (does order affect judgment?)</p>
+    </div>
+
+    <h2>Model Anonymity</h2>
+    <p>Prompts refer to "Summary A" and "Summary B" throughout analysis</p>
+  </div>
+
+  <div class="column">
+    <h2>AI Analysis Dimensions</h2>
+    <ul>
+      <li>Biological content (observations, insights)</li>
+      <li>Tone and style</li>
+      <li>Technical detail level</li>
+      <li>Structure and organization</li>
+    </ul>
+
+    <h2>Deterministic Metrics</h2>
+    <ul>
+      <li>Word/sentence/topic counts</li>
+      <li>Quantitative mentions (fold changes, TPM, percentiles)</li>
+      <li>Formatting analysis</li>
+    </ul>
+
+    <div class="highlight">
+      <p><b>Output:</b> 120 JSON files (6 × 20 genes)</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

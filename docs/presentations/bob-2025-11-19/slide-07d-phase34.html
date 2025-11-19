@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 12pt 40pt 36pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 16pt; margin: 0;
+  font-weight: bold;
+}
+.subtitle {
+  color: #F4F1DE; font-size: 13pt; margin: 4pt 0 0 0;
+}
+.content {
+  flex: 1; padding: 12pt 40pt 36pt 40pt; display: flex; gap: 25pt;
+}
+.column { flex: 1; }
+h2 {
+  color: #E07A5F; font-size: 13pt; margin: 0 0 10pt 0;
+  font-weight: bold;
+}
+p {
+  color: #2C2C2C; font-size: 14pt; margin: 3pt 0;
+  line-height: 1.2;
+}
+ul {
+  margin: 3pt 0; padding-left: 22pt;
+}
+li {
+  color: #2C2C2C; font-size: 14pt; margin: 3pt 0;
+  line-height: 1.2;
+}
+.note {
+  background: #F4F1DE; padding: 6pt; margin: 3pt 0;
+  border-left: 4pt solid #87A96B;
+  font-size: 13pt;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Phases 3-4: Aggregation & HTML</h1>
+  <p class="subtitle">Technical Detail</p>
+</div>
+<div class="content">
+  <div class="column">
+    <h2>Phase 3: Aggregation</h2>
+    <p>For each model pair across all 20 genes:</p>
+    <ul>
+      <li>Calculate means ± standard errors</li>
+      <li>Run t-tests for statistical significance</li>
+      <li>AI synthesizes qualitative patterns</li>
+      <li>Identify modal representative genes</li>
+    </ul>
+
+    <div class="note">
+      <p><b>Claude Code extensively used</b> to plan and develop this analysis pipeline and HTML rendering scripts</p>
+    </div>
+  </div>
+
+  <div class="column">
+    <h2>Phase 4: HTML Generation</h2>
+    <p>Interactive reports with:</p>
+    <ul>
+      <li>60 gene summaries (20 × 3 models)</li>
+      <li>3 aggregate comparison reports</li>
+      <li>Index page with comparison matrix</li>
+      <li>CSS hover popups for gene links</li>
+      <li>Sanitized HTML formatting</li>
+    </ul>
+
+    <p><b>Model identities</b> revealed only in final reports</p>
+
+    <p><b>Output:</b> 3 aggregate reports + navigable HTML interface</p>
+  </div>
+</div>
+</body>
+</html>

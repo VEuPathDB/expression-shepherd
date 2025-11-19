@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 18pt 40pt 36pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 32pt; margin: 0;
+  font-weight: bold;
+}
+.content {
+  flex: 1; padding: 18pt 40pt 36pt 40pt; display: flex; gap: 25pt;
+}
+.column { flex: 1; }
+.dimension {
+  background: #F4F1DE; padding: 6pt; margin: 3pt 0;
+  border-left: 4pt solid #E07A5F;
+}
+.dimension h2 {
+  color: #2C2C2C; font-size: 13pt; margin: 0 0 6pt 0;
+  font-weight: bold;
+}
+.dimension p {
+  color: #2C2C2C; font-size: 13pt; margin: 0;
+  line-height: 1.2;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Comparison Dimensions Analyzed</h1>
+</div>
+<div class="content">
+  <div class="column">
+    <div class="dimension">
+      <h2>Biological Content</h2>
+      <p>Unique vs shared observations and insights extracted from summaries</p>
+    </div>
+
+    <div class="dimension">
+      <h2>Tone & Style</h2>
+      <p>Assertive vs neutral, promotional vs balanced, narrative vs descriptive</p>
+    </div>
+
+    <div class="dimension">
+      <h2>Technical Detail</h2>
+      <p>Quantitative specificity vs contextual breadth, metrics vs mechanisms</p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="dimension">
+      <h2>Structure</h2>
+      <p>Narrative prose vs bullet lists, data-heavy vs streamlined organization</p>
+    </div>
+
+    <div class="dimension">
+      <h2>Deterministic Metrics</h2>
+      <p>Word count, sentence count, topic count, formatting patterns</p>
+    </div>
+
+    <div class="dimension">
+      <h2>Quantitative Mentions</h2>
+      <p>Frequency of fold changes, TPM values, percentiles in summaries</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

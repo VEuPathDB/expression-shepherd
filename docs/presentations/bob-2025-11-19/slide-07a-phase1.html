@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 18pt 40pt 36pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 28pt; margin: 0;
+  font-weight: bold;
+}
+.subtitle {
+  color: #F4F1DE; font-size: 16pt; margin: 4pt 0 0 0;
+}
+.content {
+  flex: 1; padding: 12pt 40pt 36pt 40pt;
+}
+h2 {
+  color: #E07A5F; font-size: 17pt; margin: 0 0 8pt 0;
+  font-weight: bold;
+}
+p {
+  color: #2C2C2C; font-size: 13pt; margin: 5pt 0;
+  line-height: 1.2;
+}
+ul {
+  margin: 6pt 0; padding-left: 20pt;
+}
+li {
+  color: #2C2C2C; font-size: 13pt; margin: 4pt 0;
+  line-height: 1.2;
+}
+.output-box {
+  background: #F4F1DE; padding: 10pt; margin: 10pt 0;
+  border-left: 4pt solid #87A96B;
+}
+.tech {
+  font-family: 'Courier New', monospace; font-size: 13pt;
+  color: #E07A5F;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Phase 1: Fetch Summaries</h1>
+  <p class="subtitle">Technical Detail</p>
+</div>
+<div class="content">
+  <h2>Process</h2>
+  <ul>
+    <li>API calls to 3 VEuPathDB dev sites, each running a different model</li>
+    <li>Cookie-based authentication for access control</li>
+    <li>Parallel processing per gene for efficiency</li>
+    <li>Fetches cached summaries from backend (typically instant)</li>
+  </ul>
+
+  <h2>Implementation</h2>
+  <p>Deterministic TypeScript script with retry logic and progress tracking</p>
+
+  <div class="output-box">
+    <p><b>Output:</b> 60 JSON files (20 genes × 3 models)</p>
+    <p class="tech">comparison/data/summaries/{model}/{geneId}.json</p>
+  </div>
+</div>
+</body>
+</html>

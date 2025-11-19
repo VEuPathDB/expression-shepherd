@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 18pt 40pt 36pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 32pt; margin: 0;
+  font-weight: bold;
+}
+.content {
+  flex: 1; padding: 18pt 40pt 36pt 40pt; display: flex; gap: 25pt;
+}
+.column { flex: 1; }
+h2 {
+  color: #E07A5F; font-size: 16pt; margin: 0 0 12pt 0;
+  font-weight: bold;
+}
+.stat {
+  background: #F4F1DE; padding: 6pt; margin: 3pt 0;
+  border-left: 4pt solid #87A96B;
+}
+.stat p {
+  color: #2C2C2C; font-size: 14pt; margin: 0;
+  line-height: 1.25;
+}
+.highlight {
+  background: #87A96B; color: #ffffff; padding: 6pt;
+  margin: 3pt 0; text-align: center;
+}
+.highlight p {
+  color: #ffffff; font-size: 13pt; font-weight: bold;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Key Quantitative Results</h1>
+</div>
+<div class="content">
+  <div class="column">
+    <h2>Word Count</h2>
+    <div class="stat">
+      <p><b>Claude 4.5 Thinking:</b> 403 words (avg)</p>
+      <p><b>GPT-5:</b> 327 words (avg)</p>
+      <p><b>p-value:</b> 0.0007 (highly significant)</p>
+    </div>
+
+    <h2>Quantitative Mentions</h2>
+    <div class="stat">
+      <p><b>Claude 4.5 Thinking:</b> 10.28 mentions/gene</p>
+      <p><b>GPT-5:</b> 1.65 mentions/gene</p>
+      <p><b>p-value:</b> &lt; 0.0001 (extremely significant)</p>
+    </div>
+  </div>
+
+  <div class="column">
+    <h2>Formatting</h2>
+    <div class="stat">
+      <p><b>Claude:</b> 75% use bullets</p>
+      <p><b>GPT-5:</b> 100% use bullets</p>
+    </div>
+
+    <h2>Similar Patterns</h2>
+    <div class="stat">
+      <p>Both models produce comparable observation and insight counts with different emphasis patterns</p>
+    </div>
+
+    <div class="highlight">
+      <p>Position Bias: 0%</p>
+      <p>Robust, order-independent judgments</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Sonnet 4 vs GPT-4o - Comparison Report</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Gene link popup styling */
+    .gene-link-wrapper {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      color: #2563eb;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .gene-link-popup {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 8px;
+      background: white;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      white-space: nowrap;
+      min-width: 200px;
+    }
+
+    .gene-link-popup::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: white;
+    }
+
+    .gene-link-wrapper:hover .gene-link-popup {
+      display: block;
+    }
+
+    .gene-link-popup a {
+      display: block;
+      padding: 6px 12px;
+      color: #1f2937;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    .gene-link-popup a:hover {
+      background-color: #f3f4f6;
+    }
+
+    .gene-link-popup a:first-child {
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 4px;
+      padding-bottom: 8px;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen py-8">
+  <div class="container mx-auto px-4 max-w-7xl">
+    
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h1 class="text-3xl font-bold text-gray-800 mb-4">
+        VEuPathDB AI Gene Expression Summaries: Model Comparison Report
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700 mb-2">Models Compared</h2>
+          <p class="text-gray-600"><span class="font-semibold">Model A:</span> Claude Sonnet 4</p>
+          <p class="text-gray-600"><span class="font-semibold">Model B:</span> GPT-4o</p>
+        </div>
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700 mb-2">Analysis Details</h2>
+          <p class="text-gray-600"><span class="font-semibold">Analysis Model:</span> GPT-5 (minimal reasoning)</p>
+          <p class="text-gray-600"><span class="font-semibold">Gene Count:</span> 20</p>
+        </div>
+      </div>
+      <div class="mt-4">
+        <h2 class="text-xl font-semibold text-gray-700 mb-2">Genes Analyzed</h2>
+        <p class="text-sm text-gray-600"><span class="gene-link-wrapper">AGAP001212 (PGRP-LB)<span class="gene-link-popup"><a href="html-summaries/AGAP001212-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP001212-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP000693 (CEC1)<span class="gene-link-popup"><a href="html-summaries/AGAP000693-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP000693-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP000999 (TOLL5A)<span class="gene-link-popup"><a href="html-summaries/AGAP000999-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP000999-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP009551 (Sult)<span class="gene-link-popup"><a href="html-summaries/AGAP009551-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP009551-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP013543 (anocin)<span class="gene-link-popup"><a href="html-summaries/AGAP013543-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP013543-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP001826 (lipophorin)<span class="gene-link-popup"><a href="html-summaries/AGAP001826-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP001826-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP009646 (Caudal)<span class="gene-link-popup"><a href="html-summaries/AGAP009646-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP009646-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP011294 (DEF1)<span class="gene-link-popup"><a href="html-summaries/AGAP011294-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP011294-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP004203 (vitellogenin)<span class="gene-link-popup"><a href="html-summaries/AGAP004203-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP004203-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP011434 (zinc carboxypeptidase A1)<span class="gene-link-popup"><a href="html-summaries/AGAP011434-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP011434-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP001713 (stearoyl CoA desaturase)<span class="gene-link-popup"><a href="html-summaries/AGAP001713-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP001713-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP006747 (REL2)<span class="gene-link-popup"><a href="html-summaries/AGAP006747-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP006747-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP011630 (putative transcription factor)<span class="gene-link-popup"><a href="html-summaries/AGAP011630-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP011630-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP002851 (Niemann-Pick C2 protein)<span class="gene-link-popup"><a href="html-summaries/AGAP002851-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP002851-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP000610 (saglin)<span class="gene-link-popup"><a href="html-summaries/AGAP000610-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP000610-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP006414 (chitinase)<span class="gene-link-popup"><a href="html-summaries/AGAP006414-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP006414-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP006796 (peritrophin)<span class="gene-link-popup"><a href="html-summaries/AGAP006796-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP006796-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP012703 (takeout)<span class="gene-link-popup"><a href="html-summaries/AGAP012703-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP012703-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP003751 (cuticular protein gene)<span class="gene-link-popup"><a href="html-summaries/AGAP003751-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP003751-gpt4o.html" target="_blank">GPT-4o</a></span></span>, <span class="gene-link-wrapper">AGAP004036 (heme peroxidase 7)<span class="gene-link-popup"><a href="html-summaries/AGAP004036-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP004036-gpt4o.html" target="_blank">GPT-4o</a></span></span></p>
+      </div>
+      <div class="mt-4 bg-blue-50 border-l-4 border-blue-400 p-3">
+        <p class="text-sm text-gray-700">
+          <span class="font-semibold">Note:</span> All numeric results are presented as <strong>mean ± standard error</strong>
+          (standard error of the mean, or SEM), which indicates the precision of the mean estimate across the 20 genes analyzed.
+        </p>
+      </div>
+    </div>
+  
+    
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Biological Content</h2>
+
+      <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4">
+        <p class="text-sm text-gray-700">
+          <span class="font-semibold">Note:</span> Statistical significance tests are not performed for biological content metrics.
+          These observations and insights have not been expert-validated, so we present descriptive statistics only without
+          making claims about which model performs better or worse.
+        </p>
+      </div>
+
+      <h3 class="text-xl font-semibold text-gray-700 mb-3">Observations</h3>
+      <div class="space-y-3 mb-6">
+        <div class="border-l-4 border-blue-500 pl-4">
+          <p class="font-semibold text-gray-700">Unique to Claude Sonnet 4</p>
+          <p class="text-gray-600">7.92 ± 0.36</p>
+        </div>
+        <div class="border-l-4 border-green-500 pl-4">
+          <p class="font-semibold text-gray-700">Unique to GPT-4o</p>
+          <p class="text-gray-600">3.73 ± 0.29</p>
+        </div>
+        <div class="border-l-4 border-purple-500 pl-4">
+          <p class="font-semibold text-gray-700">Shared</p>
+          <p class="text-gray-600">4.45 ± 0.20</p>
+        </div>
+        <div class="border-l-4 border-orange-500 pl-4">
+          <p class="font-semibold text-gray-700">Position Variance</p>
+          <p class="text-gray-600">1.65 ± 0.20</p>
+        </div>
+      </div>
+
+      <h3 class="text-xl font-semibold text-gray-700 mb-3">Insights</h3>
+      <div class="space-y-3">
+        <div class="border-l-4 border-blue-500 pl-4">
+          <p class="font-semibold text-gray-700">Unique to Claude Sonnet 4</p>
+          <p class="text-gray-600">2.83 ± 0.21</p>
+        </div>
+        <div class="border-l-4 border-green-500 pl-4">
+          <p class="font-semibold text-gray-700">Unique to GPT-4o</p>
+          <p class="text-gray-600">2.23 ± 0.12</p>
+        </div>
+        <div class="border-l-4 border-purple-500 pl-4">
+          <p class="font-semibold text-gray-700">Shared</p>
+          <p class="text-gray-600">1.50 ± 0.15</p>
+        </div>
+        <div class="border-l-4 border-orange-500 pl-4">
+          <p class="font-semibold text-gray-700">Position Variance</p>
+          <p class="text-gray-600">0.60 ± 0.12</p>
+        </div>
+      </div>
+    </div>
+  
+    
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Deterministic Metrics</h2>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Metric</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Claude Sonnet 4</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">GPT-4o</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">p-value</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Result</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr class="">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Word Count</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">308.80 ± 11.42</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">203.45 ± 7.58</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">0.0000</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">Claude Sonnet 4 significantly higher (p=0.000)</td>
+            </tr>
+            <tr class="">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Topic Count</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">6.80 ± 0.34</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">3.95 ± 0.21</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">0.0000</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">Claude Sonnet 4 significantly higher (p=0.000)</td>
+            </tr>
+            <tr class="">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Sentence Count</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">10.80 ± 0.50</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">9.05 ± 0.31</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">0.0070</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">Claude Sonnet 4 significantly higher (p=0.007)</td>
+            </tr>
+            <tr class="">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Character Count</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">2263.00 ± 75.56</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">1475.45 ± 49.86</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">0.0000</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">Claude Sonnet 4 significantly higher (p=0.000)</td>
+            </tr>
+            <tr class="">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Paragraph Count</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">7.80 ± 0.34</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">4.95 ± 0.21</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">0.0000</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">Claude Sonnet 4 significantly higher (p=0.000)</td>
+            </tr>
+            <tr class="">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Avg Sentence Length</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">29.05 ± 0.78</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">22.58 ± 0.57</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">0.0000</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">Claude Sonnet 4 significantly higher (p=0.000)</td>
+            </tr>
+            <tr class="">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Mean AI Topic Size</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">2.22 ± 0.15</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">3.92 ± 0.56</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">0.0092</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">GPT-4o significantly higher (p=0.009)</td>
+            </tr>
+            <tr class="opacity-50">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Other Topic Size</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">30.85 ± 0.77</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">33.05 ± 0.81</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">0.0636</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">No significant difference (p=0.064)</td>
+            </tr>
+            <tr class="opacity-50">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">Has Bullets %</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">80.00%</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">100.00%</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">N/A</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-700">Percentage of summaries using bullets (not t-testable)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Quantitative Expression Mentions</h2>
+
+      <div class="bg-gray-50 p-4 rounded-lg mb-4">
+        <p class="text-sm text-gray-700">
+          <span class="font-semibold">What are Quantitative Expression Mentions?</span> These are specific numeric values
+          cited in the AI-generated summaries, such as fold changes, TPM (transcripts per million) values, and percentile ranks.
+          A higher count indicates more evidence-based, data-rich summaries.
+        </p>
+      </div>
+
+      <div class="space-y-3 mb-6">
+        <div class="border-l-4 border-blue-500 pl-4">
+          <p class="font-semibold text-gray-700">Claude Sonnet 4</p>
+          <p class="text-gray-600">4.28 ± 0.54</p>
+        </div>
+        <div class="border-l-4 border-green-500 pl-4">
+          <p class="font-semibold text-gray-700">GPT-4o</p>
+          <p class="text-gray-600">0.13 ± 0.09</p>
+        </div>
+        <div class="border-l-4 border-purple-500 pl-4">
+          <p class="font-semibold text-gray-700">Statistical Test</p>
+          <p class="text-gray-600">Claude Sonnet 4 significantly higher (p=0.000)</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-6">Position Bias Analysis</h2>
+
+      <div class="bg-gray-50 p-4 rounded-lg mb-4">
+        <p class="text-sm text-gray-700">
+          <span class="font-semibold">What is Position Bias?</span> When asking AI (or humans) to make comparative judgments,
+          the order of presentation can influence the result. To detect this bias, we compare each pair of summaries twice—once
+          as "A vs B" and again as "B vs A"—and check whether the qualitative assessments contradict each other. A low
+          contradiction rate indicates robust, order-independent judgments.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="border-l-4 border-red-500 pl-4">
+          <p class="font-semibold text-gray-700">Contradiction Rate</p>
+          <p class="text-gray-600">0.00%</p>
+        </div>
+        <div class="border-l-4 border-yellow-500 pl-4">
+          <p class="font-semibold text-gray-700">Genes with Contradictions</p>
+          <p class="text-sm text-gray-600">None</p>
+        </div>
+      </div>
+    </div>
+  
+    
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Qualitative Comparison</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Tone and Style</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <p class="text-gray-700">Across genes, Claude Sonnet 4 consistently reads as precise, assertive, and evidence-forward—hypothesis-driven, quantitative, and interpretive with specific claims—whereas GPT-4o is high-level, conservative, survey-like, and broader, favoring cautious, thematic overviews with fewer specifics.</p>
+          </div>
+          <p class="text-sm text-gray-600 mt-2">
+            <span class="font-semibold">Modal representative:</span> <span class="gene-link-wrapper">AGAP006747 (REL2)<span class="gene-link-popup"><a href="html-summaries/AGAP006747-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP006747-gpt4o.html" target="_blank">GPT-4o</a></span></span>
+          </p>
+          <p class="text-sm text-gray-600 mt-1 italic">
+            Consistency of this pattern across 20 independently assessed genes: High consistency
+          </p>
+          
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Technical Detail Level</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <p class="text-gray-700">Across genes, Claude Sonnet 4 is consistently more technically detailed, quantitative, and condition-specific, offering granular, compartment/anatomical resolution and actionable metrics; GPT-4o remains qualitative, generalized, and thematic with broader coverage but limited numerical or condition-level specificity.</p>
+          </div>
+          <p class="text-sm text-gray-600 mt-2">
+            <span class="font-semibold">Modal representative:</span> <span class="gene-link-wrapper">AGAP006414 (chitinase)<span class="gene-link-popup"><a href="html-summaries/AGAP006414-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP006414-gpt4o.html" target="_blank">GPT-4o</a></span></span>
+          </p>
+          <p class="text-sm text-gray-600 mt-1 italic">
+            Consistency of this pattern across 20 independently assessed genes: High consistency
+          </p>
+          
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Structure and Organization</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <p class="text-gray-700">Across genes, Claude Sonnet 4 is more granular, evidence-linked, and experiment-anchored with sharper thematic boundaries and tighter, hypothesis-oriented structure; GPT-4o groups content into broader, more readable themes that improve cohesion and coverage but reduce specificity, weaken evidence-to-claim mapping, and blur boundaries.</p>
+          </div>
+          <p class="text-sm text-gray-600 mt-2">
+            <span class="font-semibold">Modal representative:</span> <span class="gene-link-wrapper">AGAP006796 (peritrophin)<span class="gene-link-popup"><a href="html-summaries/AGAP006796-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP006796-gpt4o.html" target="_blank">GPT-4o</a></span></span>
+          </p>
+          <p class="text-sm text-gray-600 mt-1 italic">
+            Consistency of this pattern across 20 independently assessed genes: High consistency
+          </p>
+          
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Headline</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <p class="text-gray-700">Across genes, Claude Sonnet 4’s headline is consistently judged more actionable, specific, and biologically informative—highlighting concrete tissues, regulation, and key patterns—whereas GPT-4o’s headline is broader, more general, and less directive for targeted inquiry.</p>
+          </div>
+          <p class="text-sm text-gray-600 mt-2">
+            <span class="font-semibold">Modal representative:</span> <span class="gene-link-wrapper">AGAP001713 (stearoyl CoA desaturase)<span class="gene-link-popup"><a href="html-summaries/AGAP001713-claude4.html" target="_blank">Claude Sonnet 4</a><a href="html-summaries/AGAP001713-gpt4o.html" target="_blank">GPT-4o</a></span></span>
+          </p>
+          <p class="text-sm text-gray-600 mt-1 italic">
+            Consistency of this pattern across 20 independently assessed genes: High consistency
+          </p>
+          
+        </div>
+      </div>
+    </div>
+  
+
+    <footer class="text-center text-gray-500 text-sm mt-8">
+      Generated on 10/23/2025, 4:29:47 PM
+    </footer>
+  </div>
+</body>
+</html>
