@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #87A96B; padding: 12pt 40pt 20pt 40pt;
+}
+h1 {
+  color: #ffffff; font-size: 26pt; margin: 0;
+  font-weight: bold;
+}
+.subtitle {
+  color: #F4F1DE; font-size: 14pt; margin: 4pt 0 0 0;
+}
+.content {
+  flex: 1; padding: 20pt 50pt 36pt 50pt;
+}
+h2 {
+  color: #E07A5F; font-size: 16pt; margin: 0 0 8pt 0;
+  font-weight: bold;
+}
+p {
+  color: #2C2C2C; font-size: 14pt; margin: 8pt 0;
+  line-height: 1.3;
+}
+ul {
+  margin: 8pt 0; padding-left: 24pt;
+}
+li {
+  color: #2C2C2C; font-size: 14pt; margin: 6pt 0;
+  line-height: 1.3;
+}
+.info-box {
+  background: #F4F1DE; padding: 12pt; margin: 12pt 0;
+  border-left: 4pt solid #87A96B;
+}
+.info-box p {
+  margin: 4pt 0;
+  font-size: 13pt;
+}
+.highlight {
+  color: #E07A5F; font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Alternative: promptfoo.dev</h1>
+  <p class="subtitle">LLM Evaluation Framework</p>
+</div>
+<div class="content">
+  <h2>Could We Have Used an Existing Tool?</h2>
+
+  <p><span class="highlight">promptfoo</span> is an open-source LLM evaluation framework that offers:</p>
+  <ul>
+    <li>Multi-model testing with custom evaluation criteria</li>
+    <li>LLM-as-judge for pairwise comparisons</li>
+    <li>Built-in web viewer and reporting</li>
+  </ul>
+
+  <div class="info-box">
+    <p><b>Reality check:</b> promptfoo came to attention late in the game. Even if discovered earlier, steep learning curve to harness appropriately for our specific needs (bidirectional testing, custom HTML reports, statistical aggregation).</p>
+    <p><b>Future work:</b> Should be on radar for VEuPathDB AI projects.</p>
+  </div>
+</div>
+</body>
+</html>

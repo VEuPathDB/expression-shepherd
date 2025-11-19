@@ -26,10 +26,11 @@ async function createPresentation() {
     'slide-10-browse.html',
     'slide-11-comparison.html',
     'slide-12-decision.html',
-    'slide-13-meta.html'
+    'slide-13-promptfoo.html',
+    'slide-14-meta.html'
   ];
 
-  console.log('Creating presentation with 18 slides...');
+  console.log('Creating presentation with 19 slides...');
 
   for (const file of slideFiles) {
     const filePath = path.join(__dirname, file);
