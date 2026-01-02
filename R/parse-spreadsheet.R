@@ -329,8 +329,9 @@ writeSampleSTF <- function(data, output_directory) {
 }
 
 allData <- parseSpreadsheet('../data/RNA-Seq sample re-annotation for QC.xlsx', list(), processExperiment)
-message("Filtering to keep only contrasting experiments.")
+message(glue("Filtering {length(allData)} experiments to keep only contrasting experiments."))
 contrasting <- keepContrastingOnly(allData)
+message(glue("Got {length(contrasting)} contrasting experiments."))
 message("Determining overlaps... (takes a minute)")
 overlaps_both_tbl <- determineOverlaps(contrasting, 'combined ID')
 overlaps_sra_tbl <- determineOverlaps(contrasting, 'fallback ID')
@@ -341,4 +342,4 @@ write_xlsx(
   ),
   path = "../data/overlaps.xlsx"
 )
-writeSampleSTF(contrasting, '../data/sample_stf/')
+writeSampleSTF(contrasting, '../data/sample_stf_2026/')
