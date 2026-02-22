@@ -2,7 +2,7 @@
 
 **Scope:** 20 genes, full pipeline (comparison:fetch → comparison:compare → comparison:condense → comparison:aggregate)
 
-**Accuracy:** ±20% (rough estimate based on code inspection and real summary file sizes)
+**Accuracy:** ±15% — input estimate anchored on a real comparison call; output estimate confirmed by real data
 
 ---
 
@@ -39,15 +39,29 @@ Each call sends a prompt containing two **simplified summaries** in JSON. The `s
 - `headline` (~10–15 words)
 - `topics[]` — each with headline + one-sentence summary + **experiment names only** (not the full per-experiment notes)
 
-Based on actual summary files (AGAP001212 has ~41 experiments across 8 topics; typical genes have ~20–30 experiments across 4–7 topics), a realistic average **simplified summary is ~900 tokens**.
+**Anchored on real data:** The actual token count for AGAP001212 was **5,572 input tokens** (recorded in the comparison JSON's `token_usage` field).
+
+Full summary file sizes for all 20 claude4_5thinking genes were measured (`wc -c`):
+
+| Statistic | Characters |
+|-----------|-----------|
+| Smallest (AGAP011434) | 57,681 |
+| Largest (AGAP001212) | 68,242 |
+| **Average** | **61,662** |
+| Range / spread | ~18% |
+
+The summaries are remarkably uniform. AGAP001212 is only 10.7% above average, so scaling the known token count gives a tight estimate for the average gene:
+
+> **5,572 × (61,662 / 68,242) ≈ 5,040 tokens** input for the average gene
 
 | Component | Tokens |
 |-----------|--------|
-| Static prompt text (intro, instructions, notes) | ~350 |
-| JSON response schema embedded in prompt | ~100 |
-| Summary A (simplified JSON) | ~900 |
-| Summary B (simplified JSON) | ~900 |
-| **Total input per call** | **~2,250** |
+| Static prompt text (intro, instructions, notes) | ~450 |
+| Summary A (simplified JSON) | ~2,300 |
+| Summary B (simplified JSON) | ~2,300 |
+| **Total input per call** | **~5,050** |
+
+*Note: simplified summaries are larger than intuitively expected because (a) many experiment names are 15–20+ words long, and (b) HTML markup (`<strong>`, `<ul>`, `<li>`, `<i>`) in the paragraph summary inflates token count beyond raw word count.*
 
 ### Output token estimate
 
@@ -55,21 +69,23 @@ The comparison produces:
 - `biological_content`: observations (only_in_A, only_in_B, in_both) + insights (same) — typically ~5 items per bucket × 6 buckets × 15 words
 - `qualitative_assessment`: 4 dimensions × 3 fields (summary_A, summary_B, comparison) × ~40 words each
 
+**Confirmed by real data:** AGAP001212 actual output was **1,378 tokens** — essentially spot-on with the original estimate.
+
 | Component | Tokens |
 |-----------|--------|
 | biological_content (observations + insights) | ~550 |
 | qualitative_assessment (4 dimensions) | ~640 |
 | quantitative_expression_mentions + JSON overhead | ~110 |
-| **Total output per call** | **~1,300** |
+| **Total output per call** | **~1,380** |
 
-(max_tokens is set to 4,000; typical output uses ~1,300)
+(max_tokens is set to 4,000; typical output uses ~1,380)
 
 ### Call counts and totals
 
 | Config | Genes | Pairs | Directions | Total calls | Input tokens | Output tokens |
 |--------|-------|-------|------------|-------------|-------------|---------------|
-| 2 models (current) | 20 | 1 | ×2 | 40 | 90,000 | 52,000 |
-| 3 models | 20 | 3 | ×2 | 120 | 270,000 | 156,000 |
+| 2 models (current) | 20 | 1 | ×2 | 40 | 202,000 | 55,200 |
+| 3 models | 20 | 3 | ×2 | 120 | 606,000 | 165,600 |
 
 ---
 
@@ -157,29 +173,30 @@ Each call receives all 20 gene statements for one field (e.g. all `tone_and_styl
 | Phase | AI Calls | Input tokens | Output tokens | Total tokens |
 |-------|----------|-------------|---------------|-------------|
 | comparison:fetch | 0 | 0 | 0 | 0 |
-| comparison:compare | 40 | 90,000 | 52,000 | 142,000 |
+| comparison:compare | 40 | 202,000 | 55,200 | 257,200 |
 | comparison:condense | 20 | 32,600 | 16,000 | 48,600 |
 | comparison:aggregate | 12 | 19,800 | 3,780 | 23,580 |
-| **TOTAL** | **72** | **~142,400** | **~71,780** | **~214,000** |
+| **TOTAL** | **72** | **~254,400** | **~74,980** | **~329,000** |
 
 ### Full 3-model config (if gpt4o re-enabled), 3 model pairs
 
 | Phase | AI Calls | Input tokens | Output tokens | Total tokens |
 |-------|----------|-------------|---------------|-------------|
 | comparison:fetch | 0 | 0 | 0 | 0 |
-| comparison:compare | 120 | 270,000 | 156,000 | 426,000 |
+| comparison:compare | 120 | 606,000 | 165,600 | 771,600 |
 | comparison:condense | 60 | 97,800 | 48,000 | 145,800 |
 | comparison:aggregate | 36 | 59,400 | 11,340 | 70,740 |
-| **TOTAL** | **216** | **~427,200** | **~215,340** | **~642,500** |
+| **TOTAL** | **216** | **~763,200** | **~224,940** | **~988,000** |
 
 ---
 
-## Key Assumptions
+## Key Assumptions and Data Sources
 
-- **Average simplified summary size: ~900 tokens** — based on inspecting AGAP001212 (a complex gene, ~41 experiments → ~1,200 tokens simplified) and assuming most genes are simpler (~600–900 tokens simplified). Genes with unusually many experiments will push this higher.
+- **compare input:** anchored on real token data (5,572 tokens for AGAP001212) and scaled by measured file sizes across all 20 genes. Gene-to-gene variation is low (~18% size spread), so the average estimate of ~5,050 tokens/call is reliable.
+- **compare output:** confirmed by real data (1,378 tokens for AGAP001212).
+- **condense and aggregate:** estimated from code inspection only — no real token data available.
 - **20 genes** as per `comparison/input/gene-list.txt`
-- **Tokenisation rate:** ~0.75 tokens/word (standard English prose), ~1 token/character for JSON keys
-- **JSON formatting:** `JSON.stringify(..., null, 2)` is used throughout — whitespace adds ~15% token overhead vs compact JSON
+- **JSON formatting:** `JSON.stringify(..., null, 2)` is used throughout — pretty-printing adds ~15% overhead vs compact JSON
 - The estimate excludes any retries caused by API errors
 
 ## Scaling notes
