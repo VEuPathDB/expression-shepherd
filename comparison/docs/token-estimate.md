@@ -204,3 +204,68 @@ Each call receives all 20 gene statements for one field (e.g. all `tone_and_styl
 - **comparison:compare** dominates cost (65–66% of total tokens), driven by passing both summaries per call
 - The pipeline scales linearly with genes: double the genes → double the tokens for all phases
 - The pipeline scales with O(n²) model pairs for phases 2 and 2.5: adding a 4th model would add 3 more pairs (doubling pairs from 3 to 6)
+
+---
+
+## Whole-genome expression summaries
+
+This section estimates the cost of running the main **expression-shepherd pipeline** (`src/main.ts`) to generate summaries for every gene in a genome — a completely separate workload from the pairwise comparison pipeline above.
+
+### Token basis
+
+Token cost scales approximately linearly with the number of transcriptomics experiments available per gene (each experiment gets its own AI call, then a consolidation step):
+
+| Data point | Experiments / gene | Input / gene | Output / gene |
+|------------|-------------------|-------------|--------------|
+| Top tier (*P. falciparum*, *A. gambiae*) | 40–45 | **100k** | **25k** |
+| *C. albicans* SC5314 | 18 † | 42k | 11k |
+| *I. scapularis* PalLabHiFi | 11 † | 26k | 6.5k |
+
+† = known data points; all others linearly interpolated against a midpoint of 42.5 experiments.
+
+### Proposed ~15 species
+
+Decoded from the boss's shortlist using `Is reference = yes` strains from `orgs.csv`:
+
+| Abbr | Species | DB | Strain | Genes | Est. exp | In/gene (k) | Out/gene (k) | Total in (M) | Total out (M) | **Total (M)** |
+|------|---------|----|----|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
+| **Pf** | *Plasmodium falciparum* | PlasmoDB | 3D7 | 5,720 | 42 | 100 | 25 | 572 | 143 | **715** |
+| **Pb** | *Plasmodium berghei* | PlasmoDB | ANKA | 5,254 | 20 | 47 | 12 | 247 | 63 | **310** |
+| **Tg** | *Toxoplasma gondii* | ToxoDB | ME49 | 8,778 | 30 | 71 | 18 | 623 | 158 | **781** |
+| **Cp** ¹ | *Cryptosporidium parvum* | CryptoDB | Iowa II | 4,020 | 12 | 28 | 7 | 113 | 28 | **141** |
+| **Tb** | *Trypanosoma brucei* | TriTrypDB | TREU927 | 11,764 | 20 | 47 | 12 | 553 | 141 | **694** |
+| **Leish** | *Leishmania major* | TriTrypDB | Friedlin | 9,378 | 18 | 42 | 11 | 394 | 103 | **497** |
+| **Ncr** | *Neurospora crassa* | FungiDB | OR74A | 10,591 | 20 | 47 | 12 | 498 | 127 | **625** |
+| **Calb** | *Candida albicans* | FungiDB | SC5314 | 6,468 | 18 † | 42 | 11 | 272 | 71 | **343** |
+| **Caur** | *Candida auris* | FungiDB | B8441 | 5,584 | 8 | 19 | 5 | 106 | 28 | **134** |
+| **Cneo** | *Cryptococcus neoformans* | FungiDB | JEC21 | 7,004 | 18 | 42 | 11 | 294 | 77 | **371** |
+| **Af** | *Aspergillus fumigatus* | FungiDB | Af293 | 10,130 | 22 | 52 | 13 | 527 | 132 | **659** |
+| **An** ² | *Aspergillus nidulans* | FungiDB | FGSC A4 | 10,988 | 22 | 52 | 13 | 571 | 143 | **714** |
+| **Fus** | *Fusarium graminearum* | FungiDB | PH-1 | 14,145 | 15 | 35 | 9 | 495 | 127 | **622** |
+| **Por** ³ | *Pyricularia oryzae* | FungiDB | 70-15 | 13,184 | 18 | 42 | 11 | 554 | 145 | **699** |
+| **Ag** | *Anopheles gambiae* | VectorBase | PEST | 13,845 | 42 | 100 | 25 | 1,385 | 346 | **1,731** |
+| **Is** | *Ixodes scapularis* | VectorBase | PalLabHiFi | 38,656 | 11 † | 26 | 6.5 | 1,005 | 251 | **1,256** |
+| **Aa** | *Aedes aegypti* | VectorBase | LVP_AGWG | 19,804 | 30 | 71 | 18 | 1,406 | 357 | **1,763** |
+
+¹ *Cp = Cryptosporidium parvum assumed; could alternatively be Coccidioides posadasii (FungiDB, ref strain, 10,379 genes, ~15 exp) — worth confirming with boss*
+² *An = Aspergillus nidulans (the classic model organism) — confirm vs A. niger (CBS 513.88, 14,403 genes)*
+³ *"Another plant pathogen" — Pyricularia oryzae (rice blast) suggested; alternatives: Phytophthora infestans T30-4 (19,344 genes, ~15 exp) or Botrytis cinerea B05.10 (12,073 genes, ~18 exp)*
+
+**Note on Ixodes:** Gene count (38,656) is unusually high for a eukaryote; despite low experiment count the genome scale keeps total costs comparable to Pf.
+
+### Totals
+
+| Scenario | Total input (M) | Total output (M) | **Grand total** |
+|----------|-----:|-----:|-----:|
+| **Top 5 public health** ⁴ | 2,547 | 645 | **~3.2B** |
+| **Proposed 15** (core 14 + Ag, no vector alt.) | 7,204 | 1,832 | **~9.0B** |
+| Proposed 16 (+Is) | 8,209 | 2,083 | **~10.3B** |
+| Proposed 16 (+Aa) | 8,610 | 2,189 | **~10.8B** |
+| All 17 | 9,615 | 2,440 | **~12.1B** |
+
+⁴ **Top 5 public health (author's suggestion):** malaria (*Pf*), toxoplasmosis (*Tg*), sleeping sickness (*Tb*), invasive aspergillosis (*Af*), candidiasis (*Calb*). Ag (malaria vector) would be a strong case for 6th.
+
+### Caveats
+- Experiment counts for all species except Pf/Ag, Is, and Calb are estimates — actual VEuPathDB dataset counts per species should be verified before finalising costs
+- Not all annotated genes will have expression data; the above assumes full coverage, so real costs may be 10–30% lower
+- These estimates are for a single reference strain per species; non-reference strains are excluded
