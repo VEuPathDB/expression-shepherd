@@ -384,3 +384,56 @@ These are modest token volumes — well under 1M tokens/month total — making a
 - The top-5% threshold for Tier 2 is illustrative; in practice the Tier 1 classifier output should drive the cutoff
 - Full-text extraction quality varies by publisher; some OA PDFs are scanned images or have complex layouts that inflate token counts
 - These estimates cover VEuPathDB-scope organisms only; a broader eukaryotic pathogen scope would scale proportionally
+
+---
+
+## Literature summarization
+
+**Scope:** Articles where full-text deterministic matching (gene ID / synonym lookup) confirms at least one VEuPathDB gene is mentioned — estimated at **50% of net deduplicated OA articles** = ~429 articles/month.
+
+This is a downstream step after triage: the full text has already been retrieved (for Tier 2 triage or via bulk pull), and a lexical scan has matched one or more VEuPathDB gene IDs or curated synonyms. Those articles proceed to LLM summarization, producing a two-paragraph structured summary for each gene mentioned.
+
+### Input per article
+
+| Component | Tokens |
+|-----------|-------:|
+| Full PDF text (~8 pages avg, ~4,000 words) | ~5,500 |
+| Static system prompt + instructions | ~400 |
+| Gene ID(s) + synonym context injected into prompt | ~100 |
+| **Total input per article** | **~6,000** |
+
+*Same PDF token basis as Tier 2 triage above (5,500 tokens central estimate).*
+
+### Output per article
+
+Two paragraphs of structured prose — one summarising the experimental context and methods, one summarising the key findings for the matched gene(s).
+
+| Component | Tokens |
+|-----------|-------:|
+| Paragraph 1: experimental context (~100 words) | ~140 |
+| Paragraph 2: gene-specific findings (~100 words) | ~140 |
+| JSON wrapper / metadata fields | ~50 |
+| **Total output per article** | **~330** |
+
+### Monthly and annual totals
+
+| Scenario | Articles | Input tokens | Output tokens | Total tokens |
+|----------|-------:|-------------:|--------------:|-------------:|
+| Per month (50% of ~858) | 429 | 2,574,000 | 142,000 | **~2.7M** |
+| Per year | 5,148 | 30,888,000 | 1,699,000 | **~32.6M** |
+
+### Pipeline summary including summarization
+
+| Stage | Scope | Tokens/month | Tokens/year |
+|-------|-------|-------------:|------------:|
+| Tier 1 abstract triage | ~858 articles | ~644,000 | ~7.7M |
+| Tier 2 full-text deep triage | ~43 articles (top 5%) | ~268,000 | ~3.2M |
+| Literature summarization | ~429 articles (gene-ID match, 50%) | ~2,716,000 | ~32.6M |
+| **Combined** | | **~3.6M** | **~43.5M** |
+
+The summarization step dominates the monthly token budget (~75% of total), but at ~3.6M tokens/month the entire pipeline remains orders of magnitude smaller than the genome-wide expression summary workload.
+
+### Caveats
+- "50% gene-ID match" is an assumption; actual match rate depends on synonym dictionary completeness and full-text availability — could range from 30–70%
+- One LLM call per article is assumed; articles mentioning many genes may warrant one call per gene, multiplying output costs proportionally
+- Output length scales with complexity; some articles may warrant longer summaries, others shorter
