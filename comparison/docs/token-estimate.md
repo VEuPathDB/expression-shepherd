@@ -270,3 +270,117 @@ Decoded from DSR's shortlist using `Is reference = yes` strains from `orgs.csv`:
 - Experiment counts for all species except Pf/Ag, Is, and Calb are estimates — actual VEuPathDB dataset counts per species should be verified before finalising costs
 - Not all annotated genes will have expression data; the above assumes full coverage, so real costs may be 10–30% lower
 - These estimates are for a single reference strain per species; non-reference strains are excluded
+
+---
+
+## Dataset prioritization and triage
+
+This section estimates the volume of open-access primary literature published per month across VEuPathDB organism groups, as a basis for planning an AI-assisted literature triage pipeline.
+
+### Source counts: January 2026
+
+Queried via Europe PMC REST API (`https://www.ebi.ac.uk/europepmc/webservices/rest/search`) with:
+- `OPEN_ACCESS:Y AND (PUB_TYPE:"Journal Article") AND FIRST_PDATE:[2026-01-01 TO 2026-01-31]`
+- Each organism group searched by title/abstract match on the terms shown
+
+> **Important caveat:** `hitCount` reflects articles matching the search terms in title, abstract, and keywords — not necessarily those with organism-specific experimental data. These counts are **upper bounds** for curation-relevant literature. Many hits will be epidemiological, clinical, drug-resistance, or review articles rather than transcriptomics/expression datasets.
+
+| # | Organism group | Query terms | Jan 2026 OA articles |
+|---|----------------|-------------|--------------------:|
+| 1 | Plasmodium / malaria | `Plasmodium OR malaria` | 214 |
+| 2 | Candida | `Candida` | 135 |
+| 3 | Aspergillus | `Aspergillus` | 120 |
+| 4 | Leishmania | `Leishmania OR leishmaniasis` | 75 |
+| 5 | Fusarium | `Fusarium` | 70 |
+| 6 | Aedes | `Aedes` | 52 |
+| 7 | Trypanosoma | `Trypanosoma OR trypanosomiasis OR sleeping sickness OR Chagas` | 48 |
+| 8 | Anopheles | `Anopheles` | 48 |
+| 9 | Toxoplasma | `Toxoplasma` | 40 |
+| 10 | Mucorales | `Mucor OR Rhizopus OR Mucormycosis` | 26 |
+| 11 | Culex | `Culex` | 24 |
+| 12 | Giardia | `Giardia` | 20 |
+| 13 | Cryptococcus | `Cryptococcus` | 20 |
+| 14 | Babesia / Theileria (Piroplasmida) | `Babesia OR Theileria` | 18 |
+| 15 | Cryptosporidium | `Cryptosporidium` | 16 |
+| 16 | Pneumocystis | `Pneumocystis` | 12 |
+| 17 | Entamoeba | `Entamoeba` | 9 |
+| 18 | Microsporidia | `Microsporidia OR Encephalitozoon OR Nosema` | 8 |
+| 19 | Trichomonas | `Trichomonas` | 5 |
+| — | **Gross total (with double-counting)** | | **1,010** |
+| — | **Estimated net deduplicated total** (×0.85) | | **~858** |
+
+Double-counting occurs because multi-organism papers (e.g. a *Plasmodium*–*Anopheles* interaction study) are counted under both groups. The 85% factor is a rough correction; actual overlap will vary.
+
+---
+
+### Tier 1: abstract + metadata triage
+
+**What it does:** Run every abstract through a small LLM to classify relevance (e.g. "contains new expression/transcriptomics data for a VEuPathDB species: yes/no/maybe") and assign a triage score.
+
+**Input per article:**
+| Component | Tokens |
+|-----------|-------:|
+| Abstract (~250 words) | ~350 |
+| Title + journal + authors + year | ~50 |
+| Static system prompt + output schema | ~300 |
+| **Total input per article** | **~700** |
+
+**Output per article:** A JSON object with a relevance class and brief rationale.
+| Component | Tokens |
+|-----------|-------:|
+| Relevance class + short rationale (~30 words) | ~50 |
+| **Total output per article** | **~50** |
+
+**Monthly totals (net ~858 articles/month):**
+
+| Scenario | Articles | Input tokens | Output tokens | Total tokens |
+|----------|-------:|-------------:|--------------:|-------------:|
+| Per month (net deduplicated) | 858 | 601,000 | 43,000 | **~644,000** |
+| Per year | 10,300 | 7,200,000 | 515,000 | **~7.7M** |
+
+---
+
+### Tier 2: full-text deep triage (top 5%)
+
+**What it does:** For articles passing Tier 1 (estimated top 5% = ~43 articles/month), fetch the full PDF and run through a larger LLM to produce a structured 5-bullet-point or one-paragraph curation note summarising the dataset, organism/strain, conditions, and key findings.
+
+**Input per article:**
+| Component | Tokens |
+|-----------|-------:|
+| Full PDF text (~8 pages avg, ~4,000 words) | ~5,500 |
+| Static system prompt + output schema | ~500 |
+| **Total input per article** | **~6,000** |
+
+*PDF size basis: a typical 8-page open-access journal article in biology runs ~3,500–4,500 words of body text; at ~0.75 tokens/word that is ~2,600–3,400 tokens for text alone, but figures, tables, references, and formatting markup push the tokenised PDF to ~5,000–6,000 tokens. Using 5,500 as a central estimate.*
+
+**Output per article:** A structured curation note.
+| Component | Tokens |
+|-----------|-------:|
+| 5 bullet points or 1 paragraph (~120 words) | ~180 |
+| Structured fields (organism, strain, data type, GEO/ArrayExpress accession) | ~60 |
+| **Total output per article** | **~240** |
+
+**Monthly totals (top 5% of net ~858 = ~43 articles/month):**
+
+| Scenario | Articles | Input tokens | Output tokens | Total tokens |
+|----------|-------:|-------------:|--------------:|-------------:|
+| Per month (top 5%) | 43 | 258,000 | 10,300 | **~268,000** |
+| Per year | 516 | 3,100,000 | 124,000 | **~3.2M** |
+
+---
+
+### Combined triage pipeline summary
+
+| Tier | Scope | Total tokens/month | Total tokens/year |
+|------|-------|-------------------:|------------------:|
+| Tier 1 (abstract triage) | ~858 articles | ~644,000 | ~7.7M |
+| Tier 2 (full-text deep triage) | ~43 articles (top 5%) | ~268,000 | ~3.2M |
+| **Combined** | | **~912,000** | **~10.9M** |
+
+These are modest token volumes — well under 1M tokens/month total — making an automated monthly triage pipeline very cost-effective relative to the genome-wide expression summary pipeline (~9–12B tokens for a full multi-species run).
+
+### Caveats on triage estimates
+- The 85% deduplication factor is a rough approximation; true overlap depends on the fraction of cross-organism papers in each group
+- The top-5% threshold for Tier 2 is illustrative; in practice the Tier 1 classifier output should drive the cutoff
+- Full-text extraction quality varies by publisher; some OA PDFs are scanned images or have complex layouts that inflate token counts
+- These estimates cover VEuPathDB-scope organisms only; a broader eukaryotic pathogen scope would scale proportionally
