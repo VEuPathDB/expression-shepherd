@@ -225,7 +225,7 @@ Token cost scales approximately linearly with the number of transcriptomics expe
 
 ### Proposed ~15 species
 
-Decoded from the boss's shortlist using `Is reference = yes` strains from `orgs.csv`:
+Decoded from DSR's shortlist using `Is reference = yes` strains from `orgs.csv`:
 
 | Abbr | Species | DB | Strain | Genes | Est. exp | In/gene (k) | Out/gene (k) | Total in (M) | Total out (M) | **Total (M)** |
 |------|---------|----|----|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
@@ -247,7 +247,7 @@ Decoded from the boss's shortlist using `Is reference = yes` strains from `orgs.
 | **Is** | *Ixodes scapularis* | VectorBase | PalLabHiFi | 38,656 | 11 † | 26 | 6.5 | 1,005 | 251 | **1,256** |
 | **Aa** | *Aedes aegypti* | VectorBase | LVP_AGWG | 19,804 | 30 | 71 | 18 | 1,406 | 357 | **1,763** |
 
-¹ *Cp = Cryptosporidium parvum assumed; could alternatively be Coccidioides posadasii (FungiDB, ref strain, 10,379 genes, ~15 exp) — worth confirming with boss*
+¹ *Cp = Cryptosporidium parvum assumed; could alternatively be Coccidioides posadasii (FungiDB, ref strain, 10,379 genes, ~15 exp) — worth confirming with DSR*
 ² *An = Aspergillus nidulans (the classic model organism) — confirm vs A. niger (CBS 513.88, 14,403 genes)*
 ³ *"Another plant pathogen" — Pyricularia oryzae (rice blast) suggested; alternatives: Phytophthora infestans T30-4 (19,344 genes, ~15 exp) or Botrytis cinerea B05.10 (12,073 genes, ~18 exp)*
 
@@ -258,6 +258,7 @@ Decoded from the boss's shortlist using `Is reference = yes` strains from `orgs.
 | Scenario | Total input (M) | Total output (M) | **Grand total** |
 |----------|-----:|-----:|-----:|
 | **Top 5 public health** ⁴ | 2,547 | 645 | **~3.2B** |
+| **Top 6 public health** (+ *Ag*) | 3,932 | 991 | **~4.9B** |
 | **Proposed 15** (core 14 + Ag, no vector alt.) | 7,204 | 1,832 | **~9.0B** |
 | Proposed 16 (+Is) | 8,209 | 2,083 | **~10.3B** |
 | Proposed 16 (+Aa) | 8,610 | 2,189 | **~10.8B** |
