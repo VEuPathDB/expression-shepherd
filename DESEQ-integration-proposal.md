@@ -71,3 +71,8 @@ Gene ID + Project
 
 ## Open Questions
 - **Caching**: the existing cache (in the production web implementation) already tolerates non-deterministic LLM outputs (Stage 2 in the old pipeline was cached on its LLM-derived inputs), so introducing Stage 2 contrast selection does not break the caching model. A real, but more minor, issue is that DESeq2 results depend on sample annotation data that sits outside the existing cache invalidation chain — if sample annotations were updated, cached Stage 1 enrichments would not be automatically invalidated. This is considered acceptable for now, as sample annotations change infrequently.
+- **DESeq2 service intelligence**: The DESeq2 service itself should remain a deterministic, AI-free endpoint (separation of concerns, API key management, usage monitoring). The translation from natural language contrasts to a correctly structured DESeq2 request would instead happen within the orchestrating pipeline at Stage 2, using a short, bounded sequence of tool calls — not an open-ended agentic loop:
+  1. Fetch available sample annotation variables and sample counts for the dataset
+  2. Fetch the value distribution for the variable(s) of interest
+  3. Have the LLM compose a contrast definition in terms of concrete variable + value pairs (categorical: select groups; continuous: define two ranges)
+  4. Send the resulting deterministic DESeq2 request
