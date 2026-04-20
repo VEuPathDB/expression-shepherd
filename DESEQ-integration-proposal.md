@@ -5,7 +5,7 @@ The current two-stage pipeline (per-experiment AI summary → summary-of-summari
 ## Stage 1 — Per-experiment summaries *(existing)*
 - Fetch expression data for all experiments for a given gene
 - AI summarises each experiment individually, producing: one-sentence summary, biological importance score (0–5), confidence score (0–5), keywords, notes
-- All experiment types supported (RNA-seq, microarray, proteomics, etc.)
+- All experiment types supported (RNA-seq & microarray)
 
 ## Stage 2 — Experiment and contrast selection *(new)*
 - AI reviews all Stage 1 summaries and selects 3–5 RNA-seq experiments most worthy of deeper statistical analysis (based on biological importance and confidence scores)
@@ -68,3 +68,6 @@ Gene ID + Project
 - DESeq2 enrichment is strictly opt-in per experiment: only RNA-seq datasets selected by the AI are processed
 - The Stage 3 prompt is updated to incorporate a confidence assessment, giving end users a sense of how well the summary is supported by rigorous statistics
 - Graceful degradation at every step: failures in Stage 2 or the DESeq2 service fall back to the existing two-stage output
+
+## Open Questions
+- **Caching**: the existing cache already tolerates non-deterministic LLM outputs (Stage 2 in the old pipeline was cached on its LLM-derived inputs), so introducing Stage 2 contrast selection does not break the caching model. A real, but more minor, issue is that DESeq2 results depend on sample annotation data that sits outside the existing cache invalidation chain — if sample annotations were updated, cached Stage 1 enrichments would not be automatically invalidated. This is considered acceptable for now, as sample annotations change infrequently.
