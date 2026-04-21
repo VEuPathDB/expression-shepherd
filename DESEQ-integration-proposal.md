@@ -9,12 +9,12 @@ The current two-stage pipeline (per-experiment AI summary → summary-of-summari
 
 ## Stage 2 — Experiment and contrast selection *(new)*
 - AI reviews all Stage 1 summaries and selects 3–5 RNA-seq experiments most worthy of deeper statistical analysis (based on biological importance and confidence scores)
-- For each selected experiment, the AI proposes one or more contrasts in natural language (e.g. *"quantify differential expression between timepoints 24h and 48h"*), informed by the sample metadata and experimental context already present in the Stage 1 data
-- Output: a structured list of `(dataset_id, contrast_description)` pairs
+- For each selected experiment, the AI formulates one or more contrasts in natural language (e.g. *"quantify differential expression between timepoints 24h and 48h"*), informed by the sample metadata and experimental context already present in the Stage 1 data
+- Each natural language contrast is then resolved into a concrete, structured contrast definition (variable + value pairs) via a short, bounded sequence of tool calls against the DESeq2 service's metadata endpoints — keeping the DESeq2 service itself deterministic and AI-free (see [Appendix A](#appendix-a--stage-2-contrast-resolution-tool-calls))
+- Output: a structured list of `(dataset_id, contrast_definition)` pairs ready for deterministic DESeq2 execution
 
 ## DESeq2 enrichment *(new service call, parallel)*
-- For each selected `(dataset_id, contrast_description)` pair, call the DESeq2 service with the natural language contrast instructions
-- The service interprets sample variable=value metadata, maps the instructions to appropriate sample groupings, runs DESeq2, and returns per-contrast statistics for the gene of interest: log2 fold-change, adjusted p-value (FDR), base mean expression, and genome-wide effect-size percentile rank — the latter provides crucial context for interpreting whether a given fold-change is large or modest relative to all other genes in the same contrast, as Freyja's examples have shown
+- For each resolved `(dataset_id, contrast_definition)` pair, call the deterministic, AI-free DESeq2 service, which runs DESeq2 and returns per-contrast statistics for the gene of interest: log2 fold-change, adjusted p-value (FDR), base mean expression, and genome-wide effect-size percentile rank — the latter provides crucial context for interpreting whether a given fold-change is large or modest relative to all other genes in the same contrast, as Freyja's examples have shown
 - Results are merged back into the relevant Stage 1 summary objects
 - Runs in parallel; non-selected experiments are unaffected
 - Runs are cached if the same contrasts are requested for other genes
@@ -38,14 +38,14 @@ Gene ID + Project
                   ▼
 ┌─────────────────────────────────┐
 │  Stage 2: LLM selects 3-5       │
-│  RNA-seq experiments + proposes │
-│  natural language contrasts     │
+│  RNA-seq experiments + resolves │
+│  contrasts (see Appendix A)     │
 └─────────────────┬───────────────┘
-                  │  [(dataset_id, "contrast description"), ...]
+                  │  [(dataset_id, {variable=value pairs}), ...]
                   ▼
 ┌─────────────────────────────────┐
-│  DESeq2 service (parallel)      │
-│  interprets contrast language,  │
+│  DESeq2 service (parallel,      │
+│  AI-free): runs DESeq2,         │
 │  returns log2FC + FDR per gene  │
 └─────────────────┬───────────────┘
                   │  enriched summaries merged back
@@ -64,15 +64,21 @@ Gene ID + Project
 
 ## Key design decisions
 - Contrast selection is delegated to the AI (Stage 2), which already has full experimental context from Stage 1 — no manual configuration required
-- Natural language contrast instructions decouple the AI pipeline from the DESeq2 service's internal sample grouping logic
+- Natural language contrast formulation is translated into concrete variable + value pairs within Stage 2 via a bounded tool-call sequence, keeping the DESeq2 service deterministic and AI-free (separation of concerns, API key management, usage monitoring)
 - DESeq2 enrichment is strictly opt-in per experiment: only RNA-seq datasets selected by the AI are processed
 - The Stage 3 prompt is updated to incorporate a confidence assessment, giving end users a sense of how well the summary is supported by rigorous statistics
 - Graceful degradation at every step: failures in Stage 2 or the DESeq2 service fall back to the existing two-stage output
 
 ## Open Questions
 - **Caching**: the existing cache (in the production web implementation) already tolerates non-deterministic LLM outputs (Stage 2 in the old pipeline was cached on its LLM-derived inputs), so introducing Stage 2 contrast selection does not break the caching model. A real, but more minor, issue is that DESeq2 results depend on sample annotation data that sits outside the existing cache invalidation chain — if sample annotations were updated, cached Stage 1 enrichments would not be automatically invalidated. This is considered acceptable for now, as sample annotations change infrequently.
-- **DESeq2 service intelligence**: The DESeq2 service itself should ideally remain a deterministic, AI-free endpoint (separation of concerns, API key management, usage monitoring). The translation from natural language contrasts to a correctly structured DESeq2 request would instead happen within the orchestrating pipeline at Stage 2, using a short, bounded sequence of tool calls — not an open-ended agentic loop:
-  1. Fetch available sample annotation variables and sample counts for the dataset
-  2. Fetch the value distribution for the variable(s) of interest
-  3. Have the LLM compose a contrast definition in terms of concrete variable + value pairs (categorical: select groups; continuous: define two ranges)
-  4. Send the resulting deterministic DESeq2 request
+
+---
+
+## Appendix A — Stage 2 contrast resolution tool calls
+
+To translate each natural language contrast into a structured DESeq2 request without embedding AI logic in the DESeq2 service, Stage 2 executes a short, bounded sequence of tool calls — not an open-ended agentic loop:
+
+1. **Fetch available sample annotation variables and sample counts** for the selected dataset
+2. **Fetch the value distribution** for the variable(s) of interest
+3. **LLM composes the contrast definition** in terms of concrete variable + value pairs (categorical: select groups; continuous: define two ranges)
+4. **Send the resulting deterministic DESeq2 request**
