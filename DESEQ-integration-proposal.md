@@ -15,6 +15,8 @@ The current two-stage pipeline (per-experiment AI summary → summary-of-summari
 
 ## DESeq2 enrichment via EDA service *(new, parallel)*
 - For each `(dataset_id, contrast_definition)` pair produced by Stage 2, submit a DESeq2 computation to the EDA service (`/computes/differentialexpression`), which returns per-contrast statistics for the gene of interest: log2 fold-change, adjusted p-value (FDR), base mean expression, and genome-wide effect-size percentile rank — the latter provides crucial context for interpreting whether a given fold-change is large or modest relative to all other genes in the same contrast, as Freyja's examples have shown
+- **Note**: the `/computes/differentialexpression` endpoint will need to be updated to expose the effect-size percentile rank outputs that this pipeline requires
+- Per-gene statistics are retrieved via the `/apps/differentialexpression/visualizations/volcanoplot` endpoint, which currently returns data for all genes in the contrast (~5,000 for parasite species, ~13,000 for insect vectors). Since this pipeline only ever needs one gene's row per call, and calls run in parallel across all eligible datasets, fetching the full payload each time is substantially wasteful. We should add a gene filter argument to the volcanoplot endpoint so that the EDA service returns only the row(s) of interest
 - Results are merged back into the relevant Stage 1 summary objects
 - Runs in parallel; datasets for which Stage 2 bailed out are unaffected
 - The EDA service caches computations by contrast configuration, so subsequent queries for the same contrast (e.g. for a different gene) are returned immediately
