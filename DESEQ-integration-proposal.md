@@ -12,6 +12,7 @@ The current two-stage pipeline (per-experiment AI summary → summary-of-summari
 - Each elucidation uses the individual Stage 1 summary for that dataset as context, so per-gene expression patterns (e.g. a peak at 3h rather than 24h in a time course) inform which contrast is most informative
 - The tool call chain bails out as soon as it becomes clear that DESeq2 is not feasible — for example, if there are insufficient replicates for any meaningful grouping
 - Output: a list of `(dataset_id, contrast_definition)` pairs, where each contrast definition is expressed as concrete variable + value pairs ready for deterministic DESeq2 execution
+- **Implementation note**: parallelism should be capped (suggested `max_threads = 5` as a starting point) to avoid overwhelming the EDA service with simultaneous tool call sequences
 
 ## DESeq2 enrichment via EDA service *(new, parallel)*
 - For each `(dataset_id, contrast_definition)` pair produced by Stage 2, submit a DESeq2 computation to the EDA service (`/computes/differentialexpression`), which returns per-contrast statistics for the gene of interest: log2 fold-change, adjusted p-value (FDR), base mean expression, and genome-wide effect-size percentile rank — the latter provides crucial context for interpreting whether a given fold-change is large or modest relative to all other genes in the same contrast, as Freyja's examples have shown
